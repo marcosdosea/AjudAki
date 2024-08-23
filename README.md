@@ -49,7 +49,7 @@
   <tr>
     <td align="center">
       <a href="https://github.com/camilaf56" target="_blank">
-        <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/62726040?v=4" width="100px;" alt="Foto de Éricles dos Santos no GitHub"/><br>
+        <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/76233464?v=4" width="100px;" alt="Foto de Camila Fontes no GitHub"/><br>
         <sub>
           <b>Camila Fontes</b>
           <p>Desenvolvedora</p>
@@ -58,7 +58,7 @@
     </td>
     <td align="center">
       <a href="https://github.com/LailaValenca" target="_blank">
-        <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/62726040?v=4" width="100px;" alt="Foto de Laila Valença no GitHub"/><br>
+        <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/105222032?v=4" width="100px;" alt="Foto de Laila Valença no GitHub"/><br>
         <sub>
           <b>Laila Valença</b>
           <p>Desenvolvedora</p>
@@ -67,7 +67,7 @@
     </td>
     <td align="center">
       <a href="https://github.com/Miguelftt" target="_blank">
-        <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/62863349?v=4"  width="100px;" alt="Foto de Miguel Ferreira no GitHub"/><br>
+        <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/152564665?v=4"  width="100px;" alt="Foto de Miguel Ferreira no GitHub"/><br>
         <sub>
           <b>Miguel Ferreira</b>
           <p>Desenvolvedor</p>
@@ -76,7 +76,7 @@
     </td>
     <td align="center">
       <a href="https://github.com/Vingreyck" target="_blank">
-        <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/95314199?v=4" target="_blank"  width="100px;" alt="Foto de Kendy Ferreira no GitHub"/><br>
+        <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/103907631?v=4" target="_blank"  width="100px;" alt="Foto de Vinícius Lima no GitHub"/><br>
         <sub>
           <b>Vinícius Lima</b>
           <p>Desenvolvedor</p>
@@ -85,7 +85,7 @@
     </td>
     <td align="center" >
       <a href="https://github.com/MarlyssonSD" target="_blank">
-        <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/69280619?v=4" target="_blank"  width="100px;" alt="Foto de Marlysson Dantas no GitHub"/><br>
+        <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/124621572?v=4" target="_blank"  width="100px;" alt="Foto de Marlysson Dantas no GitHub"/><br>
         <sub>
           <b>Marlysson Dantas</b>
           <p>Desenvolvedor</p>
