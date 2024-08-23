@@ -23,7 +23,7 @@
   <p>A comunicação entre o usuário e o profissional também é um desafio. Agendar e confirmar horários torna-se um processo desorganizado, com falhas de comunicação, atrasos e até a ausência de comparecimento. Esse tipo de situação gera frustração e insatisfação, além de muitas vezes deixar o problema do usuário sem solução.</p>
   <p>Por fim, a ausência de um sistema que centralize todas as etapas de contratação e pagamento torna o processo mais complicado e demorado. O usuário precisa lidar com várias etapas de forma dispersa, desde a busca até a finalização do serviço, o que torna a experiência mais desgastante e estressante.</p>
   
-  ![pessoa perdida](https://imgur.com/a/ChzMIOV)
+  ![pessoa perdida](https://i.imgur.com/ELfoqG1.png)
 
   <h2 id="solucao">2. A Solução :sparkles:</h2>
   
