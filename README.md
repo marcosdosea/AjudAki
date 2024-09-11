@@ -1,6 +1,6 @@
 <div align="center">
 <h1> AjudAki </h1>
-<!-- <img src="./Codigo/AgendeMeWeb/wwwroot/assets/logo.svg" width="60%"><br><br> -->
+ <img src="./Codigo/AjudAkiWeb/AjudAkiWeb/wwwroot/img/Logo_AjudAki.webp" width="50%"><br><br>
 
 <p>Plataforma Eficiente para Conectar e Contratar Profissionais de Forma Rápida e Segura.</p>  
   
