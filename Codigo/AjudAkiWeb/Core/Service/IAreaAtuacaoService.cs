@@ -14,5 +14,6 @@ namespace Core.Service
         Areaatuacao? Get(uint idAreaAtuacao);
         IEnumerable<Areaatuacao> GetAll();
 
+
     }
 }
