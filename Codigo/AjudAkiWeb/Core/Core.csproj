@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="Dto\" />
-    <Folder Include="Service\" />
   </ItemGroup>
 
 </Project>
