@@ -10,8 +10,8 @@ namespace Core.Service
     {
         uint Create(Areaatuacao areaatuacao);
         void Edit(Areaatuacao areaatuacao);
-        void Delete(uint idAreaAtuacao);
-        Areaatuacao? Get(uint idAreaAtuacao);
+        void Delete(uint id);
+        Areaatuacao? Get(uint id);
         IEnumerable<Areaatuacao> GetAll();
 
 
