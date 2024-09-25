@@ -12,9 +12,9 @@ namespace Core.Service
 
         void Edit(Servico servico);
 
-        void Delete(uint idServico);
+        void Delete(uint id);
 
-        Pessoa? Get(uint idServico);
+        Servico? Get(uint id);
 
         IEnumerable<Servico> GetAll();
     }
