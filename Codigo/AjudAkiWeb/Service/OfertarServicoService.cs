@@ -21,8 +21,8 @@ namespace Service
         // <summary>
         // Criar um novo serviço na base de dados
         // </summary>
-        // <param name="servico"></param>
-        // <returns></returns>
+        // <param name="servico">Objeto do serviço a ser criado.</param>
+        // <returns>Id do serviço recém-criado.</returns>
         public uint Create(Servico servico)
         {
             context.Add(servico);
@@ -33,7 +33,8 @@ namespace Service
         // <summary>
         // Remover o serviço da base de dados
         // </summary>
-        // <param name="id"></param>
+        // <param name="id">Id do serviço a ser removido.</param>
+        // <returns>Void. Nenhum valor é retornado.</returns>
         public void Delete(uint id)
         {
             var servico = context.Servicos.Find(id);
@@ -47,9 +48,8 @@ namespace Service
         // <summary>
         // Editar dados do serviço na base de dados
         // </summary>
-        // <param name="servico"></param>
-
-
+        // <param name="servico">Objeto do serviço com os novos dados.</param>
+        // <returns>Void. Nenhum valor é retornado.</returns>
         public void Edit(Servico servico)
         {
             context.Update(servico);
@@ -59,8 +59,8 @@ namespace Service
         // <summary>
         // Buscar um serviço na base de dados
         // </summary>
-        // <param name="id"></param>
-        // <returns></returns>
+        // <param name="id">Id do serviço a ser buscado.</param>
+        // <returns>Objeto do serviço encontrado ou null, caso não exista.</returns>
         public Servico? Get(uint id)
         {
             return context.Servicos.Find(id);
@@ -69,9 +69,7 @@ namespace Service
         // <summary>
         // Buscar todos os serviços cadastrados
         // </summary>
-        //<param name = "id" ></ param >
-        // <returns>Oferta de Serviços</returns>
-        // <exception cref="NotImplementedException"></exception>
+        // <returns>Coleção de serviços cadastrados.</returns>
         public IEnumerable<Servico> GetAll()
         {
             return context.Servicos.AsNoTracking();
@@ -88,4 +86,3 @@ namespace Service
         }
     }
 }
-
