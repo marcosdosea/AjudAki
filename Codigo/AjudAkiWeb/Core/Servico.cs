@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace Core;
-
+    
 public partial class Servico
 {
     public int Id { get; set; }
