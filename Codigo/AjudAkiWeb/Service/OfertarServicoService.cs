@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Service
 {
+    /// <summary>
+    /// Implementa serviços para manter o ofertar serviço.
+    /// </summary>
     class OfertarServicoService : IServico
     {
         private readonly AjudakiContext context;
@@ -34,7 +37,6 @@ namespace Service
         // Remover o serviço da base de dados
         // </summary>
         // <param name="id">Id do serviço a ser removido.</param>
-        // <returns>Void. Nenhum valor é retornado.</returns>
         public void Delete(uint id)
         {
             var servico = context.Servicos.Find(id);
@@ -49,7 +51,6 @@ namespace Service
         // Editar dados do serviço na base de dados
         // </summary>
         // <param name="servico">Objeto do serviço com os novos dados.</param>
-        // <returns>Void. Nenhum valor é retornado.</returns>
         public void Edit(Servico servico)
         {
             context.Update(servico);
@@ -73,16 +74,6 @@ namespace Service
         public IEnumerable<Servico> GetAll()
         {
             return context.Servicos.AsNoTracking();
-        }
-
-        Pessoa? IServico.Get(uint idServico)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<Servico> IServico.GetAll()
-        {
-            throw new NotImplementedException();
         }
     }
 }
