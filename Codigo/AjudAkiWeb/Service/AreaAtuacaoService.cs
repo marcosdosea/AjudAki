@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Service
 {
+    /// <summary>
+    /// Gerencia Area de atuação
+    /// </summary>
     internal class AreaAtuacaoService : IAreaAtuacaoService
     {
 
@@ -24,7 +27,6 @@ namespace Service
         /// <param name="areaatuacao">Nome da área</param>
         /// <returns>id da área de atuação</returns>
         /// <exception cref="NotImplementedException"></exception>
-
         public uint Create(Areaatuacao areaatuacao)
         {
             context.Add(areaatuacao);
@@ -35,12 +37,11 @@ namespace Service
         /// <summary>
         /// Remove a área de atuação da base de dados
         /// </summary>
-        /// <param name="idAreaAtuacao"></param>
-        /// <exception cref="NotImplementedException"></exception>
-
-        public void Delete(uint idAreaAtuacao)
+        /// <param name="id"></param>
+        /// <exception cref="NotImplementedException"></exception
+        public void Delete(uint id)
         {
-            var areaatuacao = context.Areaatuacaos.Find(idAreaAtuacao);
+            var areaatuacao = context.Areaatuacaos.Find(id);
             if (areaatuacao != null)
             {
                 context.Remove(areaatuacao);
@@ -52,7 +53,6 @@ namespace Service
         /// Edita a área de atuação
         /// </summary>
         /// <param name="areaatuacao"></param>
-
         public void Edit(Areaatuacao areaatuacao)
         {
             context.Update(areaatuacao);
@@ -62,20 +62,18 @@ namespace Service
         /// <summary>
         /// Busca uma área de atuação
         /// </summary>
-        /// <param name="idAreaAtuacao"></param>
+        /// <param name="id"></param>
         /// <returns>Área de atuação</returns>
         /// <exception cref="NotImplementedException"></exception>
-
-        public Areaatuacao? Get(uint idAreaAtuacao)
+        public Areaatuacao? Get(uint id)
         {
-            return context.Areaatuacaos.Find(idAreaAtuacao);
+            return context.Areaatuacaos.Find(id);
         }
 
         /// <summary>
         /// Busca as áreas de atuação
         /// </summary>
         /// <returns>Lista de Áreas de atuação</returns>
-        
         public IEnumerable<Areaatuacao> GetAll()
         {
             return context.Areaatuacaos.AsNoTracking();
