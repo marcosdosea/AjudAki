@@ -6,6 +6,8 @@ namespace Core;
 
 public partial class AjudakiContext : DbContext
 {
+    public object servicos;
+
     public AjudakiContext()
     {
     }
