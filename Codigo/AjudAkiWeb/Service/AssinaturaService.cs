@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Service
 {
+    /// <summary>
+    /// Implementa assinatura para manter assinaturas.
+    /// </summary>
     class AssinaturaService : IAssinaturaService
     {
         private readonly AjudakiContext context;
@@ -33,10 +36,10 @@ namespace Service
         /// <summary>
         /// Remover assinatura da base de dados
         /// </summary>
-        /// <param name="idAssinatura">id da assinatura</param>
-        public void Delete(uint idAssinatura)
+        /// <param name="id">id da assinatura</param>
+        public void Delete(uint id)
         {
-            var assinatura = context.Assinaturas.Find(idAssinatura);
+            var assinatura = context.Assinaturas.Find(id);
             if (assinatura != null)
             {
                 context.Remove(assinatura);
@@ -57,11 +60,11 @@ namespace Service
         /// <summary>
         /// Buscar uma assinatura na base de dados
         /// </summary>
-        /// <param name="idAssinatura">id da assinatura</param>
+        /// <param name="id">id da assinatura</param>
         /// <returns>dados da assinatura</returns>
-        public Assinatura? Get(uint idAssinatura)
+        public Assinatura? Get(uint id)
         {
-            return context.Assinaturas.Find(idAssinatura);
+            return context.Assinaturas.Find(id);
         }
 
         /// <summary>
