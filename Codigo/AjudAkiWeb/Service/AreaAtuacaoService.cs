@@ -17,12 +17,14 @@ namespace Service
         {
             this.context = context;
         }
+
         /// <summary>
         /// Cria uma nova área de atuação na base de dados
         /// </summary>
         /// <param name="areaatuacao">Nome da área</param>
         /// <returns>id da área de atuação</returns>
         /// <exception cref="NotImplementedException"></exception>
+
         public uint Create(Areaatuacao areaatuacao)
         {
             context.Add(areaatuacao);
@@ -35,6 +37,7 @@ namespace Service
         /// </summary>
         /// <param name="idAreaAtuacao"></param>
         /// <exception cref="NotImplementedException"></exception>
+
         public void Delete(uint idAreaAtuacao)
         {
             var areaatuacao = context.Areaatuacaos.Find(idAreaAtuacao);
@@ -49,6 +52,7 @@ namespace Service
         /// Edita a área de atuação
         /// </summary>
         /// <param name="areaatuacao"></param>
+
         public void Edit(Areaatuacao areaatuacao)
         {
             context.Update(areaatuacao);
@@ -61,11 +65,17 @@ namespace Service
         /// <param name="idAreaAtuacao"></param>
         /// <returns>Área de atuação</returns>
         /// <exception cref="NotImplementedException"></exception>
+
         public Areaatuacao? Get(uint idAreaAtuacao)
         {
             return context.Areaatuacaos.Find(idAreaAtuacao);
         }
 
+        /// <summary>
+        /// Busca as áreas de atuação
+        /// </summary>
+        /// <returns>Lista de Áreas de atuação</returns>
+        
         public IEnumerable<Areaatuacao> GetAll()
         {
             return context.Areaatuacaos.AsNoTracking();
