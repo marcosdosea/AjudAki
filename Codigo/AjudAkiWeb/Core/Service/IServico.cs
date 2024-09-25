@@ -8,15 +8,15 @@ namespace Core.Service
 {
     public interface IServico
     {
-        uint Create(Pessoa servico);
+        uint Create(Servico servico);
 
-        void Edit(Pessoa servico);
+        void Edit(Servico servico);
 
         void Delete(uint idServico);
 
         Pessoa? Get(uint idServico);
 
         IEnumerable<Servico> GetAll();
-
+        Servico? Get(uint id);
     }
 }
