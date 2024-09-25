@@ -17,6 +17,5 @@ namespace Core.Service
         Pessoa? Get(uint idServico);
 
         IEnumerable<Servico> GetAll();
-        Servico? Get(uint id);
     }
 }
