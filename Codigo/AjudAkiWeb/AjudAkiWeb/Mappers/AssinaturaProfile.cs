@@ -1,4 +1,4 @@
-﻿using AjudAkiWeb.Models;
+using AjudAkiWeb.Models;
 using AutoMapper;
 using Core;
 
