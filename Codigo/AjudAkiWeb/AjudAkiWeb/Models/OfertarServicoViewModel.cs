@@ -24,8 +24,6 @@ namespace AjudAkiWeb.Models
 
         public IdTipoServico idTipoServico { get; set; }
 
-        public IdAreaAtuacao idAreaAtuacao { get; set; }
-
         public IdProfissional idProfissional { get; set; }
     }
 }
