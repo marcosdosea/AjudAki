@@ -68,7 +68,7 @@ namespace AjudAkiWeb.Models
         [StringLength(40)]
         public string? PontoReferencia { get; set; }
 
-        public TipoPessoa TipoPessoa { get; set; } = default!;
+        public TipoPessoa TipoPessoa { get; set; }
 
         public AssinaturaViewModel IdAssinatura { get; set; }
 
