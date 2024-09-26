@@ -8,7 +8,7 @@ namespace AjudAkiWeb.Mappers
     {
         public ClienteProfile()
         {
-            CreateMap<ClienteModel, Pessoa>().ReverseMap();
+            CreateMap<ClienteViewModel, Pessoa>().ReverseMap();
         }
     }
 }

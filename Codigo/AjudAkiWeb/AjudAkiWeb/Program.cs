@@ -1,3 +1,8 @@
+using Core;
+using Core.Service;
+using Microsoft.EntityFrameworkCore;
+using Service;
+
 namespace AjudAkiWeb
 {
     public class Program
@@ -8,6 +13,9 @@ namespace AjudAkiWeb
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddTransient<IClienteService, ClienteService>();
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 

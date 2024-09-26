@@ -26,4 +26,3 @@ namespace AjudAkiWeb.Models
         public string? Descricao { get; set; }
     }
 }
-}
