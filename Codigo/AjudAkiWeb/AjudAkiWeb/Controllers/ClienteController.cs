@@ -1,83 +1,104 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Core.Service;
 using Microsoft.AspNetCore.Mvc;
+using AjudAkiWeb.Models;
+using Core;
 
 namespace AjudAkiWeb.Controllers
 {
     public class ClienteController : Controller
     {
+        private readonly IClienteService clienteService;
+        private readonly IMapper mapper;
+
+        public ClienteController(IClienteService clienteService, IMapper mapper)
+        {
+            this.clienteService = clienteService;
+            this.mapper = mapper;
+        }
+
         // GET: ClienteController
         public ActionResult Index()
         {
-            return View();
+            var listaClientes = clienteService.GetAll();
+            var listaClienteViewModel = mapper.Map<List<ClienteViewModel>>(listaClientes);
+
+            return View(listaClienteViewModel);
         }
 
         // GET: ClienteController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(uint id)
         {
-            return View();
+            var cliente = clienteService.Get(id);
+            var clienteViewModel = mapper.Map<ClienteViewModel>(cliente);
+
+            return View(clienteViewModel);
         }
 
         // GET: ClienteController/Create
         public ActionResult Create()
         {
-            return View();
+            var clienteViewModel = new ClienteViewModel();
+            clienteViewModel.DataNascimento = DateTime.Now;
+
+            return View(clienteViewModel);
         }
 
         // POST: ClienteController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(ClienteViewModel clienteViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var cliente = mapper.Map<Pessoa>(clienteViewModel);
+                clienteService.Create(cliente);
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ClienteController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(uint id)
         {
-            return View();
+            var cliente = clienteService.Get(id);
+            var clienteViewModel = mapper.Map<ClienteViewModel>(cliente);
+
+            return View(clienteViewModel);
         }
 
         // POST: ClienteController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(uint id, ClienteViewModel clienteViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var cliente = mapper.Map<Pessoa>(clienteViewModel);
+                clienteViewModel.Edit(cliente);
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ClienteController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(uint id)
         {
-            return View();
+            var cliente = clienteService.Get(id);
+            var clienteViewModel = mapper.Map<ClienteViewModel>(cliente);
+
+            return View(clienteViewModel);
         }
 
         // POST: ClienteController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(ClienteViewModel clienteViewModel)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            clienteService.Delete(clienteViewModel.Id);
+
+            return RedirectToAction(nameof(Index));
         }
     }
+
 }

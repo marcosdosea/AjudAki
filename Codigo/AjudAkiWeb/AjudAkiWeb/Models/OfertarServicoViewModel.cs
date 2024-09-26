@@ -14,16 +14,12 @@ namespace AjudAkiWeb.Models
 
         [Display(Name = "Nome")]
         [StringLength(50)]
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
 
         [Display(Name = "Data")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Campo Obrigatório")]
         public DateTime Data { get; set; }
-
-        public IdTipoServico idTipoServico { get; set; }
-
-        public IdProfissional idProfissional { get; set; }
     }
 }

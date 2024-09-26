@@ -70,7 +70,7 @@ namespace AjudAkiWeb.Models
 
         public TipoPessoa TipoPessoa { get; set; }
 
-        public AssinaturaViewModel IdAssinatura { get; set; }
+        public AssinaturaViewModel? IdAssinatura { get; set; }
 
     }
 }
