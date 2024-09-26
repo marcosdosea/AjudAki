@@ -37,10 +37,10 @@ namespace Service
         /// <summary>
         /// Remover o cliente da base de dados
         /// </summary>
-        /// <param name="idCliente">id do cliente</param>
-        public void Delete(uint idCliente)
+        /// <param name="id">id do cliente</param>
+        public void Delete(uint id)
         {
-            var cliente = context.Pessoas.Find(idCliente);
+            var cliente = context.Pessoas.Find(id);
             if (cliente != null)
             {
                 context.Remove(cliente);
@@ -61,11 +61,11 @@ namespace Service
         /// <summary>
         /// Busca um cliente na base de dados
         /// </summary>
-        /// <param name="idCliente">id do cliente</param>
+        /// <param name="id">id do cliente</param>
         /// <returns>dados do cliente</returns>
-        public Pessoa? Get(uint idCliente)
+        public Pessoa? Get(uint id)
         {
-            return context.Pessoas.Find(idCliente);
+            return context.Pessoas.Find(id);
         }
 
         /// <summary>
