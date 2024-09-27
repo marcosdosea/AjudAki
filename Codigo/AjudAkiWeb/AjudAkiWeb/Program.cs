@@ -14,8 +14,8 @@ namespace AjudAkiWeb
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddTransient<IAssinaturaService, AssinaturaService>();
-			      builder.Services.AddTransient<IClienteService, ClienteService>();
-
+	    builder.Services.AddTransient<IClienteService, ClienteService>();
+	    builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
