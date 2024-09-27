@@ -61,10 +61,5 @@ namespace AjudAkiWeb.Models
         public string? PontoReferencia { get; set; }
 
         public TipoPessoa TipoPessoa { get; set; } = default!;
-
-        internal void Edit(Pessoa cliente)
-        {
-            throw new NotImplementedException(); // estava dando erro na criação do clienteController
-        }
     }
 }
