@@ -22,16 +22,16 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Index()
         {
             var listaServicos = servicoService.GetAll();
-            var listaxServicoViewModel = mapper.Map<List<ServicoViewModel>>(listaServicos);
-            return View(listaxServicoViewModel);
+            var listaServicoViewModel = mapper.Map<List<ServicoViewModel>>(listaServicos);
+            return View(listaServicoViewModel);
         }
 
         // GET: ServicoController/Details/5
         public ActionResult Details(uint id)
         {
             var servico = servicoService.Get(id);
-            var xServicoViewModel = mapper.Map<ServicoViewModel>(servico);
-            return View(xServicoViewModel);
+            var servicoViewModel = mapper.Map<ServicoViewModel>(servico);
+            return View(servicoViewModel);
         }
 
         // GET: ServicoController/Create
@@ -52,7 +52,6 @@ namespace AjudAkiWeb.Controllers
                 var servico = mapper.Map<Servico>(servicoViewModel);
                 servicoService.Create(servico);
             }
-
             return RedirectToAction(nameof(Index));
         }
 
