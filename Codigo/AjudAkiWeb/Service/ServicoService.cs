@@ -7,11 +7,11 @@ namespace Service
     /// <summary>
     /// Implementa serviços para manter o ofertar serviço.
     /// </summary>
-    class OfertarServicoService : IServico
+    public class ServicoService : IServicoService
     {
         private readonly AjudakiContext context;
 
-        public OfertarServicoService(AjudakiContext context)
+        public ServicoService(AjudakiContext context)
         {
             this.context = context;
         }
