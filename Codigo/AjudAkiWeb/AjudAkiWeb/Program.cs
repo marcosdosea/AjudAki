@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Service;
 
 namespace AjudAkiWeb
-{ 
+{
     public class Program
     {
         public static void Main(string[] args)
@@ -14,8 +14,11 @@ namespace AjudAkiWeb
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddTransient<IAssinaturaService, AssinaturaService>();
-	        builder.Services.AddTransient<IClienteService, ClienteService>();            
+            builder.Services.AddTransient<IClienteService, ClienteService>();
             builder.Services.AddTransient<IProfissionalService, ProfissionalService>();
+            builder.Services.AddTransient<IServicoService, ServicoService>();
+            builder.Services.AddTransient<IAreaAtuacaoService, AreaAtuacaoService>();
+
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

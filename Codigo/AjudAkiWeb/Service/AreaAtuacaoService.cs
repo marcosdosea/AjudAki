@@ -7,7 +7,7 @@ namespace Service
     /// <summary>
     /// Gerencia Area de atuação
     /// </summary>
-    internal class AreaAtuacaoService : IAreaAtuacaoService
+    public class AreaAtuacaoService : IAreaAtuacaoService
     {
 
         private readonly AjudakiContext context;
