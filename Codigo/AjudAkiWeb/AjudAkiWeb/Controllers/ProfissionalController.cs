@@ -10,19 +10,19 @@ namespace AjudAkiWeb.Controllers
 {
     public class ProfissionalController : Controller
     {
-        private readonly IProfissionalService ProfissionalService;
+        private readonly IProfissionalService profissionalService;
         private readonly IMapper mapper;
 
-        public ProfissionalController(IProfissionalService ProfissionalService, IMapper mapper)
+        public ProfissionalController(IProfissionalService profissionalService, IMapper mapper)
         {
-            this.ProfissionalService = ProfissionalService;
+            this.profissionalService = profissionalService;
             this.mapper = mapper;
         }
 
         // GET: ProfissionalController
         public ActionResult Index()
         {
-            var listaProfissionais = ProfissionalService.GetAll();
+            var listaProfissionais = profissionalService.GetAll();
             var listaProfissionalViewModel = mapper.Map<List<ProfissionalViewModel>>(listaProfissionais);
             return View(listaProfissionalViewModel);
         }
@@ -30,28 +30,28 @@ namespace AjudAkiWeb.Controllers
         // GET: ProfissionalController/Details/5
         public ActionResult Details(uint id)
         {
-            var Profissional = ProfissionalService.Get(id);
-            var ProfissionalViewModel = mapper.Map<ProfissionalViewModel>(Profissional);
-            return View(ProfissionalViewModel);
+            var profissional = profissionalService.Get(id);
+            var profissionalViewModel = mapper.Map<ProfissionalViewModel>(profissional);
+            return View(profissionalViewModel);
         }
 
         // GET: ProfissionalController/Create
         public ActionResult Create()
         {
-            var ProfissionalViewModel = new ProfissionalViewModel();
+            var profissionalViewModel = new ProfissionalViewModel();
             ProfissionalViewModel.DataNascimento = DateTime.Now;
-            return View(ProfissionalViewModel);
+            return View(profissionalViewModel);
         }
 
         // POST: ProfissionalController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ProfissionalViewModel ProfissionalViewModel)
+        public ActionResult Create(ProfissionalViewModel profissionalViewModel)
         {
             if (ModelState.IsValid)
             {
-                var Profissional = mapper.Map<Pessoa>(ProfissionalViewModel);
-                ProfissionalService.Create(Profissional);
+                var profissional = mapper.Map<Pessoa>(profissionalViewModel);
+                profissionalService.Create(profissional);
             }
 
             return RedirectToAction(nameof(Index));
@@ -60,20 +60,20 @@ namespace AjudAkiWeb.Controllers
         // GET: ProfissionalController/Edit/5
         public ActionResult Edit(uint id)
         {
-            var Profissional = ProfissionalService.Get(id);
-            var ProfissionalViewModel = mapper.Map<ProfissionalViewModel>(Profissional);
-            return View(ProfissionalViewModel);
+            var profissional = profissionalService.Get(id);
+            var profissionalViewModel = mapper.Map<ProfissionalViewModel>(profissional);
+            return View(profissionalViewModel);
         }
 
         // POST: ProfissionalController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(uint id, ProfissionalViewModel ProfissionalViewModel)
+        public ActionResult Edit(uint id, ProfissionalViewModel profissionalViewModel)
         {
             if (ModelState.IsValid)
             {
-                var Profissional = mapper.Map<Pessoa>(ProfissionalViewModel);
-                ProfissionalService.Edit(Profissional);
+                var profissional = mapper.Map<Pessoa>(profissionalViewModel);
+                profissionalService.Edit(profissional);
             }
 
             return RedirectToAction(nameof(Index));
@@ -82,17 +82,17 @@ namespace AjudAkiWeb.Controllers
         // GET: ProfissionalController/Delete/5
         public ActionResult Delete(uint id)
         {
-            var Profissional = ProfissionalService.Get(id);
-            var ProfissionalViewModel = mapper.Map<ClienteViewModel>(Profissional);
-            return View(ProfissionalViewModel);
+            var profissional = profissionalService.Get(id);
+            var profissionalViewModel = mapper.Map<ClienteViewModel>(profissional);
+            return View(profissionalViewModel);
         }
 
         // POST: ProfissionalController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(ProfissionalViewModel ProfissionalViewModel)
+        public ActionResult Delete(ProfissionalViewModel profissionalViewModel)
         {
-            ProfissionalService.Delete(ProfissionalViewModel.Id);
+            profissionalService.Delete(profissionalViewModel.Id);
             return RedirectToAction(nameof(Index));
         }
     }
