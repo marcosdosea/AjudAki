@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Service
 {
-    public interface IServico
+    public interface IServicoService
     {
         uint Create(Servico servico);
 

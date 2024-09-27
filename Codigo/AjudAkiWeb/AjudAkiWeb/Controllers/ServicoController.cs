@@ -1,83 +1,97 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AjudAkiWeb.Models;
+using AutoMapper;
+using Core;
+using Core.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Service;
 
 namespace AjudAkiWeb.Controllers
 {
     public class ServicoController : Controller
     {
-        // GET: ServicoController
+        private readonly IServicoService servicoService;
+        private readonly IMapper mapper;
+
+        public ServicoController(IServicoService servicoService, IMapper mapper)
+        {
+            this.servicoService = servicoService;
+            this.mapper = mapper;
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var listaServicos = servicoService.GetAll();
+            var listaOfertarServicoViewModel = mapper.Map<List<OfertarServicoViewModel>>(listaServicos);
+            return View(listaOfertarServicoViewModel);
         }
 
         // GET: ServicoController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(uint id)
         {
-            return View();
+            var servico = servicoService.Get(id);
+            var ofertarServicoViewModel = mapper.Map<OfertarServicoViewModel>(servico);
+            return View(ofertarServicoViewModel);
         }
 
         // GET: ServicoController/Create
         public ActionResult Create()
         {
-            return View();
+            var servicoViewModel = new OfertarServicoViewModel();
+            servicoViewModel.Data = DateTime.Now;
+            return View(servicoViewModel);
         }
 
         // POST: ServicoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(OfertarServicoViewModel servicoViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var servico = mapper.Map<Servico>(servicoViewModel);
+                servicoService.Create(servico);
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ServicoController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(uint id)
         {
-            return View();
+            var servico = servicoService.Get(id);
+            var servicoViewModel = mapper.Map<OfertarServicoViewModel>(servico);
+            return View(servicoViewModel);
         }
 
         // POST: ServicoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(uint id, OfertarServicoViewModel servicoViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var servico = mapper.Map<Servico>(servicoViewModel);
+                servicoService.Edit(servico);
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ServicoController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(uint id)
         {
-            return View();
+            var servico = servicoService.Get(id);
+            var servicoViewModel = mapper.Map<OfertarServicoViewModel>(servico);
+            return View(servicoViewModel);
         }
 
-        // POST: ServicoController/Delete/5
+        // POST: ProfissionalController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(OfertarServicoViewModel servicoViewModel)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            servicoService.Delete(servicoViewModel.Id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

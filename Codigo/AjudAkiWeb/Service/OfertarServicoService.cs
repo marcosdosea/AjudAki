@@ -7,7 +7,7 @@ namespace Service
     /// <summary>
     /// Implementa serviços para manter o ofertar serviço.
     /// </summary>
-    class OfertarServicoService : IServico
+    public class OfertarServicoService : IServicoService
     {
         private readonly AjudakiContext context;
 
