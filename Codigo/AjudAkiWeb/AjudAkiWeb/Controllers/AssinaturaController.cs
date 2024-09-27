@@ -1,83 +1,95 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Service;
 using Microsoft.AspNetCore.Mvc;
+using Core;
+using AutoMapper;
+using AjudAkiWeb.Models;
 
 namespace AjudAkiWeb.Controllers
 {
     public class AssinaturaController : Controller
+
     {
+        private readonly IAssinaturaService assinaturaService;
+        private readonly IMapper mapper;
+
+        public AssinaturaController(IAssinaturaService assinaturaService, IMapper mapper)
+        {
+            this.assinaturaService = assinaturaService;
+            this.mapper = mapper;
+        }
+
         // GET: AssinaturaController
         public ActionResult Index()
         {
-            return View();
+            var listaAssinaturas = assinaturaService.GetAll();
+            var listaAssinaturaViewModel = mapper.Map<List<AssinaturaViewModel>>(listaAssinaturas);
+            return View(listaAssinaturaViewModel);
         }
 
         // GET: AssinaturaController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(uint id)
         {
-            return View();
+            var assinatura = assinaturaService.Get(id);
+            var assinaturaViewModel = mapper.Map<AssinaturaViewModel>(assinatura);
+            return View(assinaturaViewModel);
         }
 
         // GET: AssinaturaController/Create
         public ActionResult Create()
         {
-            return View();
+            var assinaturaViewModel = new AssinaturaViewModel();
+            return View(assinaturaViewModel);
         }
 
         // POST: AssinaturaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(AssinaturaViewModel assinaturaViewModel)
         {
-            try
+            if(ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var assinatura = mapper.Map<Assinatura>(assinaturaViewModel);
+                assinaturaService.Create(assinatura);
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AssinaturaController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(uint id)
         {
-            return View();
+            var assinatura = assinaturaService.Get(id);
+            var assinaturaViewModel = mapper.Map<AssinaturaViewModel>(assinatura);
+            return View(assinaturaViewModel);
         }
 
         // POST: AssinaturaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(uint id, AssinaturaViewModel assinaturaViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var assinatura = mapper.Map<Assinatura>(assinaturaViewModel);
+                assinaturaService.Edit(assinatura);
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AssinaturaController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(uint id)
         {
-            return View();
+            var assinatura = assinaturaService.Get(id);
+            var assinaturaViewModel = mapper.Map<AssinaturaViewModel>(assinatura);
+            return View(assinaturaViewModel);
         }
 
         // POST: AssinaturaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(AssinaturaViewModel assinaturaViewModel)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            assinaturaService.Delete(assinaturaViewModel.Id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

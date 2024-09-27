@@ -1,3 +1,6 @@
+using Core.Service;
+using Service;
+
 namespace AjudAkiWeb
 {
     public class Program
@@ -8,6 +11,9 @@ namespace AjudAkiWeb
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+			builder.Services.AddTransient<IAssinaturaService, AssinaturaService>();
+			builder.Services.AddTransient<IClienteService, ClienteService>();
 
             var app = builder.Build();
 
