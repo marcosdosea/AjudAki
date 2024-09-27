@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    class ProfissionalService : IProfissionalService
+    public class ProfissionalService : IProfissionalService
     {
         private readonly AjudakiContext context;
         public ProfissionalService(AjudakiContext context)
@@ -36,7 +36,7 @@ namespace Service
         /// </summary>
         /// <param name="id"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void Delete(int id)
+        public void Delete(uint id)
         {
             var profissional = context.Pessoas.Find(id);
             if (profissional != null)
@@ -67,7 +67,7 @@ namespace Service
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public Pessoa? Get(int id)
+        public Pessoa? Get(uint id)
         {
             return context.Pessoas.Find(id);
         }

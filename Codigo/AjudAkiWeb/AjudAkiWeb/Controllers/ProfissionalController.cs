@@ -1,83 +1,99 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AjudAkiWeb.Models;
+using AutoMapper;
+using Core;
+using Core.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Service;
 
 namespace AjudAkiWeb.Controllers
 {
     public class ProfissionalController : Controller
     {
+        private readonly IProfissionalService profissionalService;
+        private readonly IMapper mapper;
+
+        public ProfissionalController(IProfissionalService profissionalService, IMapper mapper)
+        {
+            this.profissionalService = profissionalService;
+            this.mapper = mapper;
+        }
+
         // GET: ProfissionalController
         public ActionResult Index()
         {
-            return View();
+            var listaProfissionais = profissionalService.GetAll();
+            var listaProfissionalViewModel = mapper.Map<List<ProfissionalViewModel>>(listaProfissionais);
+            return View(listaProfissionalViewModel);
         }
 
         // GET: ProfissionalController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(uint id)
         {
-            return View();
+            var profissional = profissionalService.Get(id);
+            var profissionalViewModel = mapper.Map<ProfissionalViewModel>(profissional);
+            return View(profissionalViewModel);
         }
 
         // GET: ProfissionalController/Create
         public ActionResult Create()
         {
-            return View();
+            var profissionalViewModel = new ProfissionalViewModel();
+            ProfissionalViewModel.DataNascimento = DateTime.Now;
+            return View(profissionalViewModel);
         }
 
         // POST: ProfissionalController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(ProfissionalViewModel profissionalViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var profissional = mapper.Map<Pessoa>(profissionalViewModel);
+                profissionalService.Create(profissional);
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ProfissionalController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(uint id)
         {
-            return View();
+            var profissional = profissionalService.Get(id);
+            var profissionalViewModel = mapper.Map<ProfissionalViewModel>(profissional);
+            return View(profissionalViewModel);
         }
 
         // POST: ProfissionalController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(uint id, ProfissionalViewModel profissionalViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var profissional = mapper.Map<Pessoa>(profissionalViewModel);
+                profissionalService.Edit(profissional);
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ProfissionalController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(uint id)
         {
-            return View();
+            var profissional = profissionalService.Get(id);
+            var profissionalViewModel = mapper.Map<ClienteViewModel>(profissional);
+            return View(profissionalViewModel);
         }
 
         // POST: ProfissionalController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(ProfissionalViewModel profissionalViewModel)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            profissionalService.Delete(profissionalViewModel.Id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
