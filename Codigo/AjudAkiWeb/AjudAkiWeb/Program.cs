@@ -14,7 +14,9 @@ namespace AjudAkiWeb
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddTransient<IClienteService, ClienteService>();
+
+            builder.Services.AddTransient<IAssinaturaService, AssinaturaService>();
+	        builder.Services.AddTransient<IClienteService, ClienteService>();            
             builder.Services.AddTransient<IProfissionalService, ProfissionalService>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
