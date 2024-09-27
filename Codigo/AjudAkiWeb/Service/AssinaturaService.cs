@@ -12,7 +12,7 @@ namespace Service
     /// <summary>
     /// Implementa assinatura para manter assinaturas.
     /// </summary>
-    class AssinaturaService : IAssinaturaService
+    public class AssinaturaService : IAssinaturaService
     {
         private readonly AjudakiContext context;
 

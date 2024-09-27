@@ -1,4 +1,3 @@
-using Core;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 using Service;
@@ -14,9 +13,9 @@ namespace AjudAkiWeb
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddTransient<IClienteService, ClienteService>();
-            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
+            builder.Services.AddTransient<IAssinaturaService, AssinaturaService>();
+	    builder.Services.AddTransient<IClienteService, ClienteService>();
+	    builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
