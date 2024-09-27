@@ -1,4 +1,5 @@
 using Core.Service;
+using Microsoft.EntityFrameworkCore;
 using Service;
 
 namespace AjudAkiWeb
@@ -12,8 +13,8 @@ namespace AjudAkiWeb
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-			builder.Services.AddTransient<IAssinaturaService, AssinaturaService>();
-			builder.Services.AddTransient<IClienteService, ClienteService>();
+            builder.Services.AddTransient<IAssinaturaService, AssinaturaService>();
+			      builder.Services.AddTransient<IClienteService, ClienteService>();
 
             var app = builder.Build();
 
