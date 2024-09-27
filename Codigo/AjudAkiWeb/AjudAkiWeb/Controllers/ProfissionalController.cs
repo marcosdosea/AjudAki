@@ -39,7 +39,7 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Create()
         {
             var profissionalViewModel = new ProfissionalViewModel();
-            ProfissionalViewModel.DataNascimento = DateTime.Now;
+            profissionalViewModel.DataNascimento = DateTime.Now;
             return View(profissionalViewModel);
         }
 

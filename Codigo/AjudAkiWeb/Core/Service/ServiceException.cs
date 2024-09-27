@@ -2,7 +2,7 @@
 namespace Service
 {
     [Serializable]
-    internal class ServiceException : Exception
+    public class ServiceException : Exception
     {
         public ServiceException()
         {
