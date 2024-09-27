@@ -22,22 +22,22 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Index()
         {
             var listaServicos = servicoService.GetAll();
-            var listaOfertarServicoViewModel = mapper.Map<List<OfertarServicoViewModel>>(listaServicos);
-            return View(listaOfertarServicoViewModel);
+            var listaxServicoViewModel = mapper.Map<List<ServicoViewModel>>(listaServicos);
+            return View(listaxServicoViewModel);
         }
 
         // GET: ServicoController/Details/5
         public ActionResult Details(uint id)
         {
             var servico = servicoService.Get(id);
-            var ofertarServicoViewModel = mapper.Map<OfertarServicoViewModel>(servico);
-            return View(ofertarServicoViewModel);
+            var xServicoViewModel = mapper.Map<ServicoViewModel>(servico);
+            return View(xServicoViewModel);
         }
 
         // GET: ServicoController/Create
         public ActionResult Create()
         {
-            var servicoViewModel = new OfertarServicoViewModel();
+            var servicoViewModel = new ServicoViewModel();
             servicoViewModel.Data = DateTime.Now;
             return View(servicoViewModel);
         }
@@ -45,7 +45,7 @@ namespace AjudAkiWeb.Controllers
         // POST: ServicoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(OfertarServicoViewModel servicoViewModel)
+        public ActionResult Create(ServicoViewModel servicoViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -60,14 +60,14 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Edit(uint id)
         {
             var servico = servicoService.Get(id);
-            var servicoViewModel = mapper.Map<OfertarServicoViewModel>(servico);
+            var servicoViewModel = mapper.Map<ServicoViewModel>(servico);
             return View(servicoViewModel);
         }
 
         // POST: ServicoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(uint id, OfertarServicoViewModel servicoViewModel)
+        public ActionResult Edit(uint id, ServicoViewModel servicoViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -81,14 +81,14 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Delete(uint id)
         {
             var servico = servicoService.Get(id);
-            var servicoViewModel = mapper.Map<OfertarServicoViewModel>(servico);
+            var servicoViewModel = mapper.Map<ServicoViewModel>(servico);
             return View(servicoViewModel);
         }
 
         // POST: ProfissionalController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(OfertarServicoViewModel servicoViewModel)
+        public ActionResult Delete(ServicoViewModel servicoViewModel)
         {
             servicoService.Delete(servicoViewModel.Id);
             return RedirectToAction(nameof(Index));

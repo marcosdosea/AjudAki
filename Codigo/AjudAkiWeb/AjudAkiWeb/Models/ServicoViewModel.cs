@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace AjudAkiWeb.Models
 {
-    public class OfertarServicoViewModel
+    public class ServicoViewModel
     {
 
         [Display(Name ="Código")]
