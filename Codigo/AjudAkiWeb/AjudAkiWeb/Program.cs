@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Service;
 
 namespace AjudAkiWeb
-{
+{ 
     public class Program
     {
         public static void Main(string[] args)
@@ -15,6 +15,7 @@ namespace AjudAkiWeb
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddTransient<IClienteService, ClienteService>();
+            builder.Services.AddTransient<IProfissionalService, ProfissionalService>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();

@@ -10,16 +10,16 @@ namespace Core.Service
     public interface IProfissionalService
     {
         uint Create(Pessoa profissional);
-        
+
         void Edit(Pessoa profissional);
-        
-        void Delete(int id);
-        
-        Pessoa? Get(int id);
-        
+
+        void Delete(uint id);
+
+        Pessoa? Get(uint id);
+
         IEnumerable<Pessoa> GetAll();
-        
+
         IEnumerable<Pessoa> GetByNome(string nome);
-        
+
     }
 }
