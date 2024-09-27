@@ -75,7 +75,7 @@ namespace AjudAkiWeb.Controllers
             if (ModelState.IsValid)
             {
                 var cliente = mapper.Map<Pessoa>(clienteViewModel);
-                clienteViewModel.Edit(cliente);
+                clienteService.Edit(cliente);
             }
 
             return RedirectToAction(nameof(Index));

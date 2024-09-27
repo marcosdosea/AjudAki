@@ -1,3 +1,4 @@
+using Core;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 using Service;
@@ -12,12 +13,14 @@ namespace AjudAkiWeb
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
             builder.Services.AddTransient<IAssinaturaService, AssinaturaService>();
 	        builder.Services.AddTransient<IClienteService, ClienteService>();            
             builder.Services.AddTransient<IProfissionalService, ProfissionalService>();
+
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+            builder.Services.AddDbContext<AjudakiContext>(
+                options => options.UseMySQL(builder.Configuration.GetConnectionString("AjudakiDatabase")));
 
             var app = builder.Build();
 
