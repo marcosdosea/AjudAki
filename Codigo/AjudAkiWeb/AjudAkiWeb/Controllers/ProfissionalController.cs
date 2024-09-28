@@ -83,7 +83,7 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Delete(uint id)
         {
             var profissional = profissionalService.Get(id);
-            var profissionalViewModel = mapper.Map<ClienteViewModel>(profissional);
+            var profissionalViewModel = mapper.Map<ProfissionalViewModel>(profissional);
             return View(profissionalViewModel);
         }
 
