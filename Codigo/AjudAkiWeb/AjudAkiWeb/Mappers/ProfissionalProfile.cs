@@ -9,6 +9,7 @@ namespace AjudAkiWeb.Mappers
         public ProfissionalProfile()
         {
             CreateMap<ProfissionalViewModel, Pessoa>().ReverseMap();
+            CreateMap<AssinaturaViewModel, Assinatura>().ReverseMap();
         }
     }
 }
