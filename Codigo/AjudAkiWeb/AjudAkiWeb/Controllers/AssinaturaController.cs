@@ -86,7 +86,7 @@ namespace AjudAkiWeb.Controllers
         // POST: AssinaturaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(AssinaturaViewModel assinaturaViewModel)
+        public ActionResult Delete(uint id,  AssinaturaViewModel assinaturaViewModel)
         {
             assinaturaService.Delete(assinaturaViewModel.Id);
             return RedirectToAction(nameof(Index));
