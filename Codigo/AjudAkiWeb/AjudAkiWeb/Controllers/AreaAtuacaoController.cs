@@ -62,7 +62,7 @@ namespace AjudAkiWeb.Controllers
         {
             var areaAtuacao = areaAtuacaoService.Get(id);
             var areaAtuacaoViewModel = mapper.Map<AreaAtuacaoViewModel>(areaAtuacao);
-            return View();
+            return View(areaAtuacaoViewModel);
         }
 
         // POST: AreaAtuacaoController/Edit/5
@@ -90,7 +90,7 @@ namespace AjudAkiWeb.Controllers
         // POST: AreaAtuacaoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(uint id, AreaAtuacaoViewModel areaAtuacaoViewModel)
+        public ActionResult Delete(AreaAtuacaoViewModel areaAtuacaoViewModel)
         {
             areaAtuacaoService.Delete(areaAtuacaoViewModel.Id);
 
