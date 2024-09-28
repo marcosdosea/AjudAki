@@ -11,11 +11,11 @@ public partial class Servico
 
     public DateTime Data { get; set; }
 
-    public int IdTipoServico { get; set; }
+    public uint IdTipoServico { get; set; }
 
-    public int IdAreaAtuacao { get; set; }
+    public uint IdAreaAtuacao { get; set; }
 
-    public int IdProfissional { get; set; }
+    public uint IdProfissional { get; set; }
 
     public virtual ICollection<Contratacao> Contratacaos { get; set; } = new List<Contratacao>();
 

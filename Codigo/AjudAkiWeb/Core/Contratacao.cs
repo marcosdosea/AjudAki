@@ -5,7 +5,7 @@ namespace Core;
 
 public partial class Contratacao
 {
-    public int Id { get; set; }
+    public uint Id { get; set; }
 
     public string Nome { get; set; } = null!;
 
@@ -23,9 +23,9 @@ public partial class Contratacao
 
     public string Status { get; set; } = null!;
 
-    public int IdServico { get; set; }
+    public uint IdServico { get; set; }
 
-    public int IdCliente { get; set; }
+    public uint IdCliente { get; set; }
 
     public virtual ICollection<Avaliacao> Avaliacaos { get; set; } = new List<Avaliacao>();
 

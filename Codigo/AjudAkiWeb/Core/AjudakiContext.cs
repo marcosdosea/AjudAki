@@ -270,8 +270,8 @@ public partial class AjudakiContext : DbContext
                         j.ToTable("pessoaagenda");
                         j.HasIndex(new[] { "IdAgenda" }, "fk_Pessoa_has_Agenda_Agenda1_idx");
                         j.HasIndex(new[] { "IdProfissional" }, "fk_Pessoa_has_Agenda_Pessoa1_idx");
-                        j.IndexerProperty<int>("IdProfissional").HasColumnName("idProfissional");
-                        j.IndexerProperty<int>("IdAgenda").HasColumnName("idAgenda");
+                        j.IndexerProperty<uint>("IdProfissional").HasColumnName("idProfissional");
+                        j.IndexerProperty<uint>("IdAgenda").HasColumnName("idAgenda");
                     });
         });
 

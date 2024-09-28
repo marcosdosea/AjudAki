@@ -5,13 +5,13 @@ namespace Core;
 
 public partial class Tiposervico
 {
-    public int Id { get; set; }
+    public uint Id { get; set; }
 
     public string Nome { get; set; } = null!;
 
-    public int IdAgenda { get; set; }
+    public uint IdAgenda { get; set; }
 
-    public int IdAreaAtuacao { get; set; }
+    public uint IdAreaAtuacao { get; set; }
 
     public virtual Agendum IdAgendaNavigation { get; set; } = null!;
 

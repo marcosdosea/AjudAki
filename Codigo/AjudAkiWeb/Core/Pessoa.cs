@@ -31,7 +31,7 @@ public partial class Pessoa
 
     public string TipoPessoa { get; set; } = null!;
 
-    public int IdAssinatura { get; set; }
+    public uint IdAssinatura { get; set; }
 
     public virtual ICollection<Contratacao> Contratacaos { get; set; } = new List<Contratacao>();
 

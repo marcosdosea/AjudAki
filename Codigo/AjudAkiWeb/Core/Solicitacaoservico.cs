@@ -5,7 +5,7 @@ namespace Core;
 
 public partial class Solicitacaoservico
 {
-    public int Id { get; set; }
+    public uint Id { get; set; }
 
     public string Nome { get; set; } = null!;
 
@@ -17,11 +17,11 @@ public partial class Solicitacaoservico
 
     public string? Descricao { get; set; }
 
-    public int IdCliente { get; set; }
+    public uint IdCliente { get; set; }
 
-    public int IdProfissional { get; set; }
+    public uint IdProfissional { get; set; }
 
-    public int IdTipoServico { get; set; }
+    public uint IdTipoServico { get; set; }
 
     public virtual Pessoa IdClienteNavigation { get; set; } = null!;
 
