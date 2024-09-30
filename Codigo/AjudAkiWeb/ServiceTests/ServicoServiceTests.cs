@@ -32,19 +32,19 @@ namespace Service.Tests
                 new()
                 {
                     Id = 1,
-                    Nome = "Pedro de Assis",
+                    Nome = "Encanador",
                     Data = DateTime.Parse("2000-12-31"),
                 },
                 new()
                 {
                     Id = 2,
-                    Nome = "Ian S. Sommervile",
+                    Nome = "Mecânico",
                     Data = DateTime.Parse("1935-12-31"),
                 },
                 new Servico
                 {
                     Id = 3,
-                    Nome = "Laila Esterfane",
+                    Nome = "Eletricista",
                     Data = DateTime.Parse("1998-11-20"),
                 },
             };
@@ -62,7 +62,7 @@ namespace Service.Tests
             var novoServico = new Servico()
             {
                 Id = 4,
-                Nome = "Pedro Ramos",
+                Nome = "Cozinheiro",
                 Data = DateTime.Parse("2003-12-25"),
             };
 
@@ -72,7 +72,7 @@ namespace Service.Tests
             Assert.AreEqual(4, ServicoService.GetAll().Count());
             var Servico = ServicoService.Get(4);
 
-            Assert.AreEqual("Pedro Ramos", Servico.Nome);
+            Assert.AreEqual("Cozinheiro", Servico.Nome);
             Assert.AreEqual(DateTime.Parse("2003-12-25"), Servico.Data);
         }
 
@@ -95,7 +95,7 @@ namespace Service.Tests
             // Act 
             var Servico = ServicoService.Get(3);
 
-            Servico.Nome = "Paulo Lima";
+            Servico.Nome = "Faxineiro";
             Servico.Data = DateTime.Parse("1993-11-21");
             ServicoService.Edit(Servico);
 
@@ -103,7 +103,7 @@ namespace Service.Tests
             Servico = ServicoService.Get(3);
 
             Assert.IsNotNull(Servico);
-            Assert.AreEqual("Paulo Lima", Servico.Nome);
+            Assert.AreEqual("Faxineiro", Servico.Nome);
             Assert.AreEqual(DateTime.Parse("1993-11-21"), Servico.Data);
         }
 
@@ -113,7 +113,7 @@ namespace Service.Tests
             var Servico = ServicoService.Get(1);
 
             Assert.IsNotNull(Servico);
-            Assert.AreEqual("Pedro de Assis", Servico.Nome); // Corrigido o nome para coincidir com a inicialização
+            Assert.AreEqual("Encanador", Servico.Nome); // Corrigido o nome para coincidir com a inicialização
             Assert.AreEqual(DateTime.Parse("2000-12-31"), Servico.Data);
         }
 
@@ -128,7 +128,7 @@ namespace Service.Tests
             Assert.IsNotNull(listaServico);
             Assert.AreEqual(3, listaServico.Count());
             Assert.AreEqual((uint)1, listaServico.First().Id);
-            Assert.AreEqual("Pedro de Assis", listaServico.First().Nome); // Corrigido o nome para coincidir com a inicialização
+            Assert.AreEqual("Encanador", listaServico.First().Nome); // Corrigido o nome para coincidir com a inicialização
         }
     }
 }

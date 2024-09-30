@@ -69,7 +69,7 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
             ServicoViewModel ServicoModel = (ServicoViewModel)viewResult.ViewData.Model;
 
-            Assert.AreEqual("Miguel dos Santos", ServicoModel.Nome);
+            Assert.AreEqual("Encanador", ServicoModel.Nome);
             Assert.AreEqual(DateTime.Parse("2000-02-07"), ServicoModel.Data);
         }
 
@@ -126,7 +126,7 @@ namespace AjudAkiWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
             ServicoViewModel ServicoModel = (ServicoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Miguel dos Santos", ServicoModel.Nome);
+            Assert.AreEqual("Encanador", ServicoModel.Nome);
             Assert.AreEqual(DateTime.Parse("2000-02-07"), ServicoModel.Data);
         }
 
@@ -154,7 +154,7 @@ namespace AjudAkiWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
             ServicoViewModel ServicoModel = (ServicoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Miguel dos Santos", ServicoModel.Nome);
+            Assert.AreEqual("Encanador", ServicoModel.Nome);
             Assert.AreEqual(DateTime.Parse("2000-02-07"), ServicoModel.Data);
         }
 
@@ -176,7 +176,7 @@ namespace AjudAkiWeb.Controllers.Tests
             return new ServicoViewModel
             {
                 Id = 4,
-                Nome = "Marlysson Dantas",
+                Nome = "Cozinheiro",
                 Data = DateTime.Parse("1951-02-23")
             };
         }
@@ -186,7 +186,7 @@ namespace AjudAkiWeb.Controllers.Tests
             return new Servico
             {
                 Id = 1,
-                Nome = "Miguel dos Santos",
+                Nome = "Encanador",
                 Data = DateTime.Parse("2000-02-07")
             };
         }
@@ -196,7 +196,7 @@ namespace AjudAkiWeb.Controllers.Tests
             return new ServicoViewModel
             {
                 Id = 2,
-                Nome = "Paulo Borbas",
+                Nome = "Encanador",
                 Data = DateTime.Parse("2002-09-24")
             };
         }
@@ -208,19 +208,19 @@ namespace AjudAkiWeb.Controllers.Tests
                 new Servico
                 {
                     Id = 1,
-                    Nome = "Pedro Ramos",
+                    Nome = "Cozinheiro",
                     Data = DateTime.Parse("1892-10-27")
                 },
                 new Servico
                 {
                     Id = 2,
-                    Nome = "Lula da Silva",
+                    Nome = "Faxineiro",
                     Data = DateTime.Parse("1839-06-21")
                 },
                 new Servico
                 {
                     Id = 3,
-                    Nome = "Marcos Dósea",
+                    Nome = "Eletricista",
                     Data = DateTime.Parse("1982-01-01")
                 },
             };
