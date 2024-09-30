@@ -85,7 +85,7 @@ namespace AjudAkiWeb.Controllers
         // POST: ProfissionalController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(ServicoViewModel servicoViewModel)
+        public ActionResult Delete(uint id, ServicoViewModel servicoViewModel)
         {
             servicoService.Delete(servicoViewModel.Id);
             return RedirectToAction(nameof(Index));
