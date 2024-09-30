@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 namespace Service.Tests
 {
     [TestClass()]
-    public class ClienteServiceTests
+    public class AssinaturaServiceTests
     {
         private AjudakiContext context;
-        private IClienteService assinaturaService;
+        private IAssinaturaService assinaturaService;
 
         [TestInitialize]
         public void Initialize()
@@ -22,44 +22,43 @@ namespace Service.Tests
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
-            // Criação da lista de clientes com todas as propriedades obrigatórias
-            var assinaturas = new List<Pessoa>
+            // Criação da lista de assinaturas com todas as propriedades obrigatórias
+            var assinaturas = new List<Assinatura>
+        {
+            new()
             {
-                new()
-                {
-                    Id = 1,
-                    Nome = "Padrão",
-                    Descricao = "Plano basico"
-                },
-                new Pessoa
-                {
-                    Id = 2,
-                    Nome = "Ian S. Sommervile",
-                    
-                },
-                new Pessoa
-                {
-                    Id = 3,
-                    Nome = "Laila Esterfane",
-                    
-                },
-            };
+                Id = 1,
+                Nome = "Plano Básico",
+                Descricao = "Plano com funcionalidades básicas"
+            },
+            new Assinatura
+            {
+                Id = 2,
+                Nome = "Plano Pro",
+                Descricao = "Plano com funcionalidades avançadas"
+            },
+            new Assinatura
+            {
+                Id = 3,
+                Nome = "Plano Avançado",
+                Descricao = "Plano premium com todas as funcionalidades"
+            },
+        };
 
             context.AddRange(assinaturas);
             context.SaveChanges();
 
-            assinaturaService = new ClienteService(context);
+            assinaturaService = new AssinaturaService(context);
         }
 
         [TestMethod()]
         public void CreateTest()
         {
             // Act
-            var novaPessoa = new Pessoa()
+            var novaAssinatura = new Assinatura()
             {
                 Id = 4,
-                Nome = "Pedro Ramos",
-                
+                Nome = "Plano Diamante",
             };
 
             assinaturaService.Create(novaAssinatura);
@@ -68,8 +67,7 @@ namespace Service.Tests
             Assert.AreEqual(4, assinaturaService.GetAll().Count());
             var assinatura = assinaturaService.Get(4);
 
-            Assert.AreEqual("Pedro Ramos", assinatura.Nome);
-            Assert.AreEqual(DateTime.Parse("2003-12-25"), assinatura.DataNascimento);
+            Assert.AreEqual("Plano Diamante", assinatura.Nome);
         }
 
         [TestMethod()]
@@ -91,15 +89,14 @@ namespace Service.Tests
             // Act 
             var assinatura = assinaturaService.Get(3);
 
-            assinatura.Nome = "Paulo Lima";
+            assinatura.Nome = "Plano Ametista";
             assinaturaService.Edit(assinatura);
 
             // Assert
             assinatura = assinaturaService.Get(3);
 
             Assert.IsNotNull(assinatura);
-            Assert.AreEqual("Paulo Lima", assinatura.Nome);
-            Assert.AreEqual(DateTime.Parse("1993-11-21"), assinatura.DataNascimento);
+            Assert.AreEqual("Plano Ametista", assinatura.Nome);
         }
 
         [TestMethod()]
@@ -108,7 +105,7 @@ namespace Service.Tests
             var assinatura = assinaturaService.Get(1);
 
             Assert.IsNotNull(assinatura);
-            Assert.AreEqual("Pedro de Assis", assinatura.Nome); // Corrigido o nome para coincidir com a inicialização
+            Assert.AreEqual("Plano Básico", assinatura.Nome); 
         }
 
         [TestMethod()]
@@ -118,11 +115,11 @@ namespace Service.Tests
             var listaAssinaturas = assinaturaService.GetAll();
 
             // Assert
-            Assert.IsInstanceOfType(listaAssinatura, typeof(IEnumerable<Assinatura>));
-            Assert.IsNotNull(listaAssinatura);
-            Assert.AreEqual(3, listaAssinatura.Count());
-            Assert.AreEqual((uint)1, listaAssinatura.First().Id);
-            Assert.AreEqual("Pedro de Assis", listaAssinatura.First().Nome); // Corrigido o nome para coincidir com a inicialização
+            Assert.IsInstanceOfType(listaAssinaturas, typeof(IEnumerable<Assinatura>));
+            Assert.IsNotNull(listaAssinaturas);
+            Assert.AreEqual(3, listaAssinaturas.Count());
+            Assert.AreEqual((uint)1, listaAssinaturas.First().Id);
+            Assert.AreEqual("Plano Básico", listaAssinaturas.First().Nome); 
         }
     }
 }

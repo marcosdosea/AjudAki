@@ -1,11 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AjudAkiWeb.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.Service;
 using Moq;
 using Mappers;
@@ -53,35 +46,35 @@ namespace AjudAkiWeb.Controllers.Tests
         private IEnumerable<Assinatura> GetTestAssinaturas()
         {
             return new List<Assinatura>
+        {
+            new Assinatura
             {
-                new Assinatura
-                {
-                    Id = 1,
-                    Nome = "Padrão",
-                    Descricao = "Plano básico com beneficios limitados"
-                },
-                new Assinatura
-                {
-                    Id = 2,
-                    Nome = "Plano Pro",
-                    Descricao = "Plano com beneficios avançados"
-                }
-            };
+                Id = 1,
+                Nome = "Padrão",
+                Descricao = "Plano básico com beneficios limitados"
+            },
+            new Assinatura
+            {
+                Id = 2,
+                Nome = "Plano Pro",
+                Descricao = "Plano com beneficios avançados"
+            }
+        };
         }
 
         [TestMethod()]
         public void IndexTest_Valido()
         {
-            //Act
+            // Act
             var result = controller.Index();
 
-            //Assert
+            // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<AssinaturaViewModel>));
 
             List<AssinaturaViewModel>? lista = (List<AssinaturaViewModel>)viewResult.ViewData.Model;
-            Assert.AreEqual(1, lista.Count);
+            Assert.AreEqual(2, lista.Count);
         }
 
         [TestMethod()]
@@ -104,6 +97,7 @@ namespace AjudAkiWeb.Controllers.Tests
         {
             // Act
             var result = controller.Create();
+
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
@@ -132,16 +126,18 @@ namespace AjudAkiWeb.Controllers.Tests
 
             // Assert
             Assert.AreEqual(1, controller.ModelState.ErrorCount);
-            Assert.IsInstanceOfType(result, typeof(ViewResult)); 
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            RedirectToActionResult redirectToActionResult = (RedirectToActionResult)result;
+            Assert.IsNull(redirectToActionResult.ControllerName);
+            Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
-
 
         private AssinaturaViewModel GetNewAssinatura()
         {
             return new AssinaturaViewModel
             {
                 Id = 4,
-                Nome = "Plano Diamantex",
+                Nome = "Plano Ametista",
                 Descricao = "Plano com beneficios brilhantes"
             };
         }
@@ -159,7 +155,6 @@ namespace AjudAkiWeb.Controllers.Tests
             AssinaturaViewModel assinaturaViewModel = (AssinaturaViewModel)viewResult.ViewData.Model;
             Assert.AreEqual("Padrão", assinaturaViewModel.Nome);
             Assert.AreEqual("Plano básico com beneficios limitados", assinaturaViewModel.Descricao);
-
         }
 
         [TestMethod()]
@@ -169,12 +164,11 @@ namespace AjudAkiWeb.Controllers.Tests
             var result = controller.Edit(GetTargetAssinaturaViewModel().Id, GetTargetAssinaturaViewModel());
 
             // Assert
-            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult)); // Corrigir aqui para RedirectToActionResult
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
             RedirectToActionResult redirectToActionResult = (RedirectToActionResult)result;
             Assert.IsNull(redirectToActionResult.ControllerName);
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
-
 
         private AssinaturaViewModel GetTargetAssinaturaViewModel()
         {
@@ -196,9 +190,9 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AssinaturaViewModel));
-            AssinaturaViewModel assinaturaViewModel = (AssinaturaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Padrão", assinaturaViewModel.Nome);
-            Assert.AreEqual("Plano básico com beneficios limitados", assinaturaViewModel.Descricao);
+            AssinaturaViewModel assinaturaModel = (AssinaturaViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Padrão", assinaturaModel.Nome);
+            Assert.AreEqual("Plano básico com beneficios limitados", assinaturaModel.Descricao);
         }
 
         [TestMethod()]
@@ -208,16 +202,14 @@ namespace AjudAkiWeb.Controllers.Tests
             var result = controller.Delete(1);
 
             // Assert
-            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
-            RedirectToActionResult redirectToActionResult = (RedirectToActionResult)result;
-            Assert.IsNull(redirectToActionResult.ControllerName);
-            Assert.AreEqual("Index", redirectToActionResult.ActionName);
-        }
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            ViewResult viewResult = (ViewResult)result;
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AssinaturaViewModel));
+            AssinaturaViewModel assinaturaViewModel = (AssinaturaViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Padrão", assinaturaViewModel.Nome);
+            Assert.AreEqual("Plano básico com beneficios limitados", assinaturaViewModel.Descricao);
 
-
-        private uint GetTargetAssinaturaModel()
-        {
-            throw new NotImplementedException();
         }
     }
+
 }
