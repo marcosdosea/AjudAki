@@ -17,7 +17,7 @@ namespace Service
         /// Criar um novo profissional na base de dados
         /// </summary>
         /// <param name="profissional"></param>
-        /// <returns></returns>
+        /// <returns>id do profissional</returns>
         /// <exception cref="NotImplementedException"></exception>
         public uint Create(Pessoa profissional)
         {
@@ -60,7 +60,7 @@ namespace Service
         /// Buscar um profissional na base de dados
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>dados do profisisonal</returns>
         /// <exception cref="NotImplementedException"></exception>
         public Pessoa? Get(uint id)
         {
@@ -70,7 +70,7 @@ namespace Service
         /// <summary>
         /// Buscar todos os profissionais cadastrados
         /// </summary>
-        /// <returns></returns>
+        /// <returns>lista de profissionais</returns>
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Pessoa> GetAll()
         {

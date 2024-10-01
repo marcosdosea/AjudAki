@@ -36,6 +36,7 @@ namespace AjudAkiWeb.Controllers.Tests
         [TestMethod()]
         public void IndexTest_Valido()
         {
+
             // Act
             var result = controller.Index();
 
@@ -138,16 +139,17 @@ namespace AjudAkiWeb.Controllers.Tests
         [TestMethod()]
         public void DeleteTest_Post_Valid()
         {
+            // Arrange
+            var profissional = GetTargetProfissionalModel();
+
             // Act
-            var result = controller.Delete(1);
+            var result = controller.Delete(profissional);
 
             // Assert
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
-            ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ProfissionalViewModel));
-            ProfissionalViewModel profissionalModel = (ProfissionalViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Miguel dos Santos", profissionalModel.Nome);
-            Assert.AreEqual(DateTime.Parse("2000-02-07"), profissionalModel.DataNascimento);
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            RedirectToActionResult redirectToActionResult = (RedirectToActionResult)result;
+            Assert.IsNull(redirectToActionResult.ControllerName);
+            Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
 
         [TestMethod()]
