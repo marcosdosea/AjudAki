@@ -87,9 +87,9 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AssinaturaViewModel));
-            AssinaturaViewModel assinaturaViewModel = (AssinaturaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Padrão", assinaturaViewModel.Nome);
-            Assert.AreEqual("Plano básico com beneficios limitados", assinaturaViewModel.Descricao);
+            AssinaturaViewModel assinaturaModel = (AssinaturaViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Padrão", assinaturaModel.Nome);
+            Assert.AreEqual("Plano básico com beneficios limitados", assinaturaModel.Descricao);
         }
 
         [TestMethod()]
@@ -152,9 +152,9 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AssinaturaViewModel));
-            AssinaturaViewModel assinaturaViewModel = (AssinaturaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Padrão", assinaturaViewModel.Nome);
-            Assert.AreEqual("Plano básico com beneficios limitados", assinaturaViewModel.Descricao);
+            AssinaturaViewModel assinaturaModel = (AssinaturaViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Padrão", assinaturaModel.Nome);
+            Assert.AreEqual("Plano básico com beneficios limitados", assinaturaModel.Descricao);
         }
 
         [TestMethod()]
@@ -205,9 +205,9 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AssinaturaViewModel));
-            AssinaturaViewModel assinaturaViewModel = (AssinaturaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Padrão", assinaturaViewModel.Nome);
-            Assert.AreEqual("Plano básico com beneficios limitados", assinaturaViewModel.Descricao);
+            AssinaturaViewModel assinaturaModel = (AssinaturaViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Padrão", assinaturaModel.Nome);
+            Assert.AreEqual("Plano básico com beneficios limitados", assinaturaModel.Descricao);
 
         }
     }
