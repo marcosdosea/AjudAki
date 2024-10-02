@@ -67,10 +67,10 @@ namespace AjudAkiWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
 
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
-            ServicoViewModel ServicoModel = (ServicoViewModel)viewResult.ViewData.Model;
+            ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
 
-            Assert.AreEqual("Encanador", ServicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("2000-02-07"), ServicoModel.Data);
+            Assert.AreEqual("Encanador", servicoModel.Nome);
+            Assert.AreEqual(DateTime.Parse("2000-02-07"), servicoModel.Data);
         }
 
         [TestMethod()]
@@ -125,9 +125,9 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
-            ServicoViewModel ServicoModel = (ServicoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Encanador", ServicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("2000-02-07"), ServicoModel.Data);
+            ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Encanador", servicoModel.Nome);
+            Assert.AreEqual(DateTime.Parse("2000-02-07"), servicoModel.Data);
         }
 
         [TestMethod()]
@@ -153,9 +153,9 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
-            ServicoViewModel ServicoModel = (ServicoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Encanador", ServicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("2000-02-07"), ServicoModel.Data);
+            ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Encanador", servicoModel.Nome);
+            Assert.AreEqual(DateTime.Parse("2000-02-07"), servicoModel.Data);
         }
 
         [TestMethod()]
@@ -165,10 +165,12 @@ namespace AjudAkiWeb.Controllers.Tests
             var result = controller.Delete(1);
 
             // Assert
-            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
-            RedirectToActionResult redirectToActionResult = (RedirectToActionResult)result;
-            Assert.IsNull(redirectToActionResult.ControllerName);
-            Assert.AreEqual("Index", redirectToActionResult.ActionName);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            ViewResult viewResult = (ViewResult)result;
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
+            ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Encanador", servicoModel.Nome);
+            Assert.AreEqual(DateTime.Parse("2000-02-07"), servicoModel.Data);
         }
 
         private ServicoViewModel GetNewServico()
