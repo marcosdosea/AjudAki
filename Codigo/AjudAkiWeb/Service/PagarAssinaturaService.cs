@@ -2,6 +2,7 @@
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 
+// TODO terminar esse Service com ajuda de Dósea
 namespace Service
 {
     /// <summary>
