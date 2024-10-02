@@ -13,7 +13,7 @@ public partial class Solicitacaoservico
 
     public string Status { get; set; } = null!;
 
-    public float? Valor { get; set; }
+    public decimal? Valor { get; set; }
 
     public string? Descricao { get; set; }
 

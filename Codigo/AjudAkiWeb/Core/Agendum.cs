@@ -17,5 +17,5 @@ public partial class Agendum
 
     public virtual ICollection<Tiposervico> Tiposervicos { get; set; } = new List<Tiposervico>();
 
-    public virtual ICollection<Pessoa> IdProfissionals { get; set; } = new List<Pessoa>();
+    public virtual ICollection<Pessoa> IdPessoas { get; set; } = new List<Pessoa>();
 }

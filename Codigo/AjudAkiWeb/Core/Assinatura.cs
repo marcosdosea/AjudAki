@@ -11,7 +11,7 @@ public partial class Assinatura
 
     public string? Status { get; set; }
 
-    public float? Valor { get; set; }
+    public decimal? Valor { get; set; }
 
     public string? Descricao { get; set; }
 

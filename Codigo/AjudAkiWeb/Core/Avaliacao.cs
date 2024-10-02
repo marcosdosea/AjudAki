@@ -11,7 +11,7 @@ public partial class Avaliacao
 
     public bool NotaProfissional { get; set; }
 
-    public uint Status { get; set; }
+    public int Status { get; set; }
 
     public string? Comentario { get; set; }
 

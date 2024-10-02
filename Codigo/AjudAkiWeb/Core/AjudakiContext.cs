@@ -6,7 +6,6 @@ namespace Core;
 
 public partial class AjudakiContext : DbContext
 {
-
     public AjudakiContext()
     {
     }
@@ -36,6 +35,9 @@ public partial class AjudakiContext : DbContext
 
     public virtual DbSet<Tiposervico> Tiposervicos { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=meusql;database=Ajudaki");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -82,9 +84,12 @@ public partial class AjudakiContext : DbContext
                 .HasMaxLength(20)
                 .HasColumnName("nome");
             entity.Property(e => e.Status)
+                .HasDefaultValueSql("'INATIVA'")
                 .HasColumnType("enum('ATIVA','INATIVA')")
                 .HasColumnName("status");
-            entity.Property(e => e.Valor).HasColumnName("valor");
+            entity.Property(e => e.Valor)
+                .HasPrecision(10)
+                .HasColumnName("valor");
         });
 
         modelBuilder.Entity<Avaliacao>(entity =>
@@ -181,7 +186,7 @@ public partial class AjudakiContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("nomePlano");
             entity.Property(e => e.Status)
-                .HasColumnType("enum('ATIVO','ATRASADO','PAGO')")
+                .HasColumnType("enum('ATIVO','ATRASADO','PAGO','CANCELADO')")
                 .HasColumnName("status");
 
             entity.HasOne(d => d.IdAssinaturaNavigation).WithMany(p => p.Pagamentoassinaturas)
@@ -245,6 +250,7 @@ public partial class AjudakiContext : DbContext
                 .HasMaxLength(11)
                 .HasColumnName("telefone");
             entity.Property(e => e.TipoPessoa)
+                .HasDefaultValueSql("'CLIENTE'")
                 .HasColumnType("enum('CLIENTE','PROFISSIONAL','ADMINISTRADOR')")
                 .HasColumnName("tipoPessoa");
 
@@ -253,24 +259,24 @@ public partial class AjudakiContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_Pessoa_Assinatura1");
 
-            entity.HasMany(d => d.IdAgenda).WithMany(p => p.IdProfissionals)
+            entity.HasMany(d => d.IdAgenda).WithMany(p => p.IdPessoas)
                 .UsingEntity<Dictionary<string, object>>(
                     "Pessoaagendum",
                     r => r.HasOne<Agendum>().WithMany()
                         .HasForeignKey("IdAgenda")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("fk_Pessoa_has_Agenda_Agenda1"),
+                        .HasConstraintName("fk_PessoaAgenda_Agenda1"),
                     l => l.HasOne<Pessoa>().WithMany()
-                        .HasForeignKey("IdProfissional")
+                        .HasForeignKey("IdPessoa")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("fk_Pessoa_has_Agenda_Pessoa1"),
+                        .HasConstraintName("fk_PessoaAgenda_Pessoa1"),
                     j =>
                     {
-                        j.HasKey("IdProfissional", "IdAgenda").HasName("PRIMARY");
+                        j.HasKey("IdPessoa", "IdAgenda").HasName("PRIMARY");
                         j.ToTable("pessoaagenda");
-                        j.HasIndex(new[] { "IdAgenda" }, "fk_Pessoa_has_Agenda_Agenda1_idx");
-                        j.HasIndex(new[] { "IdProfissional" }, "fk_Pessoa_has_Agenda_Pessoa1_idx");
-                        j.IndexerProperty<uint>("IdProfissional").HasColumnName("idProfissional");
+                        j.HasIndex(new[] { "IdAgenda" }, "fk_PessoaAgenda_Agenda1_idx");
+                        j.HasIndex(new[] { "IdPessoa" }, "fk_PessoaAgenda_Pessoa1_idx");
+                        j.IndexerProperty<uint>("IdPessoa").HasColumnName("idPessoa");
                         j.IndexerProperty<uint>("IdAgenda").HasColumnName("idAgenda");
                     });
         });
@@ -342,7 +348,9 @@ public partial class AjudakiContext : DbContext
             entity.Property(e => e.Status)
                 .HasColumnType("enum('RECUSADO','ACEITO','PENDENTE','FINALIZADO')")
                 .HasColumnName("status");
-            entity.Property(e => e.Valor).HasColumnName("valor");
+            entity.Property(e => e.Valor)
+                .HasPrecision(10)
+                .HasColumnName("valor");
 
             entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.SolicitacaoservicoIdClienteNavigations)
                 .HasForeignKey(d => d.IdCliente)
