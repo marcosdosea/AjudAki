@@ -48,12 +48,13 @@ namespace Service
         /// <exception cref="ServiceException"></exception>
         public void Edit(Pessoa profissional)
         {
-            if (profissional.TipoPessoa != "PROFISSIONAL")
+            if (!profissional.TipoPessoa.Equals("Profissional"))
             {
                 throw new ServiceException("Somente usuários do tipo PROFISSIONAL podem ser editados por este serviço.");
             }
             context.Update(profissional);
             context.SaveChanges();
+
         }
 
         /// <summary>

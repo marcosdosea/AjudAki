@@ -139,7 +139,7 @@ namespace AjudAkiWeb.Controllers.Tests
         public void DeleteTest_Post_Valid()
         {
             // Act
-            var result = controller.Delete(1);
+            var result = controller.Delete((uint)1);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
