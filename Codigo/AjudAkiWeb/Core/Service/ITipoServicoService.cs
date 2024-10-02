@@ -8,9 +8,9 @@ namespace Core.Service
 {
     public interface ITipoServicoService
     {
-        uint Create(Tiposervico tiposervico);
+        uint Create(Tiposervico tipoServico);
 
-        void Edit(Tiposervico tiposervico);
+        void Edit(Tiposervico tipoServico);
 
         void Delete(uint id);
 

@@ -21,22 +21,23 @@ namespace Service
         // </summary>
         // <param name="tiposervico">Tipo de Serviço</param>
         // <returns>Id do tipo do serviço criado.</returns>
-        public uint Create(Tiposervico tiposervico)
+        public uint Create(Tiposervico tipoServico)
         {
-            context.Add(tiposervico);
+            context.Add(tipoServico);
             context.SaveChanges();
-            return tiposervico.Id;
+            return tipoServico.Id;
         }
+
         // <summary>
         // Remover o tipo de serviço da base de dados
         // </summary>
         // <param name="id">Id do tipo de serviço a ser removido.</param>
         public void Delete(uint id)
         {
-            var tiposervico = context.Tiposervicos.Find(id);
-            if (tiposervico != null)
+            var tipoServico = context.Tiposervicos.Find(id);
+            if (tipoServico != null)
             {
-                context.Remove(tiposervico);
+                context.Remove(tipoServico);
                 context.SaveChanges();
             }
         }
@@ -45,9 +46,9 @@ namespace Service
         // Editar dados do tipo de serviço na base de dados
         // </summary>
         // <param name="tiposervico">Objeto do tipo de serviço com os novos dados.</param>
-        public void Edit(Tiposervico tiposervico)
+        public void Edit(Tiposervico tipoServico)
         {
-            context.Update(tiposervico);
+            context.Update(tipoServico);
             context.SaveChanges();
         }
 
