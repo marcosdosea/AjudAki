@@ -166,11 +166,11 @@ namespace Service.Tests
         public void GetByNomeTest()
         {
             //Act
-            var profissionais = profissionalService.GetByNome("Machado");
+            var profissionais = profissionalService.GetByNome("Pedro");
             //Assert
             Assert.IsNotNull(profissionais);
             Assert.AreEqual(1, profissionais.Count());
-            Assert.AreEqual("Machado de Assis", profissionais.First().Nome);
+            Assert.AreEqual("Pedro de Assis", profissionais.First().Nome);
         }
     }
 }

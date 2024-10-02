@@ -2,14 +2,19 @@
 
 namespace AjudAkiWeb.Models
 {
+
+    
+
     public enum TipoPessoa
     {
-        Cliente,
         Profissional,
+        Cliente,
         Administrador
     }
     public class ProfissionalViewModel
     {
+        public const string TIPO_PESSOA_PROFISSIONAL = "Profissional";
+
         [Display(Name = "Código")]
         [Required(ErrorMessage = "Código do Profissional é obrigatório")]
         [Key]
@@ -70,7 +75,8 @@ namespace AjudAkiWeb.Models
 
         public TipoPessoa TipoPessoa { get; set; }
 
-        public AssinaturaViewModel? IdAssinatura { get; set; }
+        public uint IdAssinatura { get; set; }
+        public AssinaturaViewModel? AssinaturaViewModel { get; set; }
 
     }
 }
