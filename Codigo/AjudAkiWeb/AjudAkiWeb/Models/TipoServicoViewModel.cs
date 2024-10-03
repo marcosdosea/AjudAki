@@ -15,6 +15,6 @@ namespace AjudAkiWeb.Models
         [StringLength(50)]
         public string? Nome { get; set; }
 
-        public AssinaturaViewModel? AssinaturaViewModel { get; set; }
+        public AreaAtuacaoViewModel? AreaAtuacaoViewModel { get; set; }
     }
 }

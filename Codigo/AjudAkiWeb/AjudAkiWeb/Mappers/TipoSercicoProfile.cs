@@ -4,9 +4,9 @@ using Core;
 
 namespace AjudAkiWeb.Mappers
 {
-    public class TipoSercicoProfile : Profile
+    public class TipoServicoProfile : Profile
     {
-        public TipoSercicoProfile()
+        public TipoServicoProfile()
         {
             CreateMap<TipoServicoViewModel, Tiposervico>().ReverseMap();
         }
