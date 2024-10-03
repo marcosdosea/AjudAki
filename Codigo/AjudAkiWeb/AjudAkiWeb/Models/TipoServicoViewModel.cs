@@ -6,7 +6,6 @@ namespace AjudAkiWeb.Models
 {
     public class TipoServicoViewModel
     {
-        [Display(Name = "Código")]
         [Required(ErrorMessage = "Código do tipo do serviço é obrigatório")]
         [Key]
         public uint Id { get; set; }
