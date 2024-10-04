@@ -2,6 +2,7 @@
 
 namespace AjudAkiWeb.Models
 {
+    //TODO: Validar formato de ENUM com Dósea
     public enum TurnoEnum
     {
         MANHA, TARDE, NOITE

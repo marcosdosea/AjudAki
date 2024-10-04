@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
+    /// <summary>
+    /// Implementa serviços para manter agenda
+    /// </summary>
     public class AgendaService : IAgendaService
     {
         private readonly AjudakiContext context;
@@ -18,7 +21,6 @@ namespace Service
         /// </summary>
         /// <param name="agenda"></param>
         /// <returns>id da nova agenda</returns>
-        /// <exception cref="NotImplementedException"></exception>
         public uint Create(Agendum agenda)
         {
             context.Add(agenda);
@@ -31,7 +33,6 @@ namespace Service
         /// Remove a agenda da base de dados
         /// </summary>
         /// <param name="id"></param>
-        /// <exception cref="NotImplementedException"></exception>
         public void Delete(uint id)
         {
             var agenda = context.Agenda.Find(id);

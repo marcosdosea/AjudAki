@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Service
 {
     /// <summary>
-    /// Gerencia Area de atuação
+    /// Implementa serviços para manter area de atuação
     /// </summary>
     public class AreaAtuacaoService : IAreaAtuacaoService
     {

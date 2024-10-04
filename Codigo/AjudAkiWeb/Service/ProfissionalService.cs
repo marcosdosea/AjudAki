@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
+    /// <summary>
+    /// Implementa serviços para manter profissional
+    /// </summary>
     public class ProfissionalService : IProfissionalService
     {
         private readonly AjudakiContext context;
