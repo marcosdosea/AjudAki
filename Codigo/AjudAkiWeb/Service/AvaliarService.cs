@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
+    /// <summary>
+    /// Implementa serviços para manter avaliação
+    /// </summary>
     public class AvaliarService : IAvaliarService
     {
         private readonly AjudakiContext context;

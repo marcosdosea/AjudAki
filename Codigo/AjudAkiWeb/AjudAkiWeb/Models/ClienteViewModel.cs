@@ -56,7 +56,7 @@ namespace AjudAkiWeb.Models
         [Required(ErrorMessage = "Campo Obrigatório")]
         public string NumResidencia { get; set; } = null!;
 
-        [Display(Name = "Ponto de Residência")]
+        [Display(Name = "Ponto de Referência")]
         [StringLength(40)]
         public string? PontoReferencia { get; set; }
 
