@@ -32,6 +32,7 @@ namespace AjudAkiWeb.Controllers
         {
             var areaAtuacao = areaAtuacaoService.Get(id);
             var areasAtuacaoViewModel = mapper.Map<AreaAtuacaoViewModel>(areaAtuacao);
+            
             return View(areasAtuacaoViewModel);
         }
 
@@ -62,6 +63,7 @@ namespace AjudAkiWeb.Controllers
         {
             var areaAtuacao = areaAtuacaoService.Get(id);
             var areaAtuacaoViewModel = mapper.Map<AreaAtuacaoViewModel>(areaAtuacao);
+            
             return View(areaAtuacaoViewModel);
         }
 
