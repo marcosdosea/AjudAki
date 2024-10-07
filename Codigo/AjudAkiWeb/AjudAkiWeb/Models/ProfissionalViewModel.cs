@@ -2,9 +2,6 @@
 
 namespace AjudAkiWeb.Models
 {
-
-    
-
     public enum TipoPessoa
     {
         Profissional,
