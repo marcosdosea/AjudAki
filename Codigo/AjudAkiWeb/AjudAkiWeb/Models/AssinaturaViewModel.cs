@@ -2,7 +2,7 @@
 
 namespace AjudAkiWeb.Models
 {
-    public enum StatusEnum
+    public enum AssinaturaStatusEnum
     {
         ATIVA,
         INATIVA
@@ -17,7 +17,7 @@ namespace AjudAkiWeb.Models
         [StringLength(20, ErrorMessage = "Nome não pode exceder 20 caracteres")]
         public string? Nome { get; set; }
 
-        public StatusEnum? Status { get; set; }
+        public AssinaturaStatusEnum? Status { get; set; }
 
         [Range(0, float.MaxValue, ErrorMessage = "Valor deve ser positivo")]
         public float? Valor { get; set; }
