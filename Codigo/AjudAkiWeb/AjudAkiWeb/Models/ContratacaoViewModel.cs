@@ -54,6 +54,7 @@ namespace AjudAkiWeb.Models
         [Required(ErrorMessage = "Código do Serviço é obrigatório")]
         [Display(Name = "Código do serviço")]
         public uint IdServico { get; set; }
+        public ServicoViewModel? ServicoViewModel { get; set; } 
 
         [Required(ErrorMessage = "Código do Cliente é obrigatório")]
         [Display(Name = "Código do cliente")]

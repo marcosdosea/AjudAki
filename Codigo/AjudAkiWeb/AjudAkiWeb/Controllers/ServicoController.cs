@@ -36,7 +36,7 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Create()
         {
             var servicoViewModel = new ServicoViewModel();
-            servicoViewModel.Data = DateTime.Now;
+            servicoViewModel.DataHoraSolicitacao = DateTime.Now;
             return View(servicoViewModel);
         }
 
