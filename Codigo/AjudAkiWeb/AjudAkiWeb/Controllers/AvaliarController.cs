@@ -31,9 +31,9 @@ namespace AjudAkiWeb.Controllers
         // GET: AvaliarController/Create
         public ActionResult Create()
         {
-            var AvaliarViewModel = new AvaliarViewModel();
+            var avaliarViewModel = new AvaliarViewModel();
 
-            return View(AvaliarViewModel);
+            return View(avaliarViewModel);
         }
 
         // POST: AvaliarController/Create
