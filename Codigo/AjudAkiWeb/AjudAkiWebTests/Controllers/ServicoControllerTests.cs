@@ -70,7 +70,7 @@ namespace AjudAkiWeb.Controllers.Tests
             ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
 
             Assert.AreEqual("Encanador", servicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("2000-02-07"), servicoModel.Data);
+            Assert.AreEqual(DateTime.Parse("2000-02-07"), servicoModel.DataHoraSolicitacao);
         }
 
         [TestMethod()]
@@ -127,7 +127,7 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
             ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
             Assert.AreEqual("Encanador", servicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("2000-02-07"), servicoModel.Data);
+            Assert.AreEqual(DateTime.Parse("2000-02-07"), servicoModel.DataHoraSolicitacao);
         }
 
         [TestMethod()]
@@ -155,7 +155,7 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
             ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
             Assert.AreEqual("Encanador", servicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("2000-02-07"), servicoModel.Data);
+            Assert.AreEqual(DateTime.Parse("2000-02-07"), servicoModel.DataHoraSolicitacao);
         }
 
         [TestMethod()]
@@ -170,7 +170,7 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
             ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
             Assert.AreEqual("Encanador", servicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("2000-02-07"), servicoModel.Data);
+            Assert.AreEqual(DateTime.Parse("2000-02-07"), servicoModel.DataHoraSolicitacao);
         }
 
         private ServicoViewModel GetNewServico()
@@ -179,7 +179,7 @@ namespace AjudAkiWeb.Controllers.Tests
             {
                 Id = 4,
                 Nome = "Cozinheiro",
-                Data = DateTime.Parse("1951-02-23")
+                DataHoraSolicitacao = DateTime.Parse("1951-02-23")
             };
         }
 
@@ -199,7 +199,7 @@ namespace AjudAkiWeb.Controllers.Tests
             {
                 Id = 2,
                 Nome = "Encanador",
-                Data = DateTime.Parse("2002-09-24")
+                DataHoraSolicitacao = DateTime.Parse("2002-09-24")
             };
         }
 
