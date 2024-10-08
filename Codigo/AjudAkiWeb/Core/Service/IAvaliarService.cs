@@ -10,8 +10,6 @@ namespace Core.Service
     {
         uint Create(Avaliacao avaliar);
 
-        void Delete(uint id);
-
         IEnumerable<Avaliacao> GetAll();
     }
 }
