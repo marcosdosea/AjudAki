@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Service
 {
-    public interface IContratarServico
+    public interface IContratacaoService
     {
         uint Create(Contratacao contratacao);
         void Edit(Contratacao contratacao);

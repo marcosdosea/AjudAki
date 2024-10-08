@@ -11,6 +11,9 @@ namespace AjudAkiWeb
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDbContext<AjudakiContext>(
+                options => options.UseMySQL(builder.Configuration.GetConnectionString("AjudakiDatabase")));
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddTransient<IAssinaturaService, AssinaturaService>();
@@ -19,11 +22,9 @@ namespace AjudAkiWeb
             builder.Services.AddTransient<IServicoService, ServicoService>();
             builder.Services.AddTransient<IAreaAtuacaoService, AreaAtuacaoService>();
             builder.Services.AddTransient<IAgendaService, AgendaService>();
+            builder.Services.AddTransient<IContratacaoService, ContratacaoService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-            builder.Services.AddDbContext<AjudakiContext>(
-                options => options.UseMySQL(builder.Configuration.GetConnectionString("AjudakiDatabase")));
 
             var app = builder.Build();
 

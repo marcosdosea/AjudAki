@@ -7,11 +7,11 @@ namespace Service
     /// <summary>
     /// Implementa serviços para contratar serviço
     /// </summary>
-    public class ContratarServicoService : IContratarServico
+    public class ContratacaoService : IContratacaoService
     {
         private readonly AjudakiContext context;
 
-        public ContratarServicoService(AjudakiContext context)
+        public ContratacaoService(AjudakiContext context)
         {
             this.context = context;
         }
