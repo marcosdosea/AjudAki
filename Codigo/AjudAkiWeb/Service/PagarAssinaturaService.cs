@@ -2,11 +2,11 @@
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 
-// TODO terminar esse Service com ajuda de Dósea
+
 namespace Service
 {
     /// <summary>
-    /// Implementa pagamentos para Pagamentoassinatura.
+    /// Implementa pagamentos para Pagamentoassinatura
     /// </summary>
     class PagarAssinaturaService : IPagarAssinaturaService
     {
@@ -20,13 +20,13 @@ namespace Service
         /// <summary>
         /// Adicionar um novo cartão na base de dados
         /// </summary>
-        /// <param name="pagamentoassinatura">dados do cartão</param>
+        /// <param name="pagamentoAssinatura">dados do cartão</param>
         /// <returns>novo cartão adicionado</returns>
-        public uint Create(Pagamentoassinatura pagamentoassinatura)
+        public uint Create(Pagamentoassinatura pagamentoAssinatura)
         {
-            context.Add(pagamentoassinatura);
+            context.Add(pagamentoAssinatura);
             context.SaveChanges();
-            return pagamentoassinatura.Id;
+            return pagamentoAssinatura.Id;
         }
 
         /// <summary>
@@ -35,21 +35,26 @@ namespace Service
         /// <param name="id">id do plano</param>
         public void Delete(uint id)
         {
-            var pagamentoassinatura = context.Pagamentoassinaturas.Find(id);
-            if (pagamentoassinatura != null)
+            var pagamentoAssinatura = context.Pagamentoassinaturas.Find(id);
+            if (pagamentoAssinatura != null)
             {
-                //pagamentoassinatura.Status = "Cancelada";
-                context.Remove(pagamentoassinatura);
+                //pagamentoAssinatura.Status = "Cancelada";
+                context.Remove(pagamentoAssinatura);
                 context.SaveChanges();
             }
         }
 
-        public void Edit(Pagamentoassinatura pagamentoassinatura)
+        /// <summary>
+        /// Alterar plano de assinatura na base de dados
+        /// </summary>
+        /// <param name="pagamentoAssinatura"></param>
+        public void Edit(Pagamentoassinatura pagamentoAssinatura)
         {
-            throw new NotImplementedException();
+            context.Update(pagamentoAssinatura);
+            context.SaveChanges();
         }
 
-        /// <summary>
+        /// <summary> 
         /// Buscar um pagamento na base de dados
         /// </summary>
         /// <param name="id">id do pagamento</param>
