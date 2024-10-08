@@ -8,9 +8,9 @@ namespace Core.Service
 {
     public interface IPagarAssinaturaService
     {
-        uint Create(Pagamentoassinatura pagamentoassinatura);
+        uint Create(Pagamentoassinatura pagamentoAssinatura);
 
-        void Edit(Pagamentoassinatura pagamentoassinatura);
+        void Edit(Pagamentoassinatura pagamentoaAssinatura);
 
         void Delete(uint id);
 
