@@ -25,6 +25,7 @@ namespace AjudAkiWeb
             builder.Services.AddTransient<IContratacaoService, ContratacaoService>();
             builder.Services.AddTransient<IAvaliarService, AvaliarService>();
             builder.Services.AddTransient<IPagarAssinaturaService, PagarAssinaturaService>();
+            builder.Services.AddTransient<ITipoServicoService, TipoServicoService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
