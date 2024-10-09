@@ -17,6 +17,7 @@ namespace AjudAkiWeb.Controllers
             this.mapper = mapper;
         }
 
+        // GET: ServicoController
         public ActionResult Index()
         {
             var listaServicos = servicoService.GetAll();
