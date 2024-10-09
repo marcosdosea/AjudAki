@@ -60,8 +60,9 @@ namespace AjudAkiWeb.Models
         [StringLength(40)]
         public string? PontoReferencia { get; set; }
 
-        public TipoPessoa TipoPessoa { get; set; }
+        public TipoPessoaEnum TipoPessoa { get; set; }
 
+        [Display(Name = "Digite a assinatura")]
         public uint IdAssinatura { get; set; }
 
         public AssinaturaViewModel? AssinaturaViewModel { get; set; }
