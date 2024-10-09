@@ -143,8 +143,8 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AreaAtuacaoViewModel));
-            AreaAtuacaoViewModel autorModel = (AreaAtuacaoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Eletricista", autorModel.Nome);
+            AreaAtuacaoViewModel areaAtuacaoModel = (AreaAtuacaoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Eletricista", areaAtuacaoModel.Nome);
         }
 
         [TestMethod()]
