@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Core.Dto
 {
-    public class PagarAssinaturaDTO
+    public class ClienteDTO
     {
         public uint Id { get; set; }
 
-        public DateTime DataPagamento { get; set; }
+        public string Nome { get; set; } = null!;
 
-        public string NomePlano { get; set; } = null!;
+        public string TipoPessoa { get; set; } = null!;
+
+        public uint IdAssinatura { get; set; }
     }
 }
