@@ -38,6 +38,12 @@ namespace Service.Tests
 
             avaliarService = new AvaliarService(context);
         }
+        public void GetTest()
+        {
+            var avaliacao = avaliarService.Get(2); 
+            Assert.IsNotNull(avaliacao);  
+            Assert.AreEqual("Serviço razoável", avaliacao.Comentario); 
+        }
 
         [TestMethod()]
         public void CreateTest()

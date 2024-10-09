@@ -30,7 +30,7 @@ namespace AjudAkiWeb.Controllers.Tests
         }
 
         [TestMethod()]
-        public void IndexTest()
+        public void IndexTest_Valido()
         {
             // Act
             var result = controller.Index();
@@ -45,7 +45,7 @@ namespace AjudAkiWeb.Controllers.Tests
         }
 
         [TestMethod()]
-        public void CreateTest()
+        public void CreateTest_Get_Valido()
         {
             // Act
             var result = controller.Create();
@@ -54,12 +54,40 @@ namespace AjudAkiWeb.Controllers.Tests
         }
 
         [TestMethod()]
-        public void CreateTest1()
+        public void CreateTest_Valido()
         {
             // Act
             var result = controller.Create(GetNewAvaliar());
 
             // Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            RedirectToActionResult redirectToActionResult = (RedirectToActionResult)result;
+            Assert.IsNull(redirectToActionResult.ControllerName);
+            Assert.AreEqual("Index", redirectToActionResult.ActionName);
+        }
+        public void DetailsTest_Valido()
+        {
+            // Act
+            var result = controller.Details(1);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            ViewResult viewResult = (ViewResult)result;
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AreaAtuacaoViewModel));
+            AreaAtuacaoViewModel autorModel = (AreaAtuacaoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Eletricista", autorModel.Nome);
+        }
+        [TestMethod()]
+         public void CreateTest_Post_Invalid()
+        {
+            // Arrange
+            controller.ModelState.AddModelError("Comentario", "O comentário é obrigatório");
+
+            // Act
+            var result = controller.Create(GetNewAvaliar());
+           
+            // Assert
+            Assert.AreEqual(1, controller.ModelState.ErrorCount);
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
             RedirectToActionResult redirectToActionResult = (RedirectToActionResult)result;
             Assert.IsNull(redirectToActionResult.ControllerName);
@@ -82,35 +110,35 @@ namespace AjudAkiWeb.Controllers.Tests
         private IEnumerable<Avaliacao> GetTestAvaliar()
         {
             return new List<Avaliacao>
-    {
-        new Avaliacao
-        {
-            Id = 1,
-            NotaServico = true,
-            NotaProfissional = true,
-            Status = 1,
-            Comentario = "Serviço excelente",
-            IdContratacao = 101
-        },
-        new Avaliacao
-        {
-            Id = 2,
-            NotaServico = false,
-            NotaProfissional = true,
-            Status = 2,
-            Comentario = "Serviço mediano",
-            IdContratacao = 102
-        },
-        new Avaliacao
-        {
-            Id = 3,
-            NotaServico = true,
-            NotaProfissional = false,
-            Status = 1,
-            Comentario = "Profissional abaixo do esperado",
-            IdContratacao = 103
-        }
-        };
+            {
+                new Avaliacao
+                {
+                    Id = 1,
+                    NotaServico = true,
+                    NotaProfissional = true,
+                    Status = 1,
+                    Comentario = "Serviço excelente",
+                    IdContratacao = 101
+                },
+                new Avaliacao
+                {
+                    Id = 2,
+                    NotaServico = false,
+                    NotaProfissional = true,
+                    Status = 2,
+                    Comentario = "Serviço mediano",
+                    IdContratacao = 102
+                },
+                new Avaliacao
+                {
+                    Id = 3,
+                    NotaServico = true,
+                    NotaProfissional = false,
+                    Status = 1,
+                    Comentario = "Profissional abaixo do esperado",
+                    IdContratacao = 103
+                }
+            };
         }
     }
 }

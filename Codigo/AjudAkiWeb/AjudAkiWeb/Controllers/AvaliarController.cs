@@ -27,6 +27,14 @@ namespace AjudAkiWeb.Controllers
 
             return View(listaAvaliarViewModel);
         }
+        // GET: AvaliarController/Details/5
+        public ActionResult Details(uint id)
+        {
+            var avaliar = avaliarService.Get(id);
+            var avaliarsViewModel = mapper.Map<AvaliarViewModel>(avaliar);
+
+            return View(avaliarsViewModel);
+        }
 
         // GET: AvaliarController/Create
         public ActionResult Create()

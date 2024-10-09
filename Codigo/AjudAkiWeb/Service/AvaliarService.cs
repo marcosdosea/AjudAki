@@ -19,7 +19,7 @@ namespace Service
         /// Criar um novo avaliar profissional na base de dados
         /// </summary>
         /// <param name="avaliar"></param>
-        /// <returns>id do avalair profissional</returns>
+        /// <returns>id do avaliar profissional</returns>
         /// <exception cref="NotImplementedException"></exception>
         public uint Create(Avaliacao avaliar)
         {
@@ -29,10 +29,10 @@ namespace Service
         }
 
         /// <summary>
-        /// Busca uma Avaliar profissional
+        /// Busca uma Avaliacao profissional
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>Avaliar profissional</returns>
+        /// <returns>Avaliacao profissional</returns>
         /// <exception cref="NotImplementedException"></exception>
         public Avaliacao? Get(uint id)
         {
@@ -42,7 +42,7 @@ namespace Service
         /// <summary>
         /// Buscar todas as  avaliacao de profissionais cadastradas
         /// </summary>
-        /// <returns>lista de avaliar profissional</returns>
+        /// <returns>lista de avaliacoes de profissionais</returns>
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Avaliacao> GetAll()
         {
