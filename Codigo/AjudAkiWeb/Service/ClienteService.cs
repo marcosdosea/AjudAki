@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Dto;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 
@@ -70,6 +71,24 @@ namespace Service
         public IEnumerable<Pessoa> GetAll()
         {
             return context.Pessoas.AsNoTracking();
+        }
+
+        /// <summary>
+        /// Buscar clientes iniciando com o nome
+        /// </summary>
+        /// <param name="nome">nome do cliente</param>
+        /// <returns>lista de clientes que inicia com o nome</returns>
+        public IEnumerable<ClienteDTO> GetByNome(string nome)
+        {
+            var query = from cliente in context.Pessoas
+                        where cliente.Nome.StartsWith(nome)
+                        orderby cliente.Nome
+                        select new ClienteDTO
+                        {
+                            Id = cliente.Id,
+                            Nome = cliente.Nome
+                        };
+            return query;
         }
     }
 }
