@@ -12,21 +12,22 @@ namespace AjudAkiWeb.Models
 
     public class PagarAssinaturaViewModel
     {
-        [Display(Name = "Código do pagamento da assinatura")]
+        [Display(Name = "Código")]
         [Key]
         [Required(ErrorMessage = "Código é obrigatório")]
         public uint Id { get; set; }
 
-        [Display(Name = "Data de pagamento")]
+        [Display(Name = "Data pagamento")]
         [Required(ErrorMessage = "Data pagamento é obrigatório")]
         public DateTime DataPagamento { get; set; }
 
         [Required(ErrorMessage = "Status é obrigatório")]
         public PagamentoStatusEnum? Status { get; set; }
 
-        [Display(Name = "Plano de assinatura")]
+        [Display(Name = "Plano")]
         [Required(ErrorMessage = "Plano é obrigatório")]
         public string NomePlano { get; set; } = null!;
+
         public uint IdProfissional { get; set; }
         public ProfissionalViewModel? ProfissionalViewModel { get; set; }
         public uint IdAssinatura { get; set; }
