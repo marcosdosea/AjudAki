@@ -88,7 +88,7 @@ namespace Service
                             Id = cliente.Id,
                             Nome = cliente.Nome
                         };
-            return query;
+            return query.AsNoTracking().ToList();
         }
     }
 }
