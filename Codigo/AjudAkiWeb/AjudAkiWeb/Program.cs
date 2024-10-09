@@ -23,6 +23,7 @@ namespace AjudAkiWeb
             builder.Services.AddTransient<IAreaAtuacaoService, AreaAtuacaoService>();
             builder.Services.AddTransient<IAgendaService, AgendaService>();
             builder.Services.AddTransient<IContratacaoService, ContratacaoService>();
+            builder.Services.AddTransient<IAvaliarService, AvaliarService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

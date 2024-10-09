@@ -29,20 +29,15 @@ namespace Service
         }
 
         /// <summary>
-        /// Remover a avaliacao do profissional da base de dados
+        /// Busca uma Avaliar profissional
         /// </summary>
         /// <param name="id"></param>
+        /// <returns>Avaliar profissional</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public void Delete(uint id)
+        public Avaliacao? Get(uint id)
         {
-            var avaliar = context.Avaliacaos.Find(id);
-            if (avaliar != null)
-            {
-                context.Remove(avaliar);
-                context.SaveChanges();
-            }
+            return context.Avaliacaos.Find(id);
         }
-
 
         /// <summary>
         /// Buscar todas as  avaliacao de profissionais cadastradas
