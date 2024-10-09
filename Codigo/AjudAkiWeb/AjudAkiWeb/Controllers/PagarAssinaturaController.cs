@@ -27,8 +27,8 @@ namespace AjudAkiWeb.Controllers
         // GET: PagarAssinaturaController/Details/5
         public ActionResult Details(uint id)
         {
-            var pagaraAsinatura = pagarAssinaturaService.Get(id);
-            var pagarAssinaturaViewModel = mapper.Map<PagarAssinaturaViewModel>(pagaraAsinatura);
+            var pagarAssinatura = pagarAssinaturaService.Get(id);
+            var pagarAssinaturaViewModel = mapper.Map<PagarAssinaturaViewModel>(pagarAssinatura);
             return View(pagarAssinaturaViewModel);
         }
 
