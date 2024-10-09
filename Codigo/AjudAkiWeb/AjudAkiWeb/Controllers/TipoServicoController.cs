@@ -24,6 +24,7 @@ namespace AjudAkiWeb.Controllers
         {
             var listaTipoServicos = tipoServicoService.GetAll();
             var listaTipoServicoViewModel = mapper.Map<List<TipoServicoViewModel>>(listaTipoServicos);
+            
             return View(listaTipoServicoViewModel);
         }
 
@@ -32,6 +33,7 @@ namespace AjudAkiWeb.Controllers
         {
             var tipoServico = tipoServicoService.Get(id);
             var tipoServicoViewModel = mapper.Map<TipoServicoViewModel>(tipoServico);
+            
             return View(tipoServicoViewModel);
         }
 
@@ -39,6 +41,7 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Create()
         {
             var tipoServicoViewModel = new TipoServicoViewModel();
+            
             return View(tipoServicoViewModel);
         }
 
@@ -60,6 +63,7 @@ namespace AjudAkiWeb.Controllers
         {
             var tipoServico = tipoServicoService.Get(id);
             var tipoServicoViewModel = mapper.Map<TipoServicoViewModel>(tipoServico);
+            
             return View(tipoServicoViewModel);
         }
 
@@ -81,6 +85,7 @@ namespace AjudAkiWeb.Controllers
         {
             var tipoServico = tipoServicoService.Get(id);
             var tipoServicoViewModel = mapper.Map<TipoServicoViewModel>(tipoServico);
+            
             return View(tipoServicoViewModel);
         }
 
@@ -90,6 +95,7 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Delete(uint id, TipoServicoViewModel tipoServicoViewModel)
         {
             tipoServicoService.Delete(tipoServicoViewModel.Id);
+            
             return RedirectToAction(nameof(Index));
         }
     }
