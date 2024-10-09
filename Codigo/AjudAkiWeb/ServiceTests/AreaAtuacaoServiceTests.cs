@@ -23,14 +23,14 @@ namespace Service.Tests
             context = new AjudakiContext(options);
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
-            var autores = new List<Areaatuacao>
+            var agendas = new List<Areaatuacao>
                 {
                     new() { Id = 1, Nome = "Educação"},
                     new Areaatuacao { Id = 2, Nome = "Tecnologia"},
                     new Areaatuacao { Id = 3, Nome = "Marketing"},
                 };
 
-            context.AddRange(autores);
+            context.AddRange(agendas);
             context.SaveChanges();
 
             areaAtuacaoService = new AreaAtuacaoService(context);

@@ -101,8 +101,8 @@ namespace Service.Tests
 
             // Assert
             Assert.AreEqual(2, contratacaoService.GetAll().Count());
-            var autor = contratacaoService.Get(2);
-            Assert.AreEqual(null, autor);
+            var contratacao = contratacaoService.Get(2);
+            Assert.AreEqual(null, contratacao);
         }
 
         [TestMethod()]

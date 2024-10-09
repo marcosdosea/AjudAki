@@ -1,37 +1,38 @@
-﻿using Core.Service;
-using Core;
+﻿using AjudAkiWeb.Models;
 using AutoMapper;
+using Core.Service;
+using Core;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using AjudAkiWeb.Mappers;
-using Microsoft.AspNetCore.Mvc;
-using AjudAkiWeb.Models;
 
 namespace AjudAkiWeb.Controllers.Tests
 {
     [TestClass()]
-    public class AreaAtuacaoControllerTests
+    public class AgendaControllerTests
     {
 
-        private static AreaAtuacaoController controller;
+
+        private static AgendaController controller;
 
         [TestInitialize]
         public void Initialize()
         {
             // Arrange
-            var mockService = new Mock<IAreaAtuacaoService>();
+            var mockService = new Mock<IAgendaService>();
 
             IMapper mapper = new MapperConfiguration(cfg =>
-                cfg.AddProfile(new AreaAtuacaoProfile())).CreateMapper();
+                cfg.AddProfile(new AgendaProfile())).CreateMapper();
 
             mockService.Setup(service => service.GetAll())
-                .Returns(GetTestAreasAtuacao());
+                .Returns(GetTestAgendas());
             mockService.Setup(service => service.Get(1))
-                .Returns(GetTargetAreaAtuacao());
-            mockService.Setup(service => service.Edit(It.IsAny<Areaatuacao>()))
+                .Returns(GetTargetAgenda());
+            mockService.Setup(service => service.Edit(It.IsAny<Agendum>()))
                 .Verifiable();
-            mockService.Setup(service => service.Create(It.IsAny<Areaatuacao>()))
+            mockService.Setup(service => service.Create(It.IsAny<Agendum>()))
                 .Verifiable();
-            controller = new AreaAtuacaoController(mockService.Object, mapper);
+            controller = new AgendaController(mockService.Object, mapper);
         }
 
 
@@ -44,9 +45,9 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<AreaAtuacaoViewModel>));
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<AgendaViewModel>));
 
-            List<AreaAtuacaoViewModel>? lista = (List<AreaAtuacaoViewModel>)viewResult.ViewData.Model;
+            List<AgendaViewModel>? lista = (List<AgendaViewModel>)viewResult.ViewData.Model;
             Assert.AreEqual(3, lista.Count);
         }
 
@@ -59,9 +60,11 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AreaAtuacaoViewModel));
-            AreaAtuacaoViewModel areaAtuacaoModel = (AreaAtuacaoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Eletricista", areaAtuacaoModel.Nome);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AgendaViewModel));
+            AgendaViewModel agendaModel = (AgendaViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual(DateTime.Parse("2025-07-24"), agendaModel.Data);
+            Assert.AreEqual(Enum.Parse(typeof(TurnoEnum), "MANHÃ"), agendaModel.Turno);
+
         }
 
         [TestMethod()]
@@ -78,7 +81,7 @@ namespace AjudAkiWeb.Controllers.Tests
         public void CreateTest_Valid()
         {
             // Act
-            var result = controller.Create(GetNewAreaAtuacao());
+            var result = controller.Create(GetNewAgenda());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -94,7 +97,7 @@ namespace AjudAkiWeb.Controllers.Tests
             controller.ModelState.AddModelError("Nome", "Campo requerido");
 
             // Act
-            var result = controller.Create(GetNewAreaAtuacao());
+            var result = controller.Create(GetNewAgenda());
 
             // Assert
             Assert.AreEqual(1, controller.ModelState.ErrorCount);
@@ -113,16 +116,18 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AreaAtuacaoViewModel));
-            AreaAtuacaoViewModel areaAtuacaoModel = (AreaAtuacaoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Eletricista", areaAtuacaoModel.Nome);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AgendaViewModel));
+            AgendaViewModel agendaModel = (AgendaViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual(DateTime.Parse("2025-07-24"), agendaModel.Data);
+            Assert.AreEqual(Enum.Parse(typeof(TurnoEnum), "MANHÃ"), agendaModel.Turno);
+
         }
 
         [TestMethod()]
         public void EditTest_Post_Valid()
         {
             // Act
-            var result = controller.Edit(GetTargetAreaAtuacaoModel().Id, GetTargetAreaAtuacaoModel());
+            var result = controller.Edit(GetTargetAgendaModel().Id, GetTargetAgendaModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -142,16 +147,16 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AreaAtuacaoViewModel));
-            AreaAtuacaoViewModel areaAtuacaoModel = (AreaAtuacaoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Eletricista", areaAtuacaoModel.Nome);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AgendaViewModel));
+            AgendaViewModel agendaModel = (AgendaViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual(DateTime.Parse("2025-07-24"), agendaModel.Data);
         }
 
         [TestMethod()]
         public void DeleteTest_Get_Valid()
         {
             // Act
-            var result = controller.Delete(GetTargetAreaAtuacaoModel());
+            var result = controller.Delete(GetTargetAgendaModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -159,51 +164,56 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsNull(redirectToActionResult.ControllerName);
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
-
-        private AreaAtuacaoViewModel GetNewAreaAtuacao()
+        //MÉTODOS PRIVADOS
+        private AgendaViewModel GetNewAgenda()
         {
-            return new AreaAtuacaoViewModel
+            return new AgendaViewModel
             {
                 Id = 4,
-                Nome = "Saúde",
+                Data = DateTime.Parse("2025-10-27")
             };
         }
 
-        private static Areaatuacao GetTargetAreaAtuacao()
+        private static Agendum GetTargetAgenda()
         {
-            return new Areaatuacao
+            return new Agendum
             {
                 Id = 1,
-                Nome = "Eletricista",
+                Data = DateTime.Parse("2025-07-24"),
+                Turno = "MANHÃ"
+
             };
         }
-        private AreaAtuacaoViewModel GetTargetAreaAtuacaoModel()
+        private AgendaViewModel GetTargetAgendaModel()
         {
-            return new AreaAtuacaoViewModel
+            return new AgendaViewModel
             {
                 Id = 2,
-                Nome = "Eletricista",
+                Data = DateTime.Parse("2025-02-10"),
             };
         }
-        private IEnumerable<Areaatuacao> GetTestAreasAtuacao()
+        private IEnumerable<Agendum> GetTestAgendas()
         {
 
-            return new List<Areaatuacao>
+            return new List<Agendum>
             {
-                new Areaatuacao
+                new Agendum
                 {
                     Id = 1,
-                    Nome = "Educação",
+                    Data = DateTime.Parse("2025-05-04"),
+                    Turno = "NOITE"
                 },
-                new Areaatuacao
+                new Agendum
                 {
                     Id = 2,
-                    Nome = "Eletricista",
+                    Data = DateTime.Parse("2025-08-27"),
+                    Turno = "TARDE"
                 },
-                new Areaatuacao
+                new Agendum
                 {
                     Id = 3,
-                    Nome = "Construção",
+                    Data = DateTime.Parse("2025-11-10"),
+                    Turno = "MANHÃ"
                 },
             };
         }
