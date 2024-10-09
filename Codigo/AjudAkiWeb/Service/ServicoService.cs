@@ -16,11 +16,11 @@ namespace Service
             this.context = context;
         }
 
-        // <summary>
-        // Criar um novo serviço na base de dados
-        // </summary>
-        // <param name="servico">Objeto do serviço a ser criado.</param>
-        // <returns>Id do serviço recém-criado.</returns>
+        /// <summary>
+        /// Criar um novo serviço na base de dados
+        /// </summary>
+        /// <param name="servico">Objeto do serviço a ser criado.</param>
+        /// <returns>Id do serviço recém-criado.</returns>
         public uint Create(Servico servico)
         {
             context.Add(servico);
@@ -28,10 +28,10 @@ namespace Service
             return servico.Id;
         }
 
-        // <summary>
-        // Remover o serviço da base de dados
-        // </summary>
-        // <param name="id">Id do serviço a ser removido.</param>
+        /// <summary>
+        /// Remover o serviço da base de dados
+        /// </summary>
+        /// <param name="id">Id do serviço a ser removido.</param>
         public void Delete(uint id)
         {
             var servico = context.Servicos.Find(id);
@@ -42,30 +42,30 @@ namespace Service
             }
         }
 
-        // <summary>
-        // Editar dados do serviço na base de dados
-        // </summary>
-        // <param name="servico">Objeto do serviço com os novos dados.</param>
+        /// <summary>
+        /// Editar dados do serviço na base de dados
+        /// </summary>
+        /// <param name="servico">Objeto do serviço com os novos dados.</param>
         public void Edit(Servico servico)
         {
             context.Update(servico);
             context.SaveChanges();
         }
 
-        // <summary>
-        // Buscar um serviço na base de dados
-        // </summary>
-        // <param name="id">Id do serviço a ser buscado.</param>
-        // <returns>Objeto do serviço encontrado ou null, caso não exista.</returns>
+        /// <summary>
+        /// Buscar um serviço na base de dados
+        /// </summary>
+        /// <param name="id">Id do serviço a ser buscado.</param>
+        /// <returns>Objeto do serviço encontrado ou null, caso não exista.</returns>
         public Servico? Get(uint id)
         {
             return context.Servicos.Find(id);
         }
 
-        // <summary>
-        // Buscar todos os serviços cadastrados
-        // </summary>
-        // <returns>Coleção de serviços cadastrados.</returns>
+        /// <summary>
+        /// Buscar todos os serviços cadastrados
+        /// </summary>
+        /// <returns>Coleção de serviços cadastrados.</returns>
         public IEnumerable<Servico> GetAll()
         {
             return context.Servicos.AsNoTracking();
