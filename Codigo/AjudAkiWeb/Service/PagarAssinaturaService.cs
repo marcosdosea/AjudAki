@@ -8,7 +8,7 @@ namespace Service
     /// <summary>
     /// Implementa pagamentos para Pagamentoassinatura
     /// </summary>
-    class PagarAssinaturaService : IPagarAssinaturaService
+    public class PagarAssinaturaService : IPagarAssinaturaService
     {
         private readonly AjudakiContext context;
 
