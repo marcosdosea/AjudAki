@@ -63,6 +63,8 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AgendaViewModel));
             AgendaViewModel agendaModel = (AgendaViewModel)viewResult.ViewData.Model;
             Assert.AreEqual(DateTime.Parse("2025-07-24"), agendaModel.Data);
+            Assert.AreEqual(Enum.Parse(typeof(TurnoEnum), "MANHÃ"), agendaModel.Turno);
+
         }
 
         [TestMethod()]
@@ -117,6 +119,8 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AgendaViewModel));
             AgendaViewModel agendaModel = (AgendaViewModel)viewResult.ViewData.Model;
             Assert.AreEqual(DateTime.Parse("2025-07-24"), agendaModel.Data);
+            Assert.AreEqual(Enum.Parse(typeof(TurnoEnum), "MANHÃ"), agendaModel.Turno);
+
         }
 
         [TestMethod()]
@@ -175,7 +179,9 @@ namespace AjudAkiWeb.Controllers.Tests
             return new Agendum
             {
                 Id = 1,
-                Data = DateTime.Parse("2025-07-24")
+                Data = DateTime.Parse("2025-07-24"),
+                Turno = "MANHÃ"
+
             };
         }
         private AgendaViewModel GetTargetAgendaModel()
@@ -183,7 +189,7 @@ namespace AjudAkiWeb.Controllers.Tests
             return new AgendaViewModel
             {
                 Id = 2,
-                Data = DateTime.Parse("2025-02-10")
+                Data = DateTime.Parse("2025-02-10"),
             };
         }
         private IEnumerable<Agendum> GetTestAgendas()
@@ -194,17 +200,20 @@ namespace AjudAkiWeb.Controllers.Tests
                 new Agendum
                 {
                     Id = 1,
-                    Data = DateTime.Parse("2025-05-04")
+                    Data = DateTime.Parse("2025-05-04"),
+                    Turno = "NOITE"
                 },
                 new Agendum
                 {
                     Id = 2,
-                    Data = DateTime.Parse("2025-08-27")
+                    Data = DateTime.Parse("2025-08-27"),
+                    Turno = "TARDE"
                 },
                 new Agendum
                 {
                     Id = 3,
                     Data = DateTime.Parse("2025-11-10"),
+                    Turno = "MANHÃ"
                 },
             };
         }
