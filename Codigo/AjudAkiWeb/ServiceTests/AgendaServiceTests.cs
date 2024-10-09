@@ -22,17 +22,34 @@ namespace Service.Tests
             context = new AjudakiContext(options);
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
-            var autores = new List<Areaatuacao>
+            var agendas = new List<Agendum>
                 {
-                    new() { Id = 1, Nome = "Educação"},
-                    new Areaatuacao { Id = 2, Nome = "Tecnologia"},
-                    new Areaatuacao { Id = 3, Nome = "Marketing"},
+                    new Agendum {
+                        Id = 1,
+                        Data = DateTime.Parse("2025-07-10"),
+                        Turno = "TARDE",
+                        TurnoOcupado = 1, 
+                        DiaOcupado = 0    
+                    },
+                    new Agendum {
+                        Id = 2,
+                        Data = DateTime.Parse("2025-10-12"),
+                        Turno = "MANHÃ",
+                        TurnoOcupado = 0, 
+                        DiaOcupado = 1    
+                    },
+                    new Agendum {
+                        Id = 3,
+                        Data = DateTime.Parse("2025-12-31"),
+                        Turno = "NOITE",
+                        TurnoOcupado = 1,
+                        DiaOcupado = 1    
+                    }
                 };
-
-            context.AddRange(autores);
+            context.AddRange(agendas);
             context.SaveChanges();
 
-            areaAtuacaoService = new AreaAtuacaoService(context);
+            agendaService = new AgendaService(context);
         }
 
 
@@ -41,56 +58,67 @@ namespace Service.Tests
         public void CreateTest()
         {
             // Act
-            areaAtuacaoService.Create(new Areaatuacao() { Id = 4, Nome = "Construção" });
+            var novaAgenda = new Agendum()
+            {
+                Id = 4,
+                Data = DateTime.Parse("2025-01-20"),
+                Turno = "TARDE",
+                TurnoOcupado = 0,
+                DiaOcupado = 0
+            };
+
+            agendaService.Create(novaAgenda);
+
             // Assert
-            Assert.AreEqual(4, areaAtuacaoService.GetAll().Count());
-            var areaatuacao = areaAtuacaoService.Get(4);
-            Assert.AreEqual("Construção", areaatuacao.Nome);
+            Assert.AreEqual(4, agendaService.GetAll().Count());
+            var agenda = agendaService.Get(4);
+
+            Assert.AreEqual(DateTime.Parse("2025-01-20"), agenda.Data);
         }
 
         [TestMethod()]
         public void DeleteTest()
         {
             // Act
-            areaAtuacaoService.Delete(2);
+            agendaService.Delete(2);
             // Assert
-            Assert.AreEqual(2, areaAtuacaoService.GetAll().Count());
-            var areaatuacao = areaAtuacaoService.Get(2);
-            Assert.AreEqual(null, areaatuacao);
+            Assert.AreEqual(2, agendaService.GetAll().Count());
+            var agenda = agendaService.Get(2);
+            Assert.AreEqual(null, agenda);
         }
 
         [TestMethod()]
         public void EditTest()
         {
             //Act 
-            var areaatuacao = areaAtuacaoService.Get(3);
-            areaatuacao.Nome = "Design";
-            areaAtuacaoService.Edit(areaatuacao);
+            var agenda = agendaService.Get(3);
+            agenda.Turno = "MANHÃ";
+            agendaService.Edit(agenda);
             //Assert
-            areaatuacao = areaAtuacaoService.Get(3);
-            Assert.IsNotNull(areaatuacao);
-            Assert.AreEqual("Design", areaatuacao.Nome);
+            agenda = agendaService.Get(3);
+            Assert.IsNotNull(agenda);
+            Assert.AreEqual("MANHÃ", agenda.Turno);
         }
 
         [TestMethod()]
         public void GetTest()
         {
-            var areaatuacao = areaAtuacaoService.Get(1);
-            Assert.IsNotNull(areaatuacao);
-            Assert.AreEqual("Educação", areaatuacao.Nome);
+            var agenda = agendaService.Get(1);
+            Assert.IsNotNull(agenda);
+            Assert.AreEqual(DateTime.Parse("2025-07-10"), agenda.Data);
         }
 
         [TestMethod()]
         public void GetAllTest()
         {
             // Act
-            var listaAutor = areaAtuacaoService.GetAll();
+            var listaAgenda = agendaService.GetAll();
             // Assert
-            Assert.IsInstanceOfType(listaAutor, typeof(IEnumerable<Areaatuacao>));
-            Assert.IsNotNull(listaAutor);
-            Assert.AreEqual(3, listaAutor.Count());
-            Assert.AreEqual((uint)1, listaAutor.First().Id);
-            Assert.AreEqual("Educação", listaAutor.First().Nome);
+            Assert.IsInstanceOfType(listaAgenda, typeof(IEnumerable<Agendum>));
+            Assert.IsNotNull(listaAgenda);
+            Assert.AreEqual(3, listaAgenda.Count());
+            Assert.AreEqual((uint)1, listaAgenda.First().Id);
+            Assert.AreEqual("TARDE", listaAgenda.First().Turno);
         }
 
     }

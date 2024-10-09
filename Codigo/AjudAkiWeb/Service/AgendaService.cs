@@ -1,5 +1,4 @@
-﻿
-using Core;
+﻿using Core;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 
