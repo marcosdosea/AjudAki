@@ -19,7 +19,7 @@ namespace Service
         /// Criar um novo avaliar profissional na base de dados
         /// </summary>
         /// <param name="avaliar"></param>
-        /// <returns>id do avalair profissional</returns>
+        /// <returns>id do avaliar profissional</returns>
         /// <exception cref="NotImplementedException"></exception>
         public uint Create(Avaliacao avaliar)
         {
@@ -29,25 +29,20 @@ namespace Service
         }
 
         /// <summary>
-        /// Remover a avaliacao do profissional da base de dados
+        /// Busca uma Avaliacao profissional
         /// </summary>
         /// <param name="id"></param>
+        /// <returns>Avaliacao profissional</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public void Delete(uint id)
+        public Avaliacao? Get(uint id)
         {
-            var avaliar = context.Avaliacaos.Find(id);
-            if (avaliar != null)
-            {
-                context.Remove(avaliar);
-                context.SaveChanges();
-            }
+            return context.Avaliacaos.Find(id);
         }
-
 
         /// <summary>
         /// Buscar todas as  avaliacao de profissionais cadastradas
         /// </summary>
-        /// <returns>lista de avaliar profissional</returns>
+        /// <returns>lista de avaliacoes de profissionais</returns>
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Avaliacao> GetAll()
         {

@@ -9,6 +9,8 @@ namespace Core.Service
     public interface IAvaliarService
     {
         uint Create(Avaliacao avaliar);
+       
+        Avaliacao? Get(uint id);
 
         IEnumerable<Avaliacao> GetAll();
     }
