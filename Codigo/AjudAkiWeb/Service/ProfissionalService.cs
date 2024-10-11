@@ -21,7 +21,6 @@ namespace Service
         /// </summary>
         /// <param name="profissional"></param>
         /// <returns>id do profissional</returns>
-        /// <exception cref="NotImplementedException"></exception>
         public uint Create(Pessoa profissional)
         {
             context.Add(profissional);
@@ -33,7 +32,6 @@ namespace Service
         /// Remover o profissional da base de dados
         /// </summary>
         /// <param name="id"></param>
-        /// <exception cref="NotImplementedException"></exception>
         public void Delete(uint id)
         {
             var profissional = context.Pessoas.Find(id);
@@ -65,7 +63,6 @@ namespace Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns>dados do profisisonal</returns>
-        /// <exception cref="NotImplementedException"></exception>
         public Pessoa? Get(uint id)
         {
             return context.Pessoas.Find(id);
@@ -75,7 +72,6 @@ namespace Service
         /// Buscar todos os profissionais cadastrados
         /// </summary>
         /// <returns>lista de profissionais</returns>
-        /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Pessoa> GetAll()
         {
             return context.Pessoas.AsNoTracking();
@@ -86,7 +82,6 @@ namespace Service
         /// </summary>
         /// <param name="nome"></param>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Pessoa> GetByNome(string nome)
         {
             return (IEnumerable<Pessoa>)context.Pessoas.Where(Pessoa => Pessoa.Nome.StartsWith(nome)).AsNoTracking();
