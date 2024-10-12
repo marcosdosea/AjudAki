@@ -1,7 +1,7 @@
 ﻿
 namespace Core.Service
 {
-    public interface ISolicitacaoServico
+    public interface ISolicitacaoServicoService
     {
         uint Create(Solicitacaoservico solicitacaoServico);
         void Edit(Solicitacaoservico solicitacaoServico);

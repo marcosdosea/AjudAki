@@ -9,7 +9,7 @@ namespace Service
     /// <summary>
     /// Implementa serviçoes para o manter solicitação serviço
     /// </summary>
-    public class SolicitacaoServicoService : ISolicitacaoServico
+    public class SolicitacaoServicoService : ISolicitacaoServicoService
     {
         private readonly AjudakiContext context;
 
