@@ -18,28 +18,26 @@ using AjudAkiWeb.Mappers;
 namespace AjudAkiWeb.Controllers.Tests
 {
     [TestClass()]
-    public class ServicoControllerTests
+    public class TipoServicoControllerTests
     {
-        private static ServicoController controller;
+        private static TipoServicoController? controller;
 
         [TestInitialize]
         public void Initialize()
         {
             // Arrange
-            var mockService = new Mock<IServicoService>();
+            var mockService = new Mock<ITipoServicoService>();
 
             IMapper mapper = new MapperConfiguration(cfg =>
-                cfg.AddProfile(new ServicoProfile())).CreateMapper();
+                cfg.AddProfile(new TipoServicoProfile())).CreateMapper();
 
             mockService.Setup(service => service.GetAll())
-                .Returns(GetTestServicos());
-            mockService.Setup(service => service.Get(1))
-                .Returns(GetTargetServicos());
-            mockService.Setup(service => service.Edit(It.IsAny<Servico>()))
+                .Returns(GetTestTipoServicos());
+            mockService.Setup(service => service.Edit(It.IsAny<Tiposervico>()))
                 .Verifiable();
-            mockService.Setup(service => service.Create(It.IsAny<Servico>()))
+            mockService.Setup(service => service.Create(It.IsAny<Tiposervico>()))
                 .Verifiable();
-            controller = new ServicoController(mockService.Object, mapper);
+            controller = new TipoServicoController(mockService.Object, mapper);
         }
         [TestMethod()]
         public void IndexTest_Valido()
@@ -50,9 +48,9 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<ServicoViewModel>));
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<TipoServicoViewModel>));
 
-            List<ServicoViewModel>? lista = (List<ServicoViewModel>)viewResult.ViewData.Model;
+            List<TipoServicoViewModel>? lista = (List<TipoServicoViewModel>)viewResult.ViewData.Model;
             Assert.AreEqual(3, lista.Count);
         }
 
@@ -65,12 +63,9 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
-            ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
-
-            Assert.AreEqual("Encanador", servicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("01/01/0001"), servicoModel.DataHoraSolicitacao);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(TipoServicoViewModel));
+            TipoServicoViewModel tipoServicoModel = (TipoServicoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Encanador", tipoServicoModel.Nome);
         }
 
         [TestMethod()]
@@ -84,10 +79,10 @@ namespace AjudAkiWeb.Controllers.Tests
         }
 
         [TestMethod()]
-        public void CreateTest_Valido()
+        public void CreateTest_Valid()
         {
             // Act
-            var result = controller.Create(GetNewServico());
+            var result = controller.Create(GetNewTipoServico());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -100,11 +95,11 @@ namespace AjudAkiWeb.Controllers.Tests
         [TestMethod()]
         public void CreateTest_Post_Invalid()
         {
-            // Arrange
+            //arrange
             controller.ModelState.AddModelError("Nome", "Campo requerido");
 
             // Act
-            var result = controller.Create(GetNewServico());
+            var result = controller.Create(GetNewTipoServico());
 
             // Assert
             Assert.AreEqual(1, controller.ModelState.ErrorCount);
@@ -124,17 +119,16 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
-            ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Encanador", servicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("01/01/0001"), servicoModel.DataHoraSolicitacao);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(TipoServicoViewModel));
+            TipoServicoViewModel tipoServicoModel = (TipoServicoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Encanador", tipoServicoModel.Nome);
         }
 
         [TestMethod()]
         public void EditTest_Post_Valid()
         {
             // Act
-            var result = controller.Edit(GetTargetServicoModel().Id, GetTargetServicoModel());
+            var result = controller.Edit(GetTargetTipoServicoModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -152,78 +146,69 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
-            ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Encanador", servicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("01/01/0001"), servicoModel.DataHoraSolicitacao);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(TipoServicoViewModel));
+            TipoServicoViewModel tipoServicoModel = (TipoServicoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Encanador", tipoServicoModel.Nome);
         }
 
         [TestMethod()]
         public void DeleteTest_Get_Valid()
         {
             // Act
-            var result = controller.Delete(1);
+            var result = controller.Delete(GetTargetTipoServicoModel());
 
             // Assert
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
-            ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
-            ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Encanador", servicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("01/01/0001"), servicoModel.DataHoraSolicitacao);
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            RedirectToActionResult redirectToActionResult = (RedirectToActionResult)result;
+            Assert.IsNull(redirectToActionResult.ControllerName);
+            Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
 
-        private ServicoViewModel GetNewServico()
+        private TipoServicoViewModel GetNewTipoServico()
         {
-            return new ServicoViewModel
+            return new TipoServicoViewModel
             {
                 Id = 4,
                 Nome = "Cozinheiro",
-                DataHoraSolicitacao = DateTime.Parse("1951-02-23")
             };
         }
 
-        private Servico GetTargetServicos()
+        private Tiposervico GetTargetTipoServicos()
         {
-            return new Servico
+            return new Tiposervico
             {
                 Id = 1,
                 Nome = "Encanador",
-                Data = DateTime.Parse("2000-02-07")
             };
         }
 
-        private ServicoViewModel GetTargetServicoModel()
+        private TipoServicoViewModel GetTargetTipoServicoModel()
         {
-            return new ServicoViewModel
+            return new TipoServicoViewModel
             {
                 Id = 2,
                 Nome = "Encanador",
-                DataHoraSolicitacao = DateTime.Parse("2002-09-24")
             };
         }
 
-        private IEnumerable<Servico> GetTestServicos()
+        private IEnumerable<Tiposervico> GetTestTipoServicos()
         {
-            return new List<Servico>
+            return new List<Tiposervico>
             {
-                new Servico
+                new Tiposervico
                 {
                     Id = 1,
                     Nome = "Cozinheiro",
-                    Data = DateTime.Parse("1892-10-27")
                 },
-                new Servico
+                new Tiposervico
                 {
                     Id = 2,
                     Nome = "Faxineiro",
-                    Data = DateTime.Parse("1839-06-21")
                 },
-                new Servico
+                new Tiposervico
                 {
                     Id = 3,
                     Nome = "Eletricista",
-                    Data = DateTime.Parse("1982-01-01")
                 },
             };
         }
