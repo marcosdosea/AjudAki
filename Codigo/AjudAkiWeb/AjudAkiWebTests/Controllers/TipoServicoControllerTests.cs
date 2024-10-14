@@ -30,7 +30,8 @@ namespace AjudAkiWeb.Controllers.Tests
 
             IMapper mapper = new MapperConfiguration(cfg =>
                 cfg.AddProfile(new TipoServicoProfile())).CreateMapper();
-
+            mockService.Setup(service => service.Get(1))
+    .Returns(GetTargetTipoServico());
             mockService.Setup(service => service.GetAll())
                 .Returns(GetTestTipoServicos());
             mockService.Setup(service => service.Edit(It.IsAny<Tiposervico>()))
@@ -173,7 +174,7 @@ namespace AjudAkiWeb.Controllers.Tests
             };
         }
 
-        private Tiposervico GetTargetTipoServicos()
+        private Tiposervico GetTargetTipoServico()
         {
             return new Tiposervico
             {
