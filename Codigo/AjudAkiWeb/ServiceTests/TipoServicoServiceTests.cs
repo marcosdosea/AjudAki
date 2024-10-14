@@ -85,11 +85,11 @@ namespace Service.Tests
             // Act
             var listatiposServicos = tipoServicoService.GetAll();
             // Assert
-            Assert.IsInstanceOfType(listatiposServicos, typeof(IEnumerable<Tiposervico>));
-            Assert.IsNotNull(listatiposServicos);
-            Assert.AreEqual(3, listatiposServicos.Count());
-            Assert.AreEqual((uint)1, listatiposServicos.First().Id);
-            Assert.AreEqual("Educação", listatiposServicos.First().Nome);
+            Assert.IsInstanceOfType(listaTiposServicos, typeof(IEnumerable<Tiposervico>));
+            Assert.IsNotNull(listaTiposServicos);
+            Assert.AreEqual(3, listaTiposServicos.Count());
+            Assert.AreEqual((uint)1, listaTiposServicos.First().Id);
+            Assert.AreEqual("Educação", listaTiposServicos.First().Nome);
         }
 
     }
