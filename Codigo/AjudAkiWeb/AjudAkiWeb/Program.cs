@@ -16,15 +16,16 @@ namespace AjudAkiWeb
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddTransient<IAgendaService, AgendaService>();
+            builder.Services.AddTransient<IAreaAtuacaoService, AreaAtuacaoService>();
             builder.Services.AddTransient<IAssinaturaService, AssinaturaService>();
+            builder.Services.AddTransient<IAvaliarService, AvaliarService>();
             builder.Services.AddTransient<IClienteService, ClienteService>();
+            builder.Services.AddTransient<IContratacaoService, ContratacaoService>();
+            builder.Services.AddTransient<IPagarAssinaturaService, PagarAssinaturaService>();
             builder.Services.AddTransient<IProfissionalService, ProfissionalService>();
             builder.Services.AddTransient<IServicoService, ServicoService>();
-            builder.Services.AddTransient<IAreaAtuacaoService, AreaAtuacaoService>();
-            builder.Services.AddTransient<IAgendaService, AgendaService>();
-            builder.Services.AddTransient<IContratacaoService, ContratacaoService>();
-            builder.Services.AddTransient<IAvaliarService, AvaliarService>();
-            builder.Services.AddTransient<IPagarAssinaturaService, PagarAssinaturaService>();
+            builder.Services.AddTransient<ISolicitacaoServicoService, SolicitacaoServicoService>();
             builder.Services.AddTransient<ITipoServicoService, TipoServicoService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

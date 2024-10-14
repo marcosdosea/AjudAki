@@ -21,11 +21,11 @@ namespace Service
         /// </summary>
         /// <param name="areaAtuacao">Nome da área</param>
         /// <returns>id da área de atuação</returns>
-        /// <exception cref="NotImplementedException"></exception>
         public uint Create(Areaatuacao areaAtuacao)
         {
             context.Add(areaAtuacao);
             context.SaveChanges();
+
             return areaAtuacao.Id;
         }
 
@@ -33,7 +33,6 @@ namespace Service
         /// Remove a área de atuação da base de dados
         /// </summary>
         /// <param name="id"></param>
-        /// <exception cref="NotImplementedException"></exception
         public void Delete(uint id)
         {
             var areaAtuacao = context.Areaatuacaos.Find(id);
@@ -59,7 +58,6 @@ namespace Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Área de atuação</returns>
-        /// <exception cref="NotImplementedException"></exception>
         public Areaatuacao? Get(uint id)
         {
             return context.Areaatuacaos.Find(id);
