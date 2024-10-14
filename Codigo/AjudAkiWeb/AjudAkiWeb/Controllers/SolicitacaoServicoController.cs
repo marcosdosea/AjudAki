@@ -22,8 +22,8 @@ namespace AjudAkiWeb.Controllers
         // GET: SolicitacaoServicoController
         public ActionResult Index()
         {
-            var listaAolicitacoesServico = solicitacaoServicoService.GetAll();
-            var listaSolicitacoesServicoViewModel = mapper.Map<List<SolicitacaoServicoViewModel>>(listaAolicitacoesServico);
+            var listaSolicitacoesServico = solicitacaoServicoService.GetAll();
+            var listaSolicitacoesServicoViewModel = mapper.Map<List<SolicitacaoServicoViewModel>>(listaSolicitacoesServico);
 
             return View(listaSolicitacoesServicoViewModel);
         }
@@ -33,7 +33,7 @@ namespace AjudAkiWeb.Controllers
         {
             var solicitacaoServico = solicitacaoServicoService.Get(id);
             var solicitacaoServicoViewModel = mapper.Map<SolicitacaoServicoViewModel>(solicitacaoServico);
-            return View();
+            return View(solicitacaoServicoViewModel);
         }
 
         // GET: SolicitacaoServicoController/Create
@@ -91,7 +91,7 @@ namespace AjudAkiWeb.Controllers
         // POST: SolicitacaoServicoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(uint id, SolicitacaoServicoViewModel solicitacaoServicoViewModel)
+        public ActionResult Delete(SolicitacaoServicoViewModel solicitacaoServicoViewModel)
         {
             solicitacaoServicoService.Delete(solicitacaoServicoViewModel.Id);
 
