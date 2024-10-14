@@ -1,13 +1,15 @@
 ﻿using AjudAkiWeb.Models;
 using AutoMapper;
+using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Mvc;
-using Org.BouncyCastle.Asn1.IsisMtt;
 
 namespace AjudAkiWeb.Controllers
 {
     public class SolicitacaoServicoController : Controller
     {
+        //TODO: Implementar lógicas de foreign Keys
+
         private readonly ISolicitacaoServicoService solicitacaoServicoService;
         private readonly IMapper mapper;
 
@@ -22,6 +24,7 @@ namespace AjudAkiWeb.Controllers
         {
             var listaAolicitacoesServico = solicitacaoServicoService.GetAll();
             var listaSolicitacoesServicoViewModel = mapper.Map<List<SolicitacaoServicoViewModel>>(listaAolicitacoesServico);
+
             return View(listaSolicitacoesServicoViewModel);
         }
 
@@ -36,64 +39,63 @@ namespace AjudAkiWeb.Controllers
         // GET: SolicitacaoServicoController/Create
         public ActionResult Create()
         {
-            return View();
+            var solicitacaoServicoViewModel = new SolicitacaoServicoViewModel();
+
+            return View(solicitacaoServicoViewModel);
         }
 
         // POST: SolicitacaoServicoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(SolicitacaoServicoViewModel solicitacaoServicoViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var solicitacaoServico = mapper.Map<Solicitacaoservico>(solicitacaoServicoViewModel);
+                solicitacaoServicoService.Create(solicitacaoServico);
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: SolicitacaoServicoController/Edit/5
         public ActionResult Edit(uint id)
         {
-            return View();
+            var solicitacaoServico = solicitacaoServicoService.Get(id);
+            var solicitacaoServicoViewModel = mapper.Map<SolicitacaoServicoViewModel>(solicitacaoServico);
+
+            return View(solicitacaoServicoViewModel);
         }
 
         // POST: SolicitacaoServicoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(uint id, IFormCollection collection)
+        public ActionResult Edit(uint id, SolicitacaoServicoViewModel solicitacaoServicoViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var solicitacaoServico = mapper.Map<Solicitacaoservico>(solicitacaoServicoViewModel);
+                solicitacaoServicoService.Edit(solicitacaoServico);
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: SolicitacaoServicoController/Delete/5
         public ActionResult Delete(uint id)
         {
-            return View();
+            var solicitacaoServico = solicitacaoServicoService.Get(id);
+            var solicitacaoServicoViewModel = mapper.Map<SolicitacaoServicoViewModel>(solicitacaoServico);
+
+            return View(solicitacaoServicoViewModel);
         }
 
         // POST: SolicitacaoServicoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(uint id, IFormCollection collection)
+        public ActionResult Delete(uint id, SolicitacaoServicoViewModel solicitacaoServicoViewModel)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            solicitacaoServicoService.Delete(solicitacaoServicoViewModel.Id);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
