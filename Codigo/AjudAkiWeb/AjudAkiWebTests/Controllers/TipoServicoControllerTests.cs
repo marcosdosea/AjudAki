@@ -1,18 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AjudAkiWeb.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.Service;
 using Moq;
-using Mappers;
 using Core;
 using AjudAkiWeb.Models;
 using Microsoft.AspNetCore.Mvc;
-using Org.BouncyCastle.Crypto;
 using AjudAkiWeb.Mappers;
 
 namespace AjudAkiWeb.Controllers.Tests
@@ -40,6 +31,7 @@ namespace AjudAkiWeb.Controllers.Tests
                 .Verifiable();
             controller = new TipoServicoController(mockService.Object, mapper);
         }
+
         [TestMethod()]
         public void IndexTest_Valido()
         {

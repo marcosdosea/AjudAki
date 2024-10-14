@@ -1,18 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AjudAkiWeb.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.Service;
 using Moq;
-using Mappers;
 using Core;
 using AjudAkiWeb.Models;
 using Microsoft.AspNetCore.Mvc;
-using Org.BouncyCastle.Crypto;
 using AjudAkiWeb.Mappers;
 
 namespace AjudAkiWeb.Controllers.Tests
@@ -70,7 +61,7 @@ namespace AjudAkiWeb.Controllers.Tests
             ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
 
             Assert.AreEqual("Encanador", servicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("01/01/0001"), servicoModel.DataHoraSolicitacao);
+            Assert.AreEqual(DateTime.Parse("01-01-0001"), servicoModel.DataHoraSolicitacao);
         }
 
         [TestMethod()]
@@ -127,7 +118,7 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
             ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
             Assert.AreEqual("Encanador", servicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("01/01/0001"), servicoModel.DataHoraSolicitacao);
+            Assert.AreEqual(DateTime.Parse("01-01-0001"), servicoModel.DataHoraSolicitacao);
         }
 
         [TestMethod()]
@@ -155,7 +146,7 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
             ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
             Assert.AreEqual("Encanador", servicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("01/01/0001"), servicoModel.DataHoraSolicitacao);
+            Assert.AreEqual(DateTime.Parse("01-01-0001"), servicoModel.DataHoraSolicitacao);
         }
 
         [TestMethod()]
@@ -170,7 +161,7 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ServicoViewModel));
             ServicoViewModel servicoModel = (ServicoViewModel)viewResult.ViewData.Model;
             Assert.AreEqual("Encanador", servicoModel.Nome);
-            Assert.AreEqual(DateTime.Parse("01/01/0001"), servicoModel.DataHoraSolicitacao);
+            Assert.AreEqual(DateTime.Parse("01-01-0001"), servicoModel.DataHoraSolicitacao);
         }
 
         private ServicoViewModel GetNewServico()

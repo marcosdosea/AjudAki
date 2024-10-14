@@ -1,6 +1,4 @@
-﻿using Core;
-using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AjudAkiWeb.Models
 {

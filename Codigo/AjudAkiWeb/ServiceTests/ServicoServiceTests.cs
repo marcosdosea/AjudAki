@@ -1,10 +1,6 @@
 ﻿using Core.Service;
 using Core;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Service.Tests
 {
