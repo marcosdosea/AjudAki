@@ -1,6 +1,4 @@
-﻿using Core;
-using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AjudAkiWeb.Models
 {
@@ -12,6 +10,7 @@ namespace AjudAkiWeb.Models
         public uint Id { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "Nome do tipo do serviço é obrigatório")]
         public string? Nome { get; set; }
 
         [Display(Name = "Código de área de atuação")]

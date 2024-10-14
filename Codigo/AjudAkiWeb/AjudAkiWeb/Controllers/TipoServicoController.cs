@@ -70,7 +70,7 @@ namespace AjudAkiWeb.Controllers
         // POST: TipoServicoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(uint id, TipoServicoViewModel tipoServicoViewModel)
+        public ActionResult Edit(TipoServicoViewModel tipoServicoViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace AjudAkiWeb.Controllers
         // POST: TipoServicoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(uint id, TipoServicoViewModel tipoServicoViewModel)
+        public ActionResult Delete(TipoServicoViewModel tipoServicoViewModel)
         {
             tipoServicoService.Delete(tipoServicoViewModel.Id);
             
