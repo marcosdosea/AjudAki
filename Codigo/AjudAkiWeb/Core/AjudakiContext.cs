@@ -77,7 +77,8 @@ public partial class AjudakiContext : DbContext
                 .HasMaxLength(150)
                 .HasColumnName("descricao");
             entity.Property(e => e.Nome)
-                .HasMaxLength(20)
+                .HasDefaultValueSql("'FREE'")
+                .HasColumnType("enum('FREE','BÁSICO','AVANÇADO')")
                 .HasColumnName("nome");
             entity.Property(e => e.Status)
                 .HasDefaultValueSql("'INATIVA'")
@@ -178,9 +179,6 @@ public partial class AjudakiContext : DbContext
                 .HasColumnName("dataPagamento");
             entity.Property(e => e.IdAssinatura).HasColumnName("idAssinatura");
             entity.Property(e => e.IdProfissional).HasColumnName("idProfissional");
-            entity.Property(e => e.NomePlano)
-                .HasMaxLength(50)
-                .HasColumnName("nomePlano");
             entity.Property(e => e.Status)
                 .HasColumnType("enum('ATIVO','ATRASADO','PAGO','CANCELADO')")
                 .HasColumnName("status");

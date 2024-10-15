@@ -7,9 +7,9 @@ public partial class Assinatura
 {
     public uint Id { get; set; }
 
-    public string? Nome { get; set; }
+    public string Nome { get; set; } = null!;
 
-    public string? Status { get; set; }
+    public string Status { get; set; } = null!;
 
     public decimal? Valor { get; set; }
 

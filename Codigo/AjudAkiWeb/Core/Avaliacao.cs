@@ -7,9 +7,9 @@ public partial class Avaliacao
 {
     public uint Id { get; set; }
 
-    public bool NotaServico { get; set; }
+    public sbyte NotaServico { get; set; }
 
-    public bool NotaProfissional { get; set; }
+    public sbyte NotaProfissional { get; set; }
 
     public int Status { get; set; }
 
