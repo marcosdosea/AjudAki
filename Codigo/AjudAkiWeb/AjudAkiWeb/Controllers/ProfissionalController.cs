@@ -46,6 +46,17 @@ namespace AjudAkiWeb.Controllers
             profissionalViewModel.DataNascimento = DateTime.Now;
             IEnumerable<Assinatura> listaAssinaturas = assinaturaService.GetAll();
             profissionalViewModel.ListaAssinaturas = new SelectList(listaAssinaturas, "Id", "Nome", null);
+            // Repreencher a lista de status
+            var tipoPessoaListItems = Enum.GetValues(typeof(TipoPessoaEnum))
+                .Cast<TipoPessoaEnum>()
+                .Select(status => new SelectListItem
+                {
+                    Value = status.ToString(),
+                    Text = status.ToString()
+                })
+                .ToList();
+
+            profissionalViewModel.TipoPessoaList = new SelectList(tipoPessoaListItems, "Value", "Text");
             return View(profissionalViewModel);
         }
 
