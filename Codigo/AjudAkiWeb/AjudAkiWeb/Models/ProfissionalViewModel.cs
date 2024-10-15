@@ -75,7 +75,9 @@ namespace AjudAkiWeb.Models
         public string? PontoReferencia { get; set; }
 
         public TipoPessoaEnum TipoPessoa { get; set; }
-
+        
+        public SelectList? TipoPessoaList { get; set; }
+       
         public SelectList? ListaAssinaturas { get; set; }
 
     }

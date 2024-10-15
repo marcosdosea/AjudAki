@@ -78,9 +78,9 @@
                 <span asp-validation-for="PontoReferencia" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TipoPessoa" class="control-label"></label>
-                <input asp-for="TipoPessoa" class="form-control" />
-                <span asp-validation-for="TipoPessoa" class="text-danger"></span>
+                @Html.LabelFor(m => m.TipoPessoa)
+                @Html.DropDownListFor(m => m.TipoPessoa, Model.TipoPessoaList, "Selecione o tipo pessoa", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.TipoPessoa)
             </div>
             <div class="form-group col-sm-8">
                 <label asp-for="IdAssinatura" class="control-label"></label>
