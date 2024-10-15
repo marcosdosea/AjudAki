@@ -3,17 +3,22 @@ using AutoMapper;
 using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AjudAkiWeb.Controllers
 {
     public class ContratacaoController : Controller
     {
         private readonly IContratacaoService contratacaoService;
+        private readonly IClienteService clienteService;
+        private readonly IServicoService servicoService;
         private readonly IMapper mapper;
 
-        public ContratacaoController(IContratacaoService contratacaoService, IMapper mapper)
+        public ContratacaoController(IContratacaoService contratacaoService, IClienteService clienteService, IServicoService servicoService, IMapper mapper)
         {
             this.contratacaoService = contratacaoService;
+            this.clienteService = clienteService;
+            this.servicoService = servicoService;
             this.mapper = mapper;
         }
 
@@ -39,6 +44,26 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Create()
         {
             var contratacaoViewModel = new ContratacaoViewModel();
+
+            IEnumerable<Pessoa> listaClientes = clienteService.GetAll();
+            IEnumerable<Servico> listaServicos = servicoService.GetAll();
+
+            contratacaoViewModel.ListaClientes = new SelectList(listaClientes, "Id", "Nome", null);
+            contratacaoViewModel.ListaServicos = new SelectList(listaServicos, "Id", "Nome", null);
+
+            // Repreencher a lista de status
+            var statusListItems = Enum.GetValues(typeof(ContratacaoStatusEnum))
+                .Cast<ContratacaoStatusEnum>()
+                .Select(status => new SelectListItem
+                {
+                    Value = status.ToString(),
+                    Text = status.ToString()
+                })
+                .ToList();
+
+            contratacaoViewModel.StatusList = new SelectList(statusListItems, "Value", "Text");
+
+
             contratacaoViewModel.Data = DateTime.Now;
 
             return View(contratacaoViewModel);

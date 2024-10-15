@@ -1,4 +1,5 @@
 ﻿using Core;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace AjudAkiWeb.Models
@@ -16,6 +17,14 @@ namespace AjudAkiWeb.Models
         [Required(ErrorMessage = "Código da contratação é obrigatório")]
         [Key]
         public uint Id { get; set; }
+
+        [Required(ErrorMessage = "Código do Cliente é obrigatório")]
+        [Display(Name = "Selecione o cliente")]
+        public uint IdCliente { get; set; }
+
+        [Required(ErrorMessage = "Código do Serviço é obrigatório")]
+        [Display(Name = "Selecione o serviço")]
+        public uint IdServico { get; set; }
 
         [Required(ErrorMessage = "Campo requerido")]
         [StringLength(50, MinimumLength = 4, ErrorMessage = "O nome da contratação deve ter entre 5 e 45 caracteres")]
@@ -50,30 +59,9 @@ namespace AjudAkiWeb.Models
         [Required(ErrorMessage = "Status é obrigatório")]
         [Display(Name = "Status da Contratação")]
         public ContratacaoStatusEnum Status { get; set; }
-
-        [Required(ErrorMessage = "Código do Serviço é obrigatório")]
-        [Display(Name = "Código do serviço")]
-        public uint IdServico { get; set; }
-        public ServicoViewModel? ServicoViewModel { get; set; } 
-
-        [Required(ErrorMessage = "Código do Cliente é obrigatório")]
-        [Display(Name = "Código do cliente")]
-        public uint IdCliente { get; set; }
-
-        // Método para fazer o mapeamento simples do enum para string
-        public string GetStatusAsString()
-        {
-            if (Status.Equals(ContratacaoStatusEnum.Recusado))
-                return "Recusado";
-            else if (Status.Equals(ContratacaoStatusEnum.Aceito))
-                return "Aceito";
-            else if (Status.Equals(ContratacaoStatusEnum.Pendente))
-                return "Pendente";
-            else if (Status.Equals(ContratacaoStatusEnum.Finalizado))
-                return "Finalizado";
-            else
-                return "Indefinido";
-        }
+        public SelectList? StatusList { get; set; }
+        public SelectList? ListaClientes { get; set; }
+        public SelectList? ListaServicos { get; set; }
     }
 
 }
