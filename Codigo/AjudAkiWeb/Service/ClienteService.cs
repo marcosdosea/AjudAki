@@ -64,6 +64,19 @@ namespace Service
             return context.Pessoas.Find(id);
         }
 
+        public IEnumerable<ClienteDTO> GetClienteDTO()
+        {
+            var query = from cliente in context.Pessoas
+                        select new ClienteDTO
+                        {
+                            Id = cliente.Id,
+                            Nome = cliente.Nome,
+                            NomeAssinatura = cliente.IdAssinaturaNavigation.Nome
+                        };
+            return query.AsNoTracking();
+        }
+
+
         /// <summary>
         /// Buscar todos os clientes cadastrados
         /// </summary>

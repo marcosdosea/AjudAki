@@ -14,6 +14,6 @@ namespace Core.Dto
 
         public string TipoPessoa { get; set; } = null!;
 
-        public uint IdAssinatura { get; set; }
+        public string? NomeAssinatura { get; set; }
     }
 }

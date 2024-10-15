@@ -1,4 +1,5 @@
 using Core;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace AjudAkiWeb.Models
@@ -8,7 +9,10 @@ namespace AjudAkiWeb.Models
         [Display(Name = "Código")]
         [Required(ErrorMessage = "Código do cliente é obrigatório")]
         [Key]
-        public uint Id{ get; set; }
+        public uint Id { get; set; }
+
+        [Display(Name = "Assinatura")]
+        public int IdAssinatura { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [StringLength(50)]
@@ -62,9 +66,6 @@ namespace AjudAkiWeb.Models
 
         public TipoPessoaEnum TipoPessoa { get; set; }
 
-        [Display(Name = "Digite a assinatura")]
-        public uint IdAssinatura { get; set; }
-
-        public AssinaturaViewModel? AssinaturaViewModel { get; set; }
+        public SelectList? ListaAssinaturas { get; set; }
     }
 }

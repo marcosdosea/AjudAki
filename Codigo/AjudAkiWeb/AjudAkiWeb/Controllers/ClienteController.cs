@@ -3,17 +3,20 @@ using Core.Service;
 using Microsoft.AspNetCore.Mvc;
 using AjudAkiWeb.Models;
 using Core;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AjudAkiWeb.Controllers
 {
     public class ClienteController : Controller
     {
+        private readonly IAssinaturaService assinaturaService;
         private readonly IClienteService clienteService;
         private readonly IMapper mapper;
 
-        public ClienteController(IClienteService clienteService, IMapper mapper)
+        public ClienteController(IClienteService clienteService, IAssinaturaService assinaturaService, IMapper mapper)
         {
             this.clienteService = clienteService;
+            this.assinaturaService = assinaturaService;
             this.mapper = mapper;
         }
 
@@ -41,6 +44,10 @@ namespace AjudAkiWeb.Controllers
             var clienteViewModel = new ClienteViewModel();
             clienteViewModel.DataNascimento = DateTime.Now;
 
+            IEnumerable<Assinatura> listaAssinaturas = assinaturaService.GetAll();
+
+            clienteViewModel.ListaAssinaturas = new SelectList(listaAssinaturas, "Id", "Nome", null);
+
             return View(clienteViewModel);
         }
 
@@ -63,6 +70,11 @@ namespace AjudAkiWeb.Controllers
         {
             var cliente = clienteService.Get(id);
             var clienteViewModel = mapper.Map<ClienteViewModel>(cliente);
+
+            IEnumerable<Assinatura> listaAssinaturas = assinaturaService.GetAll();
+
+            clienteViewModel.ListaAssinaturas = new SelectList(listaAssinaturas, "Id", "Nome",
+                        listaAssinaturas.FirstOrDefault(e => e.Id.Equals(cliente.IdAssinatura)));
 
             return View(clienteViewModel);
         }
