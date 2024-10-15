@@ -2,9 +2,7 @@
 using AutoMapper;
 using Core;
 using Core.Service;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Service;
 
 namespace AjudAkiWeb.Controllers
 {
@@ -12,7 +10,7 @@ namespace AjudAkiWeb.Controllers
     {
         private readonly IAvaliarService avaliarService;
         private readonly IMapper mapper;
-       
+
         public AvaliarController(IAvaliarService avaliarService, IMapper mapper)
         {
             this.avaliarService = avaliarService;
