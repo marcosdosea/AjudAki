@@ -17,7 +17,7 @@ namespace AjudAkiWeb.Models
 
         [Display(Name = "Data da agenda")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Campo obrigatório")]
         public DateTime Data { get; set; }
 
@@ -26,10 +26,10 @@ namespace AjudAkiWeb.Models
         
         [Display(Name = "Turno Ocupado (0 = Livre, 1 = Ocupado)")]
         [Range(0, 1, ErrorMessage = "O valor de Turno ocupado deve ser 0 (Livre) ou 1 (Ocupado)")]
-        public sbyte TurnoOcupado { get; set; }
+        public bool TurnoOcupado { get; set; }
 
         [Display(Name = "Dia Ocupado (0 = Livre, 1 = Ocupado)")]
         [Range(0, 1, ErrorMessage = "O valor de Dia ocupado deve ser 0 (Livre) ou 1 (Ocupado)")]
-        public sbyte DiaOcupado { get; set; }
+        public bool DiaOcupado { get; set; }
     }
 }

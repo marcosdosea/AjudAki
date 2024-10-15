@@ -77,6 +77,7 @@ namespace AjudAkiWeb.Controllers.Tests
             AreaAtuacaoViewModel autorModel = (AreaAtuacaoViewModel)viewResult.ViewData.Model;
             Assert.AreEqual("Eletricista", autorModel.Nome);
         }
+
         [TestMethod()]
          public void CreateTest_Post_Invalid()
         {
@@ -99,8 +100,8 @@ namespace AjudAkiWeb.Controllers.Tests
             return new AvaliarViewModel
             {
                 Id = 10,
-                NotaServico = true,
-                NotaProfissional = false,
+                NotaServico = 3,
+                NotaProfissional = 3,
                 Status = 1,
                 Comentario = "O serviço foi bom, mas o profissional poderia melhorar.",
                 IdContratacao = 20,
@@ -114,8 +115,8 @@ namespace AjudAkiWeb.Controllers.Tests
                 new Avaliacao
                 {
                     Id = 1,
-                    NotaServico = true,
-                    NotaProfissional = true,
+                    NotaServico = 5,
+                    NotaProfissional = 5,
                     Status = 1,
                     Comentario = "Serviço excelente",
                     IdContratacao = 101
@@ -123,8 +124,8 @@ namespace AjudAkiWeb.Controllers.Tests
                 new Avaliacao
                 {
                     Id = 2,
-                    NotaServico = false,
-                    NotaProfissional = true,
+                    NotaServico = 3,
+                    NotaProfissional = 3,
                     Status = 2,
                     Comentario = "Serviço mediano",
                     IdContratacao = 102
@@ -132,8 +133,8 @@ namespace AjudAkiWeb.Controllers.Tests
                 new Avaliacao
                 {
                     Id = 3,
-                    NotaServico = true,
-                    NotaProfissional = false,
+                    NotaServico = 2,
+                    NotaProfissional = 2,
                     Status = 1,
                     Comentario = "Profissional abaixo do esperado",
                     IdContratacao = 103

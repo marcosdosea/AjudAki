@@ -12,11 +12,11 @@ namespace AjudAkiWeb.Models
 
         [Display(Name = "Nota do Serviço")]
         [Required(ErrorMessage = "A nota do serviço é obrigatória")]
-        public bool NotaServico { get; set; }
+        public sbyte NotaServico { get; set; }
 
         [Display(Name = "Nota do Profissional")]
         [Required(ErrorMessage = "A nota do profissional é obrigatória")]
-        public bool NotaProfissional { get; set; }
+        public sbyte NotaProfissional { get; set; }
 
         [Required(ErrorMessage = "O status da avaliação é obrigatório")]
         public int Status { get; set; }

@@ -39,8 +39,7 @@ namespace AjudAkiWeb.Controllers.Tests
             {
                 Id = 1,
                 DataPagamento = DateTime.Parse("2024-02-23 14:30"),
-                Status = "CANCELADO",
-                NomePlano = "Plano Básico"
+                Status = "CANCELADO"
             };
         }
 
@@ -52,15 +51,13 @@ namespace AjudAkiWeb.Controllers.Tests
                 {
                     Id = 1,
                     DataPagamento = DateTime.Parse("2024-02-23 14:30"),
-                    Status = "CANCELADO",
-                    NomePlano = "Plano Básico"
+                    Status = "CANCELADO"
                 },
                 new Pagamentoassinatura
                 {
                     Id = 2,
                     DataPagamento = DateTime.Parse("2024-02-24 14:30"),
-                    Status = "ATRASADO",
-                    NomePlano = "Plano Básico"
+                    Status = "ATRASADO"
                 }
             };
         }
@@ -92,7 +89,7 @@ namespace AjudAkiWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(PagarAssinaturaViewModel));
             PagarAssinaturaViewModel pagarAssinaturaModel = (PagarAssinaturaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Plano Básico", pagarAssinaturaModel.NomePlano);
+            Assert.AreEqual("CANCELADO", pagarAssinaturaModel.Status.ToString());
             Assert.AreEqual(PagamentoStatusEnum.CANCELADO, pagarAssinaturaModel.Status);
         }
 
@@ -126,7 +123,6 @@ namespace AjudAkiWeb.Controllers.Tests
                 Id = 3,
                 DataPagamento = DateTime.Parse("2024-02-23 15:30"),
                 Status = PagamentoStatusEnum.PAGO,
-                NomePlano = "Plano Básico"
             };
         }
 
@@ -141,7 +137,7 @@ namespace AjudAkiWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(PagarAssinaturaViewModel));
             PagarAssinaturaViewModel pagarAssinaturaModel = (PagarAssinaturaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Plano Básico", pagarAssinaturaModel.NomePlano);
+            Assert.AreEqual("CANCELADO", pagarAssinaturaModel.Status.ToString());
             Assert.AreEqual(PagamentoStatusEnum.CANCELADO, pagarAssinaturaModel.Status);
         }
 
@@ -164,8 +160,7 @@ namespace AjudAkiWeb.Controllers.Tests
             {
                 Id = 1,
                 DataPagamento = DateTime.Parse("2024-02-23 14:30"),
-                Status = PagamentoStatusEnum.PAGO,
-                NomePlano = "Plano Básico"
+                Status = PagamentoStatusEnum.PAGO
             };
         }
 
@@ -180,7 +175,7 @@ namespace AjudAkiWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(PagarAssinaturaViewModel));
             PagarAssinaturaViewModel pagarAssinaturaModel = (PagarAssinaturaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Plano Básico", pagarAssinaturaModel.NomePlano);
+            Assert.AreEqual("CANCELADO", pagarAssinaturaModel.Status.ToString());
             Assert.AreEqual(PagamentoStatusEnum.CANCELADO, pagarAssinaturaModel.Status);
         }
 
@@ -195,7 +190,7 @@ namespace AjudAkiWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(PagarAssinaturaViewModel));
             PagarAssinaturaViewModel pagarAssinaturaModel = (PagarAssinaturaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Plano Básico", pagarAssinaturaModel.NomePlano);
+            Assert.AreEqual("CANCELADO", pagarAssinaturaModel.Status.ToString());
             Assert.AreEqual(PagamentoStatusEnum.CANCELADO, pagarAssinaturaModel.Status);
 
         }

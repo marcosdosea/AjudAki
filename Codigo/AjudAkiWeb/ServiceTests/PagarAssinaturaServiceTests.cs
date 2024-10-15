@@ -29,22 +29,19 @@ namespace Service.Tests
             {
                 Id = 1,
                 DataPagamento = DateTime.Parse("2024-02-23 14:30"),
-                Status = "PAGO",
-                NomePlano = "Plano Básico"
+                Status = "PAGO"
             },
             new Pagamentoassinatura
             {
                 Id = 2,
                 DataPagamento = DateTime.Parse("2024-02-23 14:30"),
-                Status = "ATRASADO",
-                NomePlano = "Plano Básico"
+                Status = "ATRASADO"
             },
             new Pagamentoassinatura
             {
                 Id = 3,
                 DataPagamento = DateTime.Parse("2024-02-23 14:30"),
-                Status = "ATIVO",
-                NomePlano = "Plano Básico"
+                Status = "ATIVO"
             },
         };
 
@@ -63,7 +60,6 @@ namespace Service.Tests
                 Id = 4,
                 DataPagamento = DateTime.Parse("2024-02-23 14:30"),
                 Status = "ATIVO",
-                NomePlano = "Plano Básico"
             };
 
             pagarAssinaturaService.Create(novoPagamentoassinatura);
@@ -72,7 +68,7 @@ namespace Service.Tests
             Assert.AreEqual(4, pagarAssinaturaService.GetAll().Count());
             var pagarAssinatura = pagarAssinaturaService.Get(4);
 
-            Assert.AreEqual("Plano Básico", pagarAssinatura.NomePlano);
+            Assert.AreEqual("ATIVO", pagarAssinatura.Status);
         }
 
         [TestMethod()]
@@ -94,14 +90,13 @@ namespace Service.Tests
             // Act 
             var pagarAssinatura = pagarAssinaturaService.Get(3);
 
-            pagarAssinatura.NomePlano = "Padrão";
             pagarAssinaturaService.Edit(pagarAssinatura);
 
             // Assert
             pagarAssinatura = pagarAssinaturaService.Get(3);
 
             Assert.IsNotNull(pagarAssinatura);
-            Assert.AreEqual("Padrão", pagarAssinatura.NomePlano);
+            Assert.AreEqual("ATIVO", pagarAssinatura.Status);
         }
 
         [TestMethod()]
@@ -110,7 +105,7 @@ namespace Service.Tests
             var pagarAssinatura = pagarAssinaturaService.Get(1);
 
             Assert.IsNotNull(pagarAssinatura);
-            Assert.AreEqual("Plano Básico", pagarAssinatura.NomePlano);
+            Assert.AreEqual("PAGO", pagarAssinatura.Status);
         }
 
         [TestMethod()]
@@ -124,7 +119,7 @@ namespace Service.Tests
             Assert.IsNotNull(listaPagarAssinaturas);
             Assert.AreEqual(3, listaPagarAssinaturas.Count());
             Assert.AreEqual((uint)1, listaPagarAssinaturas.First().Id);
-            Assert.AreEqual("Plano Básico", listaPagarAssinaturas.First().NomePlano);
+            Assert.AreEqual("PAGO", listaPagarAssinaturas.First().Status);
         }
     }
 }
