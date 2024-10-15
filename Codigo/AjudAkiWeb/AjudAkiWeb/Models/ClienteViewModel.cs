@@ -63,9 +63,8 @@ namespace AjudAkiWeb.Models
         [Display(Name = "Ponto de Referência")]
         [StringLength(40)]
         public string? PontoReferencia { get; set; }
-
         public TipoPessoaEnum TipoPessoa { get; set; }
-
+        public SelectList? TipoPessoaList { get; set; }
         public SelectList? ListaAssinaturas { get; set; }
     }
 }
