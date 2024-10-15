@@ -11,9 +11,9 @@ public partial class Agendum
 
     public string Turno { get; set; } = null!;
 
-    public sbyte TurnoOcupado { get; set; }
+    public bool TurnoOcupado { get; set; }
 
-    public sbyte DiaOcupado { get; set; }
+    public bool DiaOcupado { get; set; }
 
     public virtual ICollection<Tiposervico> Tiposervicos { get; set; } = new List<Tiposervico>();
 

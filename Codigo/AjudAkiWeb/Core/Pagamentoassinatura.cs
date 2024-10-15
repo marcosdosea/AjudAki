@@ -9,9 +9,7 @@ public partial class Pagamentoassinatura
 
     public DateTime DataPagamento { get; set; }
 
-    public string NomePlano { get; set; } = null!;
-
-    public string Status { get; set; } = null!;
+    public string? Status { get; set; }
 
     public uint IdProfissional { get; set; }
 

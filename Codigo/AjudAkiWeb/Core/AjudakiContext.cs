@@ -35,6 +35,10 @@ public partial class AjudakiContext : DbContext
 
     public virtual DbSet<Tiposervico> Tiposervicos { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=123456;database=Ajudaki");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Agendum>(entity =>
@@ -77,7 +81,8 @@ public partial class AjudakiContext : DbContext
                 .HasMaxLength(150)
                 .HasColumnName("descricao");
             entity.Property(e => e.Nome)
-                .HasMaxLength(20)
+                .HasDefaultValueSql("'FREE'")
+                .HasColumnType("enum('FREE','BÁSICO','AVANÇADO')")
                 .HasColumnName("nome");
             entity.Property(e => e.Status)
                 .HasDefaultValueSql("'INATIVA'")
@@ -178,9 +183,6 @@ public partial class AjudakiContext : DbContext
                 .HasColumnName("dataPagamento");
             entity.Property(e => e.IdAssinatura).HasColumnName("idAssinatura");
             entity.Property(e => e.IdProfissional).HasColumnName("idProfissional");
-            entity.Property(e => e.NomePlano)
-                .HasMaxLength(50)
-                .HasColumnName("nomePlano");
             entity.Property(e => e.Status)
                 .HasColumnType("enum('ATIVO','ATRASADO','PAGO','CANCELADO')")
                 .HasColumnName("status");
