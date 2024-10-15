@@ -16,6 +16,9 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.IdContratacao)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.NotaServico)
             </th>
             <th>
@@ -27,9 +30,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Comentario)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdContratacao)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -38,6 +38,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdContratacao)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NotaServico)
@@ -52,10 +55,9 @@
                 @Html.DisplayFor(modelItem => item.Comentario)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdContratacao)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }
