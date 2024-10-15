@@ -28,22 +28,22 @@ namespace Service.Tests
                         Id = 1,
                         Data = DateTime.Parse("2025-07-10"),
                         Turno = "TARDE",
-                        TurnoOcupado = 1, 
-                        DiaOcupado = 0    
+                        TurnoOcupado = true, 
+                        DiaOcupado = false    
                     },
                     new Agendum {
                         Id = 2,
                         Data = DateTime.Parse("2025-10-12"),
                         Turno = "MANHÃ",
-                        TurnoOcupado = 0, 
-                        DiaOcupado = 1    
+                        TurnoOcupado = false, 
+                        DiaOcupado = true    
                     },
                     new Agendum {
                         Id = 3,
                         Data = DateTime.Parse("2025-12-31"),
                         Turno = "NOITE",
-                        TurnoOcupado = 1,
-                        DiaOcupado = 1    
+                        TurnoOcupado = true,
+                        DiaOcupado = true    
                     }
                 };
             context.AddRange(agendas);
@@ -63,8 +63,8 @@ namespace Service.Tests
                 Id = 4,
                 Data = DateTime.Parse("2025-01-20"),
                 Turno = "TARDE",
-                TurnoOcupado = 0,
-                DiaOcupado = 0
+                TurnoOcupado = false,
+                DiaOcupado = false
             };
 
             agendaService.Create(novaAgenda);

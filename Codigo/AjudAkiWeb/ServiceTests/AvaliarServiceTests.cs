@@ -28,9 +28,9 @@ namespace Service.Tests
 
             var avaliacoes = new List<Avaliacao>
             {
-                new() { Id = 1, NotaServico = true, NotaProfissional = true, Status = 1, Comentario = "Ótimo serviço", IdContratacao = 101 },
-                new() { Id = 2, NotaServico = false, NotaProfissional = true, Status = 2, Comentario = "Serviço razoável", IdContratacao = 102 },
-                new() { Id = 3, NotaServico = true, NotaProfissional = false, Status = 1, Comentario = "Profissional abaixo da média", IdContratacao = 103 },
+                new() { Id = 1, NotaServico = 2, NotaProfissional = 2, Status = 1, Comentario = "Ótimo serviço", IdContratacao = 101 },
+                new() { Id = 2, NotaServico = 3, NotaProfissional = 3, Status = 2, Comentario = "Serviço razoável", IdContratacao = 102 },
+                new() { Id = 3, NotaServico = 4, NotaProfissional = 4, Status = 1, Comentario = "Profissional abaixo da média", IdContratacao = 103 },
             };
 
             context.Avaliacaos.AddRange(avaliacoes);
@@ -49,7 +49,7 @@ namespace Service.Tests
         public void CreateTest()
         {
             // Act
-            avaliarService.Create(new Avaliacao() { Id = 4, NotaServico = true, NotaProfissional = true, Status = 1, Comentario = "Excelente", IdContratacao = 104 });
+            avaliarService.Create(new Avaliacao() { Id = 4, NotaServico = 2, NotaProfissional = 4, Status = 1, Comentario = "Excelente", IdContratacao = 104 });
             // Assert
             Assert.AreEqual(4, avaliarService.GetAll().Count());
             var avaliacao = avaliarService.Get(4);

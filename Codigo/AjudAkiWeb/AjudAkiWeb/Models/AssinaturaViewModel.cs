@@ -7,6 +7,10 @@ namespace AjudAkiWeb.Models
         ATIVA,
         INATIVA
     }
+    public enum AssinaturaNomeEnum
+    {
+        FREE, BÁSICO, AVANÇADO
+    }
     public class AssinaturaViewModel
     {
         [Display(Name = "Código")]
@@ -15,7 +19,7 @@ namespace AjudAkiWeb.Models
         public uint Id { get; set; }
 
         [StringLength(20, ErrorMessage = "Nome não pode exceder 20 caracteres")]
-        public string? Nome { get; set; }
+        public AssinaturaNomeEnum? Nome { get; set; }
 
         public AssinaturaStatusEnum? Status { get; set; }
 

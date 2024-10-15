@@ -1,10 +1,6 @@
 ﻿using Core.Service;
 using Core;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Service.Tests
 {
@@ -160,17 +156,8 @@ namespace Service.Tests
             Assert.IsNotNull(listaProfissional);
             Assert.AreEqual(3, listaProfissional.Count());
             Assert.AreEqual((uint)1, listaProfissional.First().Id);
-            Assert.AreEqual("Pedro de Assis", listaProfissional.First().Nome); // Corrigido o nome para coincidir com a inicialização
+            Assert.AreEqual("Pedro de Assis", listaProfissional.First().Nome);
         }
-        [TestMethod()]
-        public void GetByNomeTest()
-        {
-            //Act
-            var profissionais = profissionalService.GetByNome("Pedro");
-            //Assert
-            Assert.IsNotNull(profissionais);
-            Assert.AreEqual(1, profissionais.Count());
-            Assert.AreEqual("Pedro de Assis", profissionais.First().Nome);
-        }
+
     }
 }

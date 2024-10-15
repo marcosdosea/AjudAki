@@ -83,7 +83,7 @@ namespace Service.Tests
         public void GetAllTest()
         {
             // Act
-            var listatiposServicos = tipoServicoService.GetAll();
+            var listaTiposServicos = tipoServicoService.GetAll();
             // Assert
             Assert.IsInstanceOfType(listaTiposServicos, typeof(IEnumerable<Tiposervico>));
             Assert.IsNotNull(listaTiposServicos);
