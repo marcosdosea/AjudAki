@@ -183,16 +183,13 @@ namespace AjudAkiWeb.Controllers.Tests
         public void DeleteTest_Get_Valid()
         {
             // Act
-            var result = controller.Delete(1);
+            var result = controller.Delete(GetTargetPagarAssinaturaViewModel());
 
             // Assert
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
-            ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(PagarAssinaturaViewModel));
-            PagarAssinaturaViewModel pagarAssinaturaModel = (PagarAssinaturaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("CANCELADO", pagarAssinaturaModel.Status.ToString());
-            Assert.AreEqual(PagamentoStatusEnum.CANCELADO, pagarAssinaturaModel.Status);
-
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            RedirectToActionResult redirectToActionResult = (RedirectToActionResult)result;
+            Assert.IsNull(redirectToActionResult.ControllerName);
+            Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
     }
 }

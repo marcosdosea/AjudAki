@@ -23,14 +23,19 @@
                 <span asp-validation-for="DataPagamento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
+                @Html.LabelFor(m => m.Status)
+                @Html.DropDownListFor(m => m.Status, Model.StatusList, "Selecione o Status", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Status)
             </div>
-            <div class="form-group">
-                <label asp-for="NomePlano" class="control-label"></label>
-                <input asp-for="NomePlano" class="form-control" />
-                <span asp-validation-for="NomePlano" class="text-danger"></span>
+            <div class="form-group col-sm-8">
+                <label asp-for="IdAssinatura" class="control-label"></label>
+                <select asp-for="IdAssinatura" asp-items="@Model.ListaAssinaturas" class="form-control"></select>
+                <span asp-validation-for="IdAssinatura" class="text-danger"></span>
+            </div>
+            <div class="form-group col-sm-8">
+                <label asp-for="IdProfissional" class="control-label"></label>
+                <select asp-for="IdProfissional" asp-items="@Model.ListaProfissionais" class="form-control"></select>
+                <span asp-validation-for="IdProfissional" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
