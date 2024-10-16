@@ -21,7 +21,7 @@ namespace AjudAkiWeb.Models
         [StringLength(20, ErrorMessage = "Nome não pode exceder 20 caracteres")]
         public AssinaturaNomeEnum? Nome { get; set; }
 
-        public AssinaturaStatusEnum? Status { get; set; }
+        public AssinaturaStatusEnum Status { get; set; }
 
         [Range(0, float.MaxValue, ErrorMessage = "Valor deve ser positivo")]
         public float? Valor { get; set; }

@@ -18,6 +18,7 @@ namespace AjudAkiWeb.Controllers.Tests
         {
             // Arrange
             var mockService = new Mock<IProfissionalService>();
+            var mockService2 = new Mock<IAssinaturaService>();
 
             IMapper mapper = new MapperConfiguration(cfg =>
                 cfg.AddProfile(new ProfissionalProfile())).CreateMapper();
@@ -30,7 +31,7 @@ namespace AjudAkiWeb.Controllers.Tests
                 .Verifiable();
             mockService.Setup(service => service.Create(It.IsAny<Pessoa>()))
                 .Verifiable();
-            controller = new ProfissionalController(mockService.Object, mapper);
+            controller = new ProfissionalController(mockService.Object, mockService2.Object, mapper);
         }
 
         [TestMethod()]
