@@ -4,18 +4,23 @@ using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Service;
 
 namespace AjudAkiWeb.Controllers
 {
     public class TipoServicoController : Controller
     {
+        private readonly IAreaAtuacaoService areaAtuacaoService;
+        private readonly IAgendaService agendaService;
         private readonly ITipoServicoService tipoServicoService;
         private readonly IMapper mapper;
 
-        public TipoServicoController(ITipoServicoService tipoServicoService, IMapper mapper)
+        public TipoServicoController(ITipoServicoService tipoServicoService, IAgendaService agendaService, IAreaAtuacaoService areaAtuacaoService, IMapper mapper)
         {
             this.tipoServicoService = tipoServicoService;
+            this.agendaService = agendaService;
+            this.areaAtuacaoService = areaAtuacaoService;
             this.mapper = mapper;
         }
 
@@ -41,7 +46,10 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Create()
         {
             var tipoServicoViewModel = new TipoServicoViewModel();
-            
+            IEnumerable<Agendum> listaAgenda = agendaService.GetAll();
+            IEnumerable<Areaatuacao> listaAreasAtuacoes = areaAtuacaoService.GetAll();
+            tipoServicoViewModel.ListaAgenda = new SelectList(listaAgenda, "Id", "Nome", null);
+            tipoServicoViewModel.ListaAreasAtuacoes = new SelectList(listaAreasAtuacoes, "Id", "Nome", null);
             return View(tipoServicoViewModel);
         }
 
