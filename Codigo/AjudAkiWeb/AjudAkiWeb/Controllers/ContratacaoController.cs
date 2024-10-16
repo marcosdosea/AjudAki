@@ -89,6 +89,16 @@ namespace AjudAkiWeb.Controllers
             var contratacao = contratacaoService.Get(id);
             var contratacaoViewModel = mapper.Map<ContratacaoViewModel>(contratacao);
 
+            IEnumerable<Pessoa> listaClientes = clienteService.GetAll();
+            IEnumerable<Servico> listaServicos = servicoService.GetAll();
+
+            contratacaoViewModel.ListaClientes = new SelectList(listaClientes, "Id", "Nome",
+                listaClientes.FirstOrDefault(e => e.Id.Equals(contratacao.IdCliente)));
+
+            contratacaoViewModel.ListaServicos = new SelectList(listaServicos, "Id", "Nome",
+                listaServicos.FirstOrDefault(e => e.Id.Equals(contratacao.IdServico)));
+
+
             return View(contratacaoViewModel);
         }
 
