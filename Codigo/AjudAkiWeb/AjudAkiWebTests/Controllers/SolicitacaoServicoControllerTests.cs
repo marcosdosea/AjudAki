@@ -1,40 +1,37 @@
-﻿using AjudAkiWeb.Models;
+﻿using AjudAkiWeb.Mappers;
+using AjudAkiWeb.Models;
 using AutoMapper;
-using Core.Service;
 using Core;
+using Core.Service;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using AjudAkiWeb.Mappers;
 
 namespace AjudAkiWeb.Controllers.Tests
 {
     [TestClass()]
-    public class AgendaControllerTests
+    public class SolicitacaoServicoControllerTests
     {
-
-        private static AgendaController controller;
+        private static SolicitacaoServicoController controller;
 
         [TestInitialize]
         public void Initialize()
         {
             // Arrange
-            var mockService = new Mock<IAgendaService>();
+            var mockService = new Mock<ISolicitacaoServicoService>();
 
             IMapper mapper = new MapperConfiguration(cfg =>
-                cfg.AddProfile(new AgendaProfile())).CreateMapper();
+                cfg.AddProfile(new SolicitacaoServicoProfile())).CreateMapper();
 
             mockService.Setup(service => service.GetAll())
-                .Returns(GetTestAgendas());
+                .Returns(GetTestSolicitacoesServicos());
             mockService.Setup(service => service.Get(1))
-                .Returns(GetTargetAgenda());
-            mockService.Setup(service => service.Edit(It.IsAny<Agendum>()))
+                .Returns(GetTargetSolicitacaoServico());
+            mockService.Setup(service => service.Edit(It.IsAny<Solicitacaoservico>()))
                 .Verifiable();
-            mockService.Setup(service => service.Create(It.IsAny<Agendum>()))
+            mockService.Setup(service => service.Create(It.IsAny<Solicitacaoservico>()))
                 .Verifiable();
-            controller = new AgendaController(mockService.Object, mapper);
+            controller = new SolicitacaoServicoController(mockService.Object, mapper);
         }
-
-
         [TestMethod()]
         public void IndexTest_Valido()
         {
@@ -44,9 +41,9 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<AgendaViewModel>));
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<SolicitacaoServicoViewModel>));
 
-            List<AgendaViewModel>? lista = (List<AgendaViewModel>)viewResult.ViewData.Model;
+            List<SolicitacaoServicoViewModel>? lista = (List<SolicitacaoServicoViewModel>)viewResult.ViewData.Model;
             Assert.AreEqual(3, lista.Count);
         }
 
@@ -59,10 +56,10 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AgendaViewModel));
-            AgendaViewModel agendaModel = (AgendaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(DateTime.Parse("2025-07-24"), agendaModel.Data);
-            Assert.AreEqual(Enum.Parse(typeof(TurnoEnum), "MANHÃ"), agendaModel.Turno);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(SolicitacaoServicoViewModel));
+            SolicitacaoServicoViewModel solicitacaoServicoModel = (SolicitacaoServicoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Supervisionar e Alimentar animais", solicitacaoServicoModel.Nome);
+            Assert.AreEqual(80m, solicitacaoServicoModel.Valor);
 
         }
 
@@ -80,7 +77,7 @@ namespace AjudAkiWeb.Controllers.Tests
         public void CreateTest_Valid()
         {
             // Act
-            var result = controller.Create(GetNewAgenda());
+            var result = controller.Create(GetNewSolicitacaoServico());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -96,7 +93,7 @@ namespace AjudAkiWeb.Controllers.Tests
             controller.ModelState.AddModelError("Nome", "Campo requerido");
 
             // Act
-            var result = controller.Create(GetNewAgenda());
+            var result = controller.Create(GetNewSolicitacaoServico());
 
             // Assert
             Assert.AreEqual(1, controller.ModelState.ErrorCount);
@@ -115,10 +112,10 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AgendaViewModel));
-            AgendaViewModel agendaModel = (AgendaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(DateTime.Parse("2025-07-24"), agendaModel.Data);
-            Assert.AreEqual(Enum.Parse(typeof(TurnoEnum), "MANHÃ"), agendaModel.Turno);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(SolicitacaoServicoViewModel));
+            SolicitacaoServicoViewModel solicitacaoServicoModel = (SolicitacaoServicoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Banho nos cachorros", solicitacaoServicoModel.Nome);
+            Assert.AreEqual(530m, solicitacaoServicoModel.Valor);
 
         }
 
@@ -126,7 +123,7 @@ namespace AjudAkiWeb.Controllers.Tests
         public void EditTest_Post_Valid()
         {
             // Act
-            var result = controller.Edit(GetTargetAgendaModel().Id, GetTargetAgendaModel());
+            var result = controller.Edit(GetTargetSolicitacaoServicoModel().Id, GetTargetSolicitacaoServicoModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -146,16 +143,16 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AgendaViewModel));
-            AgendaViewModel agendaModel = (AgendaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(DateTime.Parse("2025-07-24"), agendaModel.Data);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(SolicitacaoServicoViewModel));
+            SolicitacaoServicoViewModel solicitacaoServicoModel = (SolicitacaoServicoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual(530m, solicitacaoServicoModel.Valor);
         }
 
         [TestMethod()]
         public void DeleteTest_Get_Valid()
         {
             // Act
-            var result = controller.Delete(GetTargetAgendaModel());
+            var result = controller.Delete(GetTargetSolicitacaoServicoModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -164,57 +161,60 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
 
-        private AgendaViewModel GetNewAgenda()
+        private SolicitacaoServicoViewModel GetNewSolicitacaoServico()
         {
-            return new AgendaViewModel
+            return new SolicitacaoServicoViewModel
             {
                 Id = 4,
-                Data = DateTime.Parse("2025-10-27")
+                Nome = "Limpeza de banheiros",
+                Valor = 230
             };
         }
 
-        private static Agendum GetTargetAgenda()
+        private static Solicitacaoservico GetTargetSolicitacaoServico()
         {
-            return new Agendum
+            return new Solicitacaoservico
             {
                 Id = 1,
-                Data = DateTime.Parse("2025-07-24"),
-                Turno = "MANHÃ"
-
+                Nome = "Banho nos cachorros",
+                Valor = 530
             };
         }
 
-        private AgendaViewModel GetTargetAgendaModel()
+        private SolicitacaoServicoViewModel GetTargetSolicitacaoServicoModel()
         {
-            return new AgendaViewModel
+            return new SolicitacaoServicoViewModel
             {
                 Id = 2,
-                Data = DateTime.Parse("2025-02-10"),
+                Nome = "Cuidar de criança de 10 anos",
+                Valor = 130
             };
         }
 
-        private IEnumerable<Agendum> GetTestAgendas()
+        private IEnumerable<Solicitacaoservico> GetTestSolicitacoesServicos()
         {
 
-            return new List<Agendum>
+            return new List<Solicitacaoservico>
             {
-                new Agendum
+                new Solicitacaoservico
                 {
                     Id = 1,
-                    Data = DateTime.Parse("2025-05-04"),
-                    Turno = "NOITE"
+                    Nome = "Supervisionar e Alimentar animais",
+                    Valor = 80
                 },
-                new Agendum
+                new Solicitacaoservico
                 {
                     Id = 2,
-                    Data = DateTime.Parse("2025-08-27"),
-                    Turno = "TARDE"
+                    Nome = "Conserto de notebook",
+                    Valor = 200
+
                 },
-                new Agendum
+                new Solicitacaoservico
                 {
-                    Id = 3,
-                    Data = DateTime.Parse("2025-11-10"),
-                    Turno = "MANHÃ"
+                    Id = 3,     
+                    Nome = "Fazer atividade da faculdade de Sistemas de informação",
+                    Valor = 100
+
                 },
             };
         }

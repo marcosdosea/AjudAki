@@ -22,9 +22,6 @@
                 @Html.DisplayNameFor(model => model.DataHoraSolicitacao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Turno)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
@@ -58,9 +55,6 @@
                 @Html.DisplayFor(modelItem => item.DataHoraSolicitacao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Turno)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
@@ -79,9 +73,9 @@
                 @Html.DisplayFor(modelItem => item.IdTipoServico)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }
