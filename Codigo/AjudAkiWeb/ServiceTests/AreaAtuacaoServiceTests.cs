@@ -45,8 +45,8 @@ namespace Service.Tests
             areaAtuacaoService.Create(new Areaatuacao() { Id = 4, Nome = "Construção" });
             // Assert
             Assert.AreEqual(4, areaAtuacaoService.GetAll().Count());
-            var areaatuacao = areaAtuacaoService.Get(4);
-            Assert.AreEqual("Construção", areaatuacao.Nome);
+            var areaAtuacao = areaAtuacaoService.Get(4);
+            Assert.AreEqual("Construção", areaAtuacao.Nome);
         }
 
         [TestMethod()]
@@ -56,42 +56,42 @@ namespace Service.Tests
             areaAtuacaoService.Delete(2);
             // Assert
             Assert.AreEqual(2, areaAtuacaoService.GetAll().Count());
-            var areaatuacao = areaAtuacaoService.Get(2);
-            Assert.AreEqual(null, areaatuacao);
+            var areaAtuacao = areaAtuacaoService.Get(2);
+            Assert.AreEqual(null, areaAtuacao);
         }
 
         [TestMethod()]
         public void EditTest()
         {
             //Act 
-            var areaatuacao = areaAtuacaoService.Get(3);
-            areaatuacao.Nome = "Design";
-            areaAtuacaoService.Edit(areaatuacao);
+            var areaAtuacao = areaAtuacaoService.Get(3);
+            areaAtuacao.Nome = "Design";
+            areaAtuacaoService.Edit(areaAtuacao);
             //Assert
-            areaatuacao = areaAtuacaoService.Get(3);
-            Assert.IsNotNull(areaatuacao);
-            Assert.AreEqual("Design", areaatuacao.Nome);
+            areaAtuacao = areaAtuacaoService.Get(3);
+            Assert.IsNotNull(areaAtuacao);
+            Assert.AreEqual("Design", areaAtuacao.Nome);
         }
 
         [TestMethod()]
         public void GetTest()
         {
-            var areaatuacao = areaAtuacaoService.Get(1);
-            Assert.IsNotNull(areaatuacao);
-            Assert.AreEqual("Educação", areaatuacao.Nome);
+            var areaAtuacao = areaAtuacaoService.Get(1);
+            Assert.IsNotNull(areaAtuacao);
+            Assert.AreEqual("Educação", areaAtuacao.Nome);
         }
 
         [TestMethod()]
         public void GetAllTest()
         {
             // Act
-            var listaAutor = areaAtuacaoService.GetAll();
+            var listaAreaAtuacao = areaAtuacaoService.GetAll();
             // Assert
-            Assert.IsInstanceOfType(listaAutor, typeof(IEnumerable<Areaatuacao>));
-            Assert.IsNotNull(listaAutor);
-            Assert.AreEqual(3, listaAutor.Count());
-            Assert.AreEqual((uint)1, listaAutor.First().Id);
-            Assert.AreEqual("Educação", listaAutor.First().Nome);
+            Assert.IsInstanceOfType(listaAreaAtuacao, typeof(IEnumerable<Areaatuacao>));
+            Assert.IsNotNull(listaAreaAtuacao);
+            Assert.AreEqual(3, listaAreaAtuacao.Count());
+            Assert.AreEqual((uint)1, listaAreaAtuacao.First().Id);
+            Assert.AreEqual("Educação", listaAreaAtuacao.First().Nome);
         }
 
     }
