@@ -19,7 +19,7 @@ namespace AjudAkiWeb.Models
 
         [Display(Name = "Data da agenda")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true)]
         [Required(ErrorMessage = "Campo obrigatório")]
         public DateTime DataHoraSolicitacao { get; set; }
 
