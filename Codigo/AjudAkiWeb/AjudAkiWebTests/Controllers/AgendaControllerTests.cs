@@ -12,7 +12,6 @@ namespace AjudAkiWeb.Controllers.Tests
     public class AgendaControllerTests
     {
 
-
         private static AgendaController controller;
 
         [TestInitialize]
@@ -164,7 +163,7 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsNull(redirectToActionResult.ControllerName);
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
-        //MÉTODOS PRIVADOS
+
         private AgendaViewModel GetNewAgenda()
         {
             return new AgendaViewModel
@@ -184,6 +183,7 @@ namespace AjudAkiWeb.Controllers.Tests
 
             };
         }
+
         private AgendaViewModel GetTargetAgendaModel()
         {
             return new AgendaViewModel
@@ -192,6 +192,7 @@ namespace AjudAkiWeb.Controllers.Tests
                 Data = DateTime.Parse("2025-02-10"),
             };
         }
+
         private IEnumerable<Agendum> GetTestAgendas()
         {
 

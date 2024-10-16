@@ -24,13 +24,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="DataHoraSolicitacao" class="control-label"></label>
-                <input asp-for="DataHoraSolicitacao" class="form-control" />
+                <input asp-for="DataHoraSolicitacao" class="form-control" type="datetime-local" value="@Model.DataHoraSolicitacao.ToString("yyyy-MM-ddTHH:mm")" />
                 <span asp-validation-for="DataHoraSolicitacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Turno" class="control-label"></label>
-                <input asp-for="Turno" class="form-control" />
-                <span asp-validation-for="Turno" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>

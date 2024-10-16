@@ -1,39 +1,37 @@
-﻿using AutoMapper;
-using Moq;
-using Core.Service;
-using AjudAkiWeb.Mappers;
-using Core;
-using Microsoft.AspNetCore.Mvc;
+﻿using AjudAkiWeb.Mappers;
 using AjudAkiWeb.Models;
+using AutoMapper;
+using Core;
+using Core.Service;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
 
 namespace AjudAkiWeb.Controllers.Tests
 {
     [TestClass()]
-    public class ProfissionalControllerTests
+    public class SolicitacaoServicoControllerTests
     {
-        private static ProfissionalController controller;
+        private static SolicitacaoServicoController controller;
 
         [TestInitialize]
         public void Initialize()
         {
             // Arrange
-            var mockService = new Mock<IProfissionalService>();
-            var mockService2 = new Mock<IAssinaturaService>();
+            var mockService = new Mock<ISolicitacaoServicoService>();
 
             IMapper mapper = new MapperConfiguration(cfg =>
-                cfg.AddProfile(new ProfissionalProfile())).CreateMapper();
+                cfg.AddProfile(new SolicitacaoServicoProfile())).CreateMapper();
 
             mockService.Setup(service => service.GetAll())
-                .Returns(GetTestProfissionais());
+                .Returns(GetTestSolicitacoesServicos());
             mockService.Setup(service => service.Get(1))
-                .Returns(GetTargetProfissionais());
-            mockService.Setup(service => service.Edit(It.IsAny<Pessoa>()))
+                .Returns(GetTargetSolicitacaoServico());
+            mockService.Setup(service => service.Edit(It.IsAny<Solicitacaoservico>()))
                 .Verifiable();
-            mockService.Setup(service => service.Create(It.IsAny<Pessoa>()))
+            mockService.Setup(service => service.Create(It.IsAny<Solicitacaoservico>()))
                 .Verifiable();
-            controller = new ProfissionalController(mockService.Object, mockService2.Object, mapper);
+            controller = new SolicitacaoServicoController(mockService.Object, mapper);
         }
-
         [TestMethod()]
         public void IndexTest_Valido()
         {
@@ -43,9 +41,9 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<ProfissionalViewModel>));
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<SolicitacaoServicoViewModel>));
 
-            List<ProfissionalViewModel>? lista = (List<ProfissionalViewModel>)viewResult.ViewData.Model;
+            List<SolicitacaoServicoViewModel>? lista = (List<SolicitacaoServicoViewModel>)viewResult.ViewData.Model;
             Assert.AreEqual(3, lista.Count);
         }
 
@@ -58,12 +56,11 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(SolicitacaoServicoViewModel));
+            SolicitacaoServicoViewModel solicitacaoServicoModel = (SolicitacaoServicoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Banho nos cachorros", solicitacaoServicoModel.Nome);
+            Assert.AreEqual(530m, solicitacaoServicoModel.Valor);
 
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ProfissionalViewModel));
-            ProfissionalViewModel profissionalModel = (ProfissionalViewModel)viewResult.ViewData.Model;
-
-            Assert.AreEqual("Miguel dos Santos", profissionalModel.Nome);
-            Assert.AreEqual(DateTime.Parse("2000-02-07"), profissionalModel.DataNascimento);
         }
 
         [TestMethod()]
@@ -77,10 +74,10 @@ namespace AjudAkiWeb.Controllers.Tests
         }
 
         [TestMethod()]
-        public void CreateTest_Valido()
+        public void CreateTest_Valid()
         {
             // Act
-            var result = controller.Create(GetNewProfissional());
+            var result = controller.Create(GetNewSolicitacaoServico());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -88,7 +85,6 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsNull(redirectToActionResult.ControllerName);
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
-
 
         [TestMethod()]
         public void CreateTest_Post_Invalid()
@@ -97,7 +93,7 @@ namespace AjudAkiWeb.Controllers.Tests
             controller.ModelState.AddModelError("Nome", "Campo requerido");
 
             // Act
-            var result = controller.Create(GetNewProfissional());
+            var result = controller.Create(GetNewSolicitacaoServico());
 
             // Assert
             Assert.AreEqual(1, controller.ModelState.ErrorCount);
@@ -106,7 +102,6 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.IsNull(redirectToActionResult.ControllerName);
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
-
 
         [TestMethod()]
         public void EditTest_Get_Valid()
@@ -117,17 +112,18 @@ namespace AjudAkiWeb.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ProfissionalViewModel));
-            ProfissionalViewModel profissionalModel = (ProfissionalViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Miguel dos Santos", profissionalModel.Nome);
-            Assert.AreEqual(DateTime.Parse("2000-02-07"), profissionalModel.DataNascimento);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(SolicitacaoServicoViewModel));
+            SolicitacaoServicoViewModel solicitacaoServicoModel = (SolicitacaoServicoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual("Banho nos cachorros", solicitacaoServicoModel.Nome);
+            Assert.AreEqual(530m, solicitacaoServicoModel.Valor);
+
         }
 
         [TestMethod()]
         public void EditTest_Post_Valid()
         {
             // Act
-            var result = controller.Edit(GetTargetProfissionalModel().Id, GetTargetProfissionalModel());
+            var result = controller.Edit(GetTargetSolicitacaoServicoModel().Id, GetTargetSolicitacaoServicoModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -136,26 +132,27 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
 
+
+
         [TestMethod()]
         public void DeleteTest_Post_Valid()
         {
             // Act
-            var result = controller.Delete((uint)1);
+            var result = controller.Delete(1);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ProfissionalViewModel));
-            ProfissionalViewModel profissionalModel = (ProfissionalViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Miguel dos Santos", profissionalModel.Nome);
-            Assert.AreEqual(DateTime.Parse("2000-02-07"), profissionalModel.DataNascimento);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(SolicitacaoServicoViewModel));
+            SolicitacaoServicoViewModel solicitacaoServicoModel = (SolicitacaoServicoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual(530m, solicitacaoServicoModel.Valor);
         }
 
         [TestMethod()]
         public void DeleteTest_Get_Valid()
         {
             // Act
-            var result = controller.Delete(GetTargetProfissionalModel());
+            var result = controller.Delete(GetTargetSolicitacaoServicoModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -164,60 +161,62 @@ namespace AjudAkiWeb.Controllers.Tests
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
 
-        private ProfissionalViewModel GetNewProfissional()
+        private SolicitacaoServicoViewModel GetNewSolicitacaoServico()
         {
-            return new ProfissionalViewModel
+            return new SolicitacaoServicoViewModel
             {
                 Id = 4,
-                Nome = "Marlysson Dantas",
-                DataNascimento = DateTime.Parse("1951-02-23")
+                Nome = "Limpeza de banheiros",
+                Valor = 230
             };
         }
 
-        private Pessoa GetTargetProfissionais()
+        private static Solicitacaoservico GetTargetSolicitacaoServico()
         {
-            return new Pessoa
+            return new Solicitacaoservico
             {
                 Id = 1,
-                Nome = "Miguel dos Santos",
-                DataNascimento = DateTime.Parse("2000-02-07")
+                Nome = "Banho nos cachorros",
+                Valor = 530
             };
         }
 
-        private ProfissionalViewModel GetTargetProfissionalModel()
+        private SolicitacaoServicoViewModel GetTargetSolicitacaoServicoModel()
         {
-            return new ProfissionalViewModel
+            return new SolicitacaoServicoViewModel
             {
                 Id = 2,
-                Nome = "Paulo Borbas",
-                DataNascimento = DateTime.Parse("2002-09-24")
+                Nome = "Cuidar de criança de 10 anos",
+                Valor = 130
             };
         }
 
-        private IEnumerable<Pessoa> GetTestProfissionais()
+        private IEnumerable<Solicitacaoservico> GetTestSolicitacoesServicos()
         {
-            return new List<Pessoa>
+
+            return new List<Solicitacaoservico>
             {
-                new Pessoa
+                new Solicitacaoservico
                 {
                     Id = 1,
-                    Nome = "Pedro Ramos",
-                    DataNascimento = DateTime.Parse("1892-10-27")
+                    Nome = "Supervisionar e Alimentar animais",
+                    Valor = 80
                 },
-                new Pessoa
+                new Solicitacaoservico
                 {
                     Id = 2,
-                    Nome = "Lula da Silva",
-                    DataNascimento = DateTime.Parse("1839-06-21")
+                    Nome = "Conserto de notebook",
+                    Valor = 200
+
                 },
-                new Pessoa
+                new Solicitacaoservico
                 {
-                    Id = 3,
-                    Nome = "Marcos Dósea",
-                    DataNascimento = DateTime.Parse("1982-01-01")
+                    Id = 3,     
+                    Nome = "Fazer atividade da faculdade de Sistemas de informação",
+                    Valor = 100
+
                 },
             };
         }
-
     }
 }

@@ -18,6 +18,8 @@ namespace AjudAkiWeb.Controllers.Tests
         {
             // Arrange
             var mockService = new Mock<IPagarAssinaturaService>();
+            var mockService2 = new Mock<IAssinaturaService>();
+            var mockService3 = new Mock<IProfissionalService>();
 
             IMapper mapper = new MapperConfiguration(cfg =>
                 cfg.AddProfile(new PagarAssinaturaProfile())).CreateMapper();
@@ -30,7 +32,7 @@ namespace AjudAkiWeb.Controllers.Tests
                 .Verifiable();
             mockService.Setup(service => service.Create(It.IsAny<Pagamentoassinatura>()))
                 .Verifiable();
-            controller = new PagarAssinaturaController(mockService.Object, mapper);
+            controller = new PagarAssinaturaController(mockService.Object, mockService2.Object, mockService3.Object, mapper);
         }
 
         private Pagamentoassinatura GetTargetPagarAssinatura()

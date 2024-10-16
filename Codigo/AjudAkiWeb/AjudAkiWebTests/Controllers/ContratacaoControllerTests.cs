@@ -17,6 +17,8 @@ namespace AjudAkiWeb.Controllers.Tests
         {
             // Arrange
             var mockService = new Mock<IContratacaoService>();
+            var mockService2 = new Mock<IClienteService>();
+            var mockService3 = new Mock<IServicoService>();
 
             IMapper mapper = new MapperConfiguration(cfg =>
                 cfg.AddProfile(new ContratacaoProfile())).CreateMapper();
@@ -29,7 +31,7 @@ namespace AjudAkiWeb.Controllers.Tests
                 .Verifiable();
             mockService.Setup(service => service.Create(It.IsAny<Contratacao>()))
                 .Verifiable();
-            controller = new ContratacaoController(mockService.Object, mapper);
+            controller = new ContratacaoController(mockService.Object, mockService2.Object, mockService3.Object, mapper);
         }
 
         [TestMethod()]

@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace AjudAkiWeb.Models
-{//TODO: Implementação tratamento de ENUM to String
+{
     public enum StatusSolicitacaoEnum
     {
         RECUSADO, ACEITO, PENDENTE, FINALIZADO
     }
+
     public class SolicitacaoServicoViewModel
     {
         [Display(Name = "Código da solicitação de serviço")]
@@ -17,15 +18,14 @@ namespace AjudAkiWeb.Models
         [StringLength(50)]
         public string Nome { get; set; } = null!;
 
-        [Display(Name = "Data da agenda")]
+        [Display(Name = "Data da Solicitação")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true)]
         [Required(ErrorMessage = "Campo obrigatório")]
         public DateTime DataHoraSolicitacao { get; set; }
 
         [Display(Name = "Status:  RECUSADO, ACEITO, PENDENTE, FINALIZADO")]
-        public TurnoEnum? Turno { get; set; } = null;
-        public string Status { get; set; } = null!;
+        public StatusSolicitacaoEnum? Status { get; set; } = null;
 
         [Range(0.0, Double.MaxValue, ErrorMessage = "O valor deve ser positivo.")]
         public decimal? Valor { get; set; }

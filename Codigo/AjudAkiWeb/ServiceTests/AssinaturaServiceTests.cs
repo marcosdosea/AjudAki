@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Core;
 using Core.Service;
-using Microsoft.EntityFrameworkCore;
+using AjudAkiWeb.Models;
 namespace Service.Tests
 {
     [TestClass()]
@@ -22,28 +22,30 @@ namespace Service.Tests
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
-            // Criação da lista de assinaturas com todas as propriedades obrigatórias
             var assinaturas = new List<Assinatura>
-        {
-            new()
             {
-                Id = 1,
-                Nome = "Plano Básico",
-                Descricao = "Plano com funcionalidades básicas"
-            },
-            new Assinatura
-            {
-                Id = 2,
-                Nome = "Plano Pro",
-                Descricao = "Plano com funcionalidades avançadas"
-            },
-            new Assinatura
-            {
-                Id = 3,
-                Nome = "Plano Avançado",
-                Descricao = "Plano premium com todas as funcionalidades"
-            },
-        };
+                new Assinatura
+                {
+                    Id = 1,
+                    Nome = AssinaturaNomeEnum.BÁSICO.ToString(),
+                    Status = AssinaturaStatusEnum.ATIVA.ToString(),
+                    Descricao = "Plano com funcionalidades básicas"
+                },
+                new Assinatura
+                {
+                    Id = 2,
+                    Nome = AssinaturaNomeEnum.AVANÇADO.ToString(),
+                    Status = AssinaturaStatusEnum.INATIVA.ToString(),
+                    Descricao = "Plano com funcionalidades avançadas"
+                },
+                new Assinatura
+                {
+                    Id = 3,
+                    Nome = AssinaturaNomeEnum.AVANÇADO.ToString(),
+                    Status = AssinaturaStatusEnum.ATIVA.ToString(),
+                    Descricao = "Plano premium com todas as funcionalidades"
+                },
+            };
 
             context.AddRange(assinaturas);
             context.SaveChanges();
@@ -58,7 +60,8 @@ namespace Service.Tests
             var novaAssinatura = new Assinatura()
             {
                 Id = 4,
-                Nome = "Plano Diamante",
+                Nome = AssinaturaNomeEnum.AVANÇADO.ToString(),
+                Status = AssinaturaStatusEnum.ATIVA.ToString()
             };
 
             assinaturaService.Create(novaAssinatura);
@@ -67,7 +70,7 @@ namespace Service.Tests
             Assert.AreEqual(4, assinaturaService.GetAll().Count());
             var assinatura = assinaturaService.Get(4);
 
-            Assert.AreEqual("Plano Diamante", assinatura.Nome);
+            Assert.AreEqual(AssinaturaNomeEnum.AVANÇADO.ToString(), assinatura.Nome);
         }
 
         [TestMethod()]
@@ -89,14 +92,14 @@ namespace Service.Tests
             // Act 
             var assinatura = assinaturaService.Get(3);
 
-            assinatura.Nome = "Plano Ametista";
+            assinatura.Nome = AssinaturaNomeEnum.AVANÇADO.ToString();
             assinaturaService.Edit(assinatura);
 
             // Assert
             assinatura = assinaturaService.Get(3);
 
             Assert.IsNotNull(assinatura);
-            Assert.AreEqual("Plano Ametista", assinatura.Nome);
+            Assert.AreEqual(AssinaturaNomeEnum.AVANÇADO.ToString(), assinatura.Nome);
         }
 
         [TestMethod()]
@@ -105,7 +108,7 @@ namespace Service.Tests
             var assinatura = assinaturaService.Get(1);
 
             Assert.IsNotNull(assinatura);
-            Assert.AreEqual("Plano Básico", assinatura.Nome); 
+            Assert.AreEqual(AssinaturaNomeEnum.BÁSICO.ToString(), assinatura.Nome);
         }
 
         [TestMethod()]
@@ -119,7 +122,7 @@ namespace Service.Tests
             Assert.IsNotNull(listaAssinaturas);
             Assert.AreEqual(3, listaAssinaturas.Count());
             Assert.AreEqual((uint)1, listaAssinaturas.First().Id);
-            Assert.AreEqual("Plano Básico", listaAssinaturas.First().Nome); 
+            Assert.AreEqual(AssinaturaNomeEnum.BÁSICO.ToString(), listaAssinaturas.First().Nome);
         }
     }
 }
