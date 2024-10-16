@@ -3,18 +3,26 @@ using AutoMapper;
 using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using MySqlX.XDevAPI;
 
 namespace AjudAkiWeb.Controllers
 {
     public class SolicitacaoServicoController : Controller
     {
-        //TODO: Implementar lógicas de foreign Keys
+
 
         private readonly ISolicitacaoServicoService solicitacaoServicoService;
+        private readonly IClienteService clienteService;
+        private readonly IProfissionalService profissionalService;
+        private readonly ITipoServicoService tipoServicoService;
         private readonly IMapper mapper;
 
-        public SolicitacaoServicoController(ISolicitacaoServicoService solicitacaoServicoService, IMapper mapper)
+        public SolicitacaoServicoController(ISolicitacaoServicoService solicitacaoServicoService, IClienteService clienteService,
+                                            IProfissionalService profissionalService, ITipoServicoService tipoServicoService, IMapper mapper)
         {
+            this.clienteService = clienteService;
+            this.profissionalService = profissionalService;
             this.solicitacaoServicoService = solicitacaoServicoService;
             this.mapper = mapper;
         }
@@ -41,6 +49,26 @@ namespace AjudAkiWeb.Controllers
         {
             var solicitacaoServicoViewModel = new SolicitacaoServicoViewModel();
 
+            IEnumerable<Pessoa> listaProfissionais = profissionalService.GetAll();
+            IEnumerable<Pessoa> listaClientes = clienteService.GetAll();
+            IEnumerable<Tiposervico> listaTiposServico = tipoServicoService.GetAll();
+
+            solicitacaoServicoViewModel.ListaTiposServico = new SelectList(listaTiposServico, "Id", "Nome", null);
+
+            var statusListItems = Enum.GetValues(typeof(StatusSolicitacaoEnum))
+                                .Cast<StatusSolicitacaoEnum>()
+                                .Select(status => new SelectListItem
+                                {
+                                    Value = status.ToString(),
+                                    Text = status.ToString()
+                                })
+                                .ToList();
+
+            solicitacaoServicoViewModel.ListaProfissionais = new SelectList(listaProfissionais, "Id", "Nome", null);
+            solicitacaoServicoViewModel.ListaClientes = new SelectList(listaClientes, "Id", "Nome", null);
+
+
+
             return View(solicitacaoServicoViewModel);
         }
 
@@ -62,6 +90,20 @@ namespace AjudAkiWeb.Controllers
         {
             var solicitacaoServico = solicitacaoServicoService.Get(id);
             var solicitacaoServicoViewModel = mapper.Map<SolicitacaoServicoViewModel>(solicitacaoServico);
+
+            IEnumerable<Tiposervico> listaTiposServicos = tipoServicoService.GetAll();
+            IEnumerable<Pessoa> listaProfissionais = profissionalService.GetAll();
+            IEnumerable<Pessoa> listaClientes = clienteService.GetAll();
+
+            solicitacaoServicoViewModel.ListaTiposServico = new SelectList(listaTiposServicos, "Id", "Nome",
+                listaTiposServicos.FirstOrDefault(e => e.Id.Equals(solicitacaoServico.IdTipoServico)));
+
+            solicitacaoServicoViewModel.ListaProfissionais = new SelectList(listaProfissionais, "Id", "Nome",
+                listaProfissionais.FirstOrDefault(e => e.Id.Equals(solicitacaoServico.IdProfissional)));
+
+            solicitacaoServicoViewModel.ListaClientes = new SelectList(listaClientes, "Id", "Nome",
+                listaClientes.FirstOrDefault(e => e.Id.Equals(solicitacaoServico.IdCliente)));
+
 
             return View(solicitacaoServicoViewModel);
         }
