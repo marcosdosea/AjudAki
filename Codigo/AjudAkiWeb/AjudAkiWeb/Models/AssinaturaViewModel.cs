@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace AjudAkiWeb.Models
 {
@@ -18,9 +19,10 @@ namespace AjudAkiWeb.Models
         [Required(ErrorMessage = "Campo requerido")]
         public uint Id { get; set; }
 
-        [StringLength(20, ErrorMessage = "Nome não pode exceder 20 caracteres")]
-        public AssinaturaNomeEnum? Nome { get; set; }
+        [Required(ErrorMessage = "Campo requerido")]
+        public AssinaturaNomeEnum Nome { get; set; }
 
+        [Required(ErrorMessage = "Campo requerido")]
         public AssinaturaStatusEnum Status { get; set; }
 
         [Range(0, float.MaxValue, ErrorMessage = "Valor deve ser positivo")]
@@ -28,5 +30,9 @@ namespace AjudAkiWeb.Models
 
         [StringLength(150, ErrorMessage = "Descrição não pode exceder 150 caracteres")]
         public string? Descricao { get; set; }
+
+        public SelectList? PlanoList { get; set; }
+
+        public SelectList? StatusList { get; set; }
     }
 }
