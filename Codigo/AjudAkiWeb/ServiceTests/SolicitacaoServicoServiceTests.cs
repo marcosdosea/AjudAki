@@ -1,11 +1,13 @@
-﻿using Core.Service;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Core.Service;
 using Core;
 using Microsoft.EntityFrameworkCore;
 using Service;
 
-namespace ServiceTests
+namespace Service.Tests
 {
-    class SolicitacaoServicoServiceTests
+    [TestClass()]
+    public class SolicitacaoServicoServiceTests
     {
         private AjudakiContext context;
         private ISolicitacaoServicoService solicitacaoServicoService;
@@ -39,7 +41,7 @@ namespace ServiceTests
                         DataHoraSolicitacao = DateTime.Parse("2024-05-03"),
                         Status ="ACEITO",
                         Valor = 150m,
-                        Descricao = "O notebook não está dando tela nem nenhum outro sinal de vida"                    
+                        Descricao = "O notebook não está dando tela nem nenhum outro sinal de vida"
                     },
                     new Solicitacaoservico
                     {
@@ -48,7 +50,7 @@ namespace ServiceTests
                         DataHoraSolicitacao = DateTime.Parse("2024-08-10"),
                         Status ="PENDENTE",
                         Valor = 200m,
-                        Descricao = "Preciso fazer um TCC"                    
+                        Descricao = "Preciso fazer um TCC"
                     }
                 };
 
@@ -64,7 +66,8 @@ namespace ServiceTests
         public void CreateTest()
         {
             // Act
-            solicitacaoServicoService.Create(new Solicitacaoservico() {
+            solicitacaoServicoService.Create(new Solicitacaoservico()
+            {
                 Id = 4,
                 Nome = "Preciso do pacote office",
                 DataHoraSolicitacao = DateTime.Parse("2024-03-10"),
@@ -109,7 +112,7 @@ namespace ServiceTests
         {
             var solicitacaoServico = solicitacaoServicoService.Get(1);
             Assert.IsNotNull(solicitacaoServico);
-            Assert.AreEqual("Educação", solicitacaoServico.Nome);
+            Assert.AreEqual("Banho nos cachorros", solicitacaoServico.Nome);
         }
 
         [TestMethod()]
@@ -118,11 +121,11 @@ namespace ServiceTests
             // Act
             var listaSolicitacaoServico = solicitacaoServicoService.GetAll();
             // Assert
-            Assert.IsInstanceOfType(listaSolicitacaoServico, typeof(IEnumerable<Areaatuacao>));
+            Assert.IsInstanceOfType(listaSolicitacaoServico, typeof(IEnumerable<Solicitacaoservico>));
             Assert.IsNotNull(listaSolicitacaoServico);
             Assert.AreEqual(3, listaSolicitacaoServico.Count());
             Assert.AreEqual((uint)1, listaSolicitacaoServico.First().Id);
-            Assert.AreEqual("Educação", listaSolicitacaoServico.First().Nome);
+            Assert.AreEqual("Banho nos cachorros", listaSolicitacaoServico.First().Nome);
         }
     }
 }

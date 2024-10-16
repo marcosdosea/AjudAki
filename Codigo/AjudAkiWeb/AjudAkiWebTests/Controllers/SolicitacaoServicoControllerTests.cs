@@ -58,8 +58,8 @@ namespace AjudAkiWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(SolicitacaoServicoViewModel));
             SolicitacaoServicoViewModel solicitacaoServicoModel = (SolicitacaoServicoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Supervisionar e Alimentar animais", solicitacaoServicoModel.Nome);
-            Assert.AreEqual(80m, solicitacaoServicoModel.Valor);
+            Assert.AreEqual("Banho nos cachorros", solicitacaoServicoModel.Nome);
+            Assert.AreEqual(530m, solicitacaoServicoModel.Valor);
 
         }
 
