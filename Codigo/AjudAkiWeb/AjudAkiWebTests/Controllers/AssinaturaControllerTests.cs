@@ -38,7 +38,7 @@ namespace AjudAkiWeb.Controllers.Tests
             return new Assinatura
             {
                 Id = 1,
-                Nome = "Padrão",
+                Nome = AssinaturaNomeEnum.BÁSICO.ToString(),
                 Descricao = "Plano básico com beneficios limitados"
             };
         }
@@ -50,13 +50,13 @@ namespace AjudAkiWeb.Controllers.Tests
             new Assinatura
             {
                 Id = 1,
-                Nome = "Padrão",
+                Nome = AssinaturaNomeEnum.BÁSICO.ToString(),
                 Descricao = "Plano básico com beneficios limitados"
             },
             new Assinatura
             {
                 Id = 2,
-                Nome = "Plano Pro",
+                Nome = AssinaturaNomeEnum.AVANÇADO.ToString(),
                 Descricao = "Plano com beneficios avançados"
             }
         };
@@ -88,7 +88,7 @@ namespace AjudAkiWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AssinaturaViewModel));
             AssinaturaViewModel assinaturaModel = (AssinaturaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Padrão", assinaturaModel.Nome);
+            Assert.AreEqual(AssinaturaNomeEnum.BÁSICO, assinaturaModel.Nome);
             Assert.AreEqual("Plano básico com beneficios limitados", assinaturaModel.Descricao);
         }
 
@@ -137,7 +137,7 @@ namespace AjudAkiWeb.Controllers.Tests
             return new AssinaturaViewModel
             {
                 Id = 4,
-                Nome = "Plano Ametista",
+                Nome = AssinaturaNomeEnum.AVANÇADO,
                 Descricao = "Plano com beneficios brilhantes"
             };
         }
@@ -153,7 +153,7 @@ namespace AjudAkiWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AssinaturaViewModel));
             AssinaturaViewModel assinaturaModel = (AssinaturaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Padrão", assinaturaModel.Nome);
+            Assert.AreEqual(AssinaturaNomeEnum.BÁSICO, assinaturaModel.Nome);
             Assert.AreEqual("Plano básico com beneficios limitados", assinaturaModel.Descricao);
         }
 
@@ -175,7 +175,7 @@ namespace AjudAkiWeb.Controllers.Tests
             return new AssinaturaViewModel
             {
                 Id = 2,
-                Nome = "Plano Pro",
+                Nome = AssinaturaNomeEnum.AVANÇADO,
                 Descricao = "Plano com beneficios avançados"
             };
         }
@@ -191,7 +191,7 @@ namespace AjudAkiWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AssinaturaViewModel));
             AssinaturaViewModel assinaturaModel = (AssinaturaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Padrão", assinaturaModel.Nome);
+            Assert.AreEqual(AssinaturaNomeEnum.BÁSICO, assinaturaModel.Nome);
             Assert.AreEqual("Plano básico com beneficios limitados", assinaturaModel.Descricao);
         }
 
@@ -206,7 +206,7 @@ namespace AjudAkiWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AssinaturaViewModel));
             AssinaturaViewModel assinaturaModel = (AssinaturaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Padrão", assinaturaModel.Nome);
+            Assert.AreEqual(AssinaturaNomeEnum.BÁSICO, assinaturaModel.Nome);
             Assert.AreEqual("Plano básico com beneficios limitados", assinaturaModel.Descricao);
 
         }
