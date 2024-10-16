@@ -84,7 +84,15 @@ namespace Service
         /// <returns></returns>
         public IEnumerable<Pessoa> GetByNome(string nome)
         {
-            return (IEnumerable<Pessoa>)context.Pessoas.Where(Pessoa => Pessoa.Nome.StartsWith(nome)).AsNoTracking();
+            var query = from profissional in context.Pessoas
+                        where profissional.Nome.StartsWith(nome)
+                        select new Pessoa
+                        {
+                            Id = profissional.Id,
+                            Nome = profissional.Nome,
+                            IdAssinaturaNavigation = profissional.IdAssinaturaNavigation // Inclui a navegação
+                        };
+            return query.AsNoTracking().ToList();
         }
     }
 }

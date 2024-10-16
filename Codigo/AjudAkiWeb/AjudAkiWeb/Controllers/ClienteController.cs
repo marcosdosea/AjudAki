@@ -48,6 +48,19 @@ namespace AjudAkiWeb.Controllers
 
             clienteViewModel.ListaAssinaturas = new SelectList(listaAssinaturas, "Id", "Nome", null);
 
+            // Repreencher a lista de status
+            var tipoPessoaListItems = Enum.GetValues(typeof(TipoPessoaEnum))
+                .Cast<TipoPessoaEnum>()
+                .Select(status => new SelectListItem
+                {
+                    Value = status.ToString(),
+                    Text = status.ToString()
+                })
+                .ToList();
+
+            clienteViewModel.TipoPessoaList = new SelectList(tipoPessoaListItems, "Value", "Text");
+
+
             return View(clienteViewModel);
         }
 

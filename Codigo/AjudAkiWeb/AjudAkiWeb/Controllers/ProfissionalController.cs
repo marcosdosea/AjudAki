@@ -5,17 +5,21 @@ using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using MySqlX.XDevAPI;
 
 namespace AjudAkiWeb.Controllers
 {
     public class ProfissionalController : Controller
     {
+        private readonly IAssinaturaService assinaturaService;
         private readonly IProfissionalService profissionalService;
         private readonly IMapper mapper;
 
-        public ProfissionalController(IProfissionalService profissionalService, IMapper mapper)
+        public ProfissionalController(IProfissionalService profissionalService, IAssinaturaService assinaturaService, IMapper mapper)
         {
             this.profissionalService = profissionalService;
+            this.assinaturaService = assinaturaService;
             this.mapper = mapper;
         }
 
@@ -40,6 +44,20 @@ namespace AjudAkiWeb.Controllers
         {
             var profissionalViewModel = new ProfissionalViewModel();
             profissionalViewModel.DataNascimento = DateTime.Now;
+            IEnumerable<Assinatura> listaAssinaturas = assinaturaService.GetAll();
+            profissionalViewModel.ListaAssinaturas = new SelectList(listaAssinaturas, "Id", "Nome", null);
+            
+            // Repreencher a lista de status
+            var tipoPessoaListItems = Enum.GetValues(typeof(TipoPessoaEnum))
+                .Cast<TipoPessoaEnum>()
+                .Select(status => new SelectListItem
+                {
+                    Value = status.ToString(),
+                    Text = status.ToString()
+                })
+                .ToList();
+
+            profissionalViewModel.TipoPessoaList = new SelectList(tipoPessoaListItems, "Value", "Text");
             return View(profissionalViewModel);
         }
 
@@ -62,6 +80,11 @@ namespace AjudAkiWeb.Controllers
         {
             var profissional = profissionalService.Get(id);
             var profissionalViewModel = mapper.Map<ProfissionalViewModel>(profissional);
+            IEnumerable<Assinatura> listaAssinaturas = assinaturaService.GetAll();
+
+            profissionalViewModel.ListaAssinaturas = new SelectList(listaAssinaturas, "Id", "Nome",
+                        listaAssinaturas.FirstOrDefault(e => e.Id.Equals(profissional.IdAssinatura)));
+
             return View(profissionalViewModel);
         }
 

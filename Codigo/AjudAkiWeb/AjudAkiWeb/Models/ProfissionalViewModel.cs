@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AjudAkiWeb.Models
 {
@@ -16,6 +17,9 @@ namespace AjudAkiWeb.Models
         [Required(ErrorMessage = "Código do Profissional é obrigatório")]
         [Key]
         public uint Id { get; set; }
+
+        [Display(Name = "Assinatura")]
+        public int IdAssinatura { get; set; }
 
 
         [StringLength(50)]
@@ -39,7 +43,7 @@ namespace AjudAkiWeb.Models
 
         [Display(Name = "Data de Nascimento")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Campo Obrigatório")]
         public DateTime DataNascimento { get; set; }
 
@@ -71,9 +75,10 @@ namespace AjudAkiWeb.Models
         public string? PontoReferencia { get; set; }
 
         public TipoPessoaEnum TipoPessoa { get; set; }
-
-        public uint IdAssinatura { get; set; }
-        public AssinaturaViewModel? AssinaturaViewModel { get; set; }
+        
+        public SelectList? TipoPessoaList { get; set; }
+       
+        public SelectList? ListaAssinaturas { get; set; }
 
     }
 }

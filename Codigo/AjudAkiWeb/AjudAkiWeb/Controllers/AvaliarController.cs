@@ -3,17 +3,21 @@ using AutoMapper;
 using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Service;
 
 namespace AjudAkiWeb.Controllers
 {
     public class AvaliarController : Controller
     {
+        private readonly IContratacaoService contratacaoService;
         private readonly IAvaliarService avaliarService;
         private readonly IMapper mapper;
 
-        public AvaliarController(IAvaliarService avaliarService, IMapper mapper)
+        public AvaliarController(IAvaliarService avaliarService, IContratacaoService contratacaoService, IMapper mapper)
         {
             this.avaliarService = avaliarService;
+            this.contratacaoService = contratacaoService;
             this.mapper = mapper;
         }
 
@@ -38,7 +42,8 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Create()
         {
             var avaliarViewModel = new AvaliarViewModel();
-
+            IEnumerable<Contratacao> listaContratacaos = contratacaoService.GetAll();
+            avaliarViewModel.ListaContratacaos = new SelectList(listaContratacaos, "Id", "Nome", null);
             return View(avaliarViewModel);
         }
 

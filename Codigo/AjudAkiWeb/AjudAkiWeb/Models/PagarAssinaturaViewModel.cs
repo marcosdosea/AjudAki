@@ -24,10 +24,6 @@ namespace AjudAkiWeb.Models
         [Required(ErrorMessage = "Status é obrigatório")]
         public PagamentoStatusEnum? Status { get; set; }
 
-        [Display(Name = "Plano")]
-        [Required(ErrorMessage = "Plano é obrigatório")]
-        public string NomePlano { get; set; } = null!;
-
         public uint IdProfissional { get; set; }
         public ProfissionalViewModel? ProfissionalViewModel { get; set; }
         public uint IdAssinatura { get; set; }

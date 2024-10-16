@@ -35,7 +35,7 @@ namespace AjudAkiWeb.Models
 
         [Display(Name = "Data de Nascimento")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Campo Obrigatório")]
         public DateTime DataNascimento { get; set; }
 
@@ -63,9 +63,8 @@ namespace AjudAkiWeb.Models
         [Display(Name = "Ponto de Referência")]
         [StringLength(40)]
         public string? PontoReferencia { get; set; }
-
         public TipoPessoaEnum TipoPessoa { get; set; }
-
+        public SelectList? TipoPessoaList { get; set; }
         public SelectList? ListaAssinaturas { get; set; }
     }
 }
