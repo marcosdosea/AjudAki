@@ -30,10 +30,6 @@ namespace AjudAkiWeb.Models
         [Display(Name = "Comentário")]
         [StringLength(500, ErrorMessage = "O comentário pode ter no máximo 500 caracteres")]
         public string? Comentario { get; set; }
-
-        [Display(Name = "Contratação")]
-        [Required(ErrorMessage = "A navegação da contratação é obrigatória")]
-        public virtual Contratacao IdContratacaoNavigation { get; set; } = null!;
         public SelectList? ListaContratacaos { get; set; }
     }
 }
