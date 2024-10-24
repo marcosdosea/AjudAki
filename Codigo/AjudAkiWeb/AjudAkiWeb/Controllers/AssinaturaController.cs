@@ -4,6 +4,7 @@ using Core;
 using AutoMapper;
 using AjudAkiWeb.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MySqlX.XDevAPI;
 
 namespace AjudAkiWeb.Controllers
 {
@@ -82,6 +83,28 @@ namespace AjudAkiWeb.Controllers
         {
             var assinatura = assinaturaService.Get(id);
             var assinaturaViewModel = mapper.Map<AssinaturaViewModel>(assinatura);
+
+            var statusListItems = Enum.GetValues(typeof(AssinaturaStatusEnum))
+               .Cast<AssinaturaStatusEnum>()
+               .Select(status => new SelectListItem
+               {
+                   Value = status.ToString(),
+                   Text = status.ToString()
+               })
+               .ToList();
+
+            var planoListItems = Enum.GetValues(typeof(AssinaturaNomeEnum))
+               .Cast<AssinaturaNomeEnum>()
+               .Select(status => new SelectListItem
+               {
+                   Value = status.ToString(),
+                   Text = status.ToString()
+               })
+               .ToList();
+
+            assinaturaViewModel.StatusList = new SelectList(statusListItems, "Value", "Text");
+            assinaturaViewModel.PlanoList = new SelectList(planoListItems, "Value", "Text");
+
             return View(assinaturaViewModel);
         }
 

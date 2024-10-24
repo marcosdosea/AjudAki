@@ -89,6 +89,25 @@ namespace AjudAkiWeb.Controllers
             var pagarAssinatura = pagarAssinaturaService.Get(id);
             var pagarAssinaturaViewModel = mapper.Map<PagarAssinaturaViewModel>(pagarAssinatura);
 
+            IEnumerable<Assinatura> listaAssinaturas = assinaturaService.GetAll();
+            IEnumerable<Pessoa> listaProfissionais = profissionalService.GetAll();
+
+            pagarAssinaturaViewModel.ListaProfissionais = new SelectList(listaProfissionais, "Id", "Nome", null);
+            pagarAssinaturaViewModel.ListaAssinaturas = new SelectList(listaAssinaturas, "Id", "Nome", null);
+
+            // Repreencher a lista de status
+            var statusListItems = Enum.GetValues(typeof(PagamentoStatusEnum))
+                .Cast<PagamentoStatusEnum>()
+                .Select(status => new SelectListItem
+                {
+                    Value = status.ToString(),
+                    Text = status.ToString()
+                })
+                .ToList();
+
+            pagarAssinaturaViewModel.StatusList = new SelectList(statusListItems, "Value", "Text");
+            pagarAssinaturaViewModel.DataPagamento = DateTime.Now;
+
             return View(pagarAssinaturaViewModel);
         }
 

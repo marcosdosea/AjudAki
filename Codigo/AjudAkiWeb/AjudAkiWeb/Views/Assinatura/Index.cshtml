@@ -4,56 +4,37 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<head>
+    <link href="~/css/AssinaturaIndex.css" rel="stylesheet" asp-append-version="true" />
+</head>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Valor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Valor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.Id  }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+<h1>Administração</h1>
+<h4>Gerencie as áreas de assinaturas.</h4>
+
+@foreach (var item in Model)
+{
+    <section class="plano-card">
+        <h4>Detalhes do plano</h4>
+        <div class="plano-detalhes">
+            <span class="plano-icone">📄</span>
+            <div class="plano-info">
+                <strong>@item.Nome</strong>
+                <p>Descrição: @item.Descricao</p>
+            </div>
+        </div>
+        <div class="plano-acoes">
+            <button>
+                @Html.ActionLink("Alterar plano", "Edit", new { id = item.Id }, new { @class = "btn-alterar" })
+            </button>
+            <button>
+                @Html.ActionLink("Excluir plano", "Delete", new { id = item.Id }, new { @class = "btn-excluir" })
+            </button>
+        </div>
+    </section>
 }
-    </tbody>
-</table>
+<div class="btn-criar-container">
+    <div class="criar-novo-plano">
+        <h4>Criar um novo plano</h4>
+        <a asp-action="Create" class="btn-criar">Criar plano</a>
+    </div>
+</div>
