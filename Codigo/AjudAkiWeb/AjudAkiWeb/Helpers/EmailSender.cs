@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 
-namespace BibliotecaWeb.Helpers
+namespace AjudAkiWeb.Helpers
 {
     // TODO: Verificar as configuração do Email. O email de verificação não chega.
     public class EmailSender : IEmailSender
@@ -44,7 +44,7 @@ namespace BibliotecaWeb.Helpers
             <html>
                 <body>
                     <div style='text-align: center; margin-bottom: 20px;'>
-                        <img src='cid:HeaderImage' alt='Biblioteca' style='max-width: 30%; height: auto;'/>
+                        <img src='cid:HeaderImage' alt='AjudAki' style='max-width: 30%; height: auto;'/>
                     </div>
 
                     <div style='margin-bottom: 20px; font-size: 14px'>
