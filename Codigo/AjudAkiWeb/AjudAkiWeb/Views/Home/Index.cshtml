@@ -1,18 +1,22 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
 
-<section class="text-center">
-    <h1 class="display-4">Agende agora a sua solução</h1>
-    <h6> Sua solução em alguns cliques de distância</h6>
+<head>
+    <link href="~/css/HomeIndex.css" rel="stylesheet" asp-append-version="true" />
+</head>
+<body>
+    <section class="text-center">
+        <h2 class="display-4">Agende agora a sua solução</h2>
+        <h4> Sua solução em alguns cliques de distância</h4>
 
-    <section class="search">
-        <form action="/search" method="get">
-            <input type="search" name="query" placeholder="Área de atuação">
-            <input type="search" name="query" placeholder="Região">
-            <button type="submit">Pesquisar</button>
-        </form>
+        <section class="search">
+            <form action="/search" method="get">
+                <input type="search" name="query" placeholder="Área de atuação">
+                <input type="search" name="query" placeholder="Região">
+                <button class="botao" type="submit">Pesquisar</button>
+            </form>
+        </section>
     </section>
 
     <section class="categorias">
@@ -29,7 +33,7 @@
             <p>Encanador</p>
         </article>
         <article>
-            <p>Elestricista</p>
+            <p>Eletricista</p>
         </article>
         <article>
             <p>Refrigerista</p>
@@ -41,5 +45,4 @@
             <p>Lavagem forte</p>
         </article>
     </section>
-</section>
-
+</body>

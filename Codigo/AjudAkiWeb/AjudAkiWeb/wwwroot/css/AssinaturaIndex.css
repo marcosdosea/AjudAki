@@ -1,0 +1,151 @@
+﻿/*TODO*/
+
+/* Estilização geral */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    color: #333;
+}
+
+/* Título principal */
+h1 {
+    color: #1976d2;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+/* Subtítulo */
+h4 {
+    color: #1976d2;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+/* Estilização dos cartões de plano */
+.plano-card {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+    /* Título do cartão */
+    .plano-card h4 {
+        font-size: 1.2em;
+        color: #1976d2;
+        margin-bottom: 10px;
+    }
+
+/* Detalhes do plano */
+.plano-detalhes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.plano-icone {
+    font-size: 2em;
+    margin-right: 15px;
+}
+
+.plano-info {
+    flex-grow: 1;
+}
+
+/* Ações do plano */
+.plano-acoes {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-10%);
+    text-decoration: none;
+}
+
+/* Botões */
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+    button a {
+        text-decoration: none;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+        button a:visited {
+            color: white; 
+        }
+
+        button a:hover {
+            color: black; 
+        }
+
+/* Botão "Alterar plano" */
+.btn-alterar {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Botão "Excluir plano" */
+.btn-excluir {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Container do título e botão */
+.criar-novo-plano {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .criar-novo-plano h4 {
+        margin-right: 10px;
+        font-size: 1.2em;
+        color: #1976d2;
+    }
+
+.btn-criar {
+    background-color: #1976d2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    .btn-criar:visited {
+        color: white; 
+    }
+
+    .btn-criar:hover {
+        color: black; 
+    }
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .criar-novo-plano {
+        flex-direction: column;
+        text-align: center;
+    }
+
+        .criar-novo-plano h4 {
+            margin-bottom: 10px;
+        }
+}
