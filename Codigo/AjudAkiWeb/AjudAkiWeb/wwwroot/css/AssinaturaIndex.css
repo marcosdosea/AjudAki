@@ -138,13 +138,6 @@ button {
         color: black; 
     }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .criar-novo-plano {
-        flex-direction: column;
-        text-align: center;
-    }
-
         .criar-novo-plano h4 {
             margin-bottom: 10px;
         }
