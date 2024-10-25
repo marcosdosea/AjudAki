@@ -1,67 +1,161 @@
 ﻿@page
-@model RegisterModel
+@model AjudAkiWeb.Areas.Identity.Pages.Account.RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Cadastro";
+    // TODO: Será necessário fazer a padronização e refinamento da tela ainda.
 }
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">]
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            margin: 0;
+            padding: 0;
+            margin-bottom:50px;
+        }
 
-<h1>@ViewData["Title"]</h1>
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 2rem;
+        }
 
-<div class="row">
-    <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <label asp-for="Input.Email">Email</label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .flex {
+            display: flex;
+            align-items: flex-start;
+            gap: 4px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-input {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            accent-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro</h1>
+        <form method="post">
+            <div class="grid">
+                <div>
+                    <label for="cpf">CPF</label>
+                    <input id="cpf" asp-for="Input.Cpf" type="text" placeholder="Ex: 000.000.000-00" />
+                </div>
+                <div>
+                    <label for="cep">CEP</label>
+                    <input id="cep" asp-for="Input.Cep" type="text" placeholder="Ex: 00000-000" />
+                </div>
+                <div>
+                    <label for="nome">Nome Completo</label>
+                    <input id="nome" asp-for="Input.Nome" type="text" placeholder="Ex: Nome Completo" />
+                </div>
+                <div>
+                    <label for="bairro">Bairro</label>
+                    <input id="bairro" asp-for="Input.Bairro" type="text" placeholder="Ex: Chlara..." />
+                </div>
+                <div>
+                    <label for="celular">Celular com DDD</label>
+                    <input id="celular" asp-for="Input.Celular" type="text" placeholder="Ex: (00) 00000-0000" />
+                </div>
+                <div>
+                    <label for="rua">Rua</label>
+                    <input id="rua" asp-for="Input.Rua" type="text" placeholder="Ex: Rua Manuel Das Neves Barreto..." />
+                </div>
+                <div>
+                    <label for="telefone">Telefone com DDD</label>
+                    <input id="telefone" asp-for="Input.Telefone" type="text" placeholder="Ex: (00) 00000-0000" />
+                </div>
+                <div>
+                    <label for="numero">Número da residência</label>
+                    <input id="numero" asp-for="Input.NumResidencia" type="text" placeholder="Ex: 206..." />
+                </div>
+                <div>
+                    <label for="ponto">Ponto de Referência</label>
+                    <input id="ponto" asp-for="Input.PontoReferencia" type="text" placeholder="Ex: Próximo ao eu amo Itabaiana" />
+                </div>
+                <div>
+                    <label for="data-nascimento">Data de nascimento</label>
+                    <div style="display: flex; gap: 1rem;">
+                        <select asp-for="Input.DiaNascimento">
+                            <option value="">Dia</option>
+                            @for (int dia = 1; dia <= 31; dia++)
+                            {
+                                <option value="@dia">@dia</option>
+                            }
+                        </select>
+                        <select asp-for="Input.MesNascimento">
+                            <option value="">Mês</option>
+                            @for (int mes = 1; mes <= 12; mes++)
+                            {
+                                <option value="@mes">@mes</option>
+                            }
+                        </select>
+                        <select asp-for="Input.AnoNascimento">
+                            <option value="">Ano</option>
+                            @for (int ano = DateTime.Now.Year - 100; ano <= DateTime.Now.Year; ano++)
+                            {
+                                <option value="@ano">@ano</option>
+                            }
+                        </select>
+                    </div>
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.Password">Password</label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            <div class="checkbox-container">
+                <input type="checkbox" class="checkbox-input" id="myCheckbox">
+                <label for="myCheckbox">Estou ciente e concordo com a <a href="#" class="text-blue-600">Política de Privacidade</a> e os <a href="#" class="text-blue-600">Termos e Condições de Uso</a>.</label>
             </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <button type="submit">Cadastrar</button>
         </form>
     </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to register.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div>
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+</body>
+</html>
