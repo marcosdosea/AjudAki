@@ -85,19 +85,64 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "O {0} deve ter pelo menos {2} e no máximo {1} caracteres de comprimento.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
-            public string Password { get; set; }
+            [Display(Name = "Senha")]
+            public string Senha { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
+            [Display(Name = "Confirmar Senha")]
+            [Compare("Senha", ErrorMessage = "A senha e a confirmação da senha não coincidem.")]
+            public string ConfirmarSenha { get; set; }
+
+            // Campos adicionais conforme a nova estrutura do register.cs
+            [Required]
+            [Display(Name = "CPF")]
+            public string Cpf { get; set; }
+
+            [Required]
+            [Display(Name = "CEP")]
+            public string Cep { get; set; }
+
+            [Required]
+            [Display(Name = "Nome Completo")]
+            public string Nome { get; set; }
+
+            [Display(Name = "Bairro")]
+            public string Bairro { get; set; }
+
+            [Display(Name = "Data de Nascimento")]
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true)]
+            [Required(ErrorMessage = "Campo Obrigatório")]
+            public DateTime DataNascimento { get; set; }
+
+            [Display(Name = "Celular com DDD")]
+            public string Celular { get; set; }
+
+            [Display(Name = "Rua")]
+            public string Rua { get; set; }
+
+            [Display(Name = "Telefone com DDD")]
+            public string Telefone { get; set; }
+
+            [Display(Name = "Número da residência")]
+            public string NumResidencia { get; set; }
+
+            [Display(Name = "Ponto de referência")]
+            public string PontoReferencia { get; set; }
+
+            [Required]
+            [Display(Name = "Aceitar Termos")]
+            public bool AceitarTermos { get; set; }
+
+            public int DiaNascimento { get; set; }
+            public int MesNascimento { get; set; }
+            public int AnoNascimento { get; set; }
         }
 
 
@@ -117,7 +162,20 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, Input.Password);
+
+                // Definir os campos adicionais no objeto de usuário
+                user.Cpf = Input.Cpf;
+                user.Cep = Input.Cep;
+                user.Nome = Input.Nome;
+                user.Bairro = Input.Bairro;
+                user.Celular = Input.Celular;
+                user.Rua = Input.Rua;
+                user.Telefone = Input.Telefone;
+                user.NumResidencia = Input.NumResidencia;
+                user.PontoReferencia = Input.PontoReferencia;
+                user.DataNascimento = Input.DataNascimento;
+
+                var result = await _userManager.CreateAsync(user, Input.Senha);
 
                 if (result.Succeeded)
                 {
