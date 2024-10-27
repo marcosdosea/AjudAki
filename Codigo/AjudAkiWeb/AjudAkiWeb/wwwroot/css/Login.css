@@ -1,0 +1,153 @@
+﻿
+/* Estilos gerais */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-start; /* Mudado para flex-start */
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    max-width: 80px;
+    /* margin-right: 10px; // Removido ou ajustado se necessário */
+}
+
+.site-name {
+    font-size: 1.5rem;
+    color: #006BC8; /* Mudando a cor para #006BC8 */
+    font-weight: bold;
+    margin-left: 10px; /* Espaço entre logo e nome */
+}
+
+.login-container {
+    max-width: 500px; /* Mantendo a largura máxima */
+    width: 100%;
+    padding: 3rem; /* Mantendo o padding interno */
+    text-align: center;
+    margin-top: 50px; /* Diminuindo para subir o formulário mais para cima */
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px; /* Altura mínima para evitar aumento do container */
+}
+
+    .login-container h2 {
+        color: #006BC8; /* Cor do título "Login" */
+        font-size: 3.5rem; /* Mantendo o tamanho da fonte do título */
+        margin-top: -20px; /* Movendo o título para cima */
+        margin-bottom: 1.5rem;
+    }
+
+.form-control {
+    width: 100%;
+    padding: 2.0rem; /* Aumentando o padding dos inputs */
+    font-size: 1.1rem; /* Aumentando o tamanho da fonte dos inputs */
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+    .form-control:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+.btn-primary {
+    width: 130px; /* Ajuste a largura conforme necessário */
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: #fff; /* Texto do botão em branco */
+    background-color: #006BC8; /* Mudando a cor do botão */
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin: 1rem auto; /* Centraliza o botão horizontalmente */
+}
+
+    .btn-primary:hover {
+        background-color: #004E93; /* Cor ao passar o mouse sobre o botão */
+    }
+
+.login-links a {
+    color: #004E93; /* Cor dos links de senha e cadastro */
+    text-decoration: none;
+}
+
+.login-links {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+}
+
+    .login-links a {
+        color: #004E93; /* Cor dos links de senha e cadastro */
+        text-decoration: none;
+    }
+
+        .login-links a:hover {
+            text-decoration: underline; /* Sublinhado ao passar o mouse sobre os links */
+        }
+
+/* Rodapé */
+.footer {
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
+    background-color: #fff;
+    position: absolute;
+    bottom: 0;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    color: #007bff;
+}
+
+    .social-icons a {
+        color: #006BC8; /* Cor dos ícones de redes sociais */
+        font-size: 1.5rem;
+    }
+
+        .social-icons a:hover {
+            color: #004E93; /* Cor ao passar o mouse sobre os ícones */
+        }
+
+
