@@ -1,0 +1,18 @@
+﻿@font-face {
+    font-family: 'CentraNubeBook';
+    src: url('../fonts/centranube-book-webfont.woff2') format('woff2'), url('../fonts/centranube-book-webfont.woff') format('woff');
+    font-family: 'CentraNubeMedium';
+    src: url('../fonts/centranube-medium-webfont.woff2') format('woff2'), url('../fonts/centranube-medium-webfont.woff') format('woff');
+    font-family: 'CentraNubeBookItalic';
+    src: url('../fonts/centranube-bookitalic-webfont.woff2') format('woff2'), url('../fonts/centranube-bookitalic-webfont.woff') format('woff');
+    font-family: 'CentraNubeMediumItalic';
+    src: url('../fonts/centranube-mediumitalic-webfont.woff2') format('woff2'), url('../fonts/centranube-mediumitalic-webfont.woff') format('woff');
+}
+
+:root {
+    --primary-color: #006BC8;
+    --bg-white: #FFFFFF;
+    --placeholder-color: #5E6163;
+    --secundary-color: #0B5998;
+    --black: #000000;
+}

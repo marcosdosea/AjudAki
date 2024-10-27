@@ -9,13 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using AjudAkiWeb.Areas.Identity.Data;
+using Core.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace AjudAkiWeb.Areas.Identity.Pages.Account.Manage
+namespace Core.Identity.Pages.Account.Manage
 {
     public class EnableAuthenticatorModel : PageModel
     {

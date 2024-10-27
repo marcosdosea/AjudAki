@@ -2,7 +2,7 @@ using Core;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 using Service;
-using AjudAkiWeb.Areas.Identity.Data;
+using Core.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using AjudAkiWeb.Helpers;
