@@ -1,9 +1,7 @@
-using AjudAkiWeb.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace AjudAkiWeb.Areas.Identity.Data;
+namespace Core.Identity.Data;
 
 public class IdentityContext : IdentityDbContext<UsuarioIdentity>
 {
