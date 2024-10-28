@@ -69,43 +69,45 @@ button {
     border: none;
     padding: 0;
     cursor: pointer;
+    text-decoration: none;
 }
-
-    button a {
-        text-decoration: none;
-        padding: 10px 20px;
-        color: white;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-
-        button a:visited {
-            color: white; 
-        }
-
-        button a:hover {
-            color: black; 
-        }
 
 /* Botão "Alterar plano" */
 .btn-alterar {
-    background-color: #1976d2;
+    background-color: #006BC8;
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
 }
+
+    .btn-alterar:hover {
+        background-color: #004E93;
+        border-color: #004085;
+        color: white; 
+    }
+
 
 /* Botão "Excluir plano" */
 .btn-excluir {
-    background-color: #d32f2f;
+    background-color: #EC3F41;
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
 }
+
+    .btn-excluir:hover {
+        background-color: #DC0F13;
+        border-color: #004085;
+        color: white; 
+    }
+
+
 
 /* Container do título e botão */
 .criar-novo-plano {
@@ -122,7 +124,7 @@ button {
     }
 
 .btn-criar {
-    background-color: #1976d2;
+    background-color: #006BC8;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -130,15 +132,12 @@ button {
     font-weight: bold;
 }
 
-    .btn-criar:visited {
-        color: white; 
-    }
-
     .btn-criar:hover {
-        color: black; 
+        background-color: #004E93;
+        border-color: #004085;
+        color: white; /* Mantém a cor do texto branca ao passar o mouse */
     }
 
-        .criar-novo-plano h4 {
-            margin-bottom: 10px;
-        }
+.criar-novo-plano h4 {
+    margin-bottom: 10px;
 }
