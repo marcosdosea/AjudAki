@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AjudAkiWeb\AjudAkiWeb.csproj" />
-    <ProjectReference Include="..\Service\Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>
