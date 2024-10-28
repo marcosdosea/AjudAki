@@ -1,0 +1,6 @@
+@AjudAkiAPI_HostAddress = http://localhost:5217
+
+GET {{AjudAkiAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
