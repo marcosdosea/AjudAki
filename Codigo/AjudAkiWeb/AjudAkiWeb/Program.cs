@@ -18,17 +18,17 @@ namespace AjudAkiWeb
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddTransient<IAgendaService, AgendaService>();
-            builder.Services.AddTransient<IAreaAtuacaoService, AreaAtuacaoService>();
-            builder.Services.AddTransient<IAssinaturaService, AssinaturaService>();
-            builder.Services.AddTransient<IAvaliarService, AvaliarService>();
-            builder.Services.AddTransient<IClienteService, ClienteService>();
-            builder.Services.AddTransient<IContratacaoService, ContratacaoService>();
-            builder.Services.AddTransient<IPagarAssinaturaService, PagarAssinaturaService>();
-            builder.Services.AddTransient<IProfissionalService, ProfissionalService>();
-            builder.Services.AddTransient<IServicoService, ServicoService>();
-            builder.Services.AddTransient<ISolicitacaoServicoService, SolicitacaoServicoService>();
-            builder.Services.AddTransient<ITipoServicoService, TipoServicoService>();
+            builder.Services.AddScoped<IAgendaService, AgendaService>();
+            builder.Services.AddScoped<IAreaAtuacaoService, AreaAtuacaoService>();
+            builder.Services.AddScoped<IAssinaturaService, AssinaturaService>();
+            builder.Services.AddScoped<IAvaliarService, AvaliarService>();
+            builder.Services.AddScoped<IClienteService, ClienteService>();
+            builder.Services.AddScoped<IContratacaoService, ContratacaoService>();
+            builder.Services.AddScoped<IPagarAssinaturaService, PagarAssinaturaService>();
+            builder.Services.AddScoped<IProfissionalService, ProfissionalService>();
+            builder.Services.AddScoped<IServicoService, ServicoService>();
+            builder.Services.AddScoped<ISolicitacaoServicoService, SolicitacaoServicoService>();
+            builder.Services.AddScoped<ITipoServicoService, TipoServicoService>();
 
             // Configuração do envio de emails para o usuário
             builder.Services.AddTransient<IEmailSender, EmailSender>();
