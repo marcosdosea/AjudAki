@@ -9,17 +9,18 @@
 </head>
 
 <h1>Criar novo plano</h1>
+
 <h4>Gerencie os dados do plano.</h4>
+
+<hr />
 
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label" typeof="hidden"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
+
+            <h5>Dados do plano</h5>
+
             <div class="form-group">
                 @Html.LabelFor(m => m.Nome)
                 @Html.DropDownListFor(m => m.Nome, Model.PlanoList, "Selecione Plano", new { @class = "form-control" })
@@ -32,16 +33,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Valor" class="control-label"></label>
-                <input asp-for="Valor" class="form-control" />
+                <input asp-for="Valor" class="form-control" placeholder="R$" />
                 <span asp-validation-for="Valor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
+                <textarea asp-for="Descricao" class="form-control" rows="3" placeholder="Plano com X anúncios."></textarea>
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Salvar alterações" class="btn btn-primary" />
             </div>
         </form>
     </div>
