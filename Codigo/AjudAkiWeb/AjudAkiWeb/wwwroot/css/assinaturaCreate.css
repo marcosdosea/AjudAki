@@ -1,0 +1,88 @@
+﻿/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+h1, p {
+    color: #1a73e8; /* cor de destaque */
+    margin-bottom: 0.5em;
+}
+
+/* Layout e espaçamento */
+.row {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.col-md-4 {
+    max-width: 400px;
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo do formulário */
+.form-group {
+    margin-bottom: 1.5em;
+}
+
+    .form-group label {
+        font-weight: bold;
+        margin-bottom: 0.5em;
+        display: inline-block;
+        color: #555;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group select,
+    .form-group textarea {
+        width: 50%;
+        padding: 0.6em;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1em;
+        transition: border-color 0.3s;
+    }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="number"]:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #1a73e8;
+            outline: none;
+        }
+
+/* Botão */
+.btn-primary {
+    background-color: #1a73e8;
+    border: none;
+    color: #fff;
+    padding: 0.8em 1.2em;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 4px;
+    width: 14%;
+}
+
+    .btn-primary:hover {
+        background-color: #1558a2;
+    }
+
+/* Mensagens de validação */
+.text-danger {
+    color: #d9534f;
+    font-size: 0.9em;
+    margin-top: 0.2em;
+}
+
+/* Alinhamento e espaçamento */
+.form-group input[type="submit"] {
+    margin-top: 1em;
+}

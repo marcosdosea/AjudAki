@@ -1,13 +1,16 @@
 ﻿@model AjudAkiWeb.Models.AssinaturaViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Criar novo plano";
 }
 
-<h1>Create</h1>
+<head>
+    <link href="~/css/assinaturaCreate.css" rel="stylesheet" asp-append-version="true" />
+</head>
 
-<h4>AssinaturaViewModel</h4>
-<hr />
+<h1>Criar novo plano</h1>
+<h4>Gerencie os dados do plano.</h4>
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -43,9 +46,10 @@
         </form>
     </div>
 </div>
+<br>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {
