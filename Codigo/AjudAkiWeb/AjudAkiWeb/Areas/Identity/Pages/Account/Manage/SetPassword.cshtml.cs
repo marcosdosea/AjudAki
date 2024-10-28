@@ -5,12 +5,12 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using AjudAkiWeb.Areas.Identity.Data;
+using Core.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AjudAkiWeb.Areas.Identity.Pages.Account.Manage
+namespace Core.Identity.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {

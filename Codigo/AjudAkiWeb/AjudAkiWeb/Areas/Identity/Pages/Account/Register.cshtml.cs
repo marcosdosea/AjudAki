@@ -2,25 +2,22 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using AjudAkiWeb.Areas.Identity.Data;
+using Core;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
+using Core.Service;
+using Core.Identity.Data;
+using AutoMapper;
+using AjudAkiWeb.Models;
 
-namespace AjudAkiWeb.Areas.Identity.Pages.Account
+namespace EventoWeb.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
@@ -30,20 +27,25 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<UsuarioIdentity> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IMapper _mapper;
+        private readonly IClienteService _clienteService;
 
         public RegisterModel(
             UserManager<UsuarioIdentity> userManager,
             IUserStore<UsuarioIdentity> userStore,
             SignInManager<UsuarioIdentity> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IMapper mapper,
+            IClienteService clienteService)
         {
             _userManager = userManager;
             _userStore = userStore;
-            _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _mapper = mapper;
+            _clienteService = clienteService;
         }
 
         /// <summary>
@@ -85,64 +87,29 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "O {0} deve ter pelo menos {2} e no máximo {1} caracteres de comprimento.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Senha")]
-            public string Senha { get; set; }
+            [Display(Name = "Password")]
+            public string Password { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirmar Senha")]
-            [Compare("Senha", ErrorMessage = "A senha e a confirmação da senha não coincidem.")]
-            public string ConfirmarSenha { get; set; }
-
-            // Campos adicionais conforme a nova estrutura do register.cs
-            [Required]
-            [Display(Name = "CPF")]
-            public string Cpf { get; set; }
+            [Display(Name = "Confirm password")]
+            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            public string ConfirmPassword { get; set; }
 
             [Required]
-            [Display(Name = "CEP")]
-            public string Cep { get; set; }
-
-            [Required]
-            [Display(Name = "Nome Completo")]
+            [Display(Name = "Nome")]
             public string Nome { get; set; }
 
-            [Display(Name = "Bairro")]
-            public string Bairro { get; set; }
-
-            [Display(Name = "Data de Nascimento")]
-            [DataType(DataType.Date)]
-            [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true)]
-            [Required(ErrorMessage = "Campo Obrigatório")]
-            public DateTime DataNascimento { get; set; }
-
-            [Display(Name = "Celular com DDD")]
-            public string Celular { get; set; }
-
-            [Display(Name = "Rua")]
-            public string Rua { get; set; }
-
-            [Display(Name = "Telefone com DDD")]
-            public string Telefone { get; set; }
-
-            [Display(Name = "Número da residência")]
-            public string NumResidencia { get; set; }
-
-            [Display(Name = "Ponto de referência")]
-            public string PontoReferencia { get; set; }
-
-            [Required]
-            [Display(Name = "Aceitar Termos")]
-            public bool AceitarTermos { get; set; }
-
-            public int DiaNascimento { get; set; }
-            public int MesNascimento { get; set; }
-            public int AnoNascimento { get; set; }
+            [Required(ErrorMessage = "O campo CPF é obrigatório.")]
+            [StringLength(11, ErrorMessage = "O CPF deve ter 11 dígitos.")]
+            [Display(Name = "CPF", Prompt = "Digite seu CPF")]
+            public string CPF { get; set; }
+            public ClienteViewModel Pessoa { get; set; }
         }
 
 
@@ -154,44 +121,47 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
-
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-
-                // Definir os campos adicionais no objeto de usuário
-                user.Cpf = Input.Cpf;
-                user.Cep = Input.Cep;
-                user.Nome = Input.Nome;
-                user.Bairro = Input.Bairro;
-                user.Celular = Input.Celular;
-                user.Rua = Input.Rua;
-                user.Telefone = Input.Telefone;
-                user.NumResidencia = Input.NumResidencia;
-                user.PontoReferencia = Input.PontoReferencia;
-                user.DataNascimento = Input.DataNascimento;
-
-                var result = await _userManager.CreateAsync(user, Input.Senha);
+                var user = new UsuarioIdentity { UserName = Input.CPF, Email = Input.Email };
+                var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("Usuário criou uma nova conta com senha.");
 
-                    var userId = await _userManager.GetUserIdAsync(user);
+                    var pessoaResult = _clienteService.Create(new Pessoa
+                    {
+                        Nome = Input.Nome,
+                        Cpf = Input.Email,
+                        Email = Input.Email
+                    });
+
+                    var roleName = "USUARIO";
+                    var roleResult = await _userManager.AddToRoleAsync(user, roleName);
+
+                    if (!roleResult.Succeeded)
+                    {
+                        foreach (var error in roleResult.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                        return Page();
+                    }
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirme seu email",
+                        $"Por favor, confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -203,15 +173,16 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
+
 
         private UsuarioIdentity CreateUser()
         {

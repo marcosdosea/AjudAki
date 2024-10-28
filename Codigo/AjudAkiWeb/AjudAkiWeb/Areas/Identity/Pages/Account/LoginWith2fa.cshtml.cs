@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using AjudAkiWeb.Areas.Identity.Data;
+using Core.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace AjudAkiWeb.Areas.Identity.Pages.Account
+namespace Core.Identity.Pages.Account
 {
     public class LoginWith2faModel : PageModel
     {
