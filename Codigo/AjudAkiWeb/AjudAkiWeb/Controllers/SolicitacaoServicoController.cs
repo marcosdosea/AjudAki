@@ -4,7 +4,6 @@ using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using MySqlX.XDevAPI;
 
 namespace AjudAkiWeb.Controllers
 {
@@ -24,6 +23,7 @@ namespace AjudAkiWeb.Controllers
             this.clienteService = clienteService;
             this.profissionalService = profissionalService;
             this.solicitacaoServicoService = solicitacaoServicoService;
+            this.tipoServicoService = tipoServicoService;
             this.mapper = mapper;
         }
 
