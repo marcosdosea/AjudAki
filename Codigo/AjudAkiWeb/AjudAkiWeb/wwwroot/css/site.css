@@ -1,22 +1,110 @@
+@import url(colors.css);
+
+*{
+    font-family: CentraNube, sans-serif;
+}
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+.navbar {
+    height: 65px;
+    display: flex;
+}
+
+.navbar-brand {
+    margin-bottom: 18px;
+    padding-inline-start: 15px;
+}
+
+.forms {
+    margin-inline-start: 100px;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.formAtuacao {
+    width: 347px;
+}
+
+.formRegiao {
+    width: 250px;
+}
+
+.div-regiao{
+    margin-inline-start: 16px;
+}
+
+.formAtuacao,
+.formRegiao {
+    padding-left: 30px; /* Espaço para o ícone dentro do select */
+    flex: 1; /* Faz com que os selects ocupem espaço igual */
+    border-radius: 8px;
+}
+
+.formAtuacao:last-child,
+.formRegiao:last-child {
+    margin-right: 0; /* Remove a margem do último select */
+}
+
+.navbar button {
+    height: 34px;
+    width: 140px;
+}
+
+.icon-left, .icon-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Ignora eventos de clique no ícone */
+    color: var(--placeholder-color); /* Cor do ícone */
+    font-size: 1rem; /* Tamanho do ícone */
+}
+
+.icon-left {
+    left: 10px; /* Alinhamento à esquerda */
+}
+
+.icon-right {
+    right: 10px; /* Alinhamento à direita */
+}
+
+.btn{
+    width: 150px;
+    height: 34px;
+    margin-inline-start: 16px;
+    color: var(--bg-white);
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+.btn-conta{
+    background-color: var(--primary-color);
+}
+
+.btn-servico{
+    background-color: var(--deep-blue);
 }

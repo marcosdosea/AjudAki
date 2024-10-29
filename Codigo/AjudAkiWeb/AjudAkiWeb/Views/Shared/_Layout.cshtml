@@ -1,65 +1,90 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using Core.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<UsuarioIdentity> SignInManager
+@inject UserManager<UsuarioIdentity> UserManager
+
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AjudAkiWeb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AjudAkiWeb.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AjudAkiWeb</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Contratacao" asp-action="Index">Contratar Serviço</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Agenda" asp-action="Index">Agenda</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Avaliar" asp-action="Index">Avaliar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AreaAtuacao" asp-action="Index">Area Atuação</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Assinatura" asp-action="Index">Assinatura</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PagarAssinatura" asp-action="Index">Pagar Assinatura</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Cliente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Profissional" asp-action="Index">Profissional</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Servico" asp-action="Index">Serviço</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SolicitacaoServico" asp-action="Index">Solicitação de Serviço</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tiposervico" asp-action="Index">Tipo Serviço</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3 vw-100 ">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/Logo_AjudAki.webp" alt="AjudAkiWeb" style="height: 50px;" />
+                </a>
+                <partial name="_LoginPartial" /> 
+                <div class="forms flex-grow-1 d-flex">
+                    <form class="d-flex ms-2">
+                        <div class="position-relative me-2">
+                            <span class="icon-left">
+                                <i class="fa-solid fa-magnifying-glass"></i><!-- Ícone no início -->
+                            </span>
+                            <select class="formAtuacao form-control" aria-label="Ex: Encanador">
+                                <option value="" disabled selected>Ex: Encanador</option>
+                                <option value="encanador">Encanador</option>
+                                <option value="eletricista">Eletricista</option>
+                                <option value="pintor">Pintor</option>
+                            </select>
+                            <span class="icon-right">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </span>
+                        </div>
+
+                        <div class="div-regiao position-relative me-2">
+                            <span class="icon-left">
+                                <i class="fa fa-map-marker-alt"></i> <!-- Ícone no início -->
+                            </span>
+                            <select class="formRegiao form-control" aria-label="Selecione um Estado">
+                                <option value="" disabled selected>Estado</option>
+                                <option value="acre">Acre</option>
+                                <option value="alagoas">Alagoas</option>
+                                <option value="amapa">Amapá</option>
+                                <option value="amazonas">Amazonas</option>
+                                <option value="bahia">Bahia</option>
+                                <option value="ceara">Ceará</option>
+                                <option value="distrito_federal">Distrito Federal</option>
+                                <option value="espirito_santo">Espírito Santo</option>
+                                <option value="goias">Goiás</option>
+                                <option value="maranhao">Maranhão</option>
+                                <option value="matogrosso">Mato Grosso</option>
+                                <option value="matogrossodosul">Mato Grosso do Sul</option>
+                                <option value="minas_gerais">Minas Gerais</option>
+                                <option value="parana">Paraná</option>
+                                <option value="paraiba">Paraíba</option>
+                                <option value="parana">Paraná</option>
+                                <option value="pernambuco">Pernambuco</option>
+                                <option value="piaui">Piauí</option>
+                                <option value="rio_de_janeiro">Rio de Janeiro</option>
+                                <option value="rio_grande_do_norte">Rio Grande do Norte</option>
+                                <option value="rio_grande_do_sul">Rio Grande do Sul</option>
+                                <option value="rondonia">Rondônia</option>
+                                <option value="roraima">Roraima</option>
+                                <option value="santa_catarina">Santa Catarina</option>
+                                <option value="sao_paulo">São Paulo</option>
+                                <option value="sergipe">Sergipe</option>
+                                <option value="tocantins">Tocantins</option>
+                            </select>
+
+                            <span class="icon-right">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </span>
+                        </div>
+                    </form><a asp-area="" asp-controller="Servico" asp-action="Index" class="btn btn-servico" type="button">
+                        Ofertar Serviço <i class="fa-regular fa-money-bill-1 ms-2"></i> <!-- Ícone ao lado direito -->
+                    </a>
+
+                    <a asp-area="Identity" asp-page="/Account/Manage/Index" class="btn btn-conta" type="button">
+                        Minha Conta <i class="fa fa-user ms-2"></i> <!-- Ícone ao lado direito -->
+                    </a>
+
                 </div>
             </div>
         </nav>
