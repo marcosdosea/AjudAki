@@ -26,8 +26,8 @@
             <button>
                 @Html.ActionLink("Alterar plano", "Edit", new { id = item.Id }, new { @class = "btn-alterar" })
             </button>
-            <button>
-                @Html.ActionLink("Excluir plano", "Delete", new { id = item.Id }, new { @class = "btn-excluir" })
+            <button> 
+                type="button" class="btn-excluir" onclick="openDeleteModal(@item.Id, '@item.Nome')">Excluir Plano
             </button>
         </div>
     </section>
@@ -38,3 +38,47 @@
         <a asp-action="Create" class="btn-criar">Criar plano</a>
     </div>
 </div>
+
+<!-- Modal de Confirmação -->
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Excluir plano</h5>
+                <button type="button" class="close" aria-label="Close" onclick="closeModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="modalBody">Tem certeza de que deseja excluir este plano?</p>
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="post">
+                    <button type="submit" class="btn btn-danger">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function openDeleteModal(id, nome) {
+            // Configura o título e o corpo do modal
+            document.getElementById('modalTitle').innerText = `Excluir ${nome}`;
+            document.getElementById('modalBody').innerText = `Tem certeza de que deseja excluir o plano "${nome}"?`;
+            
+            // Configura a ação do formulário com o ID do item a ser excluído
+            document.getElementById('deleteForm').action = `@Url.Action("Delete")/${id}`;
+            
+            // Exibe o modal
+            document.getElementById('deleteModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            // Oculta o modal
+            document.getElementById('deleteModal').style.display = 'none';
+        }
+    </script>
+}

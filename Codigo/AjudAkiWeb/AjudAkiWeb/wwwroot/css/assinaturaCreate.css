@@ -57,19 +57,28 @@ textarea.form-control {
 }
 
 input[type="submit"] {
-    background-color: #1a73e8;
-    color: #fff;
-    font-size: 1em;
-    padding: 0.6em 1.5em;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    background-color: #006BC8; 
+    color: #fff; 
+    font-size: 1.10em; 
+    padding: 10px 2px; 
+    height: 45px; 
+    border: none; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+    text-align: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 10px; 
 }
 
     input[type="submit"]:hover {
-        background-color: #1558b8;
+        background-color: #004E93; 
     }
+
+
+
 
 a {
     color: #006BC8;
