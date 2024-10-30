@@ -10,12 +10,12 @@ namespace AjudAkiWeb.Models
         [Key]
         public uint Id { get; set; }
 
-        [Required(ErrorMessage = "Código do área de atuação é obrigatório")]
         [Display(Name = "Área de atuação")]
+        [Required(ErrorMessage = "Código do área de atuação é obrigatório")]
         public uint IdAreaAtuacao { get; set; }
 
-        [Required(ErrorMessage = "Código do agenda é obrigatório")]
         [Display(Name = "Agenda")]
+        [Required(ErrorMessage = "Código do agenda é obrigatório")]
         public uint IdAgenda { get; set; }
 
         [StringLength(50)]
