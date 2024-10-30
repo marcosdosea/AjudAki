@@ -60,14 +60,14 @@ body {
 
 .formAtuacao,
 .formRegiao {
-    padding-left: 30px; /* Espaço para o ícone dentro do select */
-    flex: 1; /* Faz com que os selects ocupem espaço igual */
+    padding-left: 30px; 
+    flex: 1; 
     border-radius: 8px;
 }
 
 .formAtuacao:last-child,
 .formRegiao:last-child {
-    margin-right: 0; /* Remove a margem do último select */
+    margin-right: 0; 
 }
 
 .navbar button {
@@ -79,19 +79,24 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    pointer-events: none; /* Ignora eventos de clique no ícone */
-    color: var(--placeholder-color); /* Cor do ícone */
-    font-size: 1rem; /* Tamanho do ícone */
+    pointer-events: none; 
+    color: var(--placeholder-color); 
+    font-size: 1rem; 
 }
 
 .icon-left {
-    left: 10px; /* Alinhamento à esquerda */
+    left: 10px; 
 }
 
 .icon-right {
-    right: 10px; /* Alinhamento à direita */
+    right: 10px; 
 }
-
+.text-primary {
+    color: #004E93 !important; 
+    font-weight: bold; 
+    font-size: 24px;
+    margin-left: 10px; 
+}
 .btn{
     width: 150px;
     height: 34px;
