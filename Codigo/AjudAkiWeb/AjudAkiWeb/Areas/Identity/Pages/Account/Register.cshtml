@@ -22,13 +22,13 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div>
                     <label for="cpf">CPF</label>
-                    <input id="cpf" asp-for="Input.CPF" type="text" placeholder="Ex: 000.000.000-00" />
-                    <span asp-validation-for="Input.CPF" class="text-danger"></span>
+                    <input id="cpf" asp-for="Input.Pessoa.Cpf" type="text" placeholder="Ex: 000.000.000-00" />
+                    <span asp-validation-for="Input.Pessoa.Cpf" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="nome">Nome Completo</label>
-                    <input id="nome" asp-for="Input.Nome" type="text" placeholder="Ex: Nome Completo" />
-                    <span asp-validation-for="Input.Nome" class="text-danger"></span>
+                    <input id="nome" asp-for="Input.Pessoa.Nome" type="text" placeholder="Ex: Nome Completo" />
+                    <span asp-validation-for="Input.Pessoa.Nome" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="celular">Celular com DDD</label>
@@ -47,8 +47,8 @@
                 </div>
                 <div>
                     <label for="email">Email</label>
-                    <input id="email" asp-for="Input.Email" type="email" placeholder="seuemail@email.com" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    <input id="email" asp-for="Input.Pessoa.Email" type="email" placeholder="seuemail@email.com" />
+                    <span asp-validation-for="Input.Pessoa.Email" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="senha">Senha</label>

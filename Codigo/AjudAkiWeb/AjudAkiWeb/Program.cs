@@ -40,7 +40,9 @@ namespace AjudAkiWeb
                 options.UseMySQL(builder.Configuration.GetConnectionString("AjudakiDatabase")));
 
             builder.Services.AddDbContext<IdentityContext>(options =>
-                options.UseMySQL(builder.Configuration.GetConnectionString("IdentityDatabase")));
+                options.UseMySQL(builder.Configuration.GetConnectionString("IdentityDatabase"),
+                    b => b.MigrationsAssembly("AjudAkiWeb")));
+
 
             // Configuração da identidade
             builder.Services.AddDefaultIdentity<UsuarioIdentity>(options =>
@@ -54,7 +56,7 @@ namespace AjudAkiWeb
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 6;
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                options.User.RequireUniqueEmail = false; 
+                options.User.RequireUniqueEmail = false;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = true;

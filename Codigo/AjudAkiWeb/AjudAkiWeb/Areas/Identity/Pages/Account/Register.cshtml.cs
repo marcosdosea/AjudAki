@@ -52,11 +52,6 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
-            public string Email { get; set; }
-
-            [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -66,15 +61,6 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-
-            [Required]
-            [Display(Name = "Nome")]
-            public string Nome { get; set; }
-
-            [Required(ErrorMessage = "O campo CPF é obrigatório.")]
-            [StringLength(11, ErrorMessage = "O CPF deve ter 11 dígitos.")]
-            [Display(Name = "CPF", Prompt = "Digite seu CPF")]
-            public string CPF { get; set; }
 
             public ClienteViewModel Pessoa { get; set; }
         }
@@ -92,51 +78,20 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new UsuarioIdentity { UserName = Input.CPF, Email = Input.Email };
+                var user = new UsuarioIdentity { UserName = Input.Pessoa.Cpf, Email = Input.Pessoa.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("Usuário criou uma nova conta com senha.");
 
-                    try
+                    // Salvar cliente no banco de dados usando ClienteService
+                    var pessoaResult = _clienteService.Create(new Pessoa
                     {
-                        // Salvar cliente no banco de dados usando ClienteService
-                        var pessoaResult = _clienteService.Create(new Pessoa
-                        {
-                            Nome = Input.Nome,
-                            Cpf = Input.CPF,
-                            Email = Input.Email
-                        });
-
-                        if (pessoaResult != null)
-                        {
-                            _logger.LogInformation("Cliente salvo com sucesso no banco de dados.");
-                        }
-                        else
-                        {
-                            _logger.LogError("Erro ao salvar o cliente no banco de dados.");
-                            ModelState.AddModelError(string.Empty, "Erro ao salvar o cliente.");
-                            return Page();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError($"Exceção ao salvar o cliente: {ex.Message}");
-                        ModelState.AddModelError(string.Empty, "Erro ao salvar o cliente.");
-                        return Page();
-                    }
-
-                    // Adicionar o usuário a uma role padrão
-                    var roleResult = await _userManager.AddToRoleAsync(user, "USUARIO");
-                    if (!roleResult.Succeeded)
-                    {
-                        foreach (var error in roleResult.Errors)
-                        {
-                            ModelState.AddModelError(string.Empty, error.Description);
-                        }
-                        return Page();
-                    }
+                        Nome = Input.Pessoa.Nome,
+                        Cpf = Input.Pessoa.Cpf,
+                        Email = Input.Pessoa.Email
+                    });
 
                     // Enviar e-mail de confirmação
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -146,12 +101,12 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
                         new { area = "Identity", userId = user.Id, code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code)), returnUrl },
                         Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirme seu email",
+                    await _emailSender.SendEmailAsync(Input.Pessoa.Email, "Confirme seu email",
                         $"Por favor, confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl });
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Pessoa.Email, returnUrl });
                     }
                     else
                     {
