@@ -106,7 +106,6 @@ namespace AjudAkiWeb.Controllers.Tests
                 Status = 1,
                 Comentario = "O serviço foi bom, mas o profissional poderia melhorar.",
                 IdContratacao = 20,
-                IdContratacaoNavigation = new Contratacao { Id = 20, Nome = "Contratação Exemplo" }
             };
         }
         private IEnumerable<Avaliacao> GetTestAvaliar()
