@@ -162,11 +162,35 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
 
                 foreach (var error in result.Errors)
                 {
+                    _logger.LogError($"Erro ao criar usuário: {error.Description}");
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
             return Page();
+        }
+
+        private UsuarioIdentity CreateUser()
+        {
+            try
+            {
+                return Activator.CreateInstance<UsuarioIdentity>();
+            }
+            catch
+            {
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(UsuarioIdentity)}'. " +
+                    $"Ensure that '{nameof(UsuarioIdentity)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+            }
+        }
+
+        private IUserEmailStore<UsuarioIdentity> GetEmailStore()
+        {
+            if (!_userManager.SupportsUserEmail)
+            {
+                throw new NotSupportedException("The default UI requires a user store with email support.");
+            }
+            return (IUserEmailStore<UsuarioIdentity>)_userStore;
         }
 
     }
