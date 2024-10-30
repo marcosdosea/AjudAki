@@ -1,95 +1,38 @@
 ﻿@model IEnumerable<AjudAkiWeb.Models.ContratacaoViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Minhas Contratações";
 }
+<head>
+    <link href="~/css/ContratacaoIndext.css" rel="stylesheet" asp-append-version="true" />
+</head>
 
-<h1>Index</h1>
+<h1>Minhas contratações</h1>
+<h6>Gerencie as suas contratações.</h6>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCliente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdServico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Data)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cep)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bairro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rua)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumResidencia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PontoReferencia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCliente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdServico)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cep)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bairro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rua)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumResidencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PontoReferencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+@foreach (var item in Model)
+{
+    <div class="contratacao-card" data-status="@item.Status">
+        <div class="contratacao-img">
+            <img src="~/img/profissional.jpg" alt="Foto do Profissional" />
+        </div>
+        <div class="contratacao-detalhes">
+            <h2>@item.Nome</h2>
+            <p class="telefone"><i class="fas fa-phone"></i> 9 9999-9999</p>
+            <p class="area-atuacao">Área de atuação: @item.IdServico</p>
+            <p class="tipos-servico">Tipos de serviço: Instalação de tubulações, Reparo de vazamentos</p>
+            <p class="data-turno">Dia e turno: Tarde, Dia @item.Data.ToString("dd/MM/yyyy")</p>
+        </div>
+        <div class="contratacao-footer">
+            <div class="contratacao-avaliacao">
+                <span>5.0/5.0</span>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <div class="contratacao-status">
+                <span class="status-mensagem">@item.Status</span>
+            </div>
+        </div>
+    </div>
+
 }
-    </tbody>
-</table>
+<script src="~/js/ContratacaoIndex.js"></script>
