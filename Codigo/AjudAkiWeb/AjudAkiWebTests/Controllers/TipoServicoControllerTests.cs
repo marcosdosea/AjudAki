@@ -18,6 +18,8 @@ namespace AjudAkiWeb.Controllers.Tests
         {
             // Arrange
             var mockService = new Mock<ITipoServicoService>();
+            var mockService2 = new Mock<IAgendaService>();
+            var mockService3 = new Mock<IAreaAtuacaoService>();
 
             IMapper mapper = new MapperConfiguration(cfg =>
                 cfg.AddProfile(new TipoServicoProfile())).CreateMapper();
@@ -29,7 +31,7 @@ namespace AjudAkiWeb.Controllers.Tests
                 .Verifiable();
             mockService.Setup(service => service.Create(It.IsAny<Tiposervico>()))
                 .Verifiable();
-            controller = new TipoServicoController(mockService.Object, mapper);
+            controller = new TipoServicoController(mockService.Object,mockService2.Object, mockService3.Object, mapper);
         }
 
         [TestMethod()]
