@@ -12,7 +12,7 @@ namespace AjudAkiWeb.Models
         public uint Id { get; set; }
 
         [Display(Name = "Assinatura")]
-        public int IdAssinatura { get; set; }
+        public uint IdAssinatura { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [StringLength(50)]

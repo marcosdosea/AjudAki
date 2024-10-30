@@ -17,64 +17,77 @@
 <body>
     <div class="container">
         <h1>Cadastro</h1>
-        <form method="post">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div class="grid">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div>
                     <label for="cpf">CPF</label>
                     <input id="cpf" asp-for="Input.CPF" type="text" placeholder="Ex: 000.000.000-00" />
+                    <span asp-validation-for="Input.CPF" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="nome">Nome Completo</label>
                     <input id="nome" asp-for="Input.Nome" type="text" placeholder="Ex: Nome Completo" />
+                    <span asp-validation-for="Input.Nome" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="celular">Celular com DDD</label>
                     <input id="celular" asp-for="Input.Pessoa.Celular" type="text" placeholder="Ex: (00) 00000-0000" />
+                    <span asp-validation-for="Input.Pessoa.Celular" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="telefone">Telefone com DDD</label>
                     <input id="telefone" asp-for="Input.Pessoa.Telefone" type="text" placeholder="Ex: (00) 00000-0000" />
+                    <span asp-validation-for="Input.Pessoa.Telefone" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="data-nascimento">Data de nascimento</label>
                     <input id="data-nascimento" asp-for="Input.Pessoa.DataNascimento" type="date" placeholder="01/01/2024" />
+                    <span asp-validation-for="Input.Pessoa.DataNascimento" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="email">Email</label>
                     <input id="email" asp-for="Input.Email" type="email" placeholder="seuemail@email.com" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="senha">Senha</label>
                     <input id="senha" asp-for="Input.Password" type="password" placeholder="Mínimo de 6 caracteres com letras e números" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div>
-                    <label for="confimaSenha">Confirmar senha</label>
-                    <input id="confimaSenha" asp-for="Input.ConfirmPassword" type="password" placeholder="Repita a senha novamente" />
+                    <label for="confirmaSenha">Confirmar senha</label>
+                    <input id="confirmaSenha" asp-for="Input.ConfirmPassword" type="password" placeholder="Repita a senha novamente" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="cep">CEP</label>
                     <input id="cep" asp-for="Input.Pessoa.Cep" type="text" placeholder="Ex: 00000-000" />
+                    <span asp-validation-for="Input.Pessoa.Cep" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="bairro">Bairro</label>
                     <input id="bairro" asp-for="Input.Pessoa.Bairro" type="text" placeholder="Ex: Chlara..." />
+                    <span asp-validation-for="Input.Pessoa.Bairro" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="rua">Rua</label>
                     <input id="rua" asp-for="Input.Pessoa.Rua" type="text" placeholder="Ex: Rua Manuel Das Neves Barreto..." />
+                    <span asp-validation-for="Input.Pessoa.Rua" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="numero">Número da residência</label>
                     <input id="numero" asp-for="Input.Pessoa.NumResidencia" type="text" placeholder="Ex: 206..." />
+                    <span asp-validation-for="Input.Pessoa.NumResidencia" class="text-danger"></span>
                 </div>
                 <div>
                     <label for="ponto">Ponto de Referência</label>
                     <input id="ponto" asp-for="Input.Pessoa.PontoReferencia" type="text" placeholder="Ex: Próximo ao eu amo Itabaiana" />
+                    <span asp-validation-for="Input.Pessoa.PontoReferencia" class="text-danger"></span>
                 </div>
-
             </div>
             <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-input" id="myCheckbox">
+                <input type="checkbox" class="checkbox-input" id="myCheckbox" required>
                 <label for="myCheckbox">Estou ciente e concordo com a <a href="#" class="text-blue-600">Política de Privacidade</a> e os <a href="#" class="text-blue-600">Termos e Condições de Uso</a>.</label>
             </div>
             <div class="button-container">
@@ -82,6 +95,21 @@
             </div>
         </form>
     </div>
+    <section>
+        @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+        {
+            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                <div>
+                    <p>
+                        @foreach (var provider in Model.ExternalLogins!)
+                        {
+                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                        }
+                    </p>
+                </div>
+            </form>
+        }
+    </section>
 </body>
 </html>
 
