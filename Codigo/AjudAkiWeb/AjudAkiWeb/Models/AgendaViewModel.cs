@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace AjudAkiWeb.Models
 {
-    //TODO: Validar formato de ENUM com Dósea
     public enum TurnoEnum
     {
         MANHÃ, TARDE, NOITE
@@ -22,14 +22,15 @@ namespace AjudAkiWeb.Models
         public DateTime Data { get; set; }
 
         [Display(Name = "Turnos: MANHÃ, TARDE E NOITE")]
-        public TurnoEnum? Turno { get; set; } = null;
-        
-        [Display(Name = "Turno Ocupado (0 = Livre, 1 = Ocupado)")]
-        [Range(0, 1, ErrorMessage = "O valor de Turno ocupado deve ser 0 (Livre) ou 1 (Ocupado)")]
+        public TurnoEnum? Turno { get; set; }
+
+        [Display(Name = "Turno Ocupado")]
         public bool TurnoOcupado { get; set; }
 
-        [Display(Name = "Dia Ocupado (0 = Livre, 1 = Ocupado)")]
-        [Range(0, 1, ErrorMessage = "O valor de Dia ocupado deve ser 0 (Livre) ou 1 (Ocupado)")]
+        [Display(Name = "Dia Ocupado")]
         public bool DiaOcupado { get; set; }
+
+        public SelectList? TurnoList { get; set; }
+
     }
 }
