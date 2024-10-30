@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AjudAkiWeb.Models
 {
@@ -12,7 +13,7 @@ namespace AjudAkiWeb.Models
     public class ServicoViewModel
     {
 
-        [Display(Name ="Código do Serviço")]
+        [Display(Name = "Código do Serviço")]
         [Required(ErrorMessage = "Código do serviço é obrigatório")]
         [Key]
         public uint Id { get; set; }
@@ -37,11 +38,6 @@ namespace AjudAkiWeb.Models
         [Display(Name = "Descrição da oferta do serviço")]
         public string? Descricao { get; set; }
 
-        [Display(Name = "Código do cliente")]
-        [Required(ErrorMessage = "Código do cliente é obrigatório")]
-        [Key]
-        public uint IdCliente { get; set; }
-
         [Display(Name = "Código do profissional")]
         [Required(ErrorMessage = "Código do profissional é obrigatório")]
         [Key]
@@ -51,6 +47,9 @@ namespace AjudAkiWeb.Models
         [Required(ErrorMessage = "Código do serviço é obrigatório")]
         [Key]
         public uint IdTipoServico { get; set; }
+
+        public SelectList? ListaProfissionais { get; set; }
+        public SelectList? ListaTiposServico { get; set; }
 
         // Método para fazer o mapeamento simples do enum para string
         public string GetStatusAsString()

@@ -3,17 +3,22 @@ using AutoMapper;
 using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AjudAkiWeb.Controllers
 {
     public class ServicoController : Controller
     {
+        private readonly IProfissionalService profissionalService;
         private readonly IServicoService servicoService;
+        private readonly ITipoServicoService tipoServicoService;
         private readonly IMapper mapper;
 
-        public ServicoController(IServicoService servicoService, IMapper mapper)
+        public ServicoController(IServicoService servicoService, IProfissionalService profissionalService, ITipoServicoService tipoServicoService, IMapper mapper)
         {
+            this.profissionalService = profissionalService;
             this.servicoService = servicoService;
+            this.tipoServicoService = tipoServicoService;
             this.mapper = mapper;
         }
 
@@ -37,6 +42,10 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Create()
         {
             var servicoViewModel = new ServicoViewModel();
+            IEnumerable<Pessoa> listaProfissionais = profissionalService.GetAll();
+            IEnumerable<Tiposervico> listaTiposServico = tipoServicoService.GetAll();
+            servicoViewModel.ListaTiposServico = new SelectList(listaTiposServico, "Id", "Nome", null);
+            servicoViewModel.ListaProfissionais = new SelectList(listaProfissionais, "Id", "Nome", null);
             servicoViewModel.DataHoraSolicitacao = DateTime.Now;
             return View(servicoViewModel);
         }
@@ -59,6 +68,15 @@ namespace AjudAkiWeb.Controllers
         {
             var servico = servicoService.Get(id);
             var servicoViewModel = mapper.Map<ServicoViewModel>(servico);
+            IEnumerable<Tiposervico> listaTiposServicos = tipoServicoService.GetAll();
+            IEnumerable<Pessoa> listaProfissionais = profissionalService.GetAll();
+
+            servicoViewModel.ListaTiposServico = new SelectList(listaTiposServicos, "Id", "Nome",
+                listaTiposServicos.FirstOrDefault(e => e.Id.Equals(servico.IdTipoServico)));
+
+            servicoViewModel.ListaProfissionais = new SelectList(listaProfissionais, "Id", "Nome",
+                listaProfissionais.FirstOrDefault(e => e.Id.Equals(servico.IdProfissional)));
+
             return View(servicoViewModel);
         }
 
