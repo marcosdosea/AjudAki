@@ -27,18 +27,17 @@
                     @foreach (var item in Model)
                     {
                         <tr class="border-b border-border">
-                            <td class="p-2">@Html.DisplayFor(modelItem => item.Id)</td>
                             <td class="p-2">@Html.DisplayFor(modelItem => item.Nome)</td>
                             <td class="p-2">@Html.DisplayFor(modelItem => item.DataHoraSolicitacao)</td>
                             <td class="p-2">@Html.DisplayFor(modelItem => item.Status)</td>
                             <td class="p-2">@Html.DisplayFor(modelItem => item.Valor)</td>
                             <td class="p-2">@Html.DisplayFor(modelItem => item.Descricao)</td>
-                            <td class="p-2">@Html.DisplayFor(modelItem => item.IdProfissional)</td>
                             <td class="p-2">@Html.DisplayFor(modelItem => item.IdTipoServico)</td>
+                            <td class="p-2">@Html.DisplayFor(modelItem => item.IdAreaAtuacao)</td>
                             <td class="p-2 flex space-x-2">
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-3 py-1 rounded-lg">Editar</a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-3 py-1 rounded-lg">Modificar Serviço</a>
                                 <a asp-action="Details" asp-route-id="@item.Id" class="bg-primary text-primary-foreground hover:bg-primary/80 px-3 py-1 rounded-lg">Detalhes</a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="bg-destructive text-destructive-foreground hover:bg-destructive/80 px-3 py-1 rounded-lg">Apagar</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="bg-destructive text-destructive-foreground hover:bg-destructive/80 px-3 py-1 rounded-lg">Apagar Serviço</a>
                             </td>
                         </tr>
                     }

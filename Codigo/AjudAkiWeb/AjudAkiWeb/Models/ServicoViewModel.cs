@@ -43,12 +43,18 @@ namespace AjudAkiWeb.Models
         [Key]
         public uint IdProfissional { get; set; }
 
+        [Display(Name = "Código da area atuação")]
+        [Required(ErrorMessage = "Código da area atuação é obrigatório")]
+        [Key]
+        public uint IdAreaAtuacao { get; set; }
+
         [Display(Name = "Código do serviço")]
         [Required(ErrorMessage = "Código do serviço é obrigatório")]
         [Key]
         public uint IdTipoServico { get; set; }
 
         public SelectList? ListaProfissionais { get; set; }
+        public SelectList? ListaAreaAtuacao { get; set; }
         public SelectList? ListaTiposServico { get; set; }
 
         // Método para fazer o mapeamento simples do enum para string
@@ -65,5 +71,6 @@ namespace AjudAkiWeb.Models
             else
                 return "Indefinido";
         }
+
     }
 }
