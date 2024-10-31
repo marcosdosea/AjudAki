@@ -22,20 +22,14 @@ h4 {
 /* Container do título e botão */
 .btn-criar-container {
     display: flex;
-    justify-content: space-between; /* Espaça o conteúdo entre os dois lados */
-    align-items: flex-start; /* Alinha verticalmente no início */
-    margin-top: 20px;
-    width: 100%; /* Garante que o contêiner ocupe toda a largura disponível */
 }
 
 .titulo-subtitulo {
     display: flex;
-    flex-direction: column; /* Faz o título e o subtítulo ficarem um embaixo do outro */
 }
 
 .criar-novo-plano {
     display: flex;
-    align-items: center; /* Alinha verticalmente o botão */
     margin-top: 30px;
     margin-right: auto;
 }

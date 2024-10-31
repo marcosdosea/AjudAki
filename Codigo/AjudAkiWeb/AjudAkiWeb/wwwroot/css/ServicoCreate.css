@@ -1,0 +1,12 @@
+﻿.btn-voltar {
+    background-color: red; /* Fundo vermelho */
+    color: white; /* Texto branco */
+    padding: 10px 20px; /* Espaçamento */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    text-decoration: none; /* Sem sublinhado */
+}
+
+.btn-voltar:hover {
+    background-color: darkred; /* Cor de fundo ao passar o mouse */
+}

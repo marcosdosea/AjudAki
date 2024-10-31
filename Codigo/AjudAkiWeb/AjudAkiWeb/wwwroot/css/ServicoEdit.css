@@ -1,0 +1,49 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+}
+
+.bg-background {
+    background-color: #181818;
+}
+
+.text-foreground {
+    color: #ffffff;
+}
+
+.bg-card {
+    background-color: #282828;
+}
+
+.form-control {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.text-danger {
+    color: red;
+}
+
+.rounded-lg {
+    border-radius: 10px;
+}
+
+.hover\:bg-primary\:80:hover {
+    background-color: rgba(29, 185, 84, 0.8);
+}
+
+.bg-primary {
+    background-color: #1db954;
+}
+
+.hover\:bg-red-500:hover {
+    background-color: #ff4d4d;
+}
+
+.bg-red-600 {
+    background-color: #b00000;
+}
