@@ -1,0 +1,68 @@
+﻿body, html {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+h1,h6 {
+    color: #006BC8;
+}
+
+.contratacao-card {
+    max-width: 2000px; 
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+}
+
+.contratacao-img {
+    margin-right: 20px;
+    flex-shrink: 0; 
+
+    .contratacao-img img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+
+.contratacao-detalhes {
+    flex-grow: 1;
+}
+
+    .contratacao-detalhes h2 {
+        font-size: 1.5em;
+        color: #006BC8;
+        margin-bottom: 10px;
+    }
+
+    .contratacao-detalhes p {
+        margin-bottom: 8px;
+        font-size: 1.1em;
+        color: black;
+    }
+
+
+.contratacao-status {
+    font-size: 1.1em;
+    color: #ff9900;
+}
+
+
+.contratacao-avaliacao {
+   
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    margin-bottom: 150px;
+    margin-left: 100px;
+}
+
+    .contratacao-avaliacao i {
+        color: #fbc02d;
+    }
+
+.status-mensagem {
+    font-weight: bold;
+}

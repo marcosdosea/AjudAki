@@ -22,20 +22,14 @@ h4 {
 /* Container do título e botão */
 .btn-criar-container {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 20px;
-    width: 100%;
 }
 
 .titulo-subtitulo {
     display: flex;
-    flex-direction: column;
 }
 
 .criar-novo-plano {
     display: flex;
-    align-items: center;
     margin-top: 30px;
     margin-right: auto;
 }
