@@ -3,6 +3,7 @@ using AutoMapper;
 using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AjudAkiWeb.Controllers
 {
@@ -40,6 +41,16 @@ namespace AjudAkiWeb.Controllers
         {
             var agendaViewModel = new AgendaViewModel();
 
+            var turnoListItems = Enum.GetValues(typeof(TurnoEnum))
+                                   .Cast<TurnoEnum>()
+                                   .Select(status => new SelectListItem
+                                   {
+                                       Value = status.ToString(),
+                                       Text = status.ToString()
+                                   }).ToList();
+
+            agendaViewModel.TurnoList = new SelectList(turnoListItems, "Value", "Text");
+
             return View(agendaViewModel);
         }
 
@@ -62,6 +73,17 @@ namespace AjudAkiWeb.Controllers
             var agenda = agendaService.Get(id);
             var agendaViewModel = mapper.Map<AgendaViewModel>(agenda);
 
+            var turnoListItems = Enum.GetValues(typeof(TurnoEnum))
+                       .Cast<TurnoEnum>()
+                       .Select(status => new SelectListItem
+                       {
+                           Value = status.ToString(),
+                           Text = status.ToString()
+                       }).ToList();
+
+            agendaViewModel.TurnoList = new SelectList(turnoListItems, "Value", "Text");
+
+
             return View(agendaViewModel);
         }
 
@@ -83,7 +105,7 @@ namespace AjudAkiWeb.Controllers
         {
             var agenda = agendaService.Get(id);
             var agendaViewModel = mapper.Map<AgendaViewModel>(agenda);
-            
+
             return View(agendaViewModel);
         }
 
