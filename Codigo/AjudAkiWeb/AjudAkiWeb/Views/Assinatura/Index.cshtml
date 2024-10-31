@@ -8,8 +8,17 @@
     <link href="~/css/AssinaturaIndex.css" rel="stylesheet" asp-append-version="true" />
 </head>
 
-<h1>Administração</h1>
-<h4>Gerencie as áreas de assinaturas.</h4>
+<div class="btn-criar-container">
+    <div class="titulo-subtitulo">
+        <h1>Administração</h1>
+        <h4>Gerencie as áreas de assinaturas.</h4>
+    </div>
+    <div class="criar-novo-plano">
+        <a asp-action="Create" class="btn-criar">Criar plano</a>
+    </div>
+</div>
+
+
 
 @foreach (var item in Model)
 {
@@ -26,18 +35,12 @@
             <button>
                 @Html.ActionLink("Alterar plano", "Edit", new { id = item.Id }, new { @class = "btn-alterar" })
             </button>
-            <button> 
+            <button 
                 type="button" class="btn-excluir" onclick="openDeleteModal(@item.Id, '@item.Nome')">Excluir Plano
             </button>
         </div>
     </section>
 }
-<div class="btn-criar-container">
-    <div class="criar-novo-plano">
-        <h4>Criar um novo plano</h4>
-        <a asp-action="Create" class="btn-criar">Criar plano</a>
-    </div>
-</div>
 
 <!-- Modal de Confirmação -->
 <div class="modal" id="deleteModal" tabindex="-1" role="dialog" style="display: none;">
