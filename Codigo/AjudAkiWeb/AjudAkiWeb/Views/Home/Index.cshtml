@@ -14,7 +14,20 @@
             <img src="~/img/Logo_AjudAki.webp" alt="AjudAkiWeb" style="height: 50px;" />
             <span class="text-primary ms-2">AjudAki</span>
         </a>
-
+        <div class="navbar-collapse d-flex justify-content-center">
+            <div class="d-flex flex-row flex-wrap justify-content-center">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Contratacao" asp-action="Index">Contratar Serviço</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Agenda" asp-action="Index">Agenda</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Avaliar" asp-action="Index">Avaliar</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="AreaAtuacao" asp-action="Index">Area Atuação</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Assinatura" asp-action="Index">Assinatura</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="PagarAssinatura" asp-action="Index">Pagar Assinatura</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Cliente</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Profissional" asp-action="Index">Profissional</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="SolicitacaoServico" asp-action="Index">Solicitação de Serviço</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Tiposervico" asp-action="Index">Tipo Serviço</a>
+            </div>
+        </div>
         <div class="forms flex-grow-1 d-flex">
             <a asp-area="" asp-controller="Servico" asp-action="Index" class="btn btn-servico" type="button">
                 Ofertar Serviço <i class="fa-regular fa-money-bill-1 ms-2"></i>
