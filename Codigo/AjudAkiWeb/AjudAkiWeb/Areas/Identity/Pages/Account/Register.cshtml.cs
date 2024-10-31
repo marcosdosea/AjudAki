@@ -73,40 +73,34 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
             if (ModelState.IsValid)
             {
-                var user = new UsuarioIdentity { UserName = Input.Pessoa.Cpf, Email = Input.Pessoa.Email };
+                var user = CreateUser();
+
+                await _userStore.SetUserNameAsync(user, Input.Pessoa.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("Usuário criou uma nova conta com senha.");
+                    _logger.LogInformation("User created a new account with password.");
 
-                    // Salvar cliente no banco de dados usando ClienteService
-                    var pessoaResult = _clienteService.Create(new Pessoa
-                    {
-                        Nome = Input.Pessoa.Nome,
-                        Cpf = Input.Pessoa.Cpf,
-                        Email = Input.Pessoa.Email
-                    });
-
-                    // Enviar e-mail de confirmação
+                    var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
-                        null,
-                        new { area = "Identity", userId = user.Id, code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code)), returnUrl },
-                        Request.Scheme);
+                        pageHandler: null,
+                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                        protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Pessoa.Email, "Confirme seu email",
-                        $"Por favor, confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
+                    await _emailSender.SendEmailAsync(Input.Pessoa.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Pessoa.Email, returnUrl });
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Pessoa.Email, returnUrl = returnUrl });
                     }
                     else
                     {
@@ -114,14 +108,13 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
-
                 foreach (var error in result.Errors)
                 {
-                    _logger.LogError($"Erro ao criar usuário: {error.Description}");
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
+            // If we got this far, something failed, redisplay form
             return Page();
         }
 
@@ -147,6 +140,5 @@ namespace AjudAkiWeb.Areas.Identity.Pages.Account
             }
             return (IUserEmailStore<UsuarioIdentity>)_userStore;
         }
-
     }
 }
