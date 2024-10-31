@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="~/css/ServicoIndex.css" rel="stylesheet" />
     <title>@ViewData["Title"]</title>
 </head>
 <body class="bg-background text-foreground p-6">
@@ -35,9 +36,14 @@
                             <td class="p-2">@Html.DisplayFor(modelItem => item.IdTipoServico)</td>
                             <td class="p-2">@Html.DisplayFor(modelItem => item.IdAreaAtuacao)</td>
                             <td class="p-2 flex space-x-2">
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-3 py-1 rounded-lg">Modificar Serviço</a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="border border-black text-black hover:bg-gray-200 px-3 py-1 rounded-lg flex items-center">
+                                    <span class="mr-2">⚙️</span>
+                                    Modificar Serviço
+                                </a>
                                 <a asp-action="Details" asp-route-id="@item.Id" class="bg-primary text-primary-foreground hover:bg-primary/80 px-3 py-1 rounded-lg">Detalhes</a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="bg-destructive text-destructive-foreground hover:bg-destructive/80 px-3 py-1 rounded-lg">Apagar Serviço</a>
+                                <button type="button" onclick="openDeleteModal(@item.Id, '@item.Nome')" class="bg-red-600 text-white hover:bg-red-500 px-3 py-1 rounded-lg">
+                                    Apagar Serviço
+                                </button>
                             </td>
                         </tr>
                     }
@@ -45,5 +51,45 @@
             </table>
         </div>
     </div>
+
+    <div class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center" id="deleteModal">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-3xl font-bold text-center text-blue-600" id="modalTitle">Apagar Serviço</h2>
+            <p class="text-sm text-blue-600 mt-2" id="modalBody">Tem certeza de que deseja apagar o anúncio deste serviço?</p>
+            <form id="deleteForm" method="post">
+                <input type="hidden" id="deleteId" name="Id" />
+                <div class="mt-4">
+                    <label for="cancelReason" class="block text-sm font-medium text-blue-600">Motivo do cancelamento:</label>
+                    <textarea id="cancelReason" name="Reason" rows="3" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Mensagem"></textarea>
+                </div>
+                <div class="mt-4 flex justify-center space-x-4">
+                    <button type="submit" class="bg-green-600 text-white text-sm rounded-md px-6 py-2">Apagar Serviço</button>
+                    <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 text-sm rounded-md px-6 py-2">Cancelar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function openDeleteModal(id, nome) {
+            // Atualiza o conteúdo do modal com informações do serviço
+            document.getElementById('modalTitle').innerText = `Apagar serviço`;
+            document.getElementById('modalBody').innerText = `Tem certeza que deseja apagar o anuncio de seu serviço?`;
+
+            // Configura a ação do formulário de exclusão com o ID do serviço
+            document.getElementById('deleteId').value = id;
+            document.getElementById('deleteForm').action = `@Url.Action("Delete")/${id}`;
+
+            // Exibe o modal
+            document.getElementById('deleteModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            // Oculta o modal
+            document.getElementById('deleteModal').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>

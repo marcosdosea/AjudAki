@@ -1,75 +1,90 @@
 ﻿@model AjudAkiWeb.Models.ServicoViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Serviço";
 }
 
-<h1>Edit</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <title>@ViewData["Title"]</title>
+</head>
+<body class="bg-background text-foreground p-6">
+    <div class="p-6 bg-card rounded-lg shadow-md">
+        <h1 class="text-3xl font-bold mb-4">Editar Serviço</h1>
 
-<h4>ServicoViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data" class="space-y-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
+                <input asp-for="Id" class="form-control border border-gray-300 rounded-lg p-2" readonly />
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
+                <input asp-for="Nome" class="form-control border border-gray-300 rounded-lg p-2" placeholder="Nome" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="DataHoraSolicitacao" class="control-label"></label>
-                <input asp-for="DataHoraSolicitacao" class="form-control" type="datetime-local" value="@Model.DataHoraSolicitacao.ToString("yyyy-MM-ddTHH:mm")" />
+                <input asp-for="DataHoraSolicitacao" class="form-control border border-gray-300 rounded-lg p-2" type="datetime-local" value="@Model.DataHoraSolicitacao.ToString("yyyy-MM-ddTHH:mm")" />
                 <span asp-validation-for="DataHoraSolicitacao" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
+                <input asp-for="Status" class="form-control border border-gray-300 rounded-lg p-2" placeholder="Status da oferta" />
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Valor" class="control-label"></label>
-                <input asp-for="Valor" class="form-control" />
+                <input asp-for="Valor" class="form-control border border-gray-300 rounded-lg p-2" placeholder="Valor da oferta" />
                 <span asp-validation-for="Valor" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
+                <textarea asp-for="Descricao" class="form-control border border-gray-300 rounded-lg p-2" placeholder="Descrição da oferta" rows="3"></textarea>
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="IdProfissional" class="control-label"></label>
-                <input asp-for="IdProfissional" class="form-control" />
+                <input asp-for="IdProfissional" class="form-control border border-gray-300 rounded-lg p-2" />
                 <span asp-validation-for="IdProfissional" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="IdTipoServico" class="control-label"></label>
-                <input asp-for="IdTipoServico" class="form-control" />
+                <input asp-for="IdTipoServico" class="form-control border border-gray-300 rounded-lg p-2" />
                 <span asp-validation-for="IdTipoServico" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="IdAreaAtuacao" class="control-label"></label>
-                <input asp-for="IdAreaAtuacao" class="form-control" />
+                <input asp-for="IdAreaAtuacao" class="form-control border border-gray-300 rounded-lg p-2" />
                 <span asp-validation-for="IdAreaAtuacao" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div class="flex justify-between mt-4">
+                <a asp-action="Index" class="border border-black text-black hover:bg-gray-200 px-3 py-1 rounded-lg flex items-center">Voltar</a>
+                <input type="submit" value="Salvar" class="bg-primary text-white hover:bg-primary/80 px-4 py-2 rounded-lg" />
             </div>
         </form>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
     }
-}
+</body>
+</html>

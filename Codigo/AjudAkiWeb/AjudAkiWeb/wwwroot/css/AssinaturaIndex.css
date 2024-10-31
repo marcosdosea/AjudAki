@@ -208,7 +208,6 @@ button {
         cursor: pointer;
     }
 
-    /* Botão Confirmar */
     .modal-footer .btn-danger {
         background-color: #007447;
         color: white;
@@ -220,7 +219,6 @@ button {
             background-color: #005333
         }
 
-    /* Botão Cancelar */
     .modal-footer .btn-secondary {
         background-color: #B7BABC;
         color: #343537;

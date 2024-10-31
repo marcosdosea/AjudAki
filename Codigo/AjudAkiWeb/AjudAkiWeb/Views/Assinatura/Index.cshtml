@@ -26,7 +26,7 @@
             <button>
                 @Html.ActionLink("Alterar plano", "Edit", new { id = item.Id }, new { @class = "btn-alterar" })
             </button>
-            <button> 
+            <button 
                 type="button" class="btn-excluir" onclick="openDeleteModal(@item.Id, '@item.Nome')">Excluir Plano
             </button>
         </div>
