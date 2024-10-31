@@ -23,9 +23,9 @@
                 <span asp-validation-for="Data" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Turno" class="control-label"></label>
-                <input asp-for="Turno" class="form-control" />
-                <span asp-validation-for="Turno" class="text-danger"></span>
+                @Html.LabelFor(m => m.Turno)
+                @Html.DropDownListFor(m => m.Turno, Model.TurnoList, "Selecione Plano", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Turno)
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">

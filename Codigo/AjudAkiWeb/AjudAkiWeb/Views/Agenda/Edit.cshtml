@@ -19,23 +19,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="Data" class="control-label"></label>
-                <input asp-for="Data" class="form-control" type="date" value="@Model.Data.ToString("yyyy-MM-dd")" />
+                <input asp-for="Data" class="form-control" />
                 <span asp-validation-for="Data" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Turno" class="control-label"></label>
-                <input asp-for="Turno" class="form-control" />
-                <span asp-validation-for="Turno" class="text-danger"></span>
+                @Html.LabelFor(m => m.Turno)
+                @Html.DropDownListFor(m => m.Turno, Model.TurnoList, "Selecione Plano", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Turno)
             </div>
-            <div class="form-group">
-                <label asp-for="TurnoOcupado" class="control-label"></label>
-                <input asp-for="TurnoOcupado" class="form-control" />
-                <span asp-validation-for="TurnoOcupado" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TurnoOcupado" /> @Html.DisplayNameFor(model => model.TurnoOcupado)
+                </label>
             </div>
-            <div class="form-group">
-                <label asp-for="DiaOcupado" class="control-label"></label>
-                <input asp-for="DiaOcupado" class="form-control" />
-                <span asp-validation-for="DiaOcupado" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="DiaOcupado" /> @Html.DisplayNameFor(model => model.DiaOcupado)
+                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
