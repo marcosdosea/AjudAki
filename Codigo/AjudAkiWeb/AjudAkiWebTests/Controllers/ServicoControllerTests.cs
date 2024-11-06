@@ -18,6 +18,9 @@ namespace AjudAkiWeb.Controllers.Tests
         {
             // Arrange
             var mockService = new Mock<IServicoService>();
+            var mockProfissional = new Mock<IProfissionalService>();
+            var mockTipoServico = new Mock<ITipoServicoService>();
+            var mockAreaAtuacao = new Mock<IAreaAtuacaoService>();
 
             IMapper mapper = new MapperConfiguration(cfg =>
                 cfg.AddProfile(new ServicoProfile())).CreateMapper();
@@ -30,7 +33,7 @@ namespace AjudAkiWeb.Controllers.Tests
                 .Verifiable();
             mockService.Setup(service => service.Create(It.IsAny<Servico>()))
                 .Verifiable();
-            controller = new ServicoController(mockService.Object, mapper);
+            controller = new ServicoController(mockService.Object, mockProfissional.Object, mockTipoServico.Object, mockAreaAtuacao.Object, mapper);
         }
         [TestMethod()]
         public void IndexTest_Valido()
