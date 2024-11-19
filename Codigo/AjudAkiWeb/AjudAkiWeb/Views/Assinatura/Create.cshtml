@@ -9,50 +9,50 @@
 </head>
 
 <h1>Criar novo plano</h1>
-
 <h4>Gerencie os dados do plano.</h4>
-
 <hr />
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="card">
+    <form asp-action="Create" class="assinatura-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <h5>Dados do plano</h5>
+        <h5>Dados do plano</h5>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.Nome)
-                @Html.DropDownListFor(m => m.Nome, Model.PlanoList, "Selecione Plano", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Nome)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Status)
-                @Html.DropDownListFor(m => m.Status, Model.StatusList, "Selecione o Status", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Status)
-            </div>
-            <div class="form-group">
-                <label asp-for="Valor" class="control-label"></label>
-                <input asp-for="Valor" class="form-control" placeholder="R$" />
-                <span asp-validation-for="Valor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <textarea asp-for="Descricao" class="form-control" rows="3" placeholder="Plano com X anúncios."></textarea>
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Salvar alterações" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Nome)
+            @Html.DropDownListFor(m => m.Nome, Model.PlanoList, "Selecione Plano", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Nome)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Status)
+            @Html.DropDownListFor(m => m.Status, Model.StatusList, "Selecione o Status", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Status)
+        </div>
+        <div class="form-group">
+            <label asp-for="Valor" class="control-label"></label>
+            <input asp-for="Valor" class="form-control" placeholder="R$" />
+            <span asp-validation-for="Valor" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Descricao" class="control-label"></label>
+            <textarea asp-for="Descricao" class="form-control" rows="3" placeholder="Plano com X anúncios."></textarea>
+            <span asp-validation-for="Descricao" class="text-danger"></span>
+        </div>
+        <div class="form-group button-group">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+
+    </form>
 </div>
-<br>
+
+<br />
 
 <div>
     <a asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
