@@ -1,7 +1,6 @@
 ﻿/* Estilização geral */
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
     color: #333;
 }
 
@@ -22,26 +21,28 @@ h4 {
 /* Container do título e botão */
 .btn-criar-container {
     display: flex;
+    align-items: center;
+    justify-content: space-between; 
 }
 
 .titulo-subtitulo {
     display: flex;
+    flex-direction: column; 
 }
 
 .criar-novo-plano {
     display: flex;
     margin-top: 30px;
-    margin-right: auto;
 }
 
 .btn-criar {
     background-color: #006BC8;
     color: white;
-    padding: 10px 20px;
+    padding: 10px 20px; 
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    margin-left: 680px;
+    font-size: 0.9em;
 }
 
     .btn-criar:hover {

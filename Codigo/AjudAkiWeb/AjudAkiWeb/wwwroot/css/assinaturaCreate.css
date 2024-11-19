@@ -1,8 +1,6 @@
 ﻿body {
     font-family: Arial, sans-serif;
     color: #333;
-    margin: 0;
-    padding: 0;
 }
 
 h1 {
@@ -23,69 +21,82 @@ h5 {
     margin: 0 0 1em 0;
 }
 
-form {
-    border-top: 4px solid transparent;
+/* Estilo do card */
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px; /* Limita a largura do card */
+    margin: 20px auto; /* Centraliza o card horizontalmente */
+}
+
+.assinatura-form {
     padding: 1.5em 0;
+    border-top: none; /* Removendo a borda superior do form */
 }
 
-.form-group {
-    margin-bottom: 1.2em;
-}
+    .assinatura-form .form-group {
+        margin-bottom: 1.2em;
+    }
 
-    .form-group label {
+        .assinatura-form .form-group label {
+            font-size: 1em;
+            color: #004E93;
+            margin-bottom: 0.5em;
+            display: inline-block;
+        }
+
+    .assinatura-form .form-control {
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        padding: 0.8em;
         font-size: 1em;
-        color: #004E93;
-        margin-bottom: 0.5em;
+        width: 100%;
+    }
+
+        .assinatura-form .form-control::placeholder {
+            color: #bbb;
+        }
+
+    .assinatura-form textarea.form-control {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    .assinatura-form .form-group.button-group {
+        text-align: center; /* Centraliza o botão dentro da div */
+    }
+
+    /* Estilo específico para o botão de envio no formulário de assinatura */
+    .assinatura-form button[type="submit"] {
+        background-color: #006BC8;
+        color: #fff;
+        font-size: 1em;
+        padding: 10px 15px;
+        text-align: center;
+        height: auto;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
         display: inline-block;
+        margin-top: 10px;
+        width: auto; /* Removendo uma largura fixa */
     }
 
-.form-control {
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    padding: 0.8em;
-    font-size: 1em;
-    width: 100%;
-}
+        .assinatura-form button[type="submit"]:hover {
+            background-color: #004E93;
+        }
 
-    .form-control::placeholder {
-        color: #bbb;
+    /* Estilo para links apenas dentro do formulário de assinatura */
+    .assinatura-form a {
+        color: #006BC8;
+        text-decoration: none;
+        font-size: 1em;
     }
 
-textarea.form-control {
-    resize: vertical;
-    min-height: 80px;
-}
-
-input[type="submit"] {
-    background-color: #006BC8; 
-    color: #fff; 
-    font-size: 1.10em; 
-    padding: 10px 2px; 
-    height: 45px; 
-    border: none; 
-    border-radius: 6px; 
-    cursor: pointer; 
-    transition: background-color 0.3s ease; 
-    text-align: center; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    margin-top: 10px; 
-}
-
-    input[type="submit"]:hover {
-        background-color: #004E93; 
-    }
-
-
-
-
-a {
-    color: #006BC8;
-    text-decoration: none;
-    font-size: 1em;
-}
-
-    a:hover {
-        text-decoration: underline;
-    }
+        .assinatura-form a:hover {
+            text-decoration: underline;
+        }
