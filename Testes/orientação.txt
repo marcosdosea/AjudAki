@@ -1,0 +1,9 @@
+https://www.selenium.dev/
+
+1) Baixar o Selenium IDE 'chrome'
+2) Colocar o nome do projeto 'AjudAki'
+3) Nomear como exemplo "InserirCliente"
+4) Seguir o passo a passo que foi criado no testlink gravando a tela no Selenium
+5) Gerar o código e importar para o git :)
+
+
