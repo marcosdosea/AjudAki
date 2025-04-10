@@ -12,8 +12,8 @@
     <li><a href="#problema">1. O Problema</a></li>
     <li><a href="#solucao">2. A Solução</a></li>
     <li><a href="#publico">3. Público Alvo</a></li>
-    <!-- <li><a href="#linksuteis">4. Links Úteis</a></li> -->
-    <li><a href="#equipe">4. Equipe</a></li>
+    <li><a href="#linksuteis">4. Links Úteis</a></li>
+    <li><a href="#equipe">5. Equipe</a></li>
   </ul>
 
   <h2 id="problema">1. O Problema :warning:</h2>
@@ -37,13 +37,13 @@
   <p>O público-alvo do AjudAki são proprietários de imóveis que precisam de reparo e manutenção doméstica e buscam uma solução prática e confiável. Eles frequentemente têm dificuldade em encontrar profissionais qualificados e enfrentam problemas como falta de transparência nos preços e comunicação desorganizada.</p>
   <p>Não obstante, também temos como público alvo os profissionais que querem uma plataforma que facilite a conexão com clientes, simplifique o agendamento e sua divulgação, e ofereça uma forma de construir sua reputação através de avaliações. Eles buscam uma solução eficiente para gerenciar seus serviços e aumentar suas oportunidades de trabalho.</p>
   
-  <!-- <h2 id="linksuteis">4. Links Úteis</h2> -->
+ <h2 id="linksuteis">4. Links Úteis</h2>
 
-<!-- <a href="https://www.youtube.com/watch?v=9qpcoM956Vk" target="_blank">1 - Vídeo de Apresentação </a>
+<a href="https://www.youtube.com/watch?v=44VEsfB7BqI" target="_blank">1 - Vídeo de Apresentação </a>
 
-<a href="https://github.com/marcosdosea/AgendeMe/blob/main/Gerenciamento/Manual%20de%20Uso%20-%20AgendeMe.pdf" target="_blank">2 - Manual de Uso </a> -->
+<a href="https://github.com/marcosdosea/AjudAki/blob/main/Gerenciamento/ManualdeUso.pdf" target="_blank">2 - Manual de Uso </a>
 
-  <h2 id="equipe">4. Equipe :busts_in_silhouette:</h2>
+  <h2 id="equipe">5. Equipe :busts_in_silhouette:</h2>
 
   <table align="center">
   <tr>
