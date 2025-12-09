@@ -70,6 +70,35 @@ namespace Service
         {
             return context.Servicos.AsNoTracking();
         }
+
+        /// <summary>
+        /// Buscar todos os serviços cadastrados na página inicial
+        /// </summary>
+        /// <returns>Coleção de serviços cadastrados.</returns>
+        public IEnumerable<Servico> BuscarPorFiltro(uint? idTipoServico, uint? idAreaAtuacao, uint? idProfissional)
+        {
+            var query = context.Servicos
+                .AsNoTracking()
+                .Include(s => s.IdProfissionalNavigation)
+                .AsQueryable();
+
+            if (idTipoServico.HasValue)
+            {
+                query = query.Where(s => s.IdTipoServico == idTipoServico.Value);
+            }
+
+            if (idAreaAtuacao.HasValue)
+            {
+                query = query.Where(s => s.IdAreaAtuacao == idAreaAtuacao.Value);
+            }
+
+            if (idProfissional.HasValue)
+            {
+                query = query.Where(s => s.IdProfissionalNavigation.Id == idProfissional.Value);
+            }
+
+            return query.ToList();
+        }
     }
 }
 

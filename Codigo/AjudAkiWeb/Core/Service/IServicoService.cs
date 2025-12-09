@@ -17,5 +17,7 @@ namespace Core.Service
         Servico? Get(uint id);
 
         IEnumerable<Servico> GetAll();
+
+        IEnumerable<Servico> BuscarPorFiltro(uint? idTipoServico, uint? idAreaAtuacao, uint? idProfissional);
     }
 }
