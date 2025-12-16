@@ -1,4 +1,7 @@
 ﻿@model AjudAkiWeb.Models.ServicoViewModel
+@{
+    Layout = null;
+}
 
 @{
     ViewData["Title"] = "Editar Serviço";
@@ -81,10 +84,8 @@
         </form>
     </div>
 
-    @section Scripts {
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 </body>
 </html>

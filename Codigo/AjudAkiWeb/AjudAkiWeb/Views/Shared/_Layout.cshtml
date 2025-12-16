@@ -23,12 +23,12 @@
                 </a>
                 <partial name="_LoginPartial" /> 
                 <div class="forms flex-grow-1 d-flex">
-                    <form class="d-flex ms-2">
+                    <form class="d-flex ms-2" action="/Servico/Buscar" method="get">
                         <div class="position-relative me-2">
                             <span class="icon-left">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </span>
-                            <input type="text" class="formAtuacao form-control" placeholder="Ex: Encanador" aria-label="Ex: Encanador" />
+                            <input type="text" name="termo" class="formAtuacao form-control" placeholder="Ex: Encanador" aria-label="Ex: Encanador" />
                             <span class="icon-right">
                                 <i class="fa-solid fa-angle-down"></i>
                             </span>
@@ -38,7 +38,7 @@
                             <span class="icon-left">
                                 <i class="fa fa-map-marker-alt"></i>
                             </span>
-                            <select class="formRegiao form-control" aria-label="Selecione um Estado">
+                            <select name="regiao" class="formRegiao form-control" aria-label="Selecione um Estado">
                                 <option value="" disabled selected>Estado</option>
                                 <option value="acre">Acre</option>
                                 <option value="alagoas">Alagoas</option>
@@ -71,6 +71,8 @@
                                 <i class="fa-solid fa-angle-down"></i>
                             </span>
                         </div>
+
+                        <!-- pesquisa submit removed per user request -->
                     </form>
                     <a asp-area="" asp-controller="Servico" asp-action="Index" class="btn btn-servico" type="button">
                         Ofertar Serviço <i class="fa-regular fa-money-bill-1 ms-2"></i> 
