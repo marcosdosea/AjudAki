@@ -57,13 +57,6 @@ namespace AjudAkiWeb.Models
         public SelectList? ListaAreaAtuacao { get; set; }
         public SelectList? ListaTiposServico { get; set; }
 
-        // Campos adicionais para exibição na tela de busca
-        public string? TipoServicoNome { get; set; }
-        public string? AreaAtuacaoNome { get; set; }
-        public string? ProfissionalNome { get; set; }
-        public decimal MediaAvaliacao { get; set; }
-        public string? FotoUrl { get; set; }
-
         // Método para fazer o mapeamento simples do enum para string
         public string GetStatusAsString()
         {
