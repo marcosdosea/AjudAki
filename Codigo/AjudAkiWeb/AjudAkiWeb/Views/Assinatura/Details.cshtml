@@ -1,48 +1,78 @@
 ﻿@model AjudAkiWeb.Models.AssinaturaViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do plano";
 }
 
-<h1>Details</h1>
+<head>
+    <link href="~/css/assinaturaCreate.css" rel="stylesheet" asp-append-version="true" />
+</head>
 
-<div>
-    <h4>AssinaturaViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Valor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Valor)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-    </dl>
+<div class="page-header">
+    <div class="header-content">
+        <div class="title-section">
+            <h1><i class="fa-solid fa-info-circle"></i> Detalhes do plano</h1>
+            <p class="subtitle">Informações completas do plano de assinatura</p>
+        </div>
+        <a asp-action="Index" class="btn btn-back">
+            <i class="fa-solid fa-arrow-left"></i> <span>Voltar</span>
+        </a>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
+
+<div class="form-container">
+    <div class="form-card">
+        <div class="form-header">
+            <i class="fa-solid fa-file-lines"></i>
+            <h2>Informações do plano</h2>
+        </div>
+
+        <div class="details-content">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    <i class="fa-solid fa-hashtag"></i> @Html.DisplayNameFor(model => model.Id)
+                </dt>
+                <dd class="col-sm-8">
+                    <strong>#@Html.DisplayFor(model => model.Id)</strong>
+                </dd>
+                <dt class="col-sm-4">
+                    <i class="fa-solid fa-tag"></i> @Html.DisplayNameFor(model => model.Nome)
+                </dt>
+                <dd class="col-sm-8">
+                    <strong class="text-primary">@Html.DisplayFor(model => model.Nome)</strong>
+                </dd>
+                <dt class="col-sm-4">
+                    <i class="fa-solid fa-toggle-on"></i> @Html.DisplayNameFor(model => model.Status)
+                </dt>
+                <dd class="col-sm-8">
+                    <span class="badge @(Model.Status.ToString() == "ATIVA" ? "badge-active" : "badge-inactive")">
+                        @Html.DisplayFor(model => model.Status)
+                    </span>
+                </dd>
+                <dt class="col-sm-4">
+                    <i class="fa-solid fa-dollar-sign"></i> @Html.DisplayNameFor(model => model.Valor)
+                </dt>
+                <dd class="col-sm-8">
+                    <strong class="text-success" style="font-size: 1.5rem;">R$ @Model.Valor.ToString("N2")</strong>
+                </dd>
+                <dt class="col-sm-4">
+                    <i class="fa-solid fa-align-left"></i> @Html.DisplayNameFor(model => model.Descricao)
+                </dt>
+                <dd class="col-sm-8">
+                    <div class="alert alert-light border">
+                        <p class="mb-0">@Html.DisplayFor(model => model.Descricao)</p>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="form-actions">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-save">
+                <i class="fa-solid fa-pencil"></i> Editar
+            </a>
+            <a asp-action="Index" class="btn btn-cancel">
+                <i class="fa-solid fa-arrow-left"></i> Voltar para lista
+            </a>
+        </div>
+    </div>
 </div>

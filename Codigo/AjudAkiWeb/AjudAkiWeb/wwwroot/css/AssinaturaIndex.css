@@ -1,135 +1,324 @@
-﻿/* Estilização geral */
+﻿/* ============================================
+   ESTILOS GERAIS
+   ============================================ */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
+    background-color: #f5f7fa;
 }
 
-/* Título principal */
-h1 {
-    color: #1976d2;
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-/* Subtítulo */
-h4 {
-    color: #1976d2;
-    font-size: 1.2em;
-    margin-bottom: 20px;
-}
-
-/* Container do título e botão */
-.btn-criar-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; 
-}
-
-.titulo-subtitulo {
-    display: flex;
-    flex-direction: column; 
-}
-
-.criar-novo-plano {
-    display: flex;
-    margin-top: 30px;
-}
-
-.btn-criar {
-    background-color: #006BC8;
+/* ============================================
+   HEADER DA PÁGINA
+   ============================================ */
+.page-header {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
     color: white;
-    padding: 10px 20px; 
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.9em;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-    .btn-criar:hover {
-        background-color: #004E93;
-        border-color: #004085;
-        color: white;
-    }
-
-/* Estilização dos cartões de plano */
-.plano-card {
-    border: 1px solid #e0e0e0;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-    /* Título do cartão */
-    .plano-card h4 {
-        font-size: 1.2em;
-        color: #1976d2;
-        margin-bottom: 10px;
-    }
-
-/* Detalhes do plano */
-.plano-detalhes {
+.header-content {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1.5rem;
 }
 
-.plano-icone {
-    font-size: 2em;
-    margin-right: 15px;
+.title-section {
+    flex: 1;
+    min-width: 0;
 }
 
-.plano-info {
-    flex-grow: 1;
-}
-
-/* Ações do plano */
-.plano-acoes {
-    gap: 10px;
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-10%);
-    text-decoration: none;
-}
-
-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.btn-alterar, .btn-excluir {
-    padding: 10px 20px;
-    border-radius: 5px;
+.title-section h1 {
     color: white;
-    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    white-space: nowrap;
+}
+
+.title-section h1 i {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    margin: 0.5rem 0 0 0;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.btn-create {
+    background-color: white;
+    color: #1976d2;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
     text-decoration: none;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-create:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    color: #1565c0;
+}
+
+.btn-create i {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.btn-create span {
+    white-space: nowrap;
+}
+
+/* ============================================
+   ALERTAS
+   ============================================ */
+.alert {
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.alert i {
+    margin-right: 0.5rem;
+}
+
+/* ============================================
+   ESTADO VAZIO
+   ============================================ */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: #999;
+    margin-bottom: 1.5rem;
+}
+
+/* ============================================
+   GRID DE PLANOS
+   ============================================ */
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* ============================================
+   CARDS DE PLANO
+   ============================================ */
+.plan-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+}
+
+.plan-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Header do Card */
+.plan-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.plan-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.plan-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.plan-title-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.plan-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1976d2;
+    margin: 0;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: fit-content;
+}
+
+.badge-active {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.badge-inactive {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Body do Card */
+.plan-body {
+    flex: 1;
+    margin-bottom: 1.5rem;
+}
+
+.plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+    border-radius: 8px;
+}
+
+.currency {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #666;
+}
+
+.amount {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1976d2;
+}
+
+.plan-description {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.plan-description i {
+    color: #1976d2;
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+}
+
+.plan-description p {
+    margin: 0;
+    flex: 1;
+}
+
+/* Footer do Card */
+.plan-footer {
+    display: flex;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+.plan-footer .btn {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
 }
 
-.btn-alterar {
-    background-color: #006BC8;
+.btn-edit {
+    background-color: #1976d2;
+    color: white;
 }
 
-    .btn-alterar:hover {
-        background-color: #004E93;
-        color: white;
-    }
-
-.btn-excluir {
-    background-color: #EC3F41;
+.btn-edit:hover {
+    background-color: #1565c0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(25, 118, 210, 0.3);
+    color: white;
 }
 
-    .btn-excluir:hover {
-        background-color: #DC0F13;
-        color: white;
-    }
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
 
-/* Modal de Confirmação */
+.btn-delete:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+    color: white;
+}
+
+/* ============================================
+   MODAL DE CONFIRMAÇÃO
+   ============================================ */
 #deleteModal {
     display: none;
     position: fixed;
@@ -139,94 +328,179 @@ button {
     height: 100%;
     z-index: 1050;
     background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
+    backdrop-filter: blur(2px);
+}
+
+#deleteModal[style*="block"] {
+    display: flex !important;
     justify-content: center;
     align-items: center;
 }
 
 .modal-dialog {
     max-width: 500px;
+    width: 90%;
     margin: auto;
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .modal-content {
-    border-radius: 8px;
+    background-color: white;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .modal-header {
-    background-color: #1a73e8;
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: white;
-    padding: 16px;
-    border-bottom: 1px solid #e9ecef;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-    .modal-header .modal-title {
-        font-size: 1.25rem;
-        font-weight: bold;
-        text-align: center;
-    }
+.modal-header .modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
 
-    .modal-header .close {
-        background: none;
-        border: none;
-        font-size: 1.25rem;
-        color: white;
-        opacity: 0.7;
-        cursor: pointer;
-    }
+.modal-header .close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+    opacity: 0.8;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
 
-        .modal-header .close:hover {
-            opacity: 1;
-        }
+.modal-header .close:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.2);
+}
 
 .modal-body {
-    padding: 16px;
+    padding: 1.5rem;
     font-size: 1rem;
     color: #333;
-    text-align: center;
+    line-height: 1.6;
 }
 
 .modal-footer {
-    padding: 16px;
+    padding: 1rem 1.5rem;
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    justify-content: flex-end;
+    gap: 0.75rem;
     border-top: 1px solid #e9ecef;
+    background-color: #f8f9fa;
 }
 
-    .modal-footer .btn {
-        padding: 8px 16px;
-        font-size: 1rem;
-        border-radius: 4px;
-        cursor: pointer;
+.modal-footer .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-footer .btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.modal-footer .btn-danger:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.modal-footer .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+@media (max-width: 768px) {
+    .page-header {
+        padding: 1.5rem;
     }
 
-    /* Botão Confirmar */
-    .modal-footer .btn-danger {
-        background-color: #007447;
-        color: white;
-        border: none;
-        transition: background-color 0.3s ease;
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        flex-wrap: wrap;
     }
 
-        .modal-footer .btn-danger:hover {
-            background-color: #005333;
-        }
-
-    /* Botão Cancelar */
-    .modal-footer .btn-secondary {
-        background-color: #B7BABC;
-        color: #343537;
-        border: none;
-        transition: background-color 0.3s ease;
+    .title-section {
+        width: 100%;
     }
 
-        .modal-footer .btn-secondary:hover {
-            background-color: #A0A3A6;
-        }
+    .title-section h1 {
+        font-size: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .btn-create {
+        width: 100%;
+        justify-content: center;
+        white-space: nowrap;
+    }
+
+    .plans-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .plan-footer {
+        flex-direction: column;
+    }
+
+    .plan-footer .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .plan-card {
+        padding: 1rem;
+    }
+
+    .plan-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .plan-icon {
+        margin: 0 auto;
+    }
+}

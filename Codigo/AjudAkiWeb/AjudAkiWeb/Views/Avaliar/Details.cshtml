@@ -4,147 +4,144 @@
     ViewData["Title"] = "Detalhes da Avaliação";
 }
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0">
-                        <i class="fas fa-info-circle me-2"></i>Detalhes da Avaliação
-                    </h3>
+<div class="container-avaliar">
+    <div class="page-header-avaliar-details">
+        <div class="header-content-avaliar">
+            <div class="title-section-avaliar">
+                <h1><i class="fas fa-info-circle"></i> Detalhes da Avaliação</h1>
+                <p class="subtitle-avaliar">Informações completas da avaliação</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-container-avaliar">
+        <div class="form-card-avaliar">
+            <div class="form-header-avaliar">
+                <i class="fas fa-file-lines"></i>
+                <h2>Informações da Avaliação</h2>
+            </div>
+            <div class="details-body-avaliar">
+                <!-- Código da Avaliação -->
+                <div class="detail-item-avaliar">
+                    <div class="detail-label-avaliar">
+                        <i class="fas fa-hashtag"></i> @Html.DisplayNameFor(model => model.Id)
+                    </div>
+                    <div class="detail-value-avaliar">
+                        <strong>#@Html.DisplayFor(model => model.Id)</strong>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <!-- Código da Avaliação -->
-                    <div class="mb-4 pb-3 border-bottom">
-                        <div class="d-flex align-items-center mb-2">
-                            <i class="fas fa-hashtag me-2 text-primary"></i>
-                            <span class="text-muted small">@Html.DisplayNameFor(model => model.Id)</span>
-                        </div>
-                        <h5 class="mb-0">#@Html.DisplayFor(model => model.Id)</h5>
-                    </div>
 
-                    <!-- Nome do Profissional -->
-                    @if (!string.IsNullOrEmpty(Model.NomeProfissional))
-                    {
-                        <div class="mb-4 pb-3 border-bottom">
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-user-tie me-2 text-primary"></i>
-                                <span class="text-muted small">Nome do Profissional</span>
-                            </div>
-                            <h5 class="mb-0 text-primary">@Html.DisplayFor(model => model.NomeProfissional)</h5>
+                <!-- Nome do Profissional -->
+                @if (!string.IsNullOrEmpty(Model.NomeProfissional))
+                {
+                    <div class="detail-item-avaliar">
+                        <div class="detail-label-avaliar">
+                            <i class="fas fa-user-tie"></i> Nome do Profissional
                         </div>
-                    }
-
-                    <!-- Contratação -->
-                    <div class="mb-4 pb-3 border-bottom">
-                        <div class="d-flex align-items-center mb-2">
-                            <i class="fas fa-handshake me-2 text-primary"></i>
-                            <span class="text-muted small">@Html.DisplayNameFor(model => model.IdContratacao)</span>
-                        </div>
-                        <h5 class="mb-0">@Html.DisplayFor(model => model.IdContratacao)</h5>
-                    </div>
-
-                    <!-- Nota do Serviço -->
-                    <div class="mb-4 pb-3 border-bottom">
-                        <div class="d-flex align-items-center mb-2">
-                            <i class="fas fa-tools me-2 text-primary"></i>
-                            <span class="text-muted small">@Html.DisplayNameFor(model => model.NotaServico)</span>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="star-rating-display me-3">
-                                @for (int i = 1; i <= 5; i++)
-                                {
-                                    if (i <= Model.NotaServico)
-                                    {
-                                        <i class="fas fa-star text-warning"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="far fa-star text-muted"></i>
-                                    }
-                                }
-                            </div>
-                            <span class="badge bg-warning text-dark fs-6">
-                                @Html.DisplayFor(model => model.NotaServico) / 5
-                            </span>
+                        <div class="detail-value-avaliar profissional-name-detail">
+                            @Html.DisplayFor(model => model.NomeProfissional)
                         </div>
                     </div>
+                }
 
-                    <!-- Nota do Profissional -->
-                    <div class="mb-4 pb-3 border-bottom">
-                        <div class="d-flex align-items-center mb-2">
-                            <i class="fas fa-user-tie me-2 text-primary"></i>
-                            <span class="text-muted small">@Html.DisplayNameFor(model => model.NotaProfissional)</span>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="star-rating-display me-3">
-                                @for (int i = 1; i <= 5; i++)
-                                {
-                                    if (i <= Model.NotaProfissional)
-                                    {
-                                        <i class="fas fa-star text-warning"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="far fa-star text-muted"></i>
-                                    }
-                                }
-                            </div>
-                            <span class="badge bg-warning text-dark fs-6">
-                                @Html.DisplayFor(model => model.NotaProfissional) / 5
-                            </span>
-                        </div>
+                <!-- Contratação -->
+                <div class="detail-item-avaliar">
+                    <div class="detail-label-avaliar">
+                        <i class="fas fa-handshake"></i> @Html.DisplayNameFor(model => model.IdContratacao)
                     </div>
-
-                    <!-- Status -->
-                    <div class="mb-4 pb-3 border-bottom">
-                        <div class="d-flex align-items-center mb-2">
-                            <i class="fas fa-info-circle me-2 text-primary"></i>
-                            <span class="text-muted small">@Html.DisplayNameFor(model => model.Status)</span>
-                        </div>
-                        <span class="badge bg-info fs-6">
-                            @Html.DisplayFor(model => model.Status)
-                        </span>
+                    <div class="detail-value-avaliar">
+                        #@Html.DisplayFor(model => model.IdContratacao)
                     </div>
+                </div>
 
-                    <!-- Comentário -->
-                    @if (!string.IsNullOrEmpty(Model.Comentario))
-                    {
-                        <div class="mb-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-comment me-2 text-primary"></i>
-                                <span class="text-muted small">@Html.DisplayNameFor(model => model.Comentario)</span>
-                            </div>
-                            <div class="alert alert-light border">
-                                <p class="mb-0 text-dark">@Html.DisplayFor(model => model.Comentario)</p>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="mb-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-comment me-2 text-primary"></i>
-                                <span class="text-muted small">@Html.DisplayNameFor(model => model.Comentario)</span>
-                            </div>
-                            <div class="alert alert-secondary">
-                                <p class="mb-0 text-muted"><em>Nenhum comentário foi adicionado.</em></p>
-                            </div>
-                        </div>
-                    }
-
-                    <!-- Botões de Ação -->
-                    <div class="d-flex justify-content-between mt-4 pt-3 border-top">
-                        <a asp-action="Index" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left me-2"></i>Voltar para Lista
-                        </a>
-                        <div>
-                            @if (ViewContext.HttpContext.User.IsInRole("Admin") || ViewContext.HttpContext.User.IsInRole("Administrator"))
+                <!-- Nota do Serviço -->
+                <div class="detail-item-avaliar">
+                    <div class="detail-label-avaliar">
+                        <i class="fas fa-tools"></i> @Html.DisplayNameFor(model => model.NotaServico)
+                    </div>
+                    <div class="detail-rating-avaliar">
+                        <div class="star-rating-display-avaliar">
+                            @for (int i = 1; i <= 5; i++)
                             {
-                                @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                                if (i <= Model.NotaServico)
+                                {
+                                    <i class="fas fa-star"></i>
+                                }
+                                else
+                                {
+                                    <i class="far fa-star"></i>
+                                }
                             }
                         </div>
+                        <span class="badge-nota-detail">@Html.DisplayFor(model => model.NotaServico) / 5</span>
                     </div>
+                </div>
+
+                <!-- Nota do Profissional -->
+                <div class="detail-item-avaliar">
+                    <div class="detail-label-avaliar">
+                        <i class="fas fa-user-tie"></i> @Html.DisplayNameFor(model => model.NotaProfissional)
+                    </div>
+                    <div class="detail-rating-avaliar">
+                        <div class="star-rating-display-avaliar">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                if (i <= Model.NotaProfissional)
+                                {
+                                    <i class="fas fa-star"></i>
+                                }
+                                else
+                                {
+                                    <i class="far fa-star"></i>
+                                }
+                            }
+                        </div>
+                        <span class="badge-nota-detail">@Html.DisplayFor(model => model.NotaProfissional) / 5</span>
+                    </div>
+                </div>
+
+                <!-- Status -->
+                <div class="detail-item-avaliar">
+                    <div class="detail-label-avaliar">
+                        <i class="fas fa-info-circle"></i> @Html.DisplayNameFor(model => model.Status)
+                    </div>
+                    <div class="detail-value-avaliar">
+                        <span class="badge-status-avaliar">@Html.DisplayFor(model => model.Status)</span>
+                    </div>
+                </div>
+
+                <!-- Comentário -->
+                <div class="detail-item-avaliar">
+                    <div class="detail-label-avaliar">
+                        <i class="fas fa-comment"></i> @Html.DisplayNameFor(model => model.Comentario)
+                    </div>
+                    <div class="detail-value-avaliar">
+                        @if (!string.IsNullOrEmpty(Model.Comentario))
+                        {
+                            <div class="comentario-box-avaliar">
+                                <p class="mb-0">@Html.DisplayFor(model => model.Comentario)</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="comentario-empty-avaliar">
+                                <em>Nenhum comentário foi adicionado.</em>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Botões de Ação -->
+                <div class="form-actions-avaliar">
+                    <a href="@Url.Action("Index", "Avaliar")" class="btn btn-cancel-avaliar">
+                        <i class="fas fa-arrow-left me-2"></i>Voltar
+                    </a>
+                    @if (ViewContext.HttpContext.User.IsInRole("Admin") || ViewContext.HttpContext.User.IsInRole("Administrator"))
+                    {
+                        <a href="@Url.Action("Edit", "Avaliar", new { id = Model.Id })" class="btn btn-save-avaliar">
+                            <i class="fas fa-edit me-2"></i>Editar
+                        </a>
+                    }
                 </div>
             </div>
         </div>
@@ -152,29 +149,281 @@
 </div>
 
 <style>
-    .card {
-        border: none;
-        border-radius: 10px;
+    /* ============================================
+       CONTAINER
+       ============================================ */
+    .container-avaliar {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
     }
 
-    .card-header {
-        border-radius: 10px 10px 0 0 !important;
+    /* ============================================
+       HEADER
+       ============================================ */
+    .page-header-avaliar-details {
+        background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .star-rating-display {
+    .header-content-avaliar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 1.5rem;
+    }
+
+    .title-section-avaliar h1 {
+        color: white;
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .title-section-avaliar h1 i {
+        font-size: 2rem;
+    }
+
+    .subtitle-avaliar {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1rem;
+        margin: 0.5rem 0 0 0;
+        font-weight: 400;
+    }
+
+    /* ============================================
+       FORM CARD
+       ============================================ */
+    .form-container-avaliar {
+        display: flex;
+        justify-content: center;
+    }
+
+    .form-card-avaliar {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 700px;
+        border: 1px solid #e0e0e0;
+    }
+
+    .form-header-avaliar {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .form-header-avaliar i {
+        font-size: 2rem;
+        color: #1976d2;
+    }
+
+    .form-header-avaliar h2 {
         font-size: 1.5rem;
-        letter-spacing: 3px;
+        font-weight: 600;
+        color: #1976d2;
+        margin: 0;
     }
 
-    .star-rating-display i {
-        margin-right: 2px;
+    /* ============================================
+       DETAILS BODY
+       ============================================ */
+    .details-body-avaliar {
+        padding: 1rem 0;
     }
 
-    .border-bottom {
-        border-color: #e9ecef !important;
+    .detail-item-avaliar {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #f0f0f0;
     }
 
-    .border-top {
-        border-color: #e9ecef !important;
+    .detail-item-avaliar:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .detail-label-avaliar {
+        font-size: 0.75rem;
+        color: #666;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .detail-label-avaliar i {
+        color: #1976d2;
+        font-size: 0.9rem;
+    }
+
+    .detail-value-avaliar {
+        font-size: 1.1rem;
+        color: #333;
+        font-weight: 500;
+    }
+
+    .profissional-name-detail {
+        color: #1976d2;
+        font-weight: 600;
+        font-size: 1.3rem;
+    }
+
+    .detail-rating-avaliar {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .star-rating-display-avaliar {
+        font-size: 1.8rem;
+        letter-spacing: 4px;
+    }
+
+    .star-rating-display-avaliar i {
+        color: #ffc107;
+        margin-right: 3px;
+    }
+
+    .star-rating-display-avaliar .far {
+        color: #ddd;
+    }
+
+    .badge-nota-detail {
+        background-color: #ffc107;
+        color: #333;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .badge-status-avaliar {
+        background-color: #17a2b8;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .comentario-box-avaliar {
+        background-color: #f8f9fa;
+        border-left: 4px solid #1976d2;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+    }
+
+    .comentario-box-avaliar p {
+        margin: 0;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .comentario-empty-avaliar {
+        background-color: #e9ecef;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+        color: #6c757d;
+        font-style: italic;
+    }
+
+    /* ============================================
+       BUTTONS
+       ============================================ */
+    .form-actions-avaliar {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 2px solid #f0f0f0;
+    }
+
+    .form-actions-avaliar .btn {
+        flex: 1;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        border: none;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        text-decoration: none;
+    }
+
+    .btn-save-avaliar {
+        background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+        color: white;
+        box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
+    }
+
+    .btn-save-avaliar:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(25, 118, 210, 0.4);
+        color: white;
+    }
+
+    .btn-cancel-avaliar {
+        background-color: #6c757d;
+        color: white;
+        box-shadow: 0 2px 4px rgba(108, 117, 125, 0.3);
+    }
+
+    .btn-cancel-avaliar:hover {
+        background-color: #5a6268;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(108, 117, 125, 0.4);
+        color: white;
+    }
+
+    /* ============================================
+       RESPONSIVIDADE
+       ============================================ */
+    @@media (max-width: 768px) {
+        .page-header-avaliar-details {
+            padding: 1.5rem;
+        }
+
+        .header-content-avaliar {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .btn-back-avaliar {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .form-card-avaliar {
+            padding: 1.5rem;
+        }
+
+        .form-actions-avaliar {
+            flex-direction: column;
+        }
     }
 </style>

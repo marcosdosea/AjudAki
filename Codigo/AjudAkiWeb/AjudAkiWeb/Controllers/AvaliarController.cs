@@ -71,7 +71,8 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Create()
         {
             var avaliarViewModel = new AvaliarViewModel();
-            IEnumerable<Contratacao> listaContratacaos = contratacaoService.GetAll();
+            // Materializar a lista primeiro para evitar erro de DataReader
+            var listaContratacaos = contratacaoService.GetAll().ToList();
             
             // Criar SelectList com nome da contratação e profissional
             var items = new List<SelectListItem>();
