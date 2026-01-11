@@ -4,103 +4,114 @@
     ViewData["Title"] = "Avaliar Profissional";
 }
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0">
-                        <i class="fas fa-star me-2"></i>Avaliar Profissional
-                    </h3>
-                </div>
-                <div class="card-body">
-                    <form asp-action="Create" id="avaliarForm">
-                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
-                        
-                        <!-- Campo Id (oculto) -->
-                        <input asp-for="Id" type="hidden" />
+<div class="container-avaliar">
+    <div class="page-header-avaliar-create">
+        <div class="header-content-avaliar">
+            <div class="title-section-avaliar">
+                <h1><i class="fas fa-star"></i> Avaliar Profissional</h1>
+                <p class="subtitle-avaliar">Preencha os dados da avaliação</p>
+            </div>
+            <a href="@Url.Action("Index", "Avaliar")" class="btn btn-back-avaliar">
+                <i class="fas fa-arrow-left me-2"></i>Voltar
+            </a>
+        </div>
+    </div>
 
-                        <!-- Contratação -->
-                        <div class="mb-4">
-                            <label asp-for="IdContratacao" class="form-label fw-bold">
-                                <i class="fas fa-handshake me-2 text-primary"></i>@Html.DisplayNameFor(model => model.IdContratacao)
-                            </label>
-                            <select asp-for="IdContratacao" asp-items="Model.ListaContratacaos" class="form-select form-select-lg">
-                                <option value="">Selecione uma contratação</option>
-                            </select>
-                            <span asp-validation-for="IdContratacao" class="text-danger"></span>
-                        </div>
+    <div class="form-container-avaliar">
+        <div class="form-card-avaliar">
+            <div class="form-header-avaliar">
+                <i class="fas fa-file-lines"></i>
+                <h2>Dados da Avaliação</h2>
+            </div>
+            <div class="form-body-avaliar">
+                <form asp-action="Create" id="avaliarForm">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger validation-summary-avaliar" role="alert"></div>
+                    
+                    <!-- Campo Id (oculto) -->
+                    <input asp-for="Id" type="hidden" />
 
-                        <!-- Nota do Serviço -->
-                        <div class="mb-4">
-                            <label asp-for="NotaServico" class="form-label fw-bold">
-                                <i class="fas fa-tools me-2 text-primary"></i>@Html.DisplayNameFor(model => model.NotaServico)
-                            </label>
-                            <div class="rating-container">
-                                <div class="star-rating mb-2">
-                                    @for (int i = 5; i >= 1; i--)
-                                    {
-                                        <input type="radio" name="NotaServicoStar" value="@i" id="servico-@i" class="star-input" />
-                                        <label for="servico-@i" class="star-label">
-                                            <i class="fas fa-star"></i>
-                                        </label>
-                                    }
-                                </div>
-                                <input asp-for="NotaServico" type="number" class="form-control d-none" min="0" max="5" step="1" id="NotaServico" />
-                                <span asp-validation-for="NotaServico" class="text-danger d-block mt-1"></span>
-                                <small class="text-muted">Selecione uma nota de 0 a 5 estrelas</small>
+                    <!-- Contratação -->
+                    <div class="form-group-avaliar">
+                        <label asp-for="IdContratacao" class="form-label-avaliar">
+                            <i class="fas fa-handshake"></i> @Html.DisplayNameFor(model => model.IdContratacao)
+                        </label>
+                        <select asp-for="IdContratacao" asp-items="Model.ListaContratacaos" class="form-control-avaliar">
+                            <option value="">Selecione uma contratação</option>
+                        </select>
+                        <span asp-validation-for="IdContratacao" class="text-danger validation-message-avaliar"></span>
+                    </div>
+
+                    <!-- Nota do Serviço -->
+                    <div class="form-group-avaliar">
+                        <label asp-for="NotaServico" class="form-label-avaliar">
+                            <i class="fas fa-tools"></i> @Html.DisplayNameFor(model => model.NotaServico)
+                        </label>
+                        <div class="rating-container-avaliar">
+                            <div class="star-rating-avaliar">
+                                @for (int i = 5; i >= 1; i--)
+                                {
+                                    <input type="radio" name="NotaServicoStar" value="@i" id="servico-@i" class="star-input-avaliar" />
+                                    <label for="servico-@i" class="star-label-avaliar">
+                                        <i class="fas fa-star"></i>
+                                    </label>
+                                }
                             </div>
+                            <input asp-for="NotaServico" type="number" class="form-control d-none" min="0" max="5" step="1" id="NotaServico" />
+                            <span asp-validation-for="NotaServico" class="text-danger validation-message-avaliar"></span>
+                            <small class="form-help-avaliar">Selecione uma nota de 0 a 5 estrelas</small>
                         </div>
+                    </div>
 
-                        <!-- Nota do Profissional -->
-                        <div class="mb-4">
-                            <label asp-for="NotaProfissional" class="form-label fw-bold">
-                                <i class="fas fa-user-tie me-2 text-primary"></i>@Html.DisplayNameFor(model => model.NotaProfissional)
-                            </label>
-                            <div class="rating-container">
-                                <div class="star-rating mb-2">
-                                    @for (int i = 5; i >= 1; i--)
-                                    {
-                                        <input type="radio" name="NotaProfissionalStar" value="@i" id="profissional-@i" class="star-input" />
-                                        <label for="profissional-@i" class="star-label">
-                                            <i class="fas fa-star"></i>
-                                        </label>
-                                    }
-                                </div>
-                                <input asp-for="NotaProfissional" type="number" class="form-control d-none" min="0" max="5" step="1" id="NotaProfissional" />
-                                <span asp-validation-for="NotaProfissional" class="text-danger d-block mt-1"></span>
-                                <small class="text-muted">Selecione uma nota de 0 a 5 estrelas</small>
+                    <!-- Nota do Profissional -->
+                    <div class="form-group-avaliar">
+                        <label asp-for="NotaProfissional" class="form-label-avaliar">
+                            <i class="fas fa-user-tie"></i> @Html.DisplayNameFor(model => model.NotaProfissional)
+                        </label>
+                        <div class="rating-container-avaliar">
+                            <div class="star-rating-avaliar">
+                                @for (int i = 5; i >= 1; i--)
+                                {
+                                    <input type="radio" name="NotaProfissionalStar" value="@i" id="profissional-@i" class="star-input-avaliar" />
+                                    <label for="profissional-@i" class="star-label-avaliar">
+                                        <i class="fas fa-star"></i>
+                                    </label>
+                                }
                             </div>
+                            <input asp-for="NotaProfissional" type="number" class="form-control d-none" min="0" max="5" step="1" id="NotaProfissional" />
+                            <span asp-validation-for="NotaProfissional" class="text-danger validation-message-avaliar"></span>
+                            <small class="form-help-avaliar">Selecione uma nota de 0 a 5 estrelas</small>
                         </div>
+                    </div>
 
-                        <!-- Status (oculto com valor padrão) -->
-                        <input asp-for="Status" type="hidden" value="1" />
+                    <!-- Status (oculto com valor padrão) -->
+                    <input asp-for="Status" type="hidden" value="1" />
 
-                        <!-- Comentário -->
-                        <div class="mb-4">
-                            <label asp-for="Comentario" class="form-label fw-bold">
-                                <i class="fas fa-comment me-2 text-primary"></i>@Html.DisplayNameFor(model => model.Comentario)
-                            </label>
-                            <textarea asp-for="Comentario" class="form-control" rows="5" 
-                                      placeholder="Compartilhe sua experiência com o serviço e o profissional..."></textarea>
-                            <span asp-validation-for="Comentario" class="text-danger"></span>
-                            <small class="text-muted">Máximo de 500 caracteres</small>
-                            <div class="character-count text-end mt-1">
+                    <!-- Comentário -->
+                    <div class="form-group-avaliar">
+                        <label asp-for="Comentario" class="form-label-avaliar">
+                            <i class="fas fa-comment"></i> @Html.DisplayNameFor(model => model.Comentario)
+                        </label>
+                        <textarea asp-for="Comentario" class="form-control-avaliar" rows="5" 
+                                  placeholder="Compartilhe sua experiência com o serviço e o profissional..."></textarea>
+                        <div class="form-help-avaliar">
+                            <span>Máximo de 500 caracteres</span>
+                            <span class="character-count-avaliar">
                                 <span id="charCount">0</span>/500
-                            </div>
+                            </span>
                         </div>
+                        <span asp-validation-for="Comentario" class="text-danger validation-message-avaliar"></span>
+                    </div>
 
-                        <!-- Botões -->
-                        <div class="d-flex justify-content-between mt-4">
-                            <a asp-action="Index" class="btn btn-outline-secondary">
-                                <i class="fas fa-arrow-left me-2"></i>Voltar
-                            </a>
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="fas fa-check me-2"></i>Salvar Avaliação
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    <!-- Botões -->
+                    <div class="form-actions-avaliar">
+                        <a href="@Url.Action("Index", "Avaliar")" class="btn btn-cancel-avaliar">
+                            <i class="fas fa-times me-2"></i>Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-save-avaliar">
+                            <i class="fas fa-check me-2"></i>Salvar Avaliação
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -110,54 +121,274 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     
     <style>
-        .rating-container {
+        /* ============================================
+           CONTAINER E HEADER
+           ============================================ */
+        .container-avaliar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .page-header-avaliar-create {
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-back-avaliar {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            white-space: nowrap;
+        }
+
+        .btn-back-avaliar:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* ============================================
+           FORM CARD
+           ============================================ */
+        .form-container-avaliar {
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-card-avaliar {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 700px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .form-header-avaliar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .form-header-avaliar i {
+            font-size: 2rem;
+            color: #1976d2;
+        }
+
+        .form-header-avaliar h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1976d2;
+            margin: 0;
+        }
+
+        .form-body-avaliar {
+            padding: 0;
+        }
+
+        /* ============================================
+           FORM FIELDS
+           ============================================ */
+        .form-group-avaliar {
+            margin-bottom: 2rem;
+        }
+
+        .form-label-avaliar {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-label-avaliar i {
+            color: #1976d2;
+            font-size: 0.9rem;
+        }
+
+        .form-control-avaliar {
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .form-control-avaliar:focus {
+            border-color: #1976d2;
+            box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.15);
+            outline: none;
+        }
+
+        textarea.form-control-avaliar {
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        .form-help-avaliar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .character-count-avaliar {
+            font-weight: 600;
+            color: #1976d2;
+        }
+
+        .validation-message-avaliar {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .validation-summary-avaliar {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ============================================
+           STAR RATING
+           ============================================ */
+        .rating-container-avaliar {
             position: relative;
         }
 
-        .star-rating {
+        .star-rating-avaliar {
             display: flex;
             flex-direction: row-reverse;
             justify-content: flex-end;
-            gap: 5px;
+            gap: 8px;
+            margin-bottom: 0.5rem;
         }
 
-        .star-input {
+        .star-input-avaliar {
             display: none;
         }
 
-        .star-label {
-            font-size: 2rem;
+        .star-label-avaliar {
+            font-size: 2.5rem;
             color: #ddd;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: all 0.2s ease;
         }
 
-        .star-label:hover,
-        .star-label:hover ~ .star-label {
+        .star-label-avaliar:hover,
+        .star-label-avaliar:hover ~ .star-label-avaliar {
+            color: #ffc107;
+            transform: scale(1.1);
+        }
+
+        .star-input-avaliar:checked ~ .star-label-avaliar,
+        .star-input-avaliar:checked ~ .star-label-avaliar ~ .star-label-avaliar {
             color: #ffc107;
         }
 
-        .star-input:checked ~ .star-label,
-        .star-input:checked ~ .star-label ~ .star-label {
-            color: #ffc107;
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .form-actions-avaliar {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #f0f0f0;
         }
 
-        .card {
+        .form-actions-avaliar .btn {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
             border: none;
-            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
         }
 
-        .card-header {
-            border-radius: 10px 10px 0 0 !important;
+        .btn-save-avaliar {
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            color: white;
+            box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
         }
 
-        .form-select-lg {
-            padding: 0.75rem 1rem;
+        .btn-save-avaliar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(25, 118, 210, 0.4);
+            color: white;
         }
 
-        .character-count {
-            font-size: 0.875rem;
-            color: #6c757d;
+        .btn-cancel-avaliar {
+            background-color: #6c757d;
+            color: white;
+            box-shadow: 0 2px 4px rgba(108, 117, 125, 0.3);
+        }
+
+        .btn-cancel-avaliar:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(108, 117, 125, 0.4);
+            color: white;
+        }
+
+        /* ============================================
+           RESPONSIVIDADE
+           ============================================ */
+        @@media (max-width: 768px) {
+            .page-header-avaliar-create {
+                padding: 1.5rem;
+            }
+
+            .header-content-avaliar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .btn-back-avaliar {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .form-card-avaliar {
+                padding: 1.5rem;
+            }
+
+            .form-actions-avaliar {
+                flex-direction: column;
+            }
         }
     </style>
 
@@ -187,9 +418,9 @@
                 $('#charCount').text(length);
                 
                 if (length > 500) {
-                    $('#charCount').css('color', '#dc3545');
+                    $('#charCount').parent().css('color', '#dc3545');
                 } else {
-                    $('#charCount').css('color', '#6c757d');
+                    $('#charCount').parent().css('color', '#1976d2');
                 }
             });
 

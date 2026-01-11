@@ -1,102 +1,446 @@
-﻿body {
-    font-family: Arial, sans-serif;
+﻿/* ============================================
+   ESTILOS GERAIS
+   ============================================ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
+    background-color: #f5f7fa;
 }
 
-h1 {
-    font-size: 2em;
-    color: #1a73e8;
-    margin: 0 0 0.2em 0;
+/* ============================================
+   HEADER DA PÁGINA
+   ============================================ */
+.page-header {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h4 {
-    font-size: 1.1em;
-    color: #004E93;
-    margin: 0 0 1em 0;
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1.5rem;
 }
 
-h5 {
-    font-size: 1.5em;
-    color: #004E93;
-    margin: 0 0 1em 0;
+.title-section {
+    flex: 1;
+    min-width: 0;
 }
 
-/* Estilo do card */
-.card {
-    background-color: #fff;
-    border: 1px solid #ddd;
+.title-section h1 {
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    white-space: nowrap;
+}
+
+.title-section h1 i {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    margin: 0.5rem 0 0 0;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.btn-back {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.75rem 1.5rem;
     border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 500px; /* Limita a largura do card */
-    margin: 20px auto; /* Centraliza o card horizontalmente */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.btn-back:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    color: white;
+}
+
+.btn-back span {
+    white-space: nowrap;
+}
+
+/* ============================================
+   CONTAINER DO FORMULÁRIO
+   ============================================ */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
+}
+
+.form-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #e0e0e0;
+}
+
+.form-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.form-header i {
+    font-size: 2rem;
+    color: #1976d2;
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.form-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1976d2;
+    margin: 0;
+}
+
+/* ============================================
+   FORMULÁRIO
+   ============================================ */
 .assinatura-form {
-    padding: 1.5em 0;
-    border-top: none; /* Removendo a borda superior do form */
+    padding: 0;
 }
 
-    .assinatura-form .form-group {
-        margin-bottom: 1.2em;
+.assinatura-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-label i {
+    color: #1976d2;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    width: 100%;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.form-control:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.15);
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: #999;
+}
+
+.form-control option {
+    padding: 0.5rem;
+}
+
+.input-group {
+    display: flex;
+    align-items: stretch;
+}
+
+.input-group-text {
+    background-color: #f5f7fa;
+    border: 2px solid #e0e0e0;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-weight: 600;
+    min-width: 60px;
+}
+
+.input-group .form-control {
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+}
+
+.input-group .form-control:focus {
+    border-left: 2px solid #1976d2;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+.form-help {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.form-help i {
+    color: #1976d2;
+    font-size: 0.9rem;
+}
+
+.validation-message {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.validation-summary {
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.validation-summary ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+/* ============================================
+   BOTÕES DE AÇÃO
+   ============================================ */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid #f0f0f0;
+}
+
+.form-actions .btn {
+    flex: 1;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn-save {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+    color: white;
+    box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(25, 118, 210, 0.4);
+    color: white;
+}
+
+.btn-cancel {
+    background-color: #6c757d;
+    color: white;
+    box-shadow: 0 2px 4px rgba(108, 117, 125, 0.3);
+}
+
+.btn-cancel:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.4);
+    color: white;
+}
+
+/* ============================================
+   ALERTAS
+   ============================================ */
+.alert {
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.alert i {
+    margin-right: 0.5rem;
+}
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+@media (max-width: 768px) {
+    .page-header {
+        padding: 1.5rem;
     }
 
-        .assinatura-form .form-group label {
-            font-size: 1em;
-            color: #004E93;
-            margin-bottom: 0.5em;
-            display: inline-block;
-        }
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
 
-    .assinatura-form .form-control {
-        border-radius: 6px;
-        border: 1px solid #ccc;
-        padding: 0.8em;
-        font-size: 1em;
+    .title-section {
         width: 100%;
     }
 
-        .assinatura-form .form-control::placeholder {
-            color: #bbb;
-        }
-
-    .assinatura-form textarea.form-control {
-        resize: vertical;
-        min-height: 80px;
+    .title-section h1 {
+        font-size: 1.5rem;
+        flex-wrap: wrap;
     }
 
-    .assinatura-form .form-group.button-group {
-        text-align: center; /* Centraliza o botão dentro da div */
+    .btn-back {
+        width: 100%;
+        justify-content: center;
     }
 
-    /* Estilo específico para o botão de envio no formulário de assinatura */
-    .assinatura-form button[type="submit"] {
-        background-color: #006BC8;
-        color: #fff;
-        font-size: 1em;
-        padding: 10px 15px;
-        text-align: center;
-        height: auto;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        display: inline-block;
-        margin-top: 10px;
-        width: auto; /* Removendo uma largura fixa */
+    .form-card {
+        padding: 1.5rem;
     }
 
-        .assinatura-form button[type="submit"]:hover {
-            background-color: #004E93;
-        }
-
-    /* Estilo para links apenas dentro do formulário de assinatura */
-    .assinatura-form a {
-        color: #006BC8;
-        text-decoration: none;
-        font-size: 1em;
+    .form-actions {
+        flex-direction: column;
     }
 
-        .assinatura-form a:hover {
-            text-decoration: underline;
-        }
+    .form-actions .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-card {
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    .form-header {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .form-header h2 {
+        font-size: 1.25rem;
+    }
+}
+
+/* ============================================
+   ESTILOS PARA DETAILS E DELETE
+   ============================================ */
+.details-content {
+    padding: 1rem 0;
+}
+
+.details-content dl {
+    margin: 0;
+}
+
+.details-content dt {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.details-content dt i {
+    color: #1976d2;
+    font-size: 0.9rem;
+}
+
+.details-content dd {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.details-content dd:last-child {
+    border-bottom: none;
+}
+
+.badge-active {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.badge-inactive {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+    border: none;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.4);
+    color: white;
+}

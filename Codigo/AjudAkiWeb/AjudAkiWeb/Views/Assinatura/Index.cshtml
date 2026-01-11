@@ -1,44 +1,92 @@
 ﻿@model IEnumerable<AjudAkiWeb.Models.AssinaturaViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Planos de Assinatura";
 }
 
 <head>
     <link href="~/css/AssinaturaIndex.css" rel="stylesheet" asp-append-version="true" />
 </head>
 
-<div class="btn-criar-container">
-    <div class="titulo-subtitulo">
-        <h1>Administração</h1>
-        <h4>Gerencie as áreas de assinaturas.</h4>
+<div class="page-header">
+    <div class="header-content">
+        <div class="title-section">
+            <h1><i class="fa-solid fa-credit-card"></i> Administração de Planos</h1>
+            <p class="subtitle">Gerencie os planos de assinatura do sistema</p>
+        </div>
+        <a asp-action="Create" class="btn btn-create">
+            <i class="fa-solid fa-plus-circle"></i> <span>Criar plano</span>
+        </a>
     </div>
-    <a asp-action="Create" class="btn-criar">Criar plano</a>
 </div>
 
-
-
-@foreach (var item in Model)
+@if (TempData["SuccessMessage"] != null)
 {
-    <section class="plano-card">
-        <h4>Detalhes do plano</h4>
-        <div class="plano-detalhes">
-            <span class="plano-icone">📄</span>
-            <div class="plano-info">
-                <strong>@item.Nome</strong>
-                <p>Descrição: @item.Descricao</p>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fa-solid fa-circle-check"></i> <strong>Sucesso!</strong> @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fa-solid fa-triangle-exclamation"></i> <strong>Erro!</strong> @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <div class="empty-state">
+        <i class="fa-solid fa-inbox"></i>
+        <h3>Nenhum plano cadastrado</h3>
+        <p>Comece criando seu primeiro plano de assinatura.</p>
+        <a asp-action="Create" class="btn btn-create">
+            <i class="fa-solid fa-plus-circle"></i> Criar primeiro plano
+        </a>
+    </div>
+}
+
+<div class="plans-grid">
+    @foreach (var item in Model)
+    {
+        <div class="plan-card">
+            <div class="plan-header">
+                <div class="plan-icon">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+                <div class="plan-title-section">
+                    <h3 class="plan-name">@item.Nome</h3>
+                    <span class="badge @(item.Status.ToString() == "ATIVA" ? "badge-active" : "badge-inactive")">
+                        @item.Status
+                    </span>
+                </div>
+            </div>
+            
+            <div class="plan-body">
+                <div class="plan-price">
+                    <span class="currency">R$</span>
+                    <span class="amount">@item.Valor.ToString("N2")</span>
+                </div>
+                
+                <div class="plan-description">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <p>@item.Descricao</p>
+                </div>
+            </div>
+            
+            <div class="plan-footer">
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-edit">
+                    <i class="fa-solid fa-pencil"></i> Alterar
+                </a>
+                <button type="button" class="btn btn-delete" onclick="openDeleteModal(@item.Id, '@item.Nome')">
+                    <i class="fa-solid fa-trash"></i> Excluir
+                </button>
             </div>
         </div>
-        <div class="plano-acoes">
-            <button>
-                @Html.ActionLink("Alterar plano", "Edit", new { id = item.Id }, new { @class = "btn-alterar" })
-            </button>
-            <button 
-                type="button" class="btn-excluir" onclick="openDeleteModal(@item.Id, '@item.Nome')">Excluir Plano
-            </button>
-        </div>
-    </section>
-}
+    }
+</div>
 
 <!-- Modal de Confirmação -->
 <div class="modal" id="deleteModal" tabindex="-1" role="dialog" style="display: none;">
@@ -54,8 +102,11 @@
                 <p id="modalBody">Tem certeza de que deseja excluir este plano?</p>
             </div>
             <div class="modal-footer">
-                <form id="deleteForm" method="post">
-                    <button type="submit" class="btn btn-danger">Confirmar</button>
+                <form id="deleteForm" method="post" asp-action="Delete">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="deleteId" name="id" />
+                    <input type="hidden" id="deleteViewModelId" name="Id" />
+                    <button type="submit" class="btn btn-danger">Confirmar exclusão</button>
                     <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
                 </form>
             </div>
@@ -68,10 +119,11 @@
         function openDeleteModal(id, nome) {
             // Configura o título e o corpo do modal
             document.getElementById('modalTitle').innerText = `Excluir ${nome}`;
-            document.getElementById('modalBody').innerText = `Tem certeza de que deseja excluir o plano "${nome}"?`;
+            document.getElementById('modalBody').innerText = `Tem certeza de que deseja excluir o plano "${nome}"? Esta ação não pode ser desfeita.`;
             
-            // Configura a ação do formulário com o ID do item a ser excluído
-            document.getElementById('deleteForm').action = `@Url.Action("Delete")/${id}`;
+            // Configura os campos hidden com o ID
+            document.getElementById('deleteId').value = id;
+            document.getElementById('deleteViewModelId').value = id;
             
             // Exibe o modal
             document.getElementById('deleteModal').style.display = 'block';
