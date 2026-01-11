@@ -15,7 +15,7 @@ namespace AjudAkiWeb.Controllers
         private readonly IAreaAtuacaoService areaAtuacaoService;
         private readonly IMapper mapper;
 
-        public ServicoController(IServicoService servicoService, IProfissionalService profissionalService, ITipoServicoService tipoServicoService, IAreaAtuacaoService areaAtuacaoService, IMapper mapper)
+        public ServicoController(IServicoService servicoService, IProfissionalService profissionalService, ITipoServicoService tipoServicoService, IAreaAtuacaoService areaAtuacaoService,IMapper mapper)
         {
             this.profissionalService = profissionalService;
             this.servicoService = servicoService;
@@ -117,21 +117,6 @@ namespace AjudAkiWeb.Controllers
         {
             servicoService.Delete(servicoViewModel.Id);
             return RedirectToAction(nameof(Index));
-        }
-
-        // GET: Servico/Buscar
-        [HttpGet]
-        public IActionResult Buscar(string? termo, uint? idTipoServico, uint? idAreaAtuacao, uint? idProfissional)
-        {
-            var resultados = servicoService.Buscar(termo, idTipoServico, idAreaAtuacao, idProfissional);
-
-            if (resultados == null || !resultados.Any())
-            {
-                return View("NenhumResultado");
-            }
-
-            var listaViewModel = mapper.Map<List<ServicoViewModel>>(resultados);
-            return View("Buscar", listaViewModel);
         }
     }
 }
