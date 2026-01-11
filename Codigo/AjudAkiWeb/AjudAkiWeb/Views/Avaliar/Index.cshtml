@@ -1,63 +1,245 @@
 ﻿@model IEnumerable<AjudAkiWeb.Models.AvaliarViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Avaliações";
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <!-- Cabeçalho -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="mb-1">
+                <i class="fas fa-star me-2 text-primary"></i>Avaliações
+            </h2>
+            <p class="text-muted mb-0">Gerencie todas as avaliações de profissionais</p>
+        </div>
+        <a asp-action="Create" class="btn btn-primary btn-lg">
+            <i class="fas fa-plus me-2"></i>Nova Avaliação
+        </a>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdContratacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NotaServico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NotaProfissional)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Comentario)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdContratacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NotaServico)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NotaProfissional)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comentario)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id=item.Id })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <!-- Estatísticas Rápidas -->
+    @if (Model != null && Model.Any())
+    {
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card text-center border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="text-muted mb-2">
+                            <i class="fas fa-list-alt me-2"></i>Total
+                        </h5>
+                        <h3 class="mb-0 text-primary">@Model.Count()</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="text-muted mb-2">
+                            <i class="fas fa-tools me-2"></i>Média Serviço
+                        </h5>
+                        <h3 class="mb-0 text-info">
+                            @if (Model.Any())
+                            {
+                                @Math.Round(Model.Average(x => (double)x.NotaServico), 1)
+                            }
+                            else
+                            {
+                                <text>0</text>
+                            }
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="text-muted mb-2">
+                            <i class="fas fa-user-tie me-2"></i>Média Profissional
+                        </h5>
+                        <h3 class="mb-0 text-success">
+                            @if (Model.Any())
+                            {
+                                @Math.Round(Model.Average(x => (double)x.NotaProfissional), 1)
+                            }
+                            else
+                            {
+                                <text>0</text>
+                            }
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="text-muted mb-2">
+                            <i class="fas fa-comment me-2"></i>Com Comentários
+                        </h5>
+                        <h3 class="mb-0 text-warning">
+                            @Model.Count(x => !string.IsNullOrEmpty(x.Comentario))
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Lista de Avaliações -->
+    @if (Model != null && Model.Any())
+    {
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm hover-shadow">
+                        <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-secondary">#@Html.DisplayFor(modelItem => item.Id)</span>
+                            </div>
+                            <span class="badge bg-info">@Html.DisplayFor(modelItem => item.Status)</span>
+                        </div>
+                        <div class="card-body">
+                            <!-- Nome do Profissional -->
+                            @if (!string.IsNullOrEmpty(item.NomeProfissional))
+                            {
+                                <div class="mb-3 pb-2 border-bottom">
+                                    <small class="text-muted d-block mb-1">
+                                        <i class="fas fa-user-tie me-1"></i>Profissional
+                                    </small>
+                                    <strong class="text-primary">@Html.DisplayFor(modelItem => item.NomeProfissional)</strong>
+                                </div>
+                            }
+                            
+                            <!-- Contratação -->
+                            <div class="mb-3">
+                                <small class="text-muted d-block mb-1">
+                                    <i class="fas fa-handshake me-1"></i>Contratação
+                                </small>
+                                <strong>@Html.DisplayFor(modelItem => item.IdContratacao)</strong>
+                            </div>
+
+                            <!-- Nota do Serviço -->
+                            <div class="mb-3">
+                                <small class="text-muted d-block mb-1">
+                                    <i class="fas fa-tools me-1"></i>Nota do Serviço
+                                </small>
+                                <div class="d-flex align-items-center">
+                                    <div class="star-rating-small me-2">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= item.NotaServico)
+                                            {
+                                                <i class="fas fa-star text-warning"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="far fa-star text-muted"></i>
+                                            }
+                                        }
+                                    </div>
+                                    <span class="badge bg-warning text-dark">@Html.DisplayFor(modelItem => item.NotaServico)</span>
+                                </div>
+                            </div>
+
+                            <!-- Nota do Profissional -->
+                            <div class="mb-3">
+                                <small class="text-muted d-block mb-1">
+                                    <i class="fas fa-user-tie me-1"></i>Nota do Profissional
+                                </small>
+                                <div class="d-flex align-items-center">
+                                    <div class="star-rating-small me-2">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= item.NotaProfissional)
+                                            {
+                                                <i class="fas fa-star text-warning"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="far fa-star text-muted"></i>
+                                            }
+                                        }
+                                    </div>
+                                    <span class="badge bg-warning text-dark">@Html.DisplayFor(modelItem => item.NotaProfissional)</span>
+                                </div>
+                            </div>
+
+                            <!-- Comentário (Preview) -->
+                            @if (!string.IsNullOrEmpty(item.Comentario))
+                            {
+                                <div class="mb-3">
+                                    <small class="text-muted d-block mb-1">
+                                        <i class="fas fa-comment me-1"></i>Comentário
+                                    </small>
+                                    <p class="mb-0 text-truncate" style="max-width: 100%;" title="@item.Comentario">
+                                        @if (item.Comentario.Length > 80)
+                                        {
+                                            @item.Comentario.Substring(0, 80)<text>...</text>
+                                        }
+                                        else
+                                        {
+                                            @item.Comentario
+                                        }
+                                    </p>
+                                </div>
+                            }
+                        </div>
+                        <div class="card-footer bg-white border-top">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm w-100">
+                                <i class="fas fa-eye me-2"></i>Ver Detalhes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <!-- Estado Vazio -->
+        <div class="text-center py-5">
+            <div class="mb-4">
+                <i class="fas fa-star fa-4x text-muted"></i>
+            </div>
+            <h4 class="text-muted">Nenhuma avaliação encontrada</h4>
+            <p class="text-muted mb-4">Comece criando sua primeira avaliação de profissional</p>
+            <a asp-action="Create" class="btn btn-primary btn-lg">
+                <i class="fas fa-plus me-2"></i>Criar Primeira Avaliação
+            </a>
+        </div>
+    }
+</div>
+
+<style>
+    .hover-shadow {
+        transition: all 0.3s ease;
+    }
+
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .star-rating-small {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+
+    .star-rating-small i {
+        margin-right: 1px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .card-footer {
+        border-radius: 0 0 10px 10px !important;
+    }
+</style>
