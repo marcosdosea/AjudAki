@@ -3,115 +3,121 @@
 @model RegisterModel
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "_Layout";
     ViewData["Title"] = "Cadastro";
 }
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/css/register.css" rel="stylesheet" asp-append-version="true" />
-</head>
-<body>
-    <div class="container">
-        <h1>Cadastro</h1>
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div class="grid">
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                <div>
-                    <label for="cpf">CPF</label>
-                    <input id="cpf" asp-for="Input.Pessoa.Cpf" type="text" placeholder="Ex: 000.000.000-00" />
-                    <span asp-validation-for="Input.Pessoa.Cpf" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="nome">Nome Completo</label>
-                    <input id="nome" asp-for="Input.Pessoa.Nome" type="text" placeholder="Ex: Nome Completo" />
-                    <span asp-validation-for="Input.Pessoa.Nome" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="celular">Celular com DDD</label>
-                    <input id="celular" asp-for="Input.Pessoa.Celular" type="text" placeholder="Ex: (00) 00000-0000" />
-                    <span asp-validation-for="Input.Pessoa.Celular" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="telefone">Telefone com DDD</label>
-                    <input id="telefone" asp-for="Input.Pessoa.Telefone" type="text" placeholder="Ex: (00) 00000-0000" />
-                    <span asp-validation-for="Input.Pessoa.Telefone" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="data-nascimento">Data de nascimento</label>
-                    <input id="data-nascimento" asp-for="Input.Pessoa.DataNascimento" type="date" placeholder="01/01/2024" />
-                    <span asp-validation-for="Input.Pessoa.DataNascimento" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="email">Email</label>
-                    <input id="email" asp-for="Input.Pessoa.Email" type="email" placeholder="seuemail@email.com" />
-                    <span asp-validation-for="Input.Pessoa.Email" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="senha">Senha</label>
-                    <input id="senha" asp-for="Input.Password" type="password" placeholder="Mínimo de 6 caracteres com letras e números" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="confirmaSenha">Confirmar senha</label>
-                    <input id="confirmaSenha" asp-for="Input.ConfirmPassword" type="password" placeholder="Repita a senha novamente" />
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="cep">CEP</label>
-                    <input id="cep" asp-for="Input.Pessoa.Cep" type="text" placeholder="Ex: 00000-000" />
-                    <span asp-validation-for="Input.Pessoa.Cep" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="bairro">Bairro</label>
-                    <input id="bairro" asp-for="Input.Pessoa.Bairro" type="text" placeholder="Ex: Chlara..." />
-                    <span asp-validation-for="Input.Pessoa.Bairro" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="rua">Rua</label>
-                    <input id="rua" asp-for="Input.Pessoa.Rua" type="text" placeholder="Ex: Rua Manuel Das Neves Barreto..." />
-                    <span asp-validation-for="Input.Pessoa.Rua" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="numero">Número da residência</label>
-                    <input id="numero" asp-for="Input.Pessoa.NumResidencia" type="text" placeholder="Ex: 206..." />
-                    <span asp-validation-for="Input.Pessoa.NumResidencia" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="ponto">Ponto de Referência</label>
-                    <input id="ponto" asp-for="Input.Pessoa.PontoReferencia" type="text" placeholder="Ex: Próximo ao eu amo Itabaiana" />
-                    <span asp-validation-for="Input.Pessoa.PontoReferencia" class="text-danger"></span>
-                </div>
+<div class="container py-4">
+    <h1 class="mb-3">Cadastro</h1>
+
+    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="cpf" class="form-label">CPF</label>
+                <input id="cpf" asp-for="Input.Pessoa.Cpf" class="form-control" placeholder="Ex: 000.000.000-00" />
+                <span asp-validation-for="Input.Pessoa.Cpf" class="text-danger"></span>
             </div>
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-input" id="myCheckbox" required>
-                <label for="myCheckbox">Estou ciente e concordo com a <a href="#" class="text-blue-600">Política de Privacidade</a> e os <a href="#" class="text-blue-600">Termos e Condições de Uso</a>.</label>
+
+            <div class="col-md-6">
+                <label for="nome" class="form-label">Nome Completo</label>
+                <input id="nome" asp-for="Input.Pessoa.Nome" class="form-control" placeholder="Ex: Nome Completo" />
+                <span asp-validation-for="Input.Pessoa.Nome" class="text-danger"></span>
             </div>
-            <div class="button-container">
-                <button id="registerSubmit" class="btn-submit" type="submit">Finalizar cadastro</button>
+
+            <div class="col-md-6">
+                <label for="celular" class="form-label">Celular com DDD</label>
+                <input id="celular" asp-for="Input.Pessoa.Celular" class="form-control" placeholder="Ex: (00) 00000-0000" />
+                <span asp-validation-for="Input.Pessoa.Celular" class="text-danger"></span>
             </div>
-        </form>
-    </div>
-    <section>
-        @if ((Model.ExternalLogins?.Count ?? 0) > 0)
-        {
-            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                <div>
-                    <p>
-                        @foreach (var provider in Model.ExternalLogins!)
-                        {
-                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                        }
-                    </p>
-                </div>
+
+            <div class="col-md-6">
+                <label for="telefone" class="form-label">Telefone com DDD</label>
+                <input id="telefone" asp-for="Input.Pessoa.Telefone" class="form-control" placeholder="Ex: (00) 00000-0000" />
+                <span asp-validation-for="Input.Pessoa.Telefone" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label for="data-nascimento" class="form-label">Data de nascimento</label>
+                <input id="data-nascimento" asp-for="Input.Pessoa.DataNascimento" type="date" class="form-control" />
+                <span asp-validation-for="Input.Pessoa.DataNascimento" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-8">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" asp-for="Input.Pessoa.Email" type="email" class="form-control" placeholder="seuemail@email.com" />
+                <span asp-validation-for="Input.Pessoa.Email" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label for="senha" class="form-label">Senha</label>
+                <input id="senha" asp-for="Input.Password" type="password" class="form-control" placeholder="Mínimo de 6 caracteres com letras e números" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label for="confirmaSenha" class="form-label">Confirmar senha</label>
+                <input id="confirmaSenha" asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="Repita a senha novamente" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label for="cep" class="form-label">CEP</label>
+                <input id="cep" asp-for="Input.Pessoa.Cep" class="form-control" placeholder="Ex: 00000-000" />
+                <span asp-validation-for="Input.Pessoa.Cep" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label for="bairro" class="form-label">Bairro</label>
+                <input id="bairro" asp-for="Input.Pessoa.Bairro" class="form-control" placeholder="Ex: Clara..." />
+                <span asp-validation-for="Input.Pessoa.Bairro" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label for="rua" class="form-label">Rua</label>
+                <input id="rua" asp-for="Input.Pessoa.Rua" class="form-control" placeholder="Ex: Rua Manuel..." />
+                <span asp-validation-for="Input.Pessoa.Rua" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label for="numero" class="form-label">Número da residência</label>
+                <input id="numero" asp-for="Input.Pessoa.NumResidencia" class="form-control" placeholder="Ex: 206" />
+                <span asp-validation-for="Input.Pessoa.NumResidencia" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label for="ponto" class="form-label">Ponto de Referência</label>
+                <input id="ponto" asp-for="Input.Pessoa.PontoReferencia" class="form-control" placeholder="Ex: Próximo ao eu amo Itabaiana" />
+                <span asp-validation-for="Input.Pessoa.PontoReferencia" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-check my-3">
+            <input class="form-check-input" type="checkbox" id="myCheckbox" required />
+            <label class="form-check-label" for="myCheckbox">Estou ciente e concordo com a <a href="#">Política de Privacidade</a> e os <a href="#">Termos e Condições de Uso</a>.</label>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+            <a asp-page="/Account/Login" class="text-decoration-none">Já tem conta? Entrar</a>
+            <button id="registerSubmit" class="btn btn-primary" type="submit">Finalizar cadastro</button>
+        </div>
+    </form>
+
+    @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+    {
+        <hr />
+        <div>
+            <p>Entrar com:</p>
+            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-inline">
+                @foreach (var provider in Model.ExternalLogins!)
+                {
+                    <button type="submit" class="btn btn-outline-secondary me-2" name="provider" value="@provider.Name">@provider.DisplayName</button>
+                }
             </form>
-        }
-    </section>
-</body>
-</html>
+        </div>
+    }
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -70,6 +70,71 @@ namespace Service
         {
             return context.Servicos.AsNoTracking();
         }
+
+        /// <summary>
+        /// Buscar todos os serviços cadastrados na página inicial
+        /// </summary>
+        /// <returns>Coleção de serviços cadastrados.</returns>
+        public IEnumerable<Servico> BuscarPorFiltro(uint? idTipoServico, uint? idAreaAtuacao, uint? idProfissional)
+        {
+            var query = context.Servicos
+                .AsNoTracking()
+                .Include(s => s.IdProfissionalNavigation)
+                .AsQueryable();
+
+            if (idTipoServico.HasValue)
+            {
+                query = query.Where(s => s.IdTipoServico == idTipoServico.Value);
+            }
+
+            if (idAreaAtuacao.HasValue)
+            {
+                query = query.Where(s => s.IdAreaAtuacao == idAreaAtuacao.Value);
+            }
+
+            if (idProfissional.HasValue)
+            {
+                query = query.Where(s => s.IdProfissionalNavigation.Id == idProfissional.Value);
+            }
+
+            return query.ToList();
+        }
+
+        /// <summary>
+        /// Busca por termo (pode ser nome do serviço, nome do tipo de serviço ou nome do profissional) e filtros opcionais
+        /// </summary>
+        public IEnumerable<Servico> Buscar(string? termo, uint? idTipoServico, uint? idAreaAtuacao, uint? idProfissional)
+        {
+            var query = context.Servicos
+                .AsNoTracking()
+                .Include(s => s.IdProfissionalNavigation)
+                .Include(s => s.IdTipoServicoNavigation)
+                .Include(s => s.IdAreaAtuacaoNavigation)
+                .Include(s => s.Contratacaos).ThenInclude(c => c.Avaliacaos)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(termo))
+            {
+                var t = termo.Trim();
+                query = query.Where(s =>
+                    (s.Nome != null && EF.Functions.Like(s.Nome, $"%{t}%")) ||
+                    (s.IdTipoServicoNavigation != null && s.IdTipoServicoNavigation.Nome != null && EF.Functions.Like(s.IdTipoServicoNavigation.Nome, $"%{t}%")) ||
+                    (s.IdProfissionalNavigation != null && s.IdProfissionalNavigation.Nome != null && EF.Functions.Like(s.IdProfissionalNavigation.Nome, $"%{t}%")) ||
+                    (s.IdAreaAtuacaoNavigation != null && s.IdAreaAtuacaoNavigation.Nome != null && EF.Functions.Like(s.IdAreaAtuacaoNavigation.Nome, $"%{t}%"))
+                );
+            }
+
+            if (idTipoServico.HasValue)
+                query = query.Where(s => s.IdTipoServico == idTipoServico.Value);
+
+            if (idAreaAtuacao.HasValue)
+                query = query.Where(s => s.IdAreaAtuacao == idAreaAtuacao.Value);
+
+            if (idProfissional.HasValue)
+                query = query.Where(s => s.IdProfissional == idProfissional.Value);
+
+            return query.ToList();
+        }
     }
 }
 
