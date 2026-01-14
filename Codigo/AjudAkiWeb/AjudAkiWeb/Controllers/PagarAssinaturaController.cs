@@ -4,7 +4,6 @@ using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Service;
 
 namespace AjudAkiWeb.Controllers
 {
@@ -22,6 +21,7 @@ namespace AjudAkiWeb.Controllers
             this.profissionalService = profissionalService;
             this.mapper = mapper;
         }
+
         // GET: PagarAssinaturaController
         public ActionResult Index()
         {
