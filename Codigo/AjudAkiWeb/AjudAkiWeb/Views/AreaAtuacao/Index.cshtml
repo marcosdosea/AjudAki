@@ -1,42 +1,118 @@
 ﻿@model IEnumerable<AjudAkiWeb.Models.AreaAtuacaoViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Administração";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+<link href="~/css/AreaAtuacao.css" rel="stylesheet" />
+
+<div class="row mt-4">
+    <!-- Sidebar -->
+    <div class="col-md-3 mb-3">
+        <div>
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-calendar-days me-2"></i> Solicitações de serviços
+            </a>
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-cart-shopping me-2"></i> Minhas contratações
+            </a>
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-briefcase me-2"></i> Meus serviços
+            </a>
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-file-contract me-2"></i> Minha assinatura
+            </a>
+             <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-pen me-2"></i> Editar dados
+            </a>
+            <a href="#" class="admin-menu-item active">
+                <i class="fa-solid fa-gear me-2"></i> Administração
+            </a>
+             <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-right-from-bracket me-2"></i> Sair
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9">
+        <div class="admin-header">
+            <h2>Administração</h2>
+            <p>Gerencie as áreas de atuação e serviços.</p>
+        </div>
+
+        <div class="admin-card">
+            <div class="p-4">
+                <!-- Adicionar Área de Atuação -->
+                <label class="admin-section-label">Adicione uma área de atuação</label>
+                <form asp-action="Create" method="post" class="d-flex gap-3 mb-4">
+                     <input type="text" name="Nome" class="form-control" placeholder="Ex: encanador" required style="max-width: 400px;" />
+                     <button type="submit" class="admin-btn-add">Adicionar</button>
+                </form>
+            
+                 <br />
+                 <div class="alert alert-info">
+                     <i class="fa-solid fa-info-circle"></i> Lista de Áreas Cadastradas
+                 </div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-primary">Área de Atuação</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="text-warning me-2" title="Editar"><i class="fa-solid fa-pen"></i></a>
+                                <a href="#" class="text-danger" title="Excluir" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.Id" data-nome="@item.Nome" onclick="setDeleteModal(this)">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Confirmar Exclusão -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Deseja realmente excluir a Área de Atuação <strong id="deleteItemName"></strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <form asp-action="Delete" method="post">
+            <input type="hidden" name="id" id="deleteItemId" />
+            <button type="submit" class="btn btn-danger">Excluir</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function setDeleteModal(element) {
+        var id = element.getAttribute('data-id');
+        var nome = element.getAttribute('data-nome');
+        document.getElementById('deleteItemId').value = id;
+        document.getElementById('deleteItemName').innerText = nome;
+    }
+</script>

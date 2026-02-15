@@ -1,0 +1,92 @@
+/* Admin Layout - Area Atuacao */
+.admin-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    color: #004a99;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: background-color 0.2s;
+}
+
+.admin-menu-item:hover {
+    background-color: #e9ecef;
+    text-decoration: none;
+    color: #003366;
+}
+
+.admin-menu-item.active {
+    background-color: #e6f0ff;
+    font-weight: bold;
+}
+
+.admin-menu-item i {
+    margin-right: 15px;
+    width: 20px;
+    text-align: center;
+}
+
+.admin-header {
+    margin-bottom: 20px;
+}
+
+.admin-header h2 {
+    color: #0056b3;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.admin-header p {
+    color: #6c757d;
+}
+
+.admin-card {
+    background: white;
+    border: 1px solid #0056b3;
+    border-radius: 15px;
+    padding: 30px;
+    min-height: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.admin-section-label {
+    color: #0056b3;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.admin-btn-add {
+    background-color: #0069d9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 20px;
+    font-weight: 500;
+}
+
+.admin-btn-add:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.admin-btn-delete-section {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    display: inline-block;
+    margin-top: 20px;
+    margin-right: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.admin-btn-delete-section:hover {
+    color: white;
+    background-color: #c82333;
+    text-decoration: none;
+}

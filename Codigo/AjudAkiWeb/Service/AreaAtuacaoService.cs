@@ -1,38 +1,41 @@
 ﻿using Core;
 using Core.Service;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Service
 {
-    /// <summary>
-    /// Implementa serviços para manter area de atuação
-    /// </summary>
     public class AreaAtuacaoService : IAreaAtuacaoService
     {
-
         private readonly AjudakiContext context;
+
         public AreaAtuacaoService(AjudakiContext context)
         {
-            this.context = context;
+            this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         /// <summary>
-        /// Cria uma nova área de atuação na base de dados
+        /// Criar uma nova área de atuação na base de dados
         /// </summary>
-        /// <param name="areaAtuacao">Nome da área</param>
-        /// <returns>id da área de atuação</returns>
+        /// <param name="areaAtuacao">dados da área de atuação</param>
+        /// <returns>id da área de atuação criada</returns>
+        /// <exception cref="NotImplementedException"></exception>
         public uint Create(Areaatuacao areaAtuacao)
         {
             context.Add(areaAtuacao);
             context.SaveChanges();
-
             return areaAtuacao.Id;
         }
 
         /// <summary>
-        /// Remove a área de atuação da base de dados
+        /// Remover área de atuação da base de dados
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">id da área de atuação</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void Delete(uint id)
         {
             var areaAtuacao = context.Areaatuacaos.Find(id);
@@ -44,9 +47,10 @@ namespace Service
         }
 
         /// <summary>
-        /// Edita a área de atuação
+        /// Editar dados da área de atuação na base de dados
         /// </summary>
-        /// <param name="areaAtuacao"></param>
+        /// <param name="areaAtuacao">dados da área de atuação a ser atualizada</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void Edit(Areaatuacao areaAtuacao)
         {
             context.Update(areaAtuacao);
@@ -54,22 +58,39 @@ namespace Service
         }
 
         /// <summary>
-        /// Busca uma área de atuação
+        /// Buscar uma área de atuação na base de dados
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Área de atuação</returns>
+        /// <param name="id">id da área de atuação</param>
+        /// <returns>dados da área de atuação ou null se não encontrada</returns>
+        /// <exception cref="NotImplementedException"></exception>
         public Areaatuacao? Get(uint id)
         {
             return context.Areaatuacaos.Find(id);
         }
 
         /// <summary>
-        /// Busca as áreas de atuação
+        /// Buscar todas as áreas de atuação cadastradas
         /// </summary>
-        /// <returns>Lista de Áreas de atuação</returns>
+        /// <returns>lista de áreas de atuação</returns>
+        /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Areaatuacao> GetAll()
         {
             return context.Areaatuacaos.AsNoTracking();
+        }
+
+        /// <summary>
+        /// Buscar áreas de atuação iniciando com o nome
+        /// </summary>
+        /// <param name="nome">nome da área de atuação</param>
+        /// <returns>lista de áreas de atuação que inicia com o nome</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public IEnumerable<Areaatuacao> ObterPorNomeOrdemdescrecente(string nome)
+        {
+            var query = from area in context.Areaatuacaos
+                        where area.Nome.StartsWith(nome)
+                        orderby area.Nome descending
+                        select area;
+            return query.AsNoTracking().ToList();
         }
     }
 }
