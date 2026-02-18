@@ -1,5 +1,5 @@
-﻿using AjudAkiWeb.Models;
-using AutoMapper;
+﻿using AutoMapper;
+using AjudAkiWeb.Models;
 using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -8,39 +8,35 @@ namespace AjudAkiWeb.Controllers
 {
     public class AreaAtuacaoController : Controller
     {
-
-        private readonly IAreaAtuacaoService areaAtuacaoService;
-        private readonly IMapper mapper;
+        private readonly IAreaAtuacaoService _areaAtuacaoService;
+        private readonly IMapper _mapper;
 
         public AreaAtuacaoController(IAreaAtuacaoService areaAtuacaoService, IMapper mapper)
         {
-            this.areaAtuacaoService = areaAtuacaoService;
-            this.mapper = mapper;
+            _areaAtuacaoService = areaAtuacaoService;
+            _mapper = mapper;
         }
 
         // GET: AreaAtuacaoController
         public ActionResult Index()
         {
-            var listaAreasAtuacao = areaAtuacaoService.GetAll();
-            var listaAreasAtuacaoViewModel = mapper.Map<List<AreaAtuacaoViewModel>>(listaAreasAtuacao);
-
+            var listaAreasAtuacao = _areaAtuacaoService.GetAll();
+            var listaAreasAtuacaoViewModel = _mapper.Map<List<AreaAtuacaoViewModel>>(listaAreasAtuacao);
             return View(listaAreasAtuacaoViewModel);
         }
 
         // GET: AreaAtuacaoController/Details/5
         public ActionResult Details(uint id)
         {
-            var areaAtuacao = areaAtuacaoService.Get(id);
-            var areasAtuacaoViewModel = mapper.Map<AreaAtuacaoViewModel>(areaAtuacao);
-            
-            return View(areasAtuacaoViewModel);
+            var areaAtuacao = _areaAtuacaoService.Get(id);
+            var areaAtuacaoViewModel = _mapper.Map<AreaAtuacaoViewModel>(areaAtuacao);
+            return View(areaAtuacaoViewModel);
         }
 
         // GET: AreaAtuacaoController/Create
         public ActionResult Create()
         {
             var areaAtuacaoViewModel = new AreaAtuacaoViewModel();
-
             return View(areaAtuacaoViewModel);
         }
 
@@ -51,19 +47,17 @@ namespace AjudAkiWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var areaAtuacao = mapper.Map<Areaatuacao>(areaAtuacaoViewModel);
-                areaAtuacaoService.Create(areaAtuacao);
+                var areaAtuacao = _mapper.Map<Areaatuacao>(areaAtuacaoViewModel);
+                _areaAtuacaoService.Create(areaAtuacao);
             }
             return RedirectToAction(nameof(Index));
-
         }
 
         // GET: AreaAtuacaoController/Edit/5
         public ActionResult Edit(uint id)
         {
-            var areaAtuacao = areaAtuacaoService.Get(id);
-            var areaAtuacaoViewModel = mapper.Map<AreaAtuacaoViewModel>(areaAtuacao);
-            
+            var areaAtuacao = _areaAtuacaoService.Get(id);
+            var areaAtuacaoViewModel = _mapper.Map<AreaAtuacaoViewModel>(areaAtuacao);
             return View(areaAtuacaoViewModel);
         }
 
@@ -74,8 +68,8 @@ namespace AjudAkiWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var areaAtuacao = mapper.Map<Areaatuacao>(areaAtuacaoViewModel);
-                areaAtuacaoService.Edit(areaAtuacao);
+                var areaAtuacao = _mapper.Map<Areaatuacao>(areaAtuacaoViewModel);
+                _areaAtuacaoService.Edit(areaAtuacao);
             }
             return RedirectToAction(nameof(Index));
         }
@@ -83,21 +77,18 @@ namespace AjudAkiWeb.Controllers
         // GET: AreaAtuacaoController/Delete/5
         public ActionResult Delete(uint id)
         {
-            var areaAtuacao = areaAtuacaoService.Get(id);
-            var areaAtuacaoViewModel = mapper.Map<AreaAtuacaoViewModel>(areaAtuacao);
-
+            var areaAtuacao = _areaAtuacaoService.Get(id);
+            var areaAtuacaoViewModel = _mapper.Map<AreaAtuacaoViewModel>(areaAtuacao);
             return View(areaAtuacaoViewModel);
         }
 
         // POST: AreaAtuacaoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(AreaAtuacaoViewModel areaAtuacaoViewModel)
+        public ActionResult Delete(uint id, AreaAtuacaoViewModel areaAtuacaoViewModel)
         {
-            areaAtuacaoService.Delete(areaAtuacaoViewModel.Id);
-
+            _areaAtuacaoService.Delete(id);
             return RedirectToAction(nameof(Index));
-
         }
     }
 }

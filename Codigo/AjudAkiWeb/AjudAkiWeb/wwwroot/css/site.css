@@ -1,6 +1,6 @@
 @import url(colors.css);
 
-*{
+* {
     font-family: CentraNube, sans-serif;
 }
 
@@ -14,7 +14,11 @@ html {
     }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
@@ -54,20 +58,20 @@ body {
     width: 250px;
 }
 
-.div-regiao{
+.div-regiao {
     margin-inline-start: 16px;
 }
 
 .formAtuacao,
 .formRegiao {
-    padding-left: 30px; 
-    flex: 1; 
+    padding-left: 30px;
+    flex: 1;
     border-radius: 8px;
 }
 
 .formAtuacao:last-child,
 .formRegiao:last-child {
-    margin-right: 0; 
+    margin-right: 0;
 }
 
 .navbar button {
@@ -75,29 +79,32 @@ body {
     width: 140px;
 }
 
-.icon-left, .icon-right {
+.icon-left,
+.icon-right {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    pointer-events: none; 
-    color: var(--placeholder-color); 
-    font-size: 1rem; 
+    pointer-events: none;
+    color: var(--placeholder-color);
+    font-size: 1rem;
 }
 
 .icon-left {
-    left: 10px; 
+    left: 10px;
 }
 
 .icon-right {
-    right: 10px; 
+    right: 10px;
 }
+
 .text-primary {
-    color: #004E93 !important; 
-    font-weight: bold; 
+    color: #004E93 !important;
+    font-weight: bold;
     font-size: 24px;
-    margin-left: 10px; 
+    margin-left: 10px;
 }
-.btn{
+
+.btn {
     width: 150px;
     height: 34px;
     margin-inline-start: 16px;
@@ -106,10 +113,12 @@ body {
     border-radius: 8px;
 }
 
-.btn-conta{
+.btn-conta {
     background-color: var(--primary-color);
 }
 
-.btn-servico{
+.btn-servico {
     background-color: var(--deep-blue);
 }
+
+/* Admin Layout moved to AreaAtuacao.css */
