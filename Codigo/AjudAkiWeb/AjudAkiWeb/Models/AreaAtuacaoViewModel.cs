@@ -13,5 +13,7 @@ namespace AjudAkiWeb.Models
         [StringLength(50)]
         public string Nome { get; set; } = null!;
 
+        public ICollection<TipoServicoViewModel> TiposServico { get; set; } = new List<TipoServicoViewModel>();
+
     }
 }

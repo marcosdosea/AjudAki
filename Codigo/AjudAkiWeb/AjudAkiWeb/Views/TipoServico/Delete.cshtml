@@ -1,44 +1,67 @@
 ﻿@model AjudAkiWeb.Models.TipoServicoViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Excluir Tipo de Serviço";
 }
 
-<h1>Delete</h1>
+<link href="~/css/AreaAtuacao.css" rel="stylesheet" />
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>TipoServicoViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdAreaAtuacao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdAreaAtuacao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdAgenda)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdAgenda)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+<div class="row mt-4">
+    <!-- Sidebar -->
+    <div class="col-md-3 mb-3">
+        <div class="list-group">
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-calendar-days me-2"></i> Solicitações de serviços
+            </a>
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-cart-shopping me-2"></i> Minhas contratações
+            </a>
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-briefcase me-2"></i> Meus serviços
+            </a>
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-file-contract me-2"></i> Minha assinatura
+            </a>
+             <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-pen me-2"></i> Editar dados
+            </a>
+            <a href="#" class="admin-menu-item active">
+                <i class="fa-solid fa-gear me-2"></i> Administração
+            </a>
+             <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-right-from-bracket me-2"></i> Sair
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9">
+        <div class="admin-header">
+            <h2>Administração</h2>
+            <p>Excluir tipo de serviço.</p>
+        </div>
+
+        <div class="admin-card">
+            <h4 class="text-danger fw-bold mb-4">Tem certeza que deseja excluir?</h4>
+            
+            <dl class="row">
+                <dt class="col-sm-3 fw-bold">Nome:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Nome)</dd>
+                
+                <dt class="col-sm-3 fw-bold">Área de Atuação:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.NomeAreaAtuacao)</dd>
+
+                <dt class="col-sm-3 fw-bold">Agenda:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.DescricaoAgenda)</dd>
+            </dl>
+            
+            <form asp-action="Delete" class="mt-4">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex gap-2">
+                     <button type="submit" class="admin-btn-delete px-5">Excluir</button>
+                     <a asp-action="Index" class="admin-btn-back px-4">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

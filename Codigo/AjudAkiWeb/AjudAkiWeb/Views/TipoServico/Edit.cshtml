@@ -1,46 +1,99 @@
 ﻿@model AjudAkiWeb.Models.TipoServicoViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Tipo de Serviço";
 }
 
-<h1>Edit</h1>
+<link href="~/css/AreaAtuacao.css" rel="stylesheet" />
 
-<h4>TipoServicoViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdAreaAtuacao" class="control-label"></label>
-                <input asp-for="IdAreaAtuacao" class="form-control" />
-                <span asp-validation-for="IdAreaAtuacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdAgenda" class="control-label"></label>
-                <input asp-for="IdAgenda" class="form-control" />
-                <span asp-validation-for="IdAgenda" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="row mt-4">
+    <!-- Sidebar -->
+    <div class="col-md-3 mb-3">
+        <div class="list-group">
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-calendar-days me-2"></i> Solicitações de serviços
+            </a>
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-cart-shopping me-2"></i> Minhas contratações
+            </a>
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-briefcase me-2"></i> Meus serviços
+            </a>
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-file-contract me-2"></i> Minha assinatura
+            </a>
+             <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-pen me-2"></i> Editar dados
+            </a>
+            <a href="#" class="admin-menu-item active">
+                <i class="fa-solid fa-gear me-2"></i> Administração
+            </a>
+             <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-right-from-bracket me-2"></i> Sair
+            </a>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    <!-- Main Content -->
+    <div class="col-md-9">
+        <div class="admin-header">
+            <h2>Administração</h2>
+            <p>Editar tipo de serviço.</p>
+        </div>
+
+        <div class="admin-card">
+            <div class="d-flex align-items-center mb-4">
+                <div class="bg-warning text-white p-3 rounded-circle me-3">
+                    <i class="fa-solid fa-pen fa-lg"></i>
+                </div>
+                <h4 class="text-primary fw-bold mb-0">Editar Tipo de Serviço</h4>
+            </div>
+            
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                
+                <input type="hidden" asp-for="Id" />
+                
+                <div class="row">
+                    <div class="col-md-6 form-group mb-3">
+                        <label asp-for="IdAreaAtuacao" class="control-label fw-bold mb-1"></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-layer-group text-primary"></i></span>
+                             <select asp-for="IdAreaAtuacao" class="form-select border-start-0 ps-0" asp-items="Model.ListaAreasAtuacoes">
+                                <option value="">Selecione uma Área...</option>
+                            </select>
+                        </div>
+                        <span asp-validation-for="IdAreaAtuacao" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                         <label asp-for="IdAgenda" class="control-label fw-bold mb-1"></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="fa-regular fa-calendar-alt text-primary"></i></span>
+                             <select asp-for="IdAgenda" class="form-select border-start-0 ps-0" asp-items="Model.ListaAgenda">
+                                 <option value="">Selecione uma Agenda...</option>
+                            </select>
+                        </div>
+                        <span asp-validation-for="IdAgenda" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Nome" class="control-label fw-bold mb-1"></label>
+                    <div class="input-group">
+                       <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-wrench text-primary"></i></span>
+                        <input asp-for="Nome" class="form-control border-start-0 ps-0" placeholder="Digite o nome do serviço" />
+                    </div>
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex gap-2 justify-content-end">
+                    <a asp-action="Index" class="admin-btn-back">Cancelar</a>
+                    <button type="submit" class="admin-btn-save"><i class="fa-solid fa-check me-2"></i> Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

@@ -9,11 +9,13 @@ namespace AjudAkiWeb.Controllers
     public class AreaAtuacaoController : Controller
     {
         private readonly IAreaAtuacaoService _areaAtuacaoService;
+        private readonly IAgendaService _agendaService;
         private readonly IMapper _mapper;
 
-        public AreaAtuacaoController(IAreaAtuacaoService areaAtuacaoService, IMapper mapper)
+        public AreaAtuacaoController(IAreaAtuacaoService areaAtuacaoService, IAgendaService agendaService, IMapper mapper)
         {
             _areaAtuacaoService = areaAtuacaoService;
+            _agendaService = agendaService;
             _mapper = mapper;
         }
 
@@ -21,6 +23,16 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Index()
         {
             var listaAreasAtuacao = _areaAtuacaoService.GetAll();
+            var listaAgendas = _agendaService.GetAll();
+
+            ViewBag.ListaAgenda = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(listaAgendas.Select(a => new
+            {
+                Id = a.Id,
+                Descricao = $"{a.Data:dd/MM/yyyy} - {a.Turno}"
+            }), "Id", "Descricao");
+
+            ViewBag.ListaAreasAtuacoes = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(listaAreasAtuacao, "Id", "Nome");
+
             var listaAreasAtuacaoViewModel = _mapper.Map<List<AreaAtuacaoViewModel>>(listaAreasAtuacao);
             return View(listaAreasAtuacaoViewModel);
         }

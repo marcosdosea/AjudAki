@@ -1,92 +1,187 @@
-/* Admin Layout - Area Atuacao */
-.admin-menu-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    color: #004a99;
-    text-decoration: none;
-    font-weight: 500;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    transition: background-color 0.2s;
-}
+/* AreaAtuacao.css - Custom Styles for Admin Dashboard */
 
-.admin-menu-item:hover {
-    background-color: #e9ecef;
-    text-decoration: none;
-    color: #003366;
-}
-
-.admin-menu-item.active {
-    background-color: #e6f0ff;
-    font-weight: bold;
-}
-
-.admin-menu-item i {
-    margin-right: 15px;
-    width: 20px;
-    text-align: center;
-}
-
-.admin-header {
-    margin-bottom: 20px;
-}
-
+/* General Layout */
 .admin-header h2 {
-    color: #0056b3;
+    color: #0d6efd;
     font-weight: 600;
-    margin-bottom: 5px;
 }
 
 .admin-header p {
     color: #6c757d;
 }
 
-.admin-card {
-    background: white;
-    border: 1px solid #0056b3;
-    border-radius: 15px;
-    padding: 30px;
-    min-height: 400px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+/* Sidebar Customization */
+.list-group-item.admin-menu-item {
+    border: none;
+    color: #495057;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 8px !important;
+    margin-bottom: 5px;
+    transition: all 0.2s;
+    background-color: transparent;
 }
 
+.list-group-item.admin-menu-item:hover {
+    background-color: #e9ecef;
+    color: #0d6efd;
+}
+
+.list-group-item.admin-menu-item.active {
+    background-color: #e7f1ff;
+    color: #0d6efd;
+    font-weight: 600;
+    border: none;
+}
+
+.list-group-item.admin-menu-item i {
+    width: 24px;
+    text-align: center;
+}
+
+
+/* Admin Card Container */
+.admin-card {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid #0d6efd;
+}
+
+/* Form Styles */
 .admin-section-label {
-    color: #0056b3;
+    color: #0d6efd;
     font-weight: 500;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     display: block;
 }
 
+.form-control,
+.form-select {
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    padding: 10px 15px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    border-color: #86b7fe;
+}
+
+/* Buttons */
 .admin-btn-add {
-    background-color: #0069d9;
+    background-color: #0d6efd;
     color: white;
     border: none;
-    border-radius: 5px;
-    padding: 8px 20px;
+    border-radius: 6px;
+    padding: 10px 24px;
     font-weight: 500;
+    transition: background-color 0.2s;
+    height: 100%;
+    white-space: nowrap;
 }
 
 .admin-btn-add:hover {
-    background-color: #0056b3;
+    background-color: #0b5ed7;
     color: white;
 }
 
-.admin-btn-delete-section {
+.admin-btn-delete {
     background-color: #dc3545;
     color: white;
     border: none;
-    border-radius: 30px;
-    padding: 10px 20px;
-    display: inline-block;
-    margin-top: 20px;
-    margin-right: 10px;
+    border-radius: 10px;
+    padding: 6px 16px;
+    font-weight: 500;
+    transition: background-color 0.2s;
     text-decoration: none;
-    cursor: pointer;
 }
 
-.admin-btn-delete-section:hover {
+.admin-btn-delete:hover {
+    background-color: #bb2d3b;
     color: white;
-    background-color: #c82333;
+}
+
+.admin-btn-edit {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 16px;
+    font-weight: 500;
+    transition: background-color 0.2s;
     text-decoration: none;
+}
+
+.admin-btn-edit:hover {
+    background-color: #0b5ed7;
+    color: white;
+}
+
+.admin-btn-save {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 30px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-btn-save:hover {
+    background-color: #0b5ed7;
+    color: white;
+}
+
+.admin-btn-back {
+    background-color: #fff;
+    color: #6c757d;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    padding: 10px 30px;
+    font-weight: 600;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-btn-back:hover {
+    background-color: #f8f9fa;
+    color: #495057;
+    border-color: #b6b7b9;
+}
+
+/* Accordion Customization */
+.accordion-item {
+    border: 1px solid #e9ecef;
+    background-color: #fff;
+}
+
+.accordion-button {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    box-shadow: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #e7f1ff;
+    color: #0d6efd;
+}
+
+.accordion-button::after {
+    filter: grayscale(100%);
+}
+
+.accordion-button:not(.collapsed)::after {
+    filter: invert(36%) sepia(37%) saturate(2250%) hue-rotate(205deg) brightness(99%) contrast(98%);
 }

@@ -17,5 +17,7 @@ namespace Core.Service
         Tiposervico? Get(uint id);
 
         IEnumerable<Tiposervico> GetAll();
+
+        IEnumerable<Tiposervico> ObterPorNomeOrdemCrescente(string nome);
     }
 }

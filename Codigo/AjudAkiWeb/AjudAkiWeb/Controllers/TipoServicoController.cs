@@ -5,7 +5,6 @@ using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Service;
 
 namespace AjudAkiWeb.Controllers
 {
@@ -25,20 +24,21 @@ namespace AjudAkiWeb.Controllers
         }
 
         // GET: TipoServicoController
+        // GET: TipoServicoController
         public ActionResult Index()
         {
-            var listaTipoServicos = tipoServicoService.GetAll();
-            var listaTipoServicoViewModel = mapper.Map<List<TipoServicoViewModel>>(listaTipoServicos);
-            
-            return View(listaTipoServicoViewModel);
+            return RedirectToAction("Index", "AreaAtuacao");
         }
 
         // GET: TipoServicoController/Details/5
         public ActionResult Details(uint id)
         {
             var tipoServico = tipoServicoService.Get(id);
+            if (tipoServico == null)
+            {
+                return NotFound();
+            }
             var tipoServicoViewModel = mapper.Map<TipoServicoViewModel>(tipoServico);
-            
             return View(tipoServicoViewModel);
         }
 
@@ -46,10 +46,7 @@ namespace AjudAkiWeb.Controllers
         public ActionResult Create()
         {
             var tipoServicoViewModel = new TipoServicoViewModel();
-            IEnumerable<Agendum> listaAgenda = agendaService.GetAll();
-            IEnumerable<Areaatuacao> listaAreasAtuacoes = areaAtuacaoService.GetAll();
-            tipoServicoViewModel.ListaAgenda = new SelectList(listaAgenda, "Id", "Nome", null);
-            tipoServicoViewModel.ListaAreasAtuacoes = new SelectList(listaAreasAtuacoes, "Id", "Nome", null);
+            PopulateLists(tipoServicoViewModel);
             return View(tipoServicoViewModel);
         }
 
@@ -62,49 +59,85 @@ namespace AjudAkiWeb.Controllers
             {
                 var tipoServico = mapper.Map<Tiposervico>(tipoServicoViewModel);
                 tipoServicoService.Create(tipoServico);
+                return RedirectToAction("Index", "AreaAtuacao");
             }
-            return RedirectToAction(nameof(Index));
+            PopulateLists(tipoServicoViewModel);
+            return View(tipoServicoViewModel);
         }
 
         // GET: TipoServicoController/Edit/5
         public ActionResult Edit(uint id)
         {
             var tipoServico = tipoServicoService.Get(id);
+            if (tipoServico == null)
+            {
+                return NotFound();
+            }
             var tipoServicoViewModel = mapper.Map<TipoServicoViewModel>(tipoServico);
-            
+            PopulateLists(tipoServicoViewModel);
             return View(tipoServicoViewModel);
         }
 
         // POST: TipoServicoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(TipoServicoViewModel tipoServicoViewModel)
+        public ActionResult Edit(uint id, TipoServicoViewModel tipoServicoViewModel)
         {
+            if (id != tipoServicoViewModel.Id)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
                 var tipoServico = mapper.Map<Tiposervico>(tipoServicoViewModel);
                 tipoServicoService.Edit(tipoServico);
+                return RedirectToAction("Index", "AreaAtuacao");
             }
-            return RedirectToAction(nameof(Index));
+            PopulateLists(tipoServicoViewModel);
+            return View(tipoServicoViewModel);
         }
 
         // GET: TipoServicoController/Delete/5
         public ActionResult Delete(uint id)
         {
             var tipoServico = tipoServicoService.Get(id);
+            if (tipoServico == null)
+            {
+                return NotFound();
+            }
             var tipoServicoViewModel = mapper.Map<TipoServicoViewModel>(tipoServico);
-            
             return View(tipoServicoViewModel);
         }
 
         // POST: TipoServicoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(TipoServicoViewModel tipoServicoViewModel)
+        public ActionResult Delete(uint id, TipoServicoViewModel collection)
         {
-            tipoServicoService.Delete(tipoServicoViewModel.Id);
-            
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                tipoServicoService.Delete(id);
+                return RedirectToAction("Index", "AreaAtuacao");
+            }
+            catch
+            {
+                return RedirectToAction("Index", "AreaAtuacao");
+            }
+        }
+
+        private void PopulateLists(TipoServicoViewModel viewModel)
+        {
+            var listaAgenda = agendaService.GetAll();
+            var listaAreasAtuacoes = areaAtuacaoService.GetAll();
+
+            viewModel.ListaAgenda = new SelectList(listaAgenda.Select(a => new
+            {
+                Id = a.Id,
+                Descricao = $"{a.Data:dd/MM/yyyy} - {a.Turno}"
+            }), "Id", "Descricao", viewModel.IdAgenda);
+
+            viewModel.ListaAreasAtuacoes = new SelectList(listaAreasAtuacoes, "Id", "Nome", viewModel.IdAreaAtuacao);
         }
     }
 }

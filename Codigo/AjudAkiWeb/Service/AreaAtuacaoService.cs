@@ -38,9 +38,16 @@ namespace Service
         /// <exception cref="NotImplementedException"></exception>
         public void Delete(uint id)
         {
-            var areaAtuacao = context.Areaatuacaos.Find(id);
+            var areaAtuacao = context.Areaatuacaos
+                .Include(a => a.Tiposervicos)
+                .FirstOrDefault(a => a.Id == id);
+
             if (areaAtuacao != null)
             {
+                if (areaAtuacao.Tiposervicos != null && areaAtuacao.Tiposervicos.Any())
+                {
+                    context.Tiposervicos.RemoveRange(areaAtuacao.Tiposervicos);
+                }
                 context.Remove(areaAtuacao);
                 context.SaveChanges();
             }
@@ -75,7 +82,10 @@ namespace Service
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Areaatuacao> GetAll()
         {
-            return context.Areaatuacaos.AsNoTracking();
+            return context.Areaatuacaos
+                .Include(a => a.Tiposervicos)
+                .ThenInclude(t => t.IdAgendaNavigation)
+                .AsNoTracking();
         }
 
         /// <summary>
