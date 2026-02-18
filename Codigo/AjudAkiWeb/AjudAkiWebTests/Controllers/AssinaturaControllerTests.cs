@@ -1,10 +1,12 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Core.Service;
 using Moq;
-using Mappers;
+using AjudAkiWeb.Mappers;
 using Core;
 using AjudAkiWeb.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace AjudAkiWeb.Controllers.Tests
 {
@@ -26,11 +28,20 @@ namespace AjudAkiWeb.Controllers.Tests
                 .Returns(GetTestAssinaturas());
             mockService.Setup(service => service.Get(1))
                 .Returns(GetTargetAssinatura());
+            mockService.Setup(service => service.Get(999))
+                .Returns((Assinatura?)null);
             mockService.Setup(service => service.Edit(It.IsAny<Assinatura>()))
                 .Verifiable();
             mockService.Setup(service => service.Create(It.IsAny<Assinatura>()))
                 .Verifiable();
+            mockService.Setup(service => service.Delete(It.IsAny<uint>()))
+                .Verifiable();
             controller = new AssinaturaController(mockService.Object, mapper);
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext()
+            };
+            controller.TempData = new TempDataDictionary(controller.HttpContext, Mock.Of<ITempDataProvider>());
         }
 
         private Assinatura GetTargetAssinatura()
@@ -39,6 +50,7 @@ namespace AjudAkiWeb.Controllers.Tests
             {
                 Id = 1,
                 Nome = AssinaturaNomeEnum.BÁSICO.ToString(),
+                Status = AssinaturaStatusEnum.ATIVA.ToString(),
                 Descricao = "Plano básico com beneficios limitados"
             };
         }
@@ -46,20 +58,22 @@ namespace AjudAkiWeb.Controllers.Tests
         private IEnumerable<Assinatura> GetTestAssinaturas()
         {
             return new List<Assinatura>
-        {
-            new Assinatura
             {
-                Id = 1,
-                Nome = AssinaturaNomeEnum.BÁSICO.ToString(),
-                Descricao = "Plano básico com beneficios limitados"
-            },
-            new Assinatura
-            {
-                Id = 2,
-                Nome = AssinaturaNomeEnum.AVANÇADO.ToString(),
-                Descricao = "Plano com beneficios avançados"
-            }
-        };
+                new Assinatura
+                {
+                    Id = 1,
+                    Nome = AssinaturaNomeEnum.BÁSICO.ToString(),
+                    Status = AssinaturaStatusEnum.ATIVA.ToString(),
+                    Descricao = "Plano básico com beneficios limitados"
+                },
+                new Assinatura
+                {
+                    Id = 2,
+                    Nome = AssinaturaNomeEnum.AVANÇADO.ToString(),
+                    Status = AssinaturaStatusEnum.ATIVA.ToString(),
+                    Descricao = "Plano com beneficios avançados"
+                }
+            };
         }
 
         [TestMethod()]
@@ -118,18 +132,17 @@ namespace AjudAkiWeb.Controllers.Tests
         [TestMethod()]
         public void CreateTest_Post_Invalid()
         {
-            // Arrange
+            // Arrange - simula erro de validação no modelo
             controller.ModelState.AddModelError("Nome", "Campo requerido");
 
             // Act
             var result = controller.Create(GetNewAssinatura());
 
-            // Assert
+            // Assert - quando inválido, deve retornar View para o usuário corrigir
             Assert.AreEqual(1, controller.ModelState.ErrorCount);
-            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
-            RedirectToActionResult redirectToActionResult = (RedirectToActionResult)result;
-            Assert.IsNull(redirectToActionResult.ControllerName);
-            Assert.AreEqual("Index", redirectToActionResult.ActionName);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            var viewResult = (ViewResult)result;
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AssinaturaViewModel));
         }
 
         private AssinaturaViewModel GetNewAssinatura()
@@ -138,6 +151,8 @@ namespace AjudAkiWeb.Controllers.Tests
             {
                 Id = 4,
                 Nome = AssinaturaNomeEnum.AVANÇADO,
+                Status = AssinaturaStatusEnum.ATIVA,
+                Valor = 99.90f,
                 Descricao = "Plano com beneficios brilhantes"
             };
         }
@@ -176,6 +191,8 @@ namespace AjudAkiWeb.Controllers.Tests
             {
                 Id = 2,
                 Nome = AssinaturaNomeEnum.AVANÇADO,
+                Status = AssinaturaStatusEnum.ATIVA,
+                Valor = 149.90f,
                 Descricao = "Plano com beneficios avançados"
             };
         }
@@ -208,8 +225,72 @@ namespace AjudAkiWeb.Controllers.Tests
             AssinaturaViewModel assinaturaModel = (AssinaturaViewModel)viewResult.ViewData.Model;
             Assert.AreEqual(AssinaturaNomeEnum.BÁSICO, assinaturaModel.Nome);
             Assert.AreEqual("Plano básico com beneficios limitados", assinaturaModel.Descricao);
+        }
 
+        [TestMethod()]
+        public void DeleteTest_Post_Confirmado()
+        {
+            // Act - simula confirmação de exclusão via POST
+            var viewModel = GetTargetAssinaturaViewModel();
+            viewModel.Id = 1;
+            var result = controller.Delete(1, viewModel);
+
+            // Assert - deve redirecionar para Index após excluir
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            var redirectResult = (RedirectToActionResult)result;
+            Assert.AreEqual("Index", redirectResult.ActionName);
+        }
+
+        [TestMethod()]
+        public void Details_IdInexistente_DeveRedirecionarParaIndex()
+        {
+            // Act
+            var result = controller.Details(999);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            var redirectResult = (RedirectToActionResult)result;
+            Assert.AreEqual("Index", redirectResult.ActionName);
+        }
+
+        [TestMethod()]
+        public void Edit_IdInexistente_DeveRedirecionarParaIndex()
+        {
+            // Act
+            var result = controller.Edit(999);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            var redirectResult = (RedirectToActionResult)result;
+            Assert.AreEqual("Index", redirectResult.ActionName);
+        }
+
+        [TestMethod()]
+        public void Delete_IdInexistente_DeveRedirecionarParaIndex()
+        {
+            // Act
+            var result = controller.Delete(999);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            var redirectResult = (RedirectToActionResult)result;
+            Assert.AreEqual("Index", redirectResult.ActionName);
+        }
+
+        [TestMethod()]
+        public void EditTest_Post_IdsNaoCorrespondem_DeveRedirecionarParaIndex()
+        {
+            // Arrange - ID na rota diferente do ID no modelo
+            var viewModel = GetTargetAssinaturaViewModel();
+            viewModel.Id = 2;
+
+            // Act
+            var result = controller.Edit(99, viewModel);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+            var redirectResult = (RedirectToActionResult)result;
+            Assert.AreEqual("Index", redirectResult.ActionName);
         }
     }
-
 }

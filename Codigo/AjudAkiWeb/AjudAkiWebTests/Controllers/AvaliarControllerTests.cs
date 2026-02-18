@@ -1,4 +1,4 @@
-﻿using Core.Service;
+using Core.Service;
 using Core;
 using AutoMapper;
 using Moq;
@@ -19,6 +19,8 @@ namespace AjudAkiWeb.Controllers.Tests
             // Arrange
             var mockService = new Mock<IAvaliarService>();
             var mockService2 = new Mock<IContratacaoService>();
+            var mockService3 = new Mock<IServicoService>();
+            var mockService4 = new Mock<IProfissionalService>();
 
             IMapper mapper = new MapperConfiguration(cfg =>
                 cfg.AddProfile(new AvaliarProfile())).CreateMapper();
@@ -27,7 +29,9 @@ namespace AjudAkiWeb.Controllers.Tests
                 .Returns(GetTestAvaliar());
             mockService.Setup(service => service.Create(It.IsAny<Avaliacao>()))
                 .Verifiable();
-            controller = new AvaliarController(mockService.Object, mockService2.Object, mapper);
+            mockService2.Setup(service => service.GetAll())
+                .Returns(new List<Contratacao>());
+            controller = new AvaliarController(mockService.Object, mockService2.Object, mockService3.Object, mockService4.Object, mapper);
         }
 
         [TestMethod()]

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Core;
 using Core.Service;
 using AjudAkiWeb.Models;
@@ -123,6 +123,66 @@ namespace Service.Tests
             Assert.AreEqual(3, listaAssinaturas.Count());
             Assert.AreEqual((uint)1, listaAssinaturas.First().Id);
             Assert.AreEqual(AssinaturaNomeEnum.BÁSICO.ToString(), listaAssinaturas.First().Nome);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Create_AssinaturaNull_DeveLancarArgumentNullException()
+        {
+            assinaturaService.Create(null!);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Delete_IdInexistente_DeveLancarInvalidOperationException()
+        {
+            assinaturaService.Delete(999);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Edit_AssinaturaNull_DeveLancarArgumentNullException()
+        {
+            assinaturaService.Edit(null!);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Edit_IdInexistente_DeveLancarInvalidOperationException()
+        {
+            var assinaturaInexistente = new Assinatura
+            {
+                Id = 999,
+                Nome = AssinaturaNomeEnum.BÁSICO.ToString(),
+                Status = AssinaturaStatusEnum.ATIVA.ToString()
+            };
+            assinaturaService.Edit(assinaturaInexistente);
+        }
+
+        [TestMethod()]
+        public void Get_IdInexistente_DeveRetornarNull()
+        {
+            var assinatura = assinaturaService.Get(999);
+            Assert.IsNull(assinatura);
+        }
+
+        [TestMethod()]
+        public void Create_DevePersistirDescricaoEStatus()
+        {
+            var novaAssinatura = new Assinatura
+            {
+                Id = 4,
+                Nome = AssinaturaNomeEnum.BÁSICO.ToString(),
+                Status = AssinaturaStatusEnum.ATIVA.ToString(),
+                Descricao = "Plano novo com descricao completa"
+            };
+
+            assinaturaService.Create(novaAssinatura);
+            var assinaturaSalva = assinaturaService.Get(4);
+
+            Assert.IsNotNull(assinaturaSalva);
+            Assert.AreEqual("Plano novo com descricao completa", assinaturaSalva.Descricao);
+            Assert.AreEqual(AssinaturaStatusEnum.ATIVA.ToString(), assinaturaSalva.Status);
         }
     }
 }
