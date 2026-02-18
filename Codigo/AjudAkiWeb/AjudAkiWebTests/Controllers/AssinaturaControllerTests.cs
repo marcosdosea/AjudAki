@@ -1,7 +1,7 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Core.Service;
 using Moq;
-using Mappers;
+using AjudAkiWeb.Mappers;
 using Core;
 using AjudAkiWeb.Models;
 using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,4 @@
-﻿using Core;
+using Core;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -38,11 +38,12 @@ namespace Service.Tests
 
             avaliarService = new AvaliarService(context);
         }
+        [TestMethod()]
         public void GetTest()
         {
-            var avaliacao = avaliarService.Get(2); 
-            Assert.IsNotNull(avaliacao);  
-            Assert.AreEqual("Serviço razoável", avaliacao.Comentario); 
+            var avaliacao = avaliarService.Get(2);
+            Assert.IsNotNull(avaliacao);
+            Assert.AreEqual("Serviço razoável", avaliacao.Comentario);
         }
 
         [TestMethod()]
