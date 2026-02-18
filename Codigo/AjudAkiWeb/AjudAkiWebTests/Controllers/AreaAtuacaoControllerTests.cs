@@ -1,4 +1,4 @@
-﻿using Core.Service;
+using Core.Service;
 using Core;
 using AutoMapper;
 using Moq;
@@ -30,6 +30,8 @@ namespace AjudAkiWeb.Controllers.Tests
             mockService.Setup(service => service.Edit(It.IsAny<Areaatuacao>()))
                 .Verifiable();
             mockService.Setup(service => service.Create(It.IsAny<Areaatuacao>()))
+                .Verifiable();
+            mockService.Setup(service => service.Delete(It.IsAny<uint>()))
                 .Verifiable();
             controller = new AreaAtuacaoController(mockService.Object, mapper);
         }
@@ -134,9 +136,9 @@ namespace AjudAkiWeb.Controllers.Tests
 
 
         [TestMethod()]
-        public void DeleteTest_Post_Valid()
+        public void DeleteTest_Get_Valid()
         {
-            // Act
+            // Act - GET Delete exibe a tela de confirmação
             var result = controller.Delete(1);
 
             // Assert
@@ -148,10 +150,10 @@ namespace AjudAkiWeb.Controllers.Tests
         }
 
         [TestMethod()]
-        public void DeleteTest_Get_Valid()
+        public void DeleteTest_Post_Valid()
         {
-            // Act
-            var result = controller.Delete(GetTargetAreaAtuacaoModel());
+            // Act - POST Delete confirma a exclusão
+            var result = controller.Delete(1, GetTargetAreaAtuacaoModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
