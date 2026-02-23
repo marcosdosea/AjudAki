@@ -1,72 +1,87 @@
 ﻿@model AjudAkiWeb.Models.SolicitacaoServicoViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes da Solicitação";
 }
 
-<h1>Details</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card shadow-sm border-0" style="border-radius: 15px;">
+                <div class="card-header bg-info text-white p-4" style="border-radius: 15px 15px 0 0;">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-info-circle fa-2x me-3"></i>
+                        <div>
+                            <h2 class="mb-0 h4">Detalhes da Solicitação #@Model.Id</h2>
+                            <p class="mb-0 opacity-75">Informações completas sobre o pedido de serviço.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-5">
+                    <div class="row mb-4">
+                        <div class="col-sm-12">
+                            <h5 class="text-primary border-bottom pb-2 mb-3">Informações Básicas</h5>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="text-muted small text-uppercase fw-bold d-block">Título</label>
+                            <span class="fs-5 fw-bold">@Model.Nome</span>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="text-muted small text-uppercase fw-bold d-block">Status</label>
+                            @{
+                                var statusClass = Model.Status switch
+                                {
+                                    AjudAkiWeb.Models.StatusSolicitacaoEnum.PENDENTE => "bg-warning",
+                                    AjudAkiWeb.Models.StatusSolicitacaoEnum.ACEITO => "bg-success",
+                                    AjudAkiWeb.Models.StatusSolicitacaoEnum.RECUSADO => "bg-danger",
+                                    AjudAkiWeb.Models.StatusSolicitacaoEnum.FINALIZADO => "bg-info",
+                                    _ => "bg-secondary"
+                                };
+                            }
+                            <span class="badge @statusClass rounded-pill px-3">@Model.Status</span>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="text-muted small text-uppercase fw-bold d-block">Data da Solicitação</label>
+                            <span>@Model.DataHoraSolicitacao.ToString("dd/MM/yyyy")</span>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="text-muted small text-uppercase fw-bold d-block">Valor</label>
+                            <span class="fw-bold text-success">@(Model.Valor?.ToString("C2") ?? "---")</span>
+                        </div>
+                        <div class="col-sm-12 mb-3">
+                            <label class="text-muted small text-uppercase fw-bold d-block">Descrição</label>
+                            <p class="bg-light p-3 rounded" style="white-space: pre-wrap;">@Model.Descricao</p>
+                        </div>
+                    </div>
 
-<div>
-    <h4>SolicitacaoServicoViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataHoraSolicitacao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataHoraSolicitacao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Valor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Valor)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCliente)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCliente)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdProfissional)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdProfissional)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdTipoServico)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdTipoServico)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
+                    <div class="row mb-4">
+                        <div class="col-sm-12">
+                            <h5 class="text-primary border-bottom pb-2 mb-3">Envolvidos</h5>
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                            <label class="text-muted small text-uppercase fw-bold d-block">Cliente (ID)</label>
+                            <span><i class="fas fa-user me-2 text-muted"></i> @Model.IdCliente</span>
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                            <label class="text-muted small text-uppercase fw-bold d-block">Profissional (ID)</label>
+                            <span><i class="fas fa-user-tie me-2 text-muted"></i> @Model.IdProfissional</span>
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                            <label class="text-muted small text-uppercase fw-bold d-block">Tipo de Serviço (ID)</label>
+                            <span><i class="fas fa-concierge-bell me-2 text-muted"></i> @Model.IdTipoServico</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 d-flex gap-3 border-top pt-4">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary px-5 py-2 shadow-sm" style="border-radius: 10px;">
+                            <i class="fas fa-edit me-2"></i> Editar Solicitação
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary px-4 py-2 text-white" style="border-radius: 10px;">
+                            <i class="fas fa-arrow-left me-2"></i> Voltar para Lista
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
