@@ -1,36 +1,34 @@
-﻿@model IEnumerable<AjudAkiWeb.Models.AreaAtuacaoViewModel>
+@model IEnumerable<AjudAkiWeb.Models.AreaAtuacaoViewModel>
 
 @{
     ViewData["Title"] = "Administração";
 }
 
-
-
 <link href="~/css/AreaAtuacao.css" rel="stylesheet" />
 
-<div class="row mt-4">
-    <!-- Sidebar -->
+<div class="row mt-5">
+    <!-- Sidebar (Keeping original structure as requested) -->
     <div class="col-md-3 mb-3">
-        <div>
-            <a href="#" class="admin-menu-item">
+        <div class="list-group">
+            <a href="#" class="list-group-item admin-menu-item">
                 <i class="fa-solid fa-calendar-days me-2"></i> Solicitações de serviços
             </a>
-            <a href="#" class="admin-menu-item">
+            <a href="#" class="list-group-item admin-menu-item">
                 <i class="fa-solid fa-cart-shopping me-2"></i> Minhas contratações
             </a>
-            <a href="#" class="admin-menu-item">
+            <a href="#" class="list-group-item admin-menu-item">
                 <i class="fa-solid fa-briefcase me-2"></i> Meus serviços
             </a>
-            <a href="#" class="admin-menu-item">
+            <a href="#" class="list-group-item admin-menu-item">
                 <i class="fa-solid fa-file-contract me-2"></i> Minha assinatura
             </a>
-             <a href="#" class="admin-menu-item">
+             <a href="#" class="list-group-item admin-menu-item">
                 <i class="fa-solid fa-pen me-2"></i> Editar dados
             </a>
-            <a href="#" class="admin-menu-item active">
+            <a href="#" class="list-group-item admin-menu-item active">
                 <i class="fa-solid fa-gear me-2"></i> Administração
             </a>
-             <a href="#" class="admin-menu-item">
+             <a href="#" class="list-group-item admin-menu-item">
                 <i class="fa-solid fa-right-from-bracket me-2"></i> Sair
             </a>
         </div>
@@ -38,50 +36,88 @@
 
     <!-- Main Content -->
     <div class="col-md-9">
-        <div class="admin-header">
+        <div class="admin-header mb-3">
             <h2>Administração</h2>
             <p>Gerencie as áreas de atuação e serviços.</p>
         </div>
 
         <div class="admin-card">
-            <div class="p-4">
-                <!-- Adicionar Área de Atuação -->
+            
+            <!-- Adicionar Área de Atuação (Prototype Style) -->
+            <div class="mb-5">
                 <label class="admin-section-label">Adicione uma área de atuação</label>
-                <form asp-action="Create" method="post" class="d-flex gap-3 mb-4">
+                <form asp-action="Create" method="post" class="d-flex gap-3">
                      <input type="text" name="Nome" class="form-control" placeholder="Ex: encanador" required style="max-width: 400px;" />
                      <button type="submit" class="admin-btn-add">Adicionar</button>
                 </form>
-            
-                 <br />
-                 <div class="alert alert-info">
-                     <i class="fa-solid fa-info-circle"></i> Lista de Áreas Cadastradas
-                 </div>
-
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th class="text-primary">Área de Atuação</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                @foreach (var item in Model) {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nome)
-                            </td>
-                            <td class="text-end">
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="text-warning me-2" title="Editar"><i class="fa-solid fa-pen"></i></a>
-                                <a href="#" class="text-danger" title="Excluir" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.Id" data-nome="@item.Nome" onclick="setDeleteModal(this)">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                }
-                    </tbody>
-                </table>
-
             </div>
+
+            <!-- Adicionar Tipo de Serviço (Prototype Style) -->
+            <div class="mb-5">
+                <label class="admin-section-label">Adicione um tipo de serviço correspondente a uma área de atuação</label>
+                <form asp-controller="TipoServico" asp-action="Create" method="post" class="d-flex align-items-center gap-2 flex-wrap">
+                    <!-- Dropdown Area -->
+                    <select name="IdAreaAtuacao" class="form-select" asp-items="ViewBag.ListaAreasAtuacoes" required style="max-width: 250px;">
+                        <option value="">Selecione a área</option>
+                    </select>
+                    
+                    <!-- Input Nome Serviço -->
+                    <input type="text" name="Nome" class="form-control" placeholder="Ex: instalação de torneira" required style="max-width: 300px;" />
+
+                    <!-- Hidden Agenda (Default selection logic needed or assumed first available) -->
+                    <!-- Note: In prototype, Agenda isn't shown. We need it for the backend. 
+                         I'll hide it or default it, but for now let's keep it visible but subtle or maybe just assume the user picks.
+                         Actually, to match prototype, let's put it as a smaller select or handle it differently.
+                         The user said "do not change context", so Agenda IS required.
+                         I will make it a small select next to Area to not break the design too much.
+                    -->
+                    <select name="IdAgenda" class="form-select" asp-items="ViewBag.ListaAgenda" required style="max-width: 200px;">
+                        <option value="">Agenda...</option>
+                    </select>
+
+                    <button type="submit" class="admin-btn-add">Adicionar</button>
+                </form>
+            </div>
+        
+            <!-- List Display (Accordion - To manage items) -->
+            <h5 class="text-primary mb-3 mt-5 border-bottom pb-2">Áreas e Serviços Cadastrados</h5>
+
+            <div class="accordion" id="accordionAreas">
+            @foreach (var item in Model) {
+                <div class="accordion-item mb-2 border rounded-3 overflow-hidden">
+                    <h2 class="accordion-header" id="heading-@item.Id">
+                        <button class="accordion-button collapsed fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@item.Id" aria-expanded="false" aria-controls="collapse-@item.Id">
+                            @Html.DisplayFor(modelItem => item.Nome)
+                            <span class="badge bg-light text-dark ms-2 border">@item.TiposServico.Count serviços</span>
+                        </button>
+                    </h2>
+                    <div id="collapse-@item.Id" class="accordion-collapse collapse" aria-labelledby="heading-@item.Id" data-bs-parent="#accordionAreas">
+                        <div class="accordion-body bg-light">
+                            <div class="d-flex justify-content-end mb-3">
+                                <!-- Prototype has big red buttons. We'll simulate that style for the Area delete -->
+                                <button class="admin-btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.Id" data-nome="@item.Nome" onclick="setDeleteModal(this)">
+                                    Excluir área de atuação
+                                </button>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="admin-btn-edit ms-2">Editar</a>
+                            </div>
+
+                            <ul class="list-group">
+                                @foreach (var servico in item.TiposServico)
+                                {
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>@servico.Nome</span>
+                                        <div>
+                                            <a asp-controller="TipoServico" asp-action="Edit" asp-route-id="@servico.Id" class="text-primary me-3"><i class="fa-solid fa-pen"></i></a>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+
         </div>
     </div>
 </div>

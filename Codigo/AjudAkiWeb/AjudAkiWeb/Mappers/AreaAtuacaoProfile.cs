@@ -9,7 +9,9 @@ namespace AjudAkiWeb.Mappers
     {
         public AreaAtuacaoProfile()
         {
-            CreateMap<AreaAtuacaoViewModel,Areaatuacao>().ReverseMap();
+            CreateMap<Areaatuacao, AreaAtuacaoViewModel>()
+                .ForMember(dest => dest.TiposServico, opt => opt.MapFrom(src => src.Tiposervicos))
+                .ReverseMap();
         }
     }
 }

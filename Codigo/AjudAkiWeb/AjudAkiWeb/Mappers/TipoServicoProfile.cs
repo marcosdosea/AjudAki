@@ -8,7 +8,11 @@ namespace AjudAkiWeb.Mappers
     {
         public TipoServicoProfile()
         {
-            CreateMap<TipoServicoViewModel, Tiposervico>().ReverseMap();
+            CreateMap<Tiposervico, TipoServicoViewModel>()
+                .ForMember(dest => dest.NomeAreaAtuacao, opt => opt.MapFrom(src => src.IdAreaAtuacaoNavigation.Nome))
+                .ForMember(dest => dest.DescricaoAgenda, opt => opt.MapFrom(src => $"{src.IdAgendaNavigation.Data:dd/MM/yyyy} - {src.IdAgendaNavigation.Turno}"));
+
+            CreateMap<TipoServicoViewModel, Tiposervico>();
         }
     }
 }

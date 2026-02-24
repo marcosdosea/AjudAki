@@ -1,42 +1,75 @@
 ﻿@model AjudAkiWeb.Models.TipoServicoViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes - Tipo de Serviço";
 }
 
-<h1>Details</h1>
+<link href="~/css/AreaAtuacao.css" rel="stylesheet" />
 
-<div>
-    <h4>TipoServicoViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdAreaAtuacao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdAreaAtuacao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdAgenda)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdAgenda)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.Id  }) |
-    <a asp-action="Index">Back to List</a>
+<div class="row mt-4">
+    <!-- Sidebar -->
+    <div class="col-md-3 mb-3">
+        <div class="list-group">
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-calendar-days me-2"></i> Solicitações de serviços
+            </a>
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-cart-shopping me-2"></i> Minhas contratações
+            </a>
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-briefcase me-2"></i> Meus serviços
+            </a>
+            <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-file-contract me-2"></i> Minha assinatura
+            </a>
+             <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-pen me-2"></i> Editar dados
+            </a>
+            <a href="#" class="admin-menu-item active">
+                <i class="fa-solid fa-gear me-2"></i> Administração
+            </a>
+             <a href="#" class="admin-menu-item">
+                <i class="fa-solid fa-right-from-bracket me-2"></i> Sair
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9">
+        <div class="admin-header">
+            <h2>Administração</h2>
+            <p>Detalhes do tipo de serviço.</p>
+        </div>
+
+        <div class="admin-card">
+            
+            <div class="d-flex align-items-center mb-4">
+                <div class="bg-info text-white p-3 rounded-circle me-3">
+                    <i class="fa-solid fa-circle-info fa-lg"></i>
+                </div>
+                <h4 class="text-primary fw-bold mb-0">Detalhes do Serviço</h4>
+            </div>
+
+            <div class="bg-light p-4 rounded-3 border">
+                <dl class="row mb-0">
+                    <dt class="col-sm-3 fw-bold text-muted text-uppercase small">ID:</dt>
+                    <dd class="col-sm-9 fw-bold">#@Html.DisplayFor(model => model.Id)</dd>
+
+                    <dt class="col-sm-3 fw-bold text-muted text-uppercase small mt-3">Nome do Serviço:</dt>
+                    <dd class="col-sm-9 fs-5 mt-2">@Html.DisplayFor(model => model.Nome)</dd>
+
+                    <dt class="col-sm-3 fw-bold text-muted text-uppercase small mt-3">Área de Atuação:</dt>
+                    <dd class="col-sm-9 mt-2"><span class="badge bg-primary">@Html.DisplayFor(model => model.NomeAreaAtuacao)</span></dd>
+
+                    <dt class="col-sm-3 fw-bold text-muted text-uppercase small mt-3">Agenda:</dt>
+                    <dd class="col-sm-9 mt-2"><i class="fa-regular fa-clock me-2 text-secondary"></i> @Html.DisplayFor(model => model.DescricaoAgenda)</dd>
+                </dl>
+            </div>
+
+            <div class="mt-4 d-flex justify-content-end gap-2">
+                <a asp-action="Index" class="admin-btn-back">Voltar</a>
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="admin-btn-edit text-white"><i class="fa-solid fa-pen me-2"></i> Editar</a>
+            </div>
+        </div>
+    </div>
 </div>

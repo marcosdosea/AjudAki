@@ -22,6 +22,12 @@ namespace AjudAkiWeb.Models
         [Required(ErrorMessage = "Nome do tipo do serviço é obrigatório")]
         public string? Nome { get; set; }
 
+        [Display(Name = "Nome da Área de Atuação")]
+        public string? NomeAreaAtuacao { get; set; }
+
+        [Display(Name = "Descrição da Agenda")]
+        public string? DescricaoAgenda { get; set; }
+
         public SelectList? ListaAreasAtuacoes { get; set; }
         public SelectList? ListaAgenda { get; set; }
     }
