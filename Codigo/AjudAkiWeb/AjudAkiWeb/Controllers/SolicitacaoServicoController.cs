@@ -30,114 +30,96 @@ namespace AjudAkiWeb.Controllers
         // GET: SolicitacaoServicoController
         public ActionResult Index()
         {
-            var listaSolicitacoesServico = solicitacaoServicoService.GetAll();
-            var listaSolicitacoesServicoViewModel = mapper.Map<List<SolicitacaoServicoViewModel>>(listaSolicitacoesServico);
-
-            return View(listaSolicitacoesServicoViewModel);
+            var lista = solicitacaoServicoService.GetAll();
+            var model = mapper.Map<IEnumerable<SolicitacaoServicoViewModel>>(lista);
+            return View(model);
         }
 
         // GET: SolicitacaoServicoController/Details/5
         public ActionResult Details(uint id)
         {
-            var solicitacaoServico = solicitacaoServicoService.Get(id);
-            var solicitacaoServicoViewModel = mapper.Map<SolicitacaoServicoViewModel>(solicitacaoServico);
-            return View(solicitacaoServicoViewModel);
+            var entity = solicitacaoServicoService.Get(id);
+            if (entity == null) return NotFound();
+
+            var model = mapper.Map<SolicitacaoServicoViewModel>(entity);
+            return View(model);
         }
 
         // GET: SolicitacaoServicoController/Create
         public ActionResult Create()
         {
-            var solicitacaoServicoViewModel = new SolicitacaoServicoViewModel();
-
-            IEnumerable<Pessoa> listaProfissionais = profissionalService.GetAll();
-            IEnumerable<Pessoa> listaClientes = clienteService.GetAll();
-            IEnumerable<Tiposervico> listaTiposServico = tipoServicoService.GetAll();
-
-            solicitacaoServicoViewModel.ListaTiposServico = new SelectList(listaTiposServico, "Id", "Nome", null);
-
-            var statusListItems = Enum.GetValues(typeof(StatusSolicitacaoEnum))
-                                .Cast<StatusSolicitacaoEnum>()
-                                .Select(status => new SelectListItem
-                                {
-                                    Value = status.ToString(),
-                                    Text = status.ToString()
-                                })
-                                .ToList();
-
-            solicitacaoServicoViewModel.ListaProfissionais = new SelectList(listaProfissionais, "Id", "Nome", null);
-            solicitacaoServicoViewModel.ListaClientes = new SelectList(listaClientes, "Id", "Nome", null);
-
-
-
-            return View(solicitacaoServicoViewModel);
+            var model = new SolicitacaoServicoViewModel();
+            PreencherSelectLists(model);
+            return View(model);
         }
 
         // POST: SolicitacaoServicoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(SolicitacaoServicoViewModel solicitacaoServicoViewModel)
+        public ActionResult Create(SolicitacaoServicoViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var solicitacaoServico = mapper.Map<Solicitacaoservico>(solicitacaoServicoViewModel);
-                solicitacaoServicoService.Create(solicitacaoServico);
+                var entity = mapper.Map<Solicitacaoservico>(model);
+                solicitacaoServicoService.Create(entity);
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
+
+            PreencherSelectLists(model);
+            return View(model);
         }
 
         // GET: SolicitacaoServicoController/Edit/5
         public ActionResult Edit(uint id)
         {
-            var solicitacaoServico = solicitacaoServicoService.Get(id);
-            var solicitacaoServicoViewModel = mapper.Map<SolicitacaoServicoViewModel>(solicitacaoServico);
+            var entity = solicitacaoServicoService.Get(id);
+            if (entity == null) return NotFound();
 
-            IEnumerable<Tiposervico> listaTiposServicos = tipoServicoService.GetAll();
-            IEnumerable<Pessoa> listaProfissionais = profissionalService.GetAll();
-            IEnumerable<Pessoa> listaClientes = clienteService.GetAll();
-
-            solicitacaoServicoViewModel.ListaTiposServico = new SelectList(listaTiposServicos, "Id", "Nome",
-                listaTiposServicos.FirstOrDefault(e => e.Id.Equals(solicitacaoServico.IdTipoServico)));
-
-            solicitacaoServicoViewModel.ListaProfissionais = new SelectList(listaProfissionais, "Id", "Nome",
-                listaProfissionais.FirstOrDefault(e => e.Id.Equals(solicitacaoServico.IdProfissional)));
-
-            solicitacaoServicoViewModel.ListaClientes = new SelectList(listaClientes, "Id", "Nome",
-                listaClientes.FirstOrDefault(e => e.Id.Equals(solicitacaoServico.IdCliente)));
-
-
-            return View(solicitacaoServicoViewModel);
+            var model = mapper.Map<SolicitacaoServicoViewModel>(entity);
+            PreencherSelectLists(model);
+            return View(model);
         }
 
         // POST: SolicitacaoServicoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(uint id, SolicitacaoServicoViewModel solicitacaoServicoViewModel)
+        public ActionResult Edit(uint id, SolicitacaoServicoViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var solicitacaoServico = mapper.Map<Solicitacaoservico>(solicitacaoServicoViewModel);
-                solicitacaoServicoService.Edit(solicitacaoServico);
+                var entity = mapper.Map<Solicitacaoservico>(model);
+                solicitacaoServicoService.Edit(entity);
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
+
+            PreencherSelectLists(model);
+            return View(model);
         }
 
         // GET: SolicitacaoServicoController/Delete/5
         public ActionResult Delete(uint id)
         {
-            var solicitacaoServico = solicitacaoServicoService.Get(id);
-            var solicitacaoServicoViewModel = mapper.Map<SolicitacaoServicoViewModel>(solicitacaoServico);
+            var entity = solicitacaoServicoService.Get(id);
+            if (entity == null) return NotFound();
 
-            return View(solicitacaoServicoViewModel);
+            var model = mapper.Map<SolicitacaoServicoViewModel>(entity);
+            return View(model);
         }
 
         // POST: SolicitacaoServicoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(SolicitacaoServicoViewModel solicitacaoServicoViewModel)
+        public ActionResult Delete(uint id, SolicitacaoServicoViewModel model)
         {
-            solicitacaoServicoService.Delete(solicitacaoServicoViewModel.Id);
-
+            solicitacaoServicoService.Delete(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        private void PreencherSelectLists(SolicitacaoServicoViewModel model)
+        {
+            model.ListaClientes = new SelectList(clienteService.GetAll(), "Id", "Nome", model.IdCliente);
+            model.ListaProfissionais = new SelectList(profissionalService.GetAll(), "Id", "Nome", model.IdProfissional);
+            model.ListaTiposServico = new SelectList(tipoServicoService.GetAll(), "Id", "Nome", model.IdTipoServico);
         }
     }
 }
