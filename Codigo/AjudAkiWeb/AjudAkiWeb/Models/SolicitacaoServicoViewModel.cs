@@ -10,44 +10,43 @@ namespace AjudAkiWeb.Models
 
     public class SolicitacaoServicoViewModel
     {
-        [Display(Name = "Código da solicitação de serviço")]
-        [Required(ErrorMessage = "Código da solicitação de serviço é obrigatório")]
+        [Display(Name = "Código")]
         [Key]
         public uint Id { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório")]
+        [Display(Name = "Título/Nome")]
+        [Required(ErrorMessage = "O nome é obrigatório")]
         [StringLength(50)]
         public string Nome { get; set; } = null!;
 
         [Display(Name = "Data da Solicitação")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true)]
-        [Required(ErrorMessage = "Campo obrigatório")]
-        public DateTime DataHoraSolicitacao { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "A data é obrigatória")]
+        public DateTime DataHoraSolicitacao { get; set; } = DateTime.Now;
 
-        [Display(Name = "Status:  RECUSADO, ACEITO, PENDENTE, FINALIZADO")]
-        public StatusSolicitacaoEnum? Status { get; set; } = null;
+        [Display(Name = "Status")]
+        public StatusSolicitacaoEnum? Status { get; set; } = StatusSolicitacaoEnum.PENDENTE;
 
+        [Display(Name = "Valor (R$)")]
         [Range(0.0, Double.MaxValue, ErrorMessage = "O valor deve ser positivo.")]
         public decimal? Valor { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório")]
+        [Display(Name = "Descrição Detalhada")]
+        [Required(ErrorMessage = "A descrição é obrigatória")]
         [StringLength(300)]
         public string? Descricao { get; set; }
 
-        [Display(Name = "Código do cliente")]
-        [Required(ErrorMessage = "Código do cliente é obrigatório")]
-        [Key]
+        [Display(Name = "Cliente")]
+        [Required(ErrorMessage = "O cliente é obrigatório")]
         public uint IdCliente { get; set; }
 
-        [Display(Name = "Código do profisisonal")]
-        [Required(ErrorMessage = "Código do profisisonal é obrigatório")]
-        [Key]
+        [Display(Name = "Profissional")]
+        [Required(ErrorMessage = "O profissional é obrigatório")]
         public uint IdProfissional { get; set; }
 
-        [Display(Name = "Código do tipo de serviço")]
-        [Required(ErrorMessage = "Código do tipo de serviço é obrigatório")]
-        [Key]
+        [Display(Name = "Tipo de Serviço")]
+        [Required(ErrorMessage = "O tipo de serviço é obrigatório")]
         public uint IdTipoServico { get; set; }
 
         public SelectList? ListaClientes { get; set; }

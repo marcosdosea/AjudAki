@@ -62,7 +62,9 @@ namespace Service
         /// <returns>dados da solicitação</returns>
         public Solicitacaoservico? Get(uint id)
         {
-            return context.Solicitacaoservicos.Find(id);
+            return context.Solicitacaoservicos
+                .AsNoTracking()
+                .FirstOrDefault(s => s.Id == id);
         }
 
         /// <summary>

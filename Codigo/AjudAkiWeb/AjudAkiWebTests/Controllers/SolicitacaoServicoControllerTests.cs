@@ -155,7 +155,7 @@ namespace AjudAkiWeb.Controllers.Tests
         public void DeleteTest_Get_Valid()
         {
             // Act
-            var result = controller.Delete(GetTargetSolicitacaoServicoModel());
+            var result = controller.Delete(GetTargetSolicitacaoServicoModel().Id, GetTargetSolicitacaoServicoModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
